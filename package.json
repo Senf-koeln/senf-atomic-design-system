@@ -1,6 +1,6 @@
 {
   "name": "senf-atomic-design-system",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "An atomic-design-system-library for all Senf-apps ",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
