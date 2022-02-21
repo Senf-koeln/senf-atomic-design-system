@@ -1,46 +1,60 @@
-/** @format */
+import React from 'react';
+import { Story, Meta } from '@storybook/react';
 
-import React from "react";
+import Button  from './Button';
+import {ButtonProps} from "./Button.types"
 
-import { Button } from "./Button";
-
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: "Atoms/Button",
+  title: 'Atom/Button',
   component: Button,
-  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
-    backgroundColor: { control: "color" },
   },
+} ;
+// as Meta<typeof Button>;
+
+const Template: Story<ButtonProps> = (args) => <Button {...args} />;
+
+export const Primary = Template.bind({});
+Primary.args = {
+  primary: true,
+  disabled: false,
+  text: 'Primary',
 };
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template = (args) => <Button {...args} />;
-
-export const Default = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-Default.args = {
-  text: "Submit",
+export const Secondary = Template.bind({});
+Secondary.args = {
+  primary: false,
+  disabled: false,
+  text: "Secondary",
 };
 
-export const Large = Template.bind({});
-Large.args = {
-  size: "large",
-  text: "Submit",
+export const Disabled = Template.bind({});
+Disabled.args = {
+  primary: false,
+  disabled: true,
+  text: 'Disabled',
 };
 
 export const Small = Template.bind({});
 Small.args = {
-  size: "small",
-  text: "Submit",
+  primary: true,
+  disabled: false,
+  size:"small",
+  text: 'Small',
 };
 
-// import React from "react";
-// import { storiesOf } from "@storybook/react";
-// import { Button } from ".";
+export const Medium = Template.bind({});
+Medium.args = {
+  primary: true,
+  disabled: false,
+  size:"medium",
+  text: 'Medium',
+};
 
-// const stories = storiesOf("App Test", module);
-
-// stories.add("App", () => {
-//   return <Button />;
-// });
+export const Large = Template.bind({});
+Large.args = {
+  primary: true,
+  disabled: false,
+  size:"large",
+  text: 'Large',
+};
