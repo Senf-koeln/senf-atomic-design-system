@@ -1,37 +1,49 @@
 /** @format */
 
-import babel from "rollup-plugin-babel";
+import react from "react";
+import reactDom from "react-dom";
 import resolve from "@rollup/plugin-node-resolve";
-import external from "rollup-plugin-peer-deps-external";
+import commonjs from "@rollup/plugin-commonjs";
+import typescript from "@rollup/plugin-typescript";
+import dts from "rollup-plugin-dts";
 import { terser } from "rollup-plugin-terser";
-import postcss from "rollup-plugin-postcss";
+import peerDepsExternal from "rollup-plugin-peer-deps-external";
+
+const packageJson = require("./package.json");
 
 export default [
   {
-    input: "./src/index.js",
+    input: "src/index.ts",
     output: [
       {
-        file: "dist/index.js",
+        file: packageJson.main,
         format: "cjs",
+        sourcemap: true,
       },
       {
-        file: "dist/index.es.js",
-        format: "es",
-        exports: "named",
+        file: packageJson.module,
+        format: "esm",
+        sourcemap: true,
       },
     ],
     plugins: [
-      postcss({
-        plugins: [],
-        minimize: true,
-      }),
-      babel({
-        exclude: "node_modules/**",
-        presets: ["@babel/preset-react"],
-      }),
-      external(),
+      peerDepsExternal(),
       resolve(),
+      commonjs({
+        include: "node_modules/**",
+        namedExports: {
+          react: Object.keys(react),
+          "react-dom": Object.keys(reactDom),
+        },
+      }),
+      typescript({ tsconfig: "./tsconfig.json" }),
       terser(),
     ],
+    external: ["react", "react-dom", "styled-components"],
+  },
+  {
+    input: "dist/esm/types/index.d.ts",
+    output: [{ file: "dist/index.d.ts", format: "esm" }],
+    plugins: [dts()],
   },
 ];

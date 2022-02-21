@@ -3,8 +3,12 @@
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
   backgrounds: {
-    default: "white",
+    default: "lightgrey",
     values: [
+      {
+        name: "lightgrey",
+        value: "lightgrey",
+      },
       {
         name: "white",
         value: "white",
