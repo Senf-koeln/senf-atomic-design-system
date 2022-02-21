@@ -1,7 +1,8 @@
 /** @format */
 
 import React from "react";
-import styled, { css } from "styled-components";
+import styled, { css, ThemeProvider } from "styled-components";
+import theme from "../../../theme";
 // import enterAnimation from "../../../shared/animations";
 // import plopAnimation from "../../../shared/animations";
 // import dot from "../../../shared/dot.svg";
@@ -18,7 +19,7 @@ const ButtonBase = css`
   align-items: center;
   padding: 14px 10px 14px 10px;
   box-shadow: 0px 12px 18px -10px rgba(235, 184, 0, 0.5);
-  background-color: #fed957;
+  background-color: ${(props) => props.bgColor && props.bgColor};
   overflow: hidden;
   cursor: pointer;
   border-radius: 10px;
@@ -75,21 +76,25 @@ export const Button = ({
   zIndex,
   icon,
   text,
+  bgColor,
 }) => {
   return (
-    <StyledButton
-      size={size}
-      onClick={handleButtonClick}
-      position={position}
-      left={left}
-      top={top}
-      right={right}
-      bottom={bottom}
-      zIndex={zIndex}
-    >
-      {/* {icon && <img src={dot} />} */}
-      <StyledText>{text}</StyledText>
-    </StyledButton>
+    <ThemeProvider theme={theme}>
+      <StyledButton
+        bgColor={bgColor ? bgColor : theme.colors.primary}
+        size={size}
+        onClick={handleButtonClick}
+        position={position}
+        left={left}
+        top={top}
+        right={right}
+        bottom={bottom}
+        zIndex={zIndex}
+      >
+        {/* {icon && <img src={dot} />} */}
+        <StyledText>{text}</StyledText>
+      </StyledButton>
+    </ThemeProvider>
   );
 };
 
