@@ -51,4 +51,13 @@ interface IconProps {
  */
 declare const Icon: FC<IconProps>;
 
-export { Button, Icon, Input };
+/** @format */
+interface ThemeProps {
+    children?: any;
+}
+
+/** @format */
+
+declare const StyledThemeProvider: FC<ThemeProps>;
+
+export { Button, Icon, Input, StyledThemeProvider };

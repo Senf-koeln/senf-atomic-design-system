@@ -2,7 +2,7 @@
 
 import React, { FC } from "react";
 import styled from "styled-components";
-import theme from "../../../theme";
+import theme from "../../../theme/theme";
 import { ThemeProvider } from "styled-components";
 import { ButtonProps } from "./Button.types";
 
@@ -48,18 +48,16 @@ const Button: FC<ButtonProps> = ({
   ...props
 }) => {
   return (
-    <ThemeProvider theme={theme}>
-      <StyledButton
-        type="button"
-        onClick={onClick}
-        primary={primary}
-        disabled={disabled}
-        size={size}
-        {...props}
-      >
-        {text}
-      </StyledButton>
-    </ThemeProvider>
+    <StyledButton
+      type="button"
+      onClick={onClick}
+      primary={primary}
+      disabled={disabled}
+      size={size}
+      {...props}
+    >
+      {text}
+    </StyledButton>
   );
 };
 
