@@ -6,7 +6,8 @@ An atomic-design-system-library for all Senf-apps (https://senf.app , Senf-works
 
 Our main Apps are built within a opensource Monorepo, that you can find here: https://github.com/AgileVentures/senf_client (That Repo isn't as straight forward as this one though – and not the easiest to contribute to)
 
-##About
+## About
+
 The aim of this project is to strengthen participation of citizens in urban planning & to make it more interactive and transparent. Since we see citizens as the real experts in their neighborhoods, we want to create an attractive opportunity for people to contribute their own ideas and suggestions.
 
 Ultimately, through this platform, we are attempting to establish a collaborative community-based environment in which citizens have a voice and organizations of any kind are empowered to be more participatory. Simultaneously, we see this environment as a space for people to get creative and connect in real life in order to collectively shape their own urban space.
