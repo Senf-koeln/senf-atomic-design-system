@@ -1,8 +1,8 @@
+/** @format */
 import { ChangeEventHandler } from "react";
 export interface InputProps {
     id?: string;
     type?: string;
-    value?: string;
     label?: string;
     note?: string;
     placeholder?: string;
@@ -10,5 +10,8 @@ export interface InputProps {
     error?: boolean;
     success?: boolean;
     disabled?: boolean;
+    rows?: string;
+    value?: string;
+    setValue?: ChangeEventHandler<HTMLInputElement>;
     onChange?: ChangeEventHandler<HTMLInputElement>;
 }

@@ -3,7 +3,7 @@
 import React, { FC, Fragment, useState } from "react";
 import styled from "styled-components";
 import { InputProps } from "./Input.types";
-import { House } from "../icons/House";
+import Icon from "../icons/Icon";
 
 const InputGroup = styled.div<InputProps>`
   position: relative;
@@ -183,11 +183,11 @@ const Input: FC<InputProps> = ({
       {type === "search" && (
         <React.Fragment>
           <StyledSearchIcon>
-            <House />
+            <Icon icon="search" />
           </StyledSearchIcon>
 
           <StyledSearchDelete onClick={setValue}>
-            <House />
+            <Icon icon="close" />
           </StyledSearchDelete>
         </React.Fragment>
       )}
