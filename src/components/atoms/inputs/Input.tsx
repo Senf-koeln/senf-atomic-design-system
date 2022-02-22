@@ -55,8 +55,7 @@ const StyledLabel = styled.div<InputProps>`
   font-size: 14px;
   color: #000000;
   padding-bottom: 6px;
-  max-width: 100px;
-  height: 16px;
+  max-width: auto;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
