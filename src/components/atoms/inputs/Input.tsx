@@ -3,7 +3,8 @@
 import React, { FC, Fragment, useState } from "react";
 import styled from "styled-components";
 import { InputProps } from "./Input.types";
-import { House } from "../icons/House";
+import Icon from "../icons/Icon";
+import theme from "../../../theme/theme";
 
 const InputGroup = styled.div<InputProps>`
   position: relative;
@@ -25,7 +26,7 @@ const StyledInput = styled.input<InputProps>`
   border: solid ${(props) => (props.error ? "3px" : "2px")}
     ${(props) =>
       props.error
-        ? "rgb(255, 60, 62)"
+        ? theme.colors.red
         : props.success
         ? "#067d68"
         : "rgba(255, 255, 255, 0)"};
@@ -54,8 +55,7 @@ const StyledLabel = styled.div<InputProps>`
   font-size: 14px;
   color: #000000;
   padding-bottom: 6px;
-  max-width: 100px;
-  height: 16px;
+  max-width: auto;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -117,7 +117,7 @@ const StyledSearchDelete = styled.button<InputProps>`
 
 const StyledText = styled.p<InputProps>`
   margin: 0px;
-  color: ${(props) => (props.error ? "rgb(255, 60, 62)" : "#00000")};
+  color: ${(props) => (props.error ? theme.colors.red : "#00000")};
 `;
 
 const Input: FC<InputProps> = ({
@@ -183,11 +183,11 @@ const Input: FC<InputProps> = ({
       {type === "search" && (
         <React.Fragment>
           <StyledSearchIcon>
-            <House />
+            <Icon icon="search" />
           </StyledSearchIcon>
 
           <StyledSearchDelete onClick={setValue}>
-            <House />
+            <Icon icon="close" />
           </StyledSearchDelete>
         </React.Fragment>
       )}
