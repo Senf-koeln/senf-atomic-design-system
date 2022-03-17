@@ -30,10 +30,32 @@ If you get error npm command not found make sure you have node.js installed on y
 
 To run the design Library, type npm run storybook
 
-## 4: Check out the ZenHub Tab within this repository
 
-Find an appealing ticket within the Sprint-Backlog or Bugs/Questions and try to tackle it
+## 4: Let's talk!
 
-## 5: Let's talk!
+We are extremely happy about any contribution! We are a young interdisciplinary team and would love to welcome you on board! Send us a short email to dein@senf.koeln or send me a message here: [LinkedIn](https://www.linkedin.com/in/tassilo-morino-468150162/). We will get in touch with you and add you to our Slack-Channel if you wish! We are looking forward to meeting you! 
 
-We are extremely happy about any contribution! We are a young interdisciplinary team and would love to welcome you on board! Send us a short email to dein@senf.koeln or send me a message here: [LinkedIn](https://www.linkedin.com/in/tassilo-morino-468150162/). We will get in touch with you and add you to our Slack-Channel if you wish! We are looking forward to meeting you!
+
+## 5: ZenHub
+
+We will invite you to our ZenHub Workspace, where you can find tickets to work on. Create an account and add the ZenHub Widget to Github. Now you can find an appealing ticket within the Sprint-Backlog or Bugs/Questions and try to tackle it.
+
+## 6: Take a look at the Designfile (Work in Progress)
+
+We are designing all components in Framer. You can find all to-do-components there and copy CSS attributes directly from there. It is still evolving and the Design-Experteriments-Page might be a little chaotic, but the other pages should be really straight forward. To get the icons, you got to ask us.
+
+https://framer.com/projects/senf-app--fiUScOsONkcproCH8qAH-jfmFv
+
+
+## 7: Atomic-Design-System-Principles
+
+To get a background-understanding about the atomic-design-system, take a look at this resource:
+https://atomicdesign.bradfrost.com/chapter-2/
+
+## 8: Background-Info about the foundation of this Repository
+
+To get a background-understanding on how the repository is built, here’s a link to a tutorial that has been the base:
+https://blog.logrocket.com/build-component-library-react-typescript/
+
+
+
