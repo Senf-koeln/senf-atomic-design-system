@@ -9,7 +9,7 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "build": "rollup -c",
-    "chromatic": "npx chromatic --project-token=0f165f66b932"
+    "chromatic": "chromatic --exit-zero-on-changes"
   },
   "author": "Tassilo Morino",
   "license": "ISC",
