@@ -15,6 +15,13 @@ export default {
 
 const Template: Story<ButtonProps> = (args) => <Button {...args} />;
 
+export const IconText = Template.bind({});
+IconText.args = {
+  icon: "arrowdown",
+  variant: "primary",
+  text: "Primary",
+};
+
 export const Primary = Template.bind({});
 Primary.args = {
   variant: "primary",
@@ -50,6 +57,11 @@ Disabled.args = {
 export const Loading = Template.bind({});
 Loading.args = {
   loading: true,
+};
+
+export const Icon = Template.bind({});
+Icon.args = {
+  icon: "bulb",
 };
 
 export const Small = Template.bind({});

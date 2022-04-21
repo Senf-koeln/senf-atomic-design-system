@@ -23,11 +23,11 @@ ArrowDown.args = {
 //   icon: "arrowup",
 //   color: "black",
 // };
-// export const ArrowLeft = Template.bind({});
-// ArrowLeft.args = {
-//   icon: "arrowleft",
-//   color: "black",
-// };
+export const ArrowLeft = Template.bind({});
+ArrowLeft.args = {
+  icon: "arrowleft",
+  color: "black",
+};
 // export const ArrowRight = Template.bind({});
 // ArrowRight.args = {
 //   icon: "arrowright",
