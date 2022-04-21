@@ -4,7 +4,6 @@ import React, { FC, Fragment, useState } from "react";
 import styled from "styled-components";
 import { InputProps } from "./Input.types";
 import Icon from "../icons/Icon";
-import theme from "../../../theme/theme";
 
 const InputGroup = styled.div<InputProps>`
   position: relative;
@@ -26,7 +25,7 @@ const StyledInput = styled.input<InputProps>`
   border: solid ${(props) => (props.error ? "3px" : "2px")}
     ${(props) =>
       props.error
-        ? theme.colors.red
+        ? props.theme.colors.signal.red
         : props.success
         ? "#067d68"
         : "rgba(255, 255, 255, 0)"};
@@ -117,7 +116,7 @@ const StyledSearchDelete = styled.button<InputProps>`
 
 const StyledText = styled.p<InputProps>`
   margin: 0px;
-  color: ${(props) => (props.error ? theme.colors.red : "#00000")};
+  color: ${(props) => (props.error ? props.theme.colors.signal.red : "#00000")};
 `;
 
 const Input: FC<InputProps> = ({
