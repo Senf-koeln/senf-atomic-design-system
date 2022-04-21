@@ -3,24 +3,41 @@ import type { Theme } from "styled-system";
 
 const theme: Theme = {
   fontFamily: "Nunito",
+
+  //SPACE are not complete/verified
   space: [0, 2, 4, 8, 16, 24, 32],
-  fontSizes: [12, 14, 14, 16, 16, 20, 24, 32],
-  fontWeights: [],
+
+  fontSizes: [12, 14, 16, 20, 24, 32],
+  fontWeights: [500, 600, 700, 800],
+
   lineHeight: [1.4, 1.3, 1.3, 1.5, 1.5, 1.3, 1.4, 1.2],
   letterSpacings: [0],
 
+  //what exactly is SIZES? Do we need that?
   sizes: [],
-  opacities: [],
-  borders: [0, 1, 2],
-  borderWidths: [],
-  borderStyles: [],
-  radii: [],
+
+  //should we split up BORDERS?? Is borderstyles really necessary?
+  borders: [],
+  borderWidths: [0, 1, 2, 3],
+  borderStyles: ["dashed", "solid"],
+
+  //RADII are not complete/verified
+  radii: [10, 18, 20, 24, 28, 30],
+
+  //OPACITIES are not complete/verified
+  opacities: [0.4, 0.6, 0.75],
+
+  //SHADOWS are not complete/verified
   shadows: [
     "0px 12px 18px -8px rgba(186, 160, 79, 0.2)",
     "0px -4px 10px 4px rgba(255, 255, 255, 0.2)",
   ],
+
+  //Does Louis define the TRANSITIONS??
   transitions: [],
-  zIndices: [],
+
+  //bestpractice for ZINDICES??
+  zIndices: [0, 1],
 
   colors: {
     primary: {
