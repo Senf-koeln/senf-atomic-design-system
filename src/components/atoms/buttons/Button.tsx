@@ -3,63 +3,96 @@
 import React, { FC } from "react";
 import styled from "styled-components";
 import {
-  LayerWhitFirstDefault,
+  LayerGreyButtonsDefault,
+  LayerGreyButtonsHover,
+  LayerWhiteFirstDefault,
+  LayerWhiteFirstHover,
   LayerYellowDefault,
   LayerYellowHover,
 } from "../layerStyles/LayerStyles";
 import { ButtonProps } from "./Button.types";
 
 const StyledButton = styled.button<ButtonProps>`
-  border: 0;
-  line-height: 1;
-  font-size: 15px;
   cursor: pointer;
-  font-weight: 700;
-  font-weight: bold;
-  border-radius: 3px;
-  display: inline-block;
-  padding: ${(props) =>
-    props.size === "small"
-      ? "7px 25px 8px"
-      : props.size === "medium"
-      ? "9px 30px 11px"
-      : "14px 30px 16px"};
-  color: ${(props) => (props.primary ? "#1b116e" : "#ffffff")};
+  box-sizing: border-box;
+  width: auto; /* 150px */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 
-  opacity: ${(props) => (props.disabled ? 0.5 : 1)};
+  //ADD THEME-OPACITY
+  opacity: ${(props) => (props.disabled === true ? 0.6 : 1)};
+  //ADD THEME-RADII
+  border-radius: 10px;
+
+  //ADD THEME-SPACE?
+  height: ${(props) => (props.size === "small" ? "36px" : "50px")};
+
+  //ADD THEME-SPACE?
+  padding: ${(props) =>
+    props.size === "small" ? "14px 10px 14px 10px" : "14px"};
 
   ${(props) =>
-    props.variant === "primary"
+    props.variant === "primary" || props.variant === undefined
       ? LayerYellowDefault
-      : props.variant === "primaryWhite" && LayerWhitFirstDefault}
+      : props.variant === "white"
+      ? LayerWhiteFirstDefault
+      : props.variant === "secondary" && LayerGreyButtonsDefault}
 
-  &:hover {
-    ${(props) => props.variant === "primary" && LayerYellowHover}
+  //ADD THEME-BORDER
+  border: ${(props) =>
+    props.borderStyle === "dashed"
+      ? `2px dashed ${props.theme.colors.greyscale.greyscale50tra} `
+      : "auto"};
+
+  &:hover:enabled {
+    ${(props) =>
+      props.variant === "primary" || props.variant === undefined
+        ? LayerYellowHover
+        : props.variant === "white"
+        ? LayerWhiteFirstHover
+        : props.variant === "secondary" && LayerGreyButtonsHover}
+
+    //ADD THEME-BORDER
+   border: ${(props) =>
+      props.borderStyle === "dashed"
+        ? `2px dashed ${props.theme.colors.greyscale.greyscale50tra} `
+        : "auto"};
   }
 
-  &:active {
-    ${(props) => props.variant === "primary" && LayerYellowHover}
+  &:active:enabled {
+    ${(props) =>
+      props.variant === "primary" || props.variant === undefined
+        ? LayerYellowHover
+        : props.variant === "white"
+        ? LayerWhiteFirstHover
+        : props.variant === "secondary" && LayerGreyButtonsHover}
+
+    //ADD THEME-BORDER
+  border: ${(props) =>
+      props.borderStyle === "dashed"
+        ? `2px dashed ${props.theme.colors.greyscale.greyscale50tra} `
+        : "auto"};
   }
 `;
 
 const Button: FC<ButtonProps> = ({
   size,
   variant,
-  primary,
-  disabled,
+  borderStyle,
   text,
   onClick,
-  ...props
+  ...rest
 }) => {
   return (
     <StyledButton
       type="button"
       variant={variant}
+      borderStyle={borderStyle}
       onClick={onClick}
-      primary={primary}
-      disabled={disabled}
       size={size}
-      {...props}
+      {...rest}
     >
       {text}
     </StyledButton>

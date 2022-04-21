@@ -18,53 +18,43 @@ const Template: Story<ButtonProps> = (args) => <Button {...args} />;
 export const Primary = Template.bind({});
 Primary.args = {
   variant: "primary",
-  primary: true,
-  disabled: false,
   text: "Primary",
 };
 
 export const PrimaryWhite = Template.bind({});
 PrimaryWhite.args = {
-  variant: "primaryWhite",
-  primary: true,
-  disabled: false,
+  variant: "white",
   text: "Primary White",
 };
 
 export const Secondary = Template.bind({});
 Secondary.args = {
-  primary: false,
-  disabled: false,
+  variant: "secondary",
+
+  text: "Secondary",
+};
+
+export const SecondaryDashed = Template.bind({});
+SecondaryDashed.args = {
+  variant: "secondary",
+  borderStyle: "dashed",
   text: "Secondary",
 };
 
 export const Disabled = Template.bind({});
 Disabled.args = {
-  primary: false,
   disabled: true,
   text: "Disabled",
 };
 
+export const Loading = Template.bind({});
+Loading.args = {
+  disabled: true,
+  loading: true,
+};
+
 export const Small = Template.bind({});
 Small.args = {
-  primary: true,
-  disabled: false,
   size: "small",
   text: "Small",
-};
-
-export const Medium = Template.bind({});
-Medium.args = {
-  primary: true,
-  disabled: false,
-  size: "medium",
-  text: "Medium",
-};
-
-export const Large = Template.bind({});
-Large.args = {
-  primary: true,
-  disabled: false,
-  size: "large",
-  text: "Large",
 };

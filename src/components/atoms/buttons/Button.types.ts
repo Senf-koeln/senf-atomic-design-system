@@ -3,9 +3,10 @@
 import { MouseEventHandler } from "react";
 export interface ButtonProps {
   text?: string;
-  variant?: string;
-  primary?: boolean;
+  variant?: "primary" | "white" | "secondary";
+  borderStyle?: string;
+  loading?: boolean;
   disabled?: boolean;
-  size?: "small" | "medium" | "large";
+  size?: "small" | "big";
   onClick?: MouseEventHandler<HTMLButtonElement>;
 }
