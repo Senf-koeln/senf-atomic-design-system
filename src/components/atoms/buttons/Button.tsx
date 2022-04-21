@@ -2,6 +2,7 @@
 
 import React, { FC } from "react";
 import styled from "styled-components";
+import Loader from "../animations/Loader";
 import {
   LayerGreyButtonsDefault,
   LayerGreyButtonsHover,
@@ -13,6 +14,7 @@ import {
 import { ButtonProps } from "./Button.types";
 
 const StyledButton = styled.button<ButtonProps>`
+  position: relative;
   cursor: pointer;
   box-sizing: border-box;
   width: auto; /* 150px */
@@ -29,6 +31,9 @@ const StyledButton = styled.button<ButtonProps>`
   //ADD THEME-SPACE?
   height: ${(props) => (props.size === "small" ? "36px" : "50px")};
 
+  min-width: ${(props) => (props.size === "small" ? "36px" : "50px")};
+
+  color: ${(props) => (props.loading === true ? "transparent" : "auto")};
   //ADD THEME-SPACE?
   padding: ${(props) =>
     props.size === "small" ? "14px 10px 14px 10px" : "14px"};
@@ -77,11 +82,21 @@ const StyledButton = styled.button<ButtonProps>`
   }
 `;
 
+const LoaderWrapper = styled.span`
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+`;
+
 const Button: FC<ButtonProps> = ({
   size,
   variant,
   borderStyle,
   text,
+  loading,
   onClick,
   ...rest
 }) => {
@@ -90,11 +105,17 @@ const Button: FC<ButtonProps> = ({
       type="button"
       variant={variant}
       borderStyle={borderStyle}
+      loading={loading}
       onClick={onClick}
       size={size}
       {...rest}
     >
       {text}
+      {loading && (
+        <LoaderWrapper>
+          <Loader />
+        </LoaderWrapper>
+      )}
     </StyledButton>
   );
 };

@@ -49,7 +49,6 @@ Disabled.args = {
 
 export const Loading = Template.bind({});
 Loading.args = {
-  disabled: true,
   loading: true,
 };
 

@@ -1,7 +1,7 @@
 /** @format */
 
 import React, { FC } from "react";
-import { styled } from "@storybook/theming";
+import styled from "styled-components";
 import { icons } from "../../../assets/icons/icons";
 import { IconProps } from "./Icon.types";
 
