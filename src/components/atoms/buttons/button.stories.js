@@ -17,9 +17,18 @@ const Template: Story<ButtonProps> = (args) => <Button {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {
+  variant: "primary",
   primary: true,
   disabled: false,
   text: "Primary",
+};
+
+export const PrimaryWhite = Template.bind({});
+PrimaryWhite.args = {
+  variant: "primaryWhite",
+  primary: true,
+  disabled: false,
+  text: "Primary White",
 };
 
 export const Secondary = Template.bind({});

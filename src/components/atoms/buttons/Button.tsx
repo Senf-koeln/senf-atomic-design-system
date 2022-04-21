@@ -2,8 +2,11 @@
 
 import React, { FC } from "react";
 import styled from "styled-components";
-import theme from "../../../theme/theme";
-import { ThemeProvider } from "styled-components";
+import {
+  LayerWhitFirstDefault,
+  LayerYellowDefault,
+  LayerYellowHover,
+} from "../layerStyles/LayerStyles";
 import { ButtonProps } from "./Button.types";
 
 const StyledButton = styled.button<ButtonProps>`
@@ -22,25 +25,26 @@ const StyledButton = styled.button<ButtonProps>`
       ? "9px 30px 11px"
       : "14px 30px 16px"};
   color: ${(props) => (props.primary ? "#1b116e" : "#ffffff")};
-  background-color: ${(props) =>
-    props.primary ? theme.colors.primary : "#1b116e"};
+
   opacity: ${(props) => (props.disabled ? 0.5 : 1)};
+
+  ${(props) =>
+    props.variant === "primary"
+      ? LayerYellowDefault
+      : props.variant === "primaryWhite" && LayerWhitFirstDefault}
+
   &:hover {
-    background-color: ${(props) => (props.primary ? "#55bd90" : "#6bedb5")};
+    ${(props) => props.variant === "primary" && LayerYellowHover}
   }
+
   &:active {
-    border: solid 2px #1b116e;
-    padding: ${(props) =>
-      props.size === "small"
-        ? "5px 23px 6px"
-        : props.size === "medium"
-        ? "7px 28px 9px"
-        : "12px 28px 14px"};
+    ${(props) => props.variant === "primary" && LayerYellowHover}
   }
 `;
 
 const Button: FC<ButtonProps> = ({
   size,
+  variant,
   primary,
   disabled,
   text,
@@ -50,6 +54,7 @@ const Button: FC<ButtonProps> = ({
   return (
     <StyledButton
       type="button"
+      variant={variant}
       onClick={onClick}
       primary={primary}
       disabled={disabled}
