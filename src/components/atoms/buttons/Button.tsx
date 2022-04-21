@@ -2,8 +2,6 @@
 
 import React, { FC } from "react";
 import styled from "styled-components";
-import theme from "../../../theme/theme";
-import { ThemeProvider } from "styled-components";
 import { ButtonProps } from "./Button.types";
 
 const StyledButton = styled.button<ButtonProps>`
@@ -23,7 +21,7 @@ const StyledButton = styled.button<ButtonProps>`
       : "14px 30px 16px"};
   color: ${(props) => (props.primary ? "#1b116e" : "#ffffff")};
   background-color: ${(props) =>
-    props.primary ? theme.colors.primary : "#1b116e"};
+    props.primary ? props.theme.colors.primary : "#1b116e"};
   opacity: ${(props) => (props.disabled ? 0.5 : 1)};
   &:hover {
     background-color: ${(props) => (props.primary ? "#55bd90" : "#6bedb5")};
