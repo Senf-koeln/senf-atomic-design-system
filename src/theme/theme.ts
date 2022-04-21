@@ -16,7 +16,7 @@ const theme: Theme = {
   //what exactly is SIZES? Do we need that?
   sizes: [],
 
-  //should we split up BORDERS?? Is borderstyles really necessary?
+  //should we split up BORDERS?? Is borderstyles really necessary? Bestpractices?
   borders: [],
   borderWidths: [0, 1, 2, 3],
   borderStyles: ["dashed", "solid"],
