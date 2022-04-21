@@ -2,59 +2,137 @@
 
 import React, { FC } from "react";
 import styled from "styled-components";
+import Loader from "../animations/Loader";
+import Icon from "../icons/Icon";
+import {
+  LayerGreyButtonsDefault,
+  LayerGreyButtonsHover,
+  LayerWhiteFirstDefault,
+  LayerWhiteFirstHover,
+  LayerYellowDefault,
+  LayerYellowHover,
+} from "../layerStyles/LayerStyles";
 import { ButtonProps } from "./Button.types";
 
 const StyledButton = styled.button<ButtonProps>`
-  border: 0;
-  line-height: 1;
-  font-size: 15px;
+  position: relative;
   cursor: pointer;
-  font-weight: 700;
-  font-weight: bold;
-  border-radius: 3px;
-  display: inline-block;
+  box-sizing: border-box;
+  width: auto; /* 150px */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  //ADD THEME-OPACITY
+  opacity: ${(props) => (props.disabled === true ? 0.6 : 1)};
+  //ADD THEME-RADII
+  border-radius: 10px;
+
+  //ADD THEME-SPACE?
+  height: ${(props) => (props.size === "small" ? "36px" : "50px")};
+
+  min-width: ${(props) => (props.size === "small" ? "36px" : "50px")};
+
+  color: ${(props) => (props.loading === true ? "transparent" : "auto")};
+  pointer-events: ${(props) => (props.loading === true ? "none" : "all")};
+
+  //ADD THEME-SPACE?
   padding: ${(props) =>
-    props.size === "small"
-      ? "7px 25px 8px"
-      : props.size === "medium"
-      ? "9px 30px 11px"
-      : "14px 30px 16px"};
-  color: ${(props) => (props.primary ? "#1b116e" : "#ffffff")};
-  background-color: ${(props) =>
-    props.primary ? props.theme.colors.primary : "#1b116e"};
-  opacity: ${(props) => (props.disabled ? 0.5 : 1)};
-  &:hover {
-    background-color: ${(props) => (props.primary ? "#55bd90" : "#6bedb5")};
+    props.size === "small" ? "14px 10px 14px 10px" : "14px"};
+
+  ${(props) =>
+    props.variant === "primary" || props.variant === undefined
+      ? LayerYellowDefault
+      : props.variant === "white"
+      ? LayerWhiteFirstDefault
+      : props.variant === "secondary" && LayerGreyButtonsDefault}
+
+  //ADD THEME-BORDER
+  border: ${(props) =>
+    props.borderStyle === "dashed"
+      ? `2px dashed ${props.theme.colors.greyscale.greyscale50tra} `
+      : "auto"};
+
+  &:hover:enabled {
+    ${(props) =>
+      props.variant === "primary" || props.variant === undefined
+        ? LayerYellowHover
+        : props.variant === "white"
+        ? LayerWhiteFirstHover
+        : props.variant === "secondary" && LayerGreyButtonsHover}
+
+    //ADD THEME-BORDER
+   border: ${(props) =>
+      props.borderStyle === "dashed"
+        ? `2px dashed ${props.theme.colors.greyscale.greyscale50tra} `
+        : "auto"};
   }
-  &:active {
-    border: solid 2px #1b116e;
-    padding: ${(props) =>
-      props.size === "small"
-        ? "5px 23px 6px"
-        : props.size === "medium"
-        ? "7px 28px 9px"
-        : "12px 28px 14px"};
+
+  &:active:enabled {
+    ${(props) =>
+      props.variant === "primary" || props.variant === undefined
+        ? LayerYellowHover
+        : props.variant === "white"
+        ? LayerWhiteFirstHover
+        : props.variant === "secondary" && LayerGreyButtonsHover}
+
+    //ADD THEME-BORDER
+  border: ${(props) =>
+      props.borderStyle === "dashed"
+        ? `2px dashed ${props.theme.colors.greyscale.greyscale50tra} `
+        : "auto"};
   }
 `;
 
+const LoaderWrapper = styled.span`
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+`;
+
+const IconWrapper = styled.div`
+  padding-right: 5px;
+`;
+
 const Button: FC<ButtonProps> = ({
-  size,
-  primary,
-  disabled,
   text,
+  children,
+  icon,
+  size,
+  variant,
+  borderStyle,
+  loading,
   onClick,
-  ...props
+  ...rest
 }) => {
   return (
     <StyledButton
       type="button"
+      variant={variant}
+      icon={icon}
+      borderStyle={borderStyle}
+      loading={loading}
       onClick={onClick}
-      primary={primary}
-      disabled={disabled}
       size={size}
-      {...props}
+      {...rest}
     >
+      {children && children}
+      {icon && (
+        <IconWrapper>
+          <Icon icon={icon} />
+        </IconWrapper>
+      )}
+
       {text}
+      {loading && (
+        <LoaderWrapper>
+          <Loader />
+        </LoaderWrapper>
+      )}
     </StyledButton>
   );
 };

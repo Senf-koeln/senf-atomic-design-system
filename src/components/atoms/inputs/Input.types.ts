@@ -7,6 +7,7 @@ export interface InputProps {
   type?: string;
   label?: string;
   note?: string;
+  icon?: string;
   placeholder?: string;
   required?: boolean;
   error?: boolean;

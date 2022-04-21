@@ -3,6 +3,6 @@
 import { ChangeEventHandler } from "react";
 
 export interface IconProps {
-  icon?: number;
+  icon?: string;
   color?: string;
 }
