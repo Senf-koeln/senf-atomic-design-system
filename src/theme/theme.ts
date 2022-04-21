@@ -10,11 +10,15 @@ const theme: Theme = {
   letterSpacings: [0],
 
   sizes: [],
+  opacities: [],
   borders: [0, 1, 2],
   borderWidths: [],
   borderStyles: [],
   radii: [],
-  shadows: [],
+  shadows: [
+    "0px 12px 18px -8px rgba(186, 160, 79, 0.2)",
+    "0px -4px 10px 4px rgba(255, 255, 255, 0.2)",
+  ],
   transitions: [],
   zIndices: [],
 
