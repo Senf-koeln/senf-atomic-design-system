@@ -5,8 +5,13 @@ import { withThemes } from "@react-theming/storybook-addon";
 
 import theme from "../src/theme/theme";
 
-// pass ThemeProvider and array of your themes to decorator
-addDecorator(withThemes(ThemeProvider, [theme]));
+export const decorators = [
+  (Story) => (
+    <ThemeProvider theme={theme}>
+      <Story />
+    </ThemeProvider>
+  ),
+];
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
