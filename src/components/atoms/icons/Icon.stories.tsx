@@ -7,8 +7,7 @@ import { IconProps } from "./Icon.types";
 export default {
   title: "Atom/Icon",
   component: Icon,
-};
-// as Meta<typeof Input>;
+} as Meta<typeof Icon>;
 
 const Template: Story<IconProps> = (args) => <Icon {...args} />;
 

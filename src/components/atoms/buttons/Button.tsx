@@ -32,6 +32,9 @@ const StyledButton = styled.button<ButtonProps>`
   //ADD THEME-SPACE?
   height: ${(props) => (props.size === "small" ? "36px" : "50px")};
 
+  //FOR SMALLICONBUTTON  – is this really  correct?
+  width: ${(props) => (props.fillWidth === "max" ? "100%" : "auto")};
+
   min-width: ${(props) => (props.size === "small" ? "36px" : "50px")};
 
   color: ${(props) => (props.loading === true ? "transparent" : "auto")};
@@ -94,8 +97,8 @@ const LoaderWrapper = styled.span`
   height: 100%;
 `;
 
-const IconWrapper = styled.div`
-  padding-right: 5px;
+const IconWrapper = styled.div<ButtonProps>`
+  padding-right: ${(props) => (props.text === undefined ? "0px" : "5px")};
 `;
 
 const Button: FC<ButtonProps> = ({
@@ -105,6 +108,7 @@ const Button: FC<ButtonProps> = ({
   size,
   variant,
   borderStyle,
+  fillWidth,
   loading,
   onClick,
   ...rest
@@ -112,9 +116,11 @@ const Button: FC<ButtonProps> = ({
   return (
     <StyledButton
       type="button"
+      text={text}
       variant={variant}
       icon={icon}
       borderStyle={borderStyle}
+      fillWidth={fillWidth}
       loading={loading}
       onClick={onClick}
       size={size}
@@ -122,11 +128,13 @@ const Button: FC<ButtonProps> = ({
     >
       {children && children}
       {icon && (
-        <IconWrapper>
-          <Icon icon={icon} />
+        <IconWrapper text={text}>
+          <Icon
+            icon={icon}
+            transform={size === "small" ? "scale(0.7)" : "scale(1)"}
+          />
         </IconWrapper>
       )}
-
       {text}
       {loading && (
         <LoaderWrapper>

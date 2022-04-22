@@ -7,8 +7,7 @@ import { LoaderProps } from "./Loader.types";
 export default {
   title: "Atom/Loader",
   component: Loader,
-};
-// as Meta<typeof Input>;
+} as Meta<typeof Loader>;
 
 const Template: Story<LoaderProps> = (args) => <Loader {...args} />;
 

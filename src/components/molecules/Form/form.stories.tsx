@@ -8,8 +8,7 @@ import { FormProps } from "./Form.types";
 export default {
   title: "Molecules/Form",
   component: Form,
-};
-// as Meta<typeof Input>;
+} as Meta<typeof Form>;
 
 const Template: Story<FormProps> = (args) => <Form {...args} />;
 

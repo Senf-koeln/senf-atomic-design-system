@@ -5,15 +5,15 @@ import styled from "styled-components";
 import Input from "../../atoms/inputs/Input";
 import { FormProps } from "./Form.types";
 
-const Wrapper = styled.div`
-  width: 80%;
-  margin-left: 10%;
+const Wrapper = styled.div<FormProps>`
+  margin: ${(props) => (props.margin ? props.margin : 0)};
+  max-width: ${(props) => (props.maxWidth ? props.maxWidth : "100%")};
 `;
 
-const Form: FC<FormProps> = ({ inputItems, ...props }) => {
+const Form: FC<FormProps> = ({ inputItems, margin, maxWidth, ...props }) => {
   return (
     <form>
-      <Wrapper>
+      <Wrapper margin={margin} maxWidth={maxWidth}>
         {inputItems?.map((item) => {
           return (
             <Input
