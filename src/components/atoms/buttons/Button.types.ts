@@ -6,6 +6,7 @@ export interface ButtonProps {
   variant?: "primary" | "white" | "secondary" | "plus";
   icon?: string;
   borderStyle?: "dashed" | "solid";
+  fillWidth?: "max" | undefined;
   loading?: boolean;
   disabled?: boolean;
   size?: "small" | "big";

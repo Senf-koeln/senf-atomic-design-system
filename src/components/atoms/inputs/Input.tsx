@@ -8,10 +8,8 @@ import Icon from "../icons/Icon";
 const InputGroup = styled.div<InputProps>`
   position: relative;
   margin-top: 5px;
-  margin-left: 10%;
   display: flex;
   flex-direction: column;
-  max-width: 600px;
   opacity: ${(props) => (props.disabled ? "0.5" : "1")};
 `;
 

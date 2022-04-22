@@ -12,8 +12,7 @@ export default {
   title: "Atom/Button",
   component: Button,
   argTypes: {},
-};
-// as Meta<typeof Button>;
+} as Meta<typeof Button>;
 
 const Template: Story<ButtonProps> = (args) => <Button {...args} />;
 const RoundedButtonTemplate: Story<ButtonProps> = (args) => (

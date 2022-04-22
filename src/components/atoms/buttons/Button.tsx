@@ -33,7 +33,7 @@ const StyledButton = styled.button<ButtonProps>`
   height: ${(props) => (props.size === "small" ? "36px" : "50px")};
 
   //FOR SMALLICONBUTTON  – is this really  correct?
-  width: ${(props) => (props.text === undefined ? "36px" : "auto")};
+  width: ${(props) => (props.fillWidth === "max" ? "100%" : "auto")};
 
   min-width: ${(props) => (props.size === "small" ? "36px" : "50px")};
 
@@ -108,6 +108,7 @@ const Button: FC<ButtonProps> = ({
   size,
   variant,
   borderStyle,
+  fillWidth,
   loading,
   onClick,
   ...rest
@@ -119,6 +120,7 @@ const Button: FC<ButtonProps> = ({
       variant={variant}
       icon={icon}
       borderStyle={borderStyle}
+      fillWidth={fillWidth}
       loading={loading}
       onClick={onClick}
       size={size}

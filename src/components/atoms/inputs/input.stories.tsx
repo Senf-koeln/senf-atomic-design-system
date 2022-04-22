@@ -7,8 +7,7 @@ import { InputProps } from "./Input.types";
 export default {
   title: "Atom/Input",
   component: Input,
-};
-// as Meta<typeof Input>;
+} as Meta<typeof Input>;
 
 const Template: Story<InputProps> = (args) => <Input {...args} />;
 
