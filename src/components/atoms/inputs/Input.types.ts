@@ -17,4 +17,5 @@ export interface InputProps {
   value?: string;
   setValue?: ChangeEventHandler<HTMLInputElement>;
   onChange?: ChangeEventHandler<HTMLInputElement>;
+  onClick?: ChangeEventHandler<HTMLInputElement>;
 }
