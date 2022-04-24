@@ -8,6 +8,9 @@ import { FormProps } from "./Form.types";
 const Wrapper = styled.div<FormProps>`
   margin: ${(props) => (props.margin ? props.margin : 0)};
   max-width: ${(props) => (props.maxWidth ? props.maxWidth : "100%")};
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 `;
 
 const Form: FC<FormProps> = ({ inputItems, margin, maxWidth, ...props }) => {

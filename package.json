@@ -53,6 +53,8 @@
     "styled-system": "^5.1.5"
   },
   "dependencies": {
-    "lottie-web": "^5.9.2"
+    "i18next": "^21.6.16",
+    "lottie-web": "^5.9.2",
+    "react-i18next": "^11.16.7"
   }
 }

@@ -7,7 +7,6 @@ import Icon from "../icons/Icon";
 
 const InputGroup = styled.div<InputProps>`
   position: relative;
-  margin-top: 5px;
   display: flex;
   flex-direction: column;
   opacity: ${(props) => (props.disabled ? "0.5" : "1")};
@@ -39,7 +38,8 @@ const StyledInput = styled.input<InputProps>`
     color: rgba(0, 0, 0, 0.7);
   }
   &:focus {
-    border: 3px solid rgb(254, 217, 87);
+    outline: 3px solid ${(props) => props.theme.colors.primary.primary120};
+    outline-offset: -3px;
   }
 `;
 
@@ -146,9 +146,11 @@ const Input: FC<InputProps> = ({
   return (
     <InputGroup disabled={disabled}>
       <FlexWrapper>
-        <StyledLabel>
-          <StyledText>{label}</StyledText>
-        </StyledLabel>
+        {label && (
+          <StyledLabel>
+            <StyledText>{label}</StyledText>
+          </StyledLabel>
+        )}
         {required && (
           <StyledRequiredStar>
             {" "}
@@ -158,11 +160,13 @@ const Input: FC<InputProps> = ({
           </StyledRequiredStar>
         )}
 
-        <StyledNote>
-          <StyledText disabled={disabled} error={error}>
-            {note}
-          </StyledText>
-        </StyledNote>
+        {note && (
+          <StyledNote>
+            <StyledText disabled={disabled} error={error}>
+              {note}
+            </StyledText>
+          </StyledNote>
+        )}
       </FlexWrapper>
       <StyledInput
         id={id}

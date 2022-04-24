@@ -17,5 +17,10 @@ const Template: Story<AuthProps> = (args) => <Auth {...args} />;
 
 export const Login = Template.bind({});
 Login.args = {
-  text: "x",
+  variant: "login",
+};
+
+export const Register = Template.bind({});
+Register.args = {
+  variant: "register",
 };
