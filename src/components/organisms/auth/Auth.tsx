@@ -1,8 +1,10 @@
 /** @format */
 
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import styled from "styled-components";
+import { useTranslation } from "react-i18next";
 import Button from "../../atoms/buttons/Button";
+import FlexWrapper from "../../atoms/layout/FlexWrapper";
 import Shape from "../../atoms/shapes/Shape";
 import Form from "../../molecules/Form/Form";
 import { AuthProps } from "./Auth.types";
@@ -27,7 +29,41 @@ const StyledSvg = styled.svg`
   margin-top: 285px;
   z-index: 1;
 `;
-const Auth: FC<AuthProps> = ({ text }) => {
+const ContentWrapper = styled.div`
+  width: 80%;
+  margin-left: 10%;
+  position: relative;
+`;
+const Auth: FC<AuthProps> = () => {
+  const { t } = useTranslation();
+  const [variant, setVariant] = useState("login");
+  const inputItemsLogin = [
+    { name: "email", type: "email", placeholder: "E-Mail" },
+    {
+      name: "password",
+      type: "password",
+      placeholder: "Password",
+    },
+  ];
+
+  const inputItemsRegister = [
+    { name: "email", type: "email", placeholder: "E-Mail" },
+    {
+      name: "password",
+      type: "password",
+      placeholder: "Password",
+    },
+    {
+      name: "confirmPassword",
+      type: "password",
+      placeholder: "Confirm Password",
+    },
+    {
+      name: "username",
+      type: "username",
+      placeholder: "Username",
+    },
+  ];
   return (
     <StyledWrapper>
       <Shape />
@@ -62,24 +98,63 @@ const Auth: FC<AuthProps> = ({ text }) => {
           ></path>
         </g>
       </StyledSvg>
-      <Form
-        margin="0 10% 0 10%"
-        maxWidth="80%"
-        inputItems={[
-          { name: "email", type: "email", placeholder: "E-Mail" },
-          {
-            name: "password",
-            type: "password",
-            placeholder: "Password",
-          },
-        ]}
-      />
-      <Button
-        variant="white"
-        fillWidth="max"
-        text="Anmelden"
-        margin="10px 10% 0 10%"
-      />
+
+      <FlexWrapper direction="vertical" width="80%" margin="25px 10%  0 10%">
+        <h2 style={{ position: "relative" }}>
+          Hey, <br /> willkommen bei Senf.
+        </h2>
+        <FlexWrapper
+          direction="horizontal"
+          alignItems="center"
+          margin="20px 0 0 0 "
+        >
+          {variant === "login" ? (
+            <React.Fragment>
+              <p style={{ position: "relative" }}>Bist du neu?</p>{" "}
+              <a
+                style={{ position: "relative" }}
+                onClick={() => setVariant("register")}
+              >
+                {t("register_now")}
+              </a>
+            </React.Fragment>
+          ) : (
+            <React.Fragment>
+              <p style={{ position: "relative" }}>Hast du einen Account?</p>
+              <a
+                style={{ position: "relative" }}
+                onClick={() => setVariant("login")}
+              >
+                Jetzt anmelden
+              </a>
+            </React.Fragment>
+          )}
+        </FlexWrapper>
+        <Form
+          margin="24px 0 0 0"
+          width="100%"
+          inputItems={
+            variant === "register" ? inputItemsRegister : inputItemsLogin
+          }
+        />
+        <FlexWrapper
+          direction="horizontal"
+          alignItems="center"
+          margin="14px 0 36px 0"
+        >
+          {variant === "login" ? (
+            <React.Fragment>
+              <p style={{ position: "relative" }}>Passwort vergessen?</p>{" "}
+              <a style={{ position: "relative" }}>Zurücksetzen</a>
+            </React.Fragment>
+          ) : (
+            <React.Fragment>
+              <p style={{ position: "relative" }}>Hast du einen Account?</p>
+            </React.Fragment>
+          )}
+        </FlexWrapper>
+        <Button variant="white" fillWidth="max" text="Anmelden" />
+      </FlexWrapper>
     </StyledWrapper>
   );
 };

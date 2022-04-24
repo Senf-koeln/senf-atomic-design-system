@@ -5,7 +5,7 @@ const theme: Theme = {
   fontFamily: "Nunito",
 
   //SPACE are not complete/verified
-  space: [0, 2, 4, 8, 16, 24, 32],
+  space: [0, 2, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44],
 
   fontSizes: [12, 14, 16, 20, 24, 32],
   fontWeights: [500, 600, 700, 800],

@@ -9,6 +9,17 @@ const StyledWrapper = styled.div<ShapeProps>`
   width: 100%;
   margin-top: 288px;
   z-index: 0;
+  display: flex;
+  flex-direction: column;
+`;
+
+//NOT WORKING
+const RemainingSpaceFill = styled.div`
+  flex-grow: 1;
+  background-color: green;
+  width: 100%;
+  position: relative;
+  z-index: 99999;
 `;
 
 const Shapes = [
@@ -28,7 +39,11 @@ const Shapes = [
 ];
 
 const Shape: FC<ShapeProps> = ({ variant }) => {
-  return <StyledWrapper>{Shapes[0]}</StyledWrapper>;
+  return (
+    <StyledWrapper>
+      {Shapes[0]} <RemainingSpaceFill />
+    </StyledWrapper>
+  );
 };
 
 export default Shape;
