@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import Button from "../../atoms/buttons/Button";
@@ -15,6 +15,14 @@ const StyledWrapper = styled.div<AuthProps>`
   max-width: 400px;
   min-height: 100vh;
   background-color: ${(props) => props.theme.colors.beige.beige20};
+`;
+
+const RectShape = styled.div`
+  position: absolute;
+  width: 100%;
+  top: 400px;
+  height: calc(100% - 400px);
+  background-color: ${(props) => props.theme.colors.primary.primary100};
 `;
 const Img = styled.img`
   position: absolute;
@@ -34,9 +42,16 @@ const ContentWrapper = styled.div`
   margin-left: 10%;
   position: relative;
 `;
-const Auth: FC<AuthProps> = () => {
+const Auth: FC<AuthProps> = ({ variant }) => {
   const { t } = useTranslation();
-  const [variant, setVariant] = useState("login");
+  const [variantState, setVariantState] = useState("login");
+
+  useEffect(() => {
+    if (variant === "register") {
+      setVariantState("register");
+    }
+  }, [variant]);
+
   const inputItemsLogin = [
     { name: "email", type: "email", placeholder: "E-Mail" },
     {
@@ -63,10 +78,21 @@ const Auth: FC<AuthProps> = () => {
       type: "username",
       placeholder: "Username",
     },
+    {
+      name: "gender",
+      type: "gender",
+      placeholder: "Gender",
+    },
+    {
+      name: "age",
+      type: "age",
+      placeholder: "Age",
+    },
   ];
   return (
     <StyledWrapper>
       <Shape />
+      <RectShape />
       <Img
         src={require("../../../assets/illustrations/senfManSquatting.png")}
         alt="Illustration"
@@ -108,12 +134,12 @@ const Auth: FC<AuthProps> = () => {
           alignItems="center"
           margin="20px 0 0 0 "
         >
-          {variant === "login" ? (
+          {variantState === "login" ? (
             <React.Fragment>
               <p style={{ position: "relative" }}>Bist du neu?</p>{" "}
               <a
                 style={{ position: "relative" }}
-                onClick={() => setVariant("register")}
+                onClick={() => setVariantState("register")}
               >
                 {t("register_now")}
               </a>
@@ -123,7 +149,7 @@ const Auth: FC<AuthProps> = () => {
               <p style={{ position: "relative" }}>Hast du einen Account?</p>
               <a
                 style={{ position: "relative" }}
-                onClick={() => setVariant("login")}
+                onClick={() => setVariantState("login")}
               >
                 Jetzt anmelden
               </a>
@@ -134,7 +160,7 @@ const Auth: FC<AuthProps> = () => {
           margin="24px 0 0 0"
           width="100%"
           inputItems={
-            variant === "register" ? inputItemsRegister : inputItemsLogin
+            variantState === "register" ? inputItemsRegister : inputItemsLogin
           }
         />
         <FlexWrapper
@@ -142,7 +168,7 @@ const Auth: FC<AuthProps> = () => {
           alignItems="center"
           margin="14px 0 36px 0"
         >
-          {variant === "login" ? (
+          {variantState === "login" ? (
             <React.Fragment>
               <p style={{ position: "relative" }}>Passwort vergessen?</p>{" "}
               <a style={{ position: "relative" }}>Zurücksetzen</a>

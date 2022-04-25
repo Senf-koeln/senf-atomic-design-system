@@ -19,13 +19,17 @@ const StyledInput = styled.input<InputProps>`
   padding: 14px;
   padding-left: ${(props) => (props.type === "search" ? "40px" : "14px")};
 
-  border: solid ${(props) => (props.error ? "3px" : "2px")}
+  /* border: solid ${(props) => (props.error ? "3px" : "2px")}
     ${(props) =>
-      props.error
-        ? props.theme.colors.signal.red
-        : props.success
-        ? "#067d68"
-        : "rgba(255, 255, 255, 0)"};
+    props.error
+      ? props.theme.colors.signal.red
+      : props.success
+      ? "#067d68"
+      : "rgba(255, 255, 255, 0)"}; */
+  border: 0;
+  outline: ${(props) => (props.error ? "3px" : "0px")} solid
+    ${(props) => props.theme.colors.signal.red};
+  outline-offset: -3px;
   border-radius: 10px;
   font-size: 16px;
   text-align: left;
