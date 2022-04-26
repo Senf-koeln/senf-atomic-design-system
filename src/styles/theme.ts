@@ -7,10 +7,11 @@ const theme: Theme = {
   //SPACE are not complete/verified
   space: [0, 2, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44],
 
-  fontSizes: [12, 14, 16, 20, 24, 32],
+  // font sizes converted from px to default browsers rem (16 px base)
+  fontSizes: [12, 14, 16, 20, 24, 32].map(numInPX => numInPX / 16),
   fontWeights: [500, 600, 700, 800],
 
-  lineHeight: [1.4, 1.3, 1.3, 1.5, 1.5, 1.3, 1.4, 1.2],
+  lineHeight: [ 1.2, 1.3, 1.4, 1.5 ],
   letterSpacings: [0],
 
   //what exactly is SIZES? Do we need that?
