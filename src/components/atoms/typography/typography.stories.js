@@ -28,7 +28,7 @@ export const BodySm = Template.bind({});
 BodySm.args = { variant: "bodySm", children: "Body Small" };
 
 export const BodySm = Template.bind({});
-BodySm.args = { variant: "footnote", children: "foot note" };
+BodySm.args = { variant: "footnote", children: "foot note TEST" };
 
 export const Button = Template.bind({});
 Button.args = { variant: "buttonBg", children: "Button" };
