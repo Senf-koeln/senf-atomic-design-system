@@ -22,13 +22,16 @@ export const H3 = Template.bind({});
 H3.args = { variant: "h3", children: "H3 Headline", as: "h3" };
 
 export const Body = Template.bind({});
-Body.args = { variant: "body", children: "Body" };
+Body.args = { variant: "bodyBg", children: "Body" };
 
 export const BodySm = Template.bind({});
 BodySm.args = { variant: "bodySm", children: "Body Small" };
 
+export const BodySm = Template.bind({});
+BodySm.args = { variant: "footnote", children: "foot note" };
+
 export const Button = Template.bind({});
-Button.args = { variant: "button", children: "Button" };
+Button.args = { variant: "buttonBg", children: "Button" };
 
 export const ButtonSm = Template.bind({});
 ButtonSm.args = { variant: "buttonSm", children: "Button Small" };

@@ -35,7 +35,7 @@ const Typography = styled.p<TypographyProps>`
         fontWeight = theme.fontWeights[2];
         lineHeight = `${theme.lineHeight[1]}em`;
         break;
-      case "body":
+      case "bodyBg":
         fontSize = `${theme.fontSizes[2]}rem`;
         fontWeight = theme.fontWeights[0];
         lineHeight = `${theme.lineHeight[3]}em`;
@@ -44,6 +44,11 @@ const Typography = styled.p<TypographyProps>`
         fontSize = `${theme.fontSizes[1]}rem`;
         fontWeight = theme.fontWeights[0];
         lineHeight = `${theme.lineHeight[1]}em`;
+        break;
+      case "footnote":
+        fontSize = `${theme.fontSizes[0]}rem`;
+        fontWeight = theme.fontWeights[1];
+        lineHeight = `${theme.lineHeight[2]}em`;
         break;
       default:
         fontSize = "";
