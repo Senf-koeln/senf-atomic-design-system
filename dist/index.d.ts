@@ -1,10 +1,18 @@
 import { MouseEventHandler, FC, ChangeEventHandler } from 'react';
+import * as styled_components from 'styled-components';
+import { Theme } from 'styled-system';
+
+/** @format */
 
 interface ButtonProps {
     text?: string;
-    primary?: boolean;
+    variant?: "primary" | "white" | "secondary" | "plus";
+    icon?: string;
+    borderStyle?: "dashed" | "solid";
+    fillWidth?: "max" | undefined;
+    loading?: boolean;
     disabled?: boolean;
-    size?: "small" | "medium" | "large";
+    size?: "small" | "big";
     onClick?: MouseEventHandler<HTMLButtonElement>;
 }
 
@@ -19,6 +27,7 @@ interface InputProps {
     type?: string;
     label?: string;
     note?: string;
+    icon?: string;
     placeholder?: string;
     required?: boolean;
     error?: boolean;
@@ -28,6 +37,7 @@ interface InputProps {
     value?: string;
     setValue?: ChangeEventHandler<HTMLInputElement>;
     onChange?: ChangeEventHandler<HTMLInputElement>;
+    onClick?: ChangeEventHandler<HTMLInputElement>;
 }
 
 /** @format */
@@ -36,8 +46,10 @@ declare const Input: FC<InputProps>;
 
 /** @format */
 interface IconProps {
-    icon?: number;
+    icon?: string;
+    size?: "big" | undefined;
     color?: string;
+    transform?: string;
 }
 
 /** @format */
@@ -51,13 +63,15 @@ interface IconProps {
  */
 declare const Icon: FC<IconProps>;
 
-/** @format */
-interface ThemeProps {
-    children?: any;
+interface TypographyProps {
+    fontFamily: string;
+    variant: "h1" | "h2" | "h3" | "buttonBg" | "buttonSm" | "bodyBg" | "bodySm" | "footnote";
 }
 
+declare const Typography: styled_components.StyledComponent<"p", any, TypographyProps, never>;
+
 /** @format */
 
-declare const StyledThemeProvider: FC<ThemeProps>;
+declare const theme: Theme;
 
-export { Button, Icon, Input, StyledThemeProvider };
+export { Button, Icon, Input, Typography, theme };

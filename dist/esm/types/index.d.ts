@@ -1,9 +1,6 @@
 /** @format */
-import Button from "./components/atoms/buttons/Button";
-import Input from "./components/atoms/inputs/Input";
-import Icon from "./components/atoms/icons/Icon";
-import StyledThemeProvider from "./theme/Themeprovider";
-export { Button };
-export { Input };
-export { Icon };
-export { StyledThemeProvider };
+export { default as Button } from "./components/atoms/buttons/Button";
+export { default as Input } from "./components/atoms/inputs/Input";
+export { default as Icon } from "./components/atoms/icons/Icon";
+export { default as Typography } from "./components/atoms/typography/Typography";
+export { default as theme } from "./styles/theme";
