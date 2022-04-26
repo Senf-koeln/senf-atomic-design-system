@@ -7,10 +7,11 @@ const theme: Theme = {
   //SPACE are not complete/verified
   space: [0, 2, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44],
 
-  fontSizes: [12, 14, 16, 20, 24, 32],
+  // font sizes converted from px to default browsers rem (16 px base)
+  fontSizes: [12, 14, 16, 20, 24, 32].map((numInPX) => numInPX / 16),
   fontWeights: [500, 600, 700, 800],
 
-  lineHeight: [1.4, 1.3, 1.3, 1.5, 1.5, 1.3, 1.4, 1.2],
+  lineHeight: [1.2, 1.3, 1.4, 1.5],
   letterSpacings: [0],
 
   //what exactly is SIZES? Do we need that?
@@ -27,10 +28,11 @@ const theme: Theme = {
   //OPACITIES are not complete/verified
   opacities: [0.4, 0.6, 0.75],
 
-  //SHADOWS are not complete/verified
   shadows: [
-    "0px 12px 18px -8px rgba(186, 160, 79, 0.2)",
-    "0px -4px 10px 4px rgba(255, 255, 255, 0.2)",
+    "0px 12px 18px -8px",
+    "0px 4px 6px -2px",
+    "0px -4px 10px 4px",
+    "0px -2px 5px 2px",
   ],
 
   //Does Louis define the TRANSITIONS??
@@ -111,6 +113,7 @@ const theme: Theme = {
       blueDark: "#241ebe",
       blue: "#322bf3",
     },
+    primaryHoverLayerShadowColor: "rgba(235, 184, 0, 0.5)",
   },
 };
 

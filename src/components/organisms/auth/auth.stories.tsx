@@ -31,7 +31,7 @@ LoginDisabled.args = {
 export const LoginLoading = Template.bind({});
 LoginLoading.args = {
   variant: "login",
-  formikRegisterStore: { isValid: true },
+  formikLoginStore: { isValid: true },
   loading: true,
 };
 

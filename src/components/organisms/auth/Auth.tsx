@@ -59,7 +59,7 @@ const Auth: FC<AuthProps> = ({
   }, [variant]);
 
   const inputItemsLogin = [
-    { name: "email", type: "email", placeholder: "E-Mail" },
+    { name: "haha", type: "email", placeholder: "E-Mail" },
     {
       name: "password",
       type: "password",
