@@ -3,11 +3,35 @@
 import React from "react";
 import styled from "styled-components";
 
-const H1Text = styled.h1`
+const Component = styled.p`
   font-weight: 900;
-  font-family: ${(props) => props.fontFamily};
+  font-family: ${({theme}) => fontFamily || theme};
+
+
+  ${
+    let fontFamily;
+    let fontWeight;
+    let lineHeight;
+    ({type}) => {
+      switch (type) {
+        case "h1":
+          fontFamily =
+          fontWeight = 
+          lineHeight = 
+          break;
+      
+        default:
+          break;
+      }
+    }
+  }
 `;
-export const H1 = ({ text }) => {
-  return <H1Text fontFamily={props.theme.fontFamily}>{text}</H1Text>;
+
+export const Typography = ({ variant, color, children, ...props }) => {
+  return (
+    <Component as={variant} {...props}>
+      {children}
+    </Component>
+  );
 };
 export default H1;
