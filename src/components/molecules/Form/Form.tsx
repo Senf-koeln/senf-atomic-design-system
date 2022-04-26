@@ -13,7 +13,13 @@ const Wrapper = styled.div<FormProps>`
   gap: 14px;
 `;
 
-const Form: FC<FormProps> = ({ inputItems, margin, maxWidth, ...props }) => {
+const Form: FC<FormProps> = ({
+  formik,
+  inputItems,
+  margin,
+  maxWidth,
+  ...props
+}) => {
   return (
     <form>
       <Wrapper margin={margin} maxWidth={maxWidth}>
@@ -26,9 +32,8 @@ const Form: FC<FormProps> = ({ inputItems, margin, maxWidth, ...props }) => {
               placeholder={item.placeholder}
               label={item.label}
               note={item.note}
-
-              // onChange={formik.handleChange}
-              //   value={formik.values[item.name]}
+              onChange={formik?.handleChange}
+              value={formik?.values[item.name]}
               //   error={outsideClick && Boolean(formik.errors[item.name])}
               //   helperText={outsideClick && formik.errors[item.name]}
             />

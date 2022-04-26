@@ -42,7 +42,13 @@ const ContentWrapper = styled.div`
   margin-left: 10%;
   position: relative;
 `;
-const Auth: FC<AuthProps> = ({ variant }) => {
+const Auth: FC<AuthProps> = ({
+  variant,
+  loading,
+  formikLoginStore,
+  formikRegisterStore,
+  handleSubmitRegister,
+}) => {
   const { t } = useTranslation();
   const [variantState, setVariantState] = useState("login");
 
@@ -162,6 +168,9 @@ const Auth: FC<AuthProps> = ({ variant }) => {
           inputItems={
             variantState === "register" ? inputItemsRegister : inputItemsLogin
           }
+          formik={
+            variantState === "register" ? formikRegisterStore : formikLoginStore
+          }
         />
         <FlexWrapper
           direction="horizontal"
@@ -179,7 +188,18 @@ const Auth: FC<AuthProps> = ({ variant }) => {
             </React.Fragment>
           )}
         </FlexWrapper>
-        <Button variant="white" fillWidth="max" text="Anmelden" />
+        <Button
+          variant="white"
+          fillWidth="max"
+          text="Anmelden"
+          loading={loading}
+          onClick={handleSubmitRegister}
+          disabled={
+            variantState === "register"
+              ? !formikRegisterStore?.isValid
+              : !formikLoginStore?.isValid
+          }
+        />
       </FlexWrapper>
     </StyledWrapper>
   );

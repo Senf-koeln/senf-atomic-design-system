@@ -16,8 +16,23 @@ export default {
 const Template: Story<AuthProps> = (args) => <Auth {...args} />;
 
 export const Login = Template.bind({});
+
 Login.args = {
   variant: "login",
+  loading: false,
+  formikRegisterStore: { isValid: true },
+};
+
+export const LoginDisabled = Template.bind({});
+LoginDisabled.args = {
+  variant: "login",
+};
+
+export const LoginLoading = Template.bind({});
+LoginLoading.args = {
+  variant: "login",
+  formikRegisterStore: { isValid: true },
+  loading: true,
 };
 
 export const Register = Template.bind({});
