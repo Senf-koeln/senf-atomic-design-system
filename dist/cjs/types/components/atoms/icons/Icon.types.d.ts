@@ -1,5 +1,7 @@
 /** @format */
 export interface IconProps {
-    icon?: number;
+    icon?: string;
+    size?: "big" | undefined;
     color?: string;
+    transform?: string;
 }

@@ -100,6 +100,7 @@ const theme: Theme = {
       greyscale5tra: "rgba(192, 188, 175, 0.05)",
     },
     black: {
+      black100: "rgba(0, 0, 0, 1)",
       black80tra: "rgba(0, 0, 0, 0.8)",
       black60tra: "rgba(0, 0, 0, 0.6)",
       black40tra: "rgba(0, 0, 0, 0.4)",
