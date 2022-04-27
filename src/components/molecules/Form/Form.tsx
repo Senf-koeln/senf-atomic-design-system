@@ -1,7 +1,8 @@
 /** @format */
 
-import React, { useState, FC } from "react";
+import React, { useState, FC, useRef } from "react";
 import styled from "styled-components";
+import useOnClickOutside from "../../../hooks/useOnClickOutside";
 import Input from "../../atoms/inputs/Input";
 import { FormProps } from "./Form.types";
 
@@ -20,9 +21,20 @@ const Form: FC<FormProps> = ({
   maxWidth,
   ...props
 }) => {
+  const [outsideClick, setOutsideClick] = useState(false);
+
+  const outerRef = useRef();
+  useOnClickOutside(outerRef, () => {
+    setOutsideClick(true);
+
+    setTimeout(() => {
+      setOutsideClick(false);
+    }, 10000);
+  });
+
   return (
     <form>
-      <Wrapper margin={margin} maxWidth={maxWidth}>
+      <Wrapper margin={margin} maxWidth={maxWidth} ref={outerRef}>
         {inputItems?.map((item) => {
           return (
             <Input
@@ -31,11 +43,10 @@ const Form: FC<FormProps> = ({
               type={item.type}
               placeholder={item.placeholder}
               label={item.label}
-              note={item.note}
               onChange={formik?.handleChange}
               value={formik?.values[item.name]}
-              //   error={outsideClick && Boolean(formik.errors[item.name])}
-              //   helperText={outsideClick && formik.errors[item.name]}
+              error={outsideClick && Boolean(formik.errors[item.name])}
+              note={outsideClick && formik.errors[item.name]}
             />
           );
         })}

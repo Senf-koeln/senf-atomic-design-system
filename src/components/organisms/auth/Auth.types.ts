@@ -9,4 +9,5 @@ export interface AuthProps {
   formikRegisterStore?: Function;
   formikLoginStore?: Function;
   handleSubmitRegister?: Function;
+  handleSubmitLogin?: Function;
 }

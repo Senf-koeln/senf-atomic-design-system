@@ -9,5 +9,6 @@ module.exports = {
     "@storybook/addon-links",
     "@storybook/addon-essentials",
     "@react-theming/storybook-addon",
+    "storybook-react-i18next",
   ],
 };

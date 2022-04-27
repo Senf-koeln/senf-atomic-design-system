@@ -5,4 +5,5 @@ export interface FormProps {
   margin?: string;
   maxWidth?: string;
   formik?: string;
+  outsideClick?: boolean;
 }

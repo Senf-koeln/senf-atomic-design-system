@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import Button from "../../atoms/buttons/Button";
@@ -8,6 +8,8 @@ import FlexWrapper from "../../atoms/layout/FlexWrapper";
 import Shape from "../../atoms/shapes/Shape";
 import Form from "../../molecules/Form/Form";
 import { AuthProps } from "./Auth.types";
+import { useFormik } from "formik";
+import * as yup from "yup";
 
 const StyledWrapper = styled.div<AuthProps>`
   position: relative;
@@ -45,9 +47,8 @@ const ContentWrapper = styled.div`
 const Auth: FC<AuthProps> = ({
   variant,
   loading,
-  formikLoginStore,
-  formikRegisterStore,
   handleSubmitRegister,
+  handleSubmitLogin,
 }) => {
   const { t } = useTranslation();
   const [variantState, setVariantState] = useState("login");
@@ -59,7 +60,7 @@ const Auth: FC<AuthProps> = ({
   }, [variant]);
 
   const inputItemsLogin = [
-    { name: "haha", type: "email", placeholder: "E-Mail" },
+    { name: "email", type: "email", placeholder: "E-Mail" },
     {
       name: "password",
       type: "password",
@@ -95,6 +96,66 @@ const Auth: FC<AuthProps> = ({
       placeholder: "Age",
     },
   ];
+
+  const loginValidationSchema = yup.object({
+    email: yup
+      .string()
+      .required(t("enter_email"))
+      .email(t("enter_valid_email")),
+
+    password: yup.string().required(t("enter_password")),
+  });
+  const registerValidationSchema = yup.object({
+    email: yup
+      .string()
+      .required(t("enter_email"))
+      .email(t("enter_valid_email")),
+
+    password: yup
+      .string()
+      .required(t("enter_password"))
+      .min(8, t("password_8characters"))
+      .matches(/\d+/, t("password_with_number")),
+
+    confirmPassword: yup
+      .string()
+      .required(t("confirmPassword"))
+      .oneOf([yup.ref("password"), null], t("passwords_must_match")),
+    username: yup
+      .string()
+      .required(t("enter_username"))
+      .min(3, t("username_too_short"))
+      .max(20, t("username_too_long"))
+      .matches(/^\S*$/, t("spaces_username"))
+      .matches(/^[a-zA-Z0-9\-\_\.]*$/, t("username_latin_only")),
+  });
+
+  const formikLoginStore = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: loginValidationSchema,
+    validateOnMount: true,
+    onSubmit: () => console.log("values"),
+  });
+
+  const formikRegisterStore = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+      confirmPassword: "",
+      username: "",
+      age: "",
+      sex: "",
+    },
+    validationSchema: registerValidationSchema,
+    validateOnMount: true,
+    validateOnChange: true,
+    validateOnBlur: true,
+    onSubmit: () => console.log("values"),
+  });
+
   return (
     <StyledWrapper>
       <Shape />
@@ -162,6 +223,7 @@ const Auth: FC<AuthProps> = ({
             </React.Fragment>
           )}
         </FlexWrapper>
+
         <Form
           margin="24px 0 0 0"
           width="100%"
@@ -172,6 +234,7 @@ const Auth: FC<AuthProps> = ({
             variantState === "register" ? formikRegisterStore : formikLoginStore
           }
         />
+
         <FlexWrapper
           direction="horizontal"
           alignItems="center"
@@ -193,7 +256,11 @@ const Auth: FC<AuthProps> = ({
           fillWidth="max"
           text="Anmelden"
           loading={loading}
-          onClick={handleSubmitRegister}
+          onClick={
+            variantState === "register"
+              ? handleSubmitRegister
+              : handleSubmitLogin
+          }
           disabled={
             variantState === "register"
               ? !formikRegisterStore?.isValid

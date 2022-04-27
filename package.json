@@ -42,6 +42,7 @@
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-terser": "^7.0.2",
+    "storybook-react-i18next": "^1.0.20",
     "styled-components": "^5.3.3",
     "styled-system": "^5.1.5",
     "typescript": "^4.5.5"
@@ -53,8 +54,10 @@
     "styled-system": "^5.1.5"
   },
   "dependencies": {
+    "formik": "^2.2.9",
     "i18next": "^21.6.16",
     "lottie-web": "^5.9.2",
-    "react-i18next": "^11.16.7"
+    "react-i18next": "^11.16.7",
+    "yup": "^0.32.11"
   }
 }

@@ -3,9 +3,9 @@ import { ThemeProvider } from "styled-components";
 import { addDecorator } from "@storybook/react";
 import { withThemes } from "@react-theming/storybook-addon";
 import GlobalStyle from "../src/styles/globalStyle";
-import "../src/util/i18n"; // i18n configuration
-
 import theme from "../src/styles/theme";
+
+import i18n from "../src/util/i18n";
 
 export const decorators = [
   (Story) => (
@@ -17,6 +17,12 @@ export const decorators = [
 ];
 
 export const parameters = {
+  i18n,
+  locale: "en",
+  locales: {
+    en: { title: "English", left: "🇺🇸" },
+    de: { title: "German", left: "🇩🇪" },
+  },
   actions: { argTypesRegex: "^on[A-Z].*" },
   backgrounds: {
     default: "lightgrey",
