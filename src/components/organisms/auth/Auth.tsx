@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import Button from "../../atoms/buttons/Button";
@@ -8,6 +8,8 @@ import FlexWrapper from "../../atoms/layout/FlexWrapper";
 import Shape from "../../atoms/shapes/Shape";
 import Form from "../../molecules/Form/Form";
 import { AuthProps } from "./Auth.types";
+import { useFormik } from "formik";
+import * as yup from "yup";
 
 const StyledWrapper = styled.div<AuthProps>`
   position: relative;
@@ -15,6 +17,14 @@ const StyledWrapper = styled.div<AuthProps>`
   max-width: 400px;
   min-height: 100vh;
   background-color: ${(props) => props.theme.colors.beige.beige20};
+`;
+
+const RectShape = styled.div`
+  position: absolute;
+  width: 100%;
+  top: 400px;
+  height: calc(100% - 400px);
+  background-color: ${(props) => props.theme.colors.primary.primary100};
 `;
 const Img = styled.img`
   position: absolute;
@@ -34,9 +44,21 @@ const ContentWrapper = styled.div`
   margin-left: 10%;
   position: relative;
 `;
-const Auth: FC<AuthProps> = () => {
+const Auth: FC<AuthProps> = ({
+  variant,
+  loading,
+  handleSubmitRegister,
+  handleSubmitLogin,
+}) => {
   const { t } = useTranslation();
-  const [variant, setVariant] = useState("login");
+  const [variantState, setVariantState] = useState("login");
+
+  useEffect(() => {
+    if (variant === "register") {
+      setVariantState("register");
+    }
+  }, [variant]);
+
   const inputItemsLogin = [
     { name: "email", type: "email", placeholder: "E-Mail" },
     {
@@ -63,10 +85,81 @@ const Auth: FC<AuthProps> = () => {
       type: "username",
       placeholder: "Username",
     },
+    {
+      name: "gender",
+      type: "gender",
+      placeholder: "Gender",
+    },
+    {
+      name: "age",
+      type: "age",
+      placeholder: "Age",
+    },
   ];
+
+  const loginValidationSchema = yup.object({
+    email: yup
+      .string()
+      .required(t("enter_email"))
+      .email(t("enter_valid_email")),
+
+    password: yup.string().required(t("enter_password")),
+  });
+  const registerValidationSchema = yup.object({
+    email: yup
+      .string()
+      .required(t("enter_email"))
+      .email(t("enter_valid_email")),
+
+    password: yup
+      .string()
+      .required(t("enter_password"))
+      .min(8, t("password_8characters"))
+      .matches(/\d+/, t("password_with_number")),
+
+    confirmPassword: yup
+      .string()
+      .required(t("confirmPassword"))
+      .oneOf([yup.ref("password"), null], t("passwords_must_match")),
+    username: yup
+      .string()
+      .required(t("enter_username"))
+      .min(3, t("username_too_short"))
+      .max(20, t("username_too_long"))
+      .matches(/^\S*$/, t("spaces_username"))
+      .matches(/^[a-zA-Z0-9\-\_\.]*$/, t("username_latin_only")),
+  });
+
+  const formikLoginStore = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: loginValidationSchema,
+    validateOnMount: true,
+    onSubmit: () => console.log("values"),
+  });
+
+  const formikRegisterStore = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+      confirmPassword: "",
+      username: "",
+      age: "",
+      sex: "",
+    },
+    validationSchema: registerValidationSchema,
+    validateOnMount: true,
+    validateOnChange: true,
+    validateOnBlur: true,
+    onSubmit: () => console.log("values"),
+  });
+
   return (
     <StyledWrapper>
       <Shape />
+      <RectShape />
       <Img
         src={require("../../../assets/illustrations/senfManSquatting.png")}
         alt="Illustration"
@@ -108,12 +201,12 @@ const Auth: FC<AuthProps> = () => {
           alignItems="center"
           margin="20px 0 0 0 "
         >
-          {variant === "login" ? (
+          {variantState === "login" ? (
             <React.Fragment>
               <p style={{ position: "relative" }}>Bist du neu?</p>{" "}
               <a
                 style={{ position: "relative" }}
-                onClick={() => setVariant("register")}
+                onClick={() => setVariantState("register")}
               >
                 {t("register_now")}
               </a>
@@ -123,26 +216,31 @@ const Auth: FC<AuthProps> = () => {
               <p style={{ position: "relative" }}>Hast du einen Account?</p>
               <a
                 style={{ position: "relative" }}
-                onClick={() => setVariant("login")}
+                onClick={() => setVariantState("login")}
               >
                 Jetzt anmelden
               </a>
             </React.Fragment>
           )}
         </FlexWrapper>
+
         <Form
           margin="24px 0 0 0"
           width="100%"
           inputItems={
-            variant === "register" ? inputItemsRegister : inputItemsLogin
+            variantState === "register" ? inputItemsRegister : inputItemsLogin
+          }
+          formik={
+            variantState === "register" ? formikRegisterStore : formikLoginStore
           }
         />
+
         <FlexWrapper
           direction="horizontal"
           alignItems="center"
           margin="14px 0 36px 0"
         >
-          {variant === "login" ? (
+          {variantState === "login" ? (
             <React.Fragment>
               <p style={{ position: "relative" }}>Passwort vergessen?</p>{" "}
               <a style={{ position: "relative" }}>Zurücksetzen</a>
@@ -153,7 +251,22 @@ const Auth: FC<AuthProps> = () => {
             </React.Fragment>
           )}
         </FlexWrapper>
-        <Button variant="white" fillWidth="max" text="Anmelden" />
+        <Button
+          variant="white"
+          fillWidth="max"
+          text="Anmelden"
+          loading={loading}
+          onClick={
+            variantState === "register"
+              ? handleSubmitRegister
+              : handleSubmitLogin
+          }
+          disabled={
+            variantState === "register"
+              ? !formikRegisterStore?.isValid
+              : !formikLoginStore?.isValid
+          }
+        />
       </FlexWrapper>
     </StyledWrapper>
   );
