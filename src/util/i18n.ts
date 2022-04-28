@@ -2,8 +2,8 @@
 
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
-import * as translationDe from "./translations/german.json";
-import * as translationEn from "./translations/german.json";
+import translationDe from "./translations/german.json";
+import translationEn from "./translations/german.json";
 
 i18n
   //.use(LanguageDetector)
