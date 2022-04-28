@@ -4,7 +4,14 @@ import { MouseEventHandler } from "react";
 export interface OrganizationCardProps {
   title?: string;
   projectRoomsSize?: number;
-  organizationType?: string;
+  organizationType?:
+    | "Vereine"
+    | "Initiativen"
+    | "Politik"
+    | "Planungsbüros"
+    | "Stadtverwaltung"
+    | "Presse"
+    | "Sonstige";
   img?: string;
   onClick?: MouseEventHandler<HTMLButtonElement>;
 }

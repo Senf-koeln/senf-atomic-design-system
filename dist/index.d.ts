@@ -1,6 +1,7 @@
 import { FC, MouseEventHandler, ChangeEventHandler } from 'react';
 import * as styled_components from 'styled-components';
 import { Theme } from 'styled-system';
+export { default as i18n } from 'i18next';
 
 /** @format */
 interface LoaderProps {
@@ -118,6 +119,20 @@ declare const Form: FC<FormProps>;
 
 /** @format */
 
+interface OrganizationCardProps {
+    title?: string;
+    projectRoomsSize?: number;
+    organizationType?: "Vereine" | "Initiativen" | "Politik" | "Planungsbüros" | "Stadtverwaltung" | "Presse" | "Sonstige";
+    img?: string;
+    onClick?: MouseEventHandler<HTMLButtonElement>;
+}
+
+/** @format */
+
+declare const OrganizationCard: FC<OrganizationCardProps>;
+
+/** @format */
+
 interface AuthProps {
     text?: string;
     variant?: "register" | "login";
@@ -137,4 +152,6 @@ declare const Auth: FC<AuthProps>;
 
 declare const theme: Theme;
 
-export { Auth, Button, FlexWrapper, Form, Icon, Input, Loader, Shape, Typography, theme };
+declare const GlobalStyle: styled_components.GlobalStyleComponent<{}, styled_components.DefaultTheme>;
+
+export { Auth, Button, FlexWrapper, Form, GlobalStyle, Icon, Input, Loader, OrganizationCard, Shape, Typography, theme };

@@ -11,6 +11,8 @@ import { AuthProps } from "./Auth.types";
 import { useFormik } from "formik";
 import * as yup from "yup";
 
+import SenfManSquating from "../../../assets/illustrations/senfManSquatting.png";
+
 const StyledWrapper = styled.div<AuthProps>`
   position: relative;
   width: 100%;
@@ -160,10 +162,7 @@ const Auth: FC<AuthProps> = ({
     <StyledWrapper>
       <Shape />
       <RectShape />
-      <Img
-        src={require("../../../assets/illustrations/senfManSquatting.png")}
-        alt="Illustration"
-      />
+      <Img src={SenfManSquating} alt="Illustration" />
 
       <StyledSvg xmlns="http://www.w3.org/2000/svg" width="175" height="69">
         <g>

@@ -1,5 +1,6 @@
 /** @format */
 
+import { t } from "i18next";
 import React, { FC } from "react";
 import styled from "styled-components";
 import Icon from "../../atoms/icons/Icon";
@@ -68,17 +69,6 @@ const LogoWrapper = styled.div`
 `;
 
 const Thumbnail = styled.div`
-  /* width: calc(100% - 20px);
-  height: calc(100% - 20px);
-  aspect-ratio: 1;
-  margin-left: 50%;
-  transform: translateX(-50%);
-  margin-top: 10px;
-  overflow: hidden;
-  border-radius: 10px;
-  position: relative;
-  overflow-x: hidden;
-  overflow-y: hidden; */
   margin-top: 0px;
   margin-left: 50%;
   transform: translateX(-50%);
@@ -200,7 +190,9 @@ const OrganizationCard: FC<OrganizationCardProps> = ({
       </Title>
       <SubTitle>
         {projectRoomsSize}{" "}
-        {projectRoomsSize === 1 ? "aktiver Projektraum" : "aktive Projekträume"}
+        {projectRoomsSize === 1
+          ? t("active_projectroom")
+          : t("active_projectrooms")}
       </SubTitle>
     </Wrapper>
   );
