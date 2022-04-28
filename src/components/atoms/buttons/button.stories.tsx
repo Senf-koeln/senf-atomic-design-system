@@ -2,10 +2,7 @@
 
 import React from "react";
 import { Story, Meta } from "@storybook/react";
-
 import Button from "./Button";
-import RoundedButton from "./RoundedButton";
-
 import { ButtonProps } from "./Button.types";
 
 export default {
@@ -15,19 +12,6 @@ export default {
 } as Meta<typeof Button>;
 
 const Template: Story<ButtonProps> = (args) => <Button {...args} />;
-const RoundedButtonTemplate: Story<ButtonProps> = (args) => (
-  <RoundedButton {...args} />
-);
-
-export const AddButton = RoundedButtonTemplate.bind({});
-AddButton.args = {
-  variant: "plus",
-};
-
-export const BackButton = RoundedButtonTemplate.bind({});
-BackButton.args = {
-  icon: "arrowdown",
-};
 
 export const IconText = Template.bind({});
 IconText.args = {
