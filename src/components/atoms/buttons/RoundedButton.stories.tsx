@@ -2,9 +2,7 @@
 
 import React from "react";
 import { Story, Meta } from "@storybook/react";
-
 import RoundedButton from "./RoundedButton";
-
 import { ButtonProps } from "./Button.types";
 
 export default {

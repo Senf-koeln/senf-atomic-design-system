@@ -20,10 +20,6 @@ const Wrapper = styled.div<OrganizationCardProps>`
 
   ${(props) => LayerWhiteFirstDefault}
 
-  /* box-shadow: 0px 12px 18px -8px rgba(186, 160, 79, 0.2),
-    0px -4px 10px 4px rgba(255, 255, 255, 0.2); */
-  /* background-color: ${(props) => (props.active ? "#feecab" : "#fcfbf8")};
-  border: 2px solid ${(props) => (props.active ? "#e8ba02" : "#ffffff")}; */
   filter: ${(props) =>
     props.status === "deactivated" || props.status === "uncompleted"
       ? "brightness(0.6)"
@@ -87,8 +83,10 @@ const LogoPlacer = styled.div`
   box-sizing: border-box;
   width: 28px;
   height: 28px;
-  box-shadow: 0px 6px 8px -1px rgba(186, 160, 79, 0.2),
-    0px -2px 5px 2px rgba(255, 255, 255, 0.2);
+  box-shadow: ${({ theme }) => theme.shadows[5]}
+      ${({ theme }) => theme.colors.brown.brown20tra},
+    ${({ theme }) => theme.shadows[3]}
+      ${({ theme }) => theme.colors.white.white20tra};
   background-color: #faf8f3;
   overflow: visible;
   border-radius: 8px;

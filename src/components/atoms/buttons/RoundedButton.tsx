@@ -21,15 +21,11 @@ const StyledButton = styled.button<ButtonProps>`
   justify-content: center;
   align-items: center;
 
-  box-shadow: 0px 12px 18px -8px var(
-        --token-1b934134-2ca5-4f4e-85f7-23e508bbf2a5,
-        rgba(186, 160, 79, 0.2)
-      ) /* {"name":"Brown 020 transparent"} */,
-    0px -4px 10px 4px var(
-        --token-9d5754a0-f478-42c4-94f1-2a2608c50c5c,
-        rgba(255, 255, 255, 0.2)
-      ) /* {"name":"White 020 transparent"} */;
-  background-color: ${(props) => props.theme.colors.brown.brown4};
+  box-shadow: ${({ theme }) => theme.shadows[0]}
+      ${({ theme }) => theme.colors.brown.brown20tra},
+    ${({ theme }) => theme.shadows[2]}
+      ${({ theme }) => theme.colors.white.white20tra};
+  background-color: ${({ theme }) => theme.colors.brown.brown4};
 
   aspect-ratio: 1 / 1;
 
