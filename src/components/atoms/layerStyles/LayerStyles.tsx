@@ -75,7 +75,7 @@ export const LayerGreyDefault = css`
   box-shadow: ${({ theme }) => theme.shadows[0]}${({ theme }) =>
   theme.colors.greyscale.greyscale20tra}
   background-color: ${({ theme }) => theme.colors.greyscale.greyscale10tra};
-  border: 2px solid ${({ theme }) => theme.colors.grey.greyscale8tra};
+  border: 2px solid ${({ theme }) => theme.colors.greyscale.greyscale8tra};
 `;
 
 export const LayerGreyHover = css`
@@ -83,17 +83,17 @@ export const LayerGreyHover = css`
   box-shadow: ${({ theme }) => theme.shadows[0]}
     ${({ theme }) => theme.colors.greyscale.greyscale20tra};
   background-color: ${({ theme }) => theme.colors.greyscale.greyscale20tra};
-  border: 2px solid ${({ theme }) => theme.colors.grey.greyscale10tra};
+  border: 2px solid ${({ theme }) => theme.colors.greyscale.greyscale10tra};
 `;
 
 export const LayerGreyButtonsDefault = css`
   box-sizing: border-box;
   background-color: ${({ theme }) => theme.colors.greyscale.greyscale10tra};
-  border: 2px solid ${({ theme }) => theme.colors.grey.greyscale8tra};
+  border: 2px solid ${({ theme }) => theme.colors.greyscale.greyscale8tra};
 `;
 
 export const LayerGreyButtonsHover = css`
   box-sizing: border-box;
   background-color: ${({ theme }) => theme.colors.greyscale.greyscale20tra};
-  border: 2px solid ${({ theme }) => theme.colors.grey.greyscale10tra};
+  border: 2px solid ${({ theme }) => theme.colors.greyscale.greyscale10tra};
 `;
