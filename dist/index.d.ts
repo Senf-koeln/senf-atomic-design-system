@@ -1,10 +1,29 @@
-import { MouseEventHandler, FC, ChangeEventHandler } from 'react';
+import { FC, MouseEventHandler, ChangeEventHandler } from 'react';
+import * as styled_components from 'styled-components';
+import { Theme } from 'styled-system';
+export { default as i18n } from 'i18next';
+
+/** @format */
+interface LoaderProps {
+    height?: string;
+    width?: string;
+}
+
+/** @format */
+
+declare const Loader: FC<LoaderProps>;
+
+/** @format */
 
 interface ButtonProps {
     text?: string;
-    primary?: boolean;
+    variant?: "primary" | "white" | "secondary" | "plus";
+    icon?: string;
+    borderStyle?: "dashed" | "solid";
+    fillWidth?: "max" | undefined;
+    loading?: boolean;
     disabled?: boolean;
-    size?: "small" | "medium" | "large";
+    size?: "small" | "big";
     onClick?: MouseEventHandler<HTMLButtonElement>;
 }
 
@@ -13,31 +32,11 @@ interface ButtonProps {
 declare const Button: FC<ButtonProps>;
 
 /** @format */
-
-interface InputProps {
-    id?: string;
-    type?: string;
-    label?: string;
-    note?: string;
-    placeholder?: string;
-    required?: boolean;
-    error?: boolean;
-    success?: boolean;
-    disabled?: boolean;
-    rows?: string;
-    value?: string;
-    setValue?: ChangeEventHandler<HTMLInputElement>;
-    onChange?: ChangeEventHandler<HTMLInputElement>;
-}
-
-/** @format */
-
-declare const Input: FC<InputProps>;
-
-/** @format */
 interface IconProps {
-    icon?: number;
+    icon?: string;
+    size?: "big" | undefined;
     color?: string;
+    transform?: string;
 }
 
 /** @format */
@@ -52,12 +51,107 @@ interface IconProps {
 declare const Icon: FC<IconProps>;
 
 /** @format */
-interface ThemeProps {
-    children?: any;
+
+interface InputProps {
+    id?: string;
+    type?: string;
+    label?: string;
+    note?: string;
+    icon?: string;
+    placeholder?: string;
+    required?: boolean;
+    error?: boolean;
+    success?: boolean;
+    disabled?: boolean;
+    rows?: string;
+    value?: string;
+    setValue?: ChangeEventHandler<HTMLInputElement>;
+    onChange?: ChangeEventHandler<HTMLInputElement>;
+    onClick?: ChangeEventHandler<HTMLInputElement>;
 }
 
 /** @format */
 
-declare const StyledThemeProvider: FC<ThemeProps>;
+declare const Input: FC<InputProps>;
 
-export { Button, Icon, Input, StyledThemeProvider };
+/** @format */
+
+interface FlexWrapperProps {
+    direction?: "vertical" | "horizontal";
+    width?: string;
+    margin?: string;
+    alignItems?: "flex-start" | "center" | "flex-end";
+    onClick?: MouseEventHandler<HTMLButtonElement>;
+}
+
+/** @format */
+
+declare const FlexWrapper: FC<FlexWrapperProps>;
+
+/** @format */
+interface ShapeProps {
+    variant?: string;
+}
+
+/** @format */
+
+declare const Shape: FC<ShapeProps>;
+
+interface TypographyProps {
+    fontFamily: string;
+    variant: "h1" | "h2" | "h3" | "buttonBg" | "buttonSm" | "bodyBg" | "bodySm" | "footnote";
+}
+
+declare const Typography: styled_components.StyledComponent<"p", any, TypographyProps, never>;
+
+/** @format */
+interface FormProps {
+    inputItems?: Array<string>;
+    margin?: string;
+    maxWidth?: string;
+    formik?: string;
+    outsideClick?: boolean;
+}
+
+/** @format */
+
+declare const Form: FC<FormProps>;
+
+/** @format */
+
+interface OrganizationCardProps {
+    title?: string;
+    projectRoomsSize?: number;
+    organizationType?: "Vereine" | "Initiativen" | "Politik" | "Planungsbüros" | "Stadtverwaltung" | "Presse" | "Sonstige";
+    img?: string;
+    onClick?: MouseEventHandler<HTMLButtonElement>;
+}
+
+/** @format */
+
+declare const OrganizationCard: FC<OrganizationCardProps>;
+
+/** @format */
+
+interface AuthProps {
+    text?: string;
+    variant?: "register" | "login";
+    loading?: boolean;
+    onClick?: MouseEventHandler<HTMLButtonElement>;
+    formikRegisterStore?: Function;
+    formikLoginStore?: Function;
+    handleSubmitRegister?: Function;
+    handleSubmitLogin?: Function;
+}
+
+/** @format */
+
+declare const Auth: FC<AuthProps>;
+
+/** @format */
+
+declare const theme: Theme;
+
+declare const GlobalStyle: styled_components.GlobalStyleComponent<{}, styled_components.DefaultTheme>;
+
+export { Auth, Button, FlexWrapper, Form, GlobalStyle, Icon, Input, Loader, OrganizationCard, Shape, Typography, theme };

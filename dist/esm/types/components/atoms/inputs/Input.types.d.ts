@@ -5,6 +5,7 @@ export interface InputProps {
     type?: string;
     label?: string;
     note?: string;
+    icon?: string;
     placeholder?: string;
     required?: boolean;
     error?: boolean;
@@ -14,4 +15,5 @@ export interface InputProps {
     value?: string;
     setValue?: ChangeEventHandler<HTMLInputElement>;
     onChange?: ChangeEventHandler<HTMLInputElement>;
+    onClick?: ChangeEventHandler<HTMLInputElement>;
 }
