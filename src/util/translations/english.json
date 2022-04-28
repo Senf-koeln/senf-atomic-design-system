@@ -1,5 +1,11 @@
 {
   "register_now": "Register now",
+  "login_now": "Login now",
   "active_projectroom": "active Projectroom",
-  "active_projectrooms": "active Projectrooms"
+  "active_projectrooms": "active Projectrooms",
+  "auth_headline": "Hey,\nwelcome at Senf.",
+  "reset": "Reset",
+  "forgot_password": "Forgot password?",
+  "do_you_have_an_acccount": "Do you have an account?",
+  "register_agb": "By registering, I confirm that I have read and understood the  <1>T&Cs</1>  and the  <3>Data privacy</3>  of Senf and I agree with them."
 }
