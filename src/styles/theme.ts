@@ -23,7 +23,7 @@ const theme: Theme = {
   borderStyles: ["dashed", "solid"],
 
   //RADII are not complete/verified
-  radii: [10, 18, 20, 24, 28, 30],
+  radii: [8, 10, 18, 20, 24, 28, 30],
 
   //OPACITIES are not complete/verified
   opacities: [0.4, 0.6, 0.75],

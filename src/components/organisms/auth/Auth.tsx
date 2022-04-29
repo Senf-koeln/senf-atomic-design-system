@@ -199,6 +199,7 @@ const Auth: FC<AuthProps> = ({
         </Typography>
         <FlexWrapper
           direction="horizontal"
+          gap="10px"
           alignItems="center"
           margin="20px 0 0 0 "
         >
@@ -242,6 +243,7 @@ const Auth: FC<AuthProps> = ({
 
         <FlexWrapper
           direction="horizontal"
+          gap="10px"
           alignItems="center"
           margin="14px 0 36px 0"
         >
