@@ -1,14 +1,15 @@
 /** @format */
 
-import { t } from "i18next";
 import React, { FC } from "react";
 import styled from "styled-components";
 import Icon from "../../atoms/icons/Icon";
 import { LayerWhiteFirstDefault } from "../../atoms/layerStyles/LayerStyles";
+import FlexWrapper from "../../atoms/layout/FlexWrapper";
 import Typography from "../../atoms/typography/Typography";
-import { OrganizationCardProps } from "./OrganizationCard.types";
+import { IdeaCardProps } from "./IdeaCard.types";
+import { t } from "i18next";
 
-const Wrapper = styled.div<OrganizationCardProps>`
+const Wrapper = styled.div<IdeaCardProps>`
   float: left;
   margin: 10px 0px 0px 10px;
   overflow: hidden;
@@ -18,6 +19,15 @@ const Wrapper = styled.div<OrganizationCardProps>`
   height: auto;
   border-radius: 18px;
 
+  width: 95%;
+
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
+  max-width: 400px;
+  height: auto;
+  overflow: hidden;
+
   ${(props) => LayerWhiteFirstDefault}
 
   filter: ${(props) =>
@@ -25,31 +35,29 @@ const Wrapper = styled.div<OrganizationCardProps>`
       ? "brightness(0.6)"
       : "brightness(1)"};
   animation: opacityTranslateYFrom50Animation 0.8s;
-  @media (max-width: 768px) {
-    width: calc(50% - 15px);
-  }
 `;
 
+const InnerWrapper = styled.div`
+  margin: 12px 18px;
+`;
 const LogoWrapper = styled.div`
   position: relative;
-  margin-top: 10px;
-  margin-left: 50%;
-  transform: translateX(-50%);
   box-sizing: border-box;
-  height: 0;
-  width: calc(100% - 20px);
-  padding-bottom: calc(100% - 22px);
+  width: 118px;
+  height: 118px;
   background-color: #ffffff;
   border-radius: 10px;
   border: 1px solid rgba(195, 186, 162, 0.2);
   border-radius: 10px;
   overflow: hidden;
+  flex-shrink: 0;
 `;
 
 const Thumbnail = styled.div`
   margin-top: 0px;
   margin-left: 50%;
   transform: translateX(-50%);
+  box-sizing: border-box;
   width: 100%;
   padding-bottom: 100%;
   overflow: visible;
@@ -71,50 +79,11 @@ const LogoPlacer = styled.div`
   overflow: visible;
   border-radius: 8px;
   border: 2px solid rgba(255, 255, 255, 0.8);
-  margin: 134px 134px 69px 16px;
-  position: absolute;
-  bottom: 0;
-  @media (max-width: 368px) {
-    top: -32px;
-  }
 `;
 
 const IconWrapper = styled.div`
-  margin: 2px;
-  margin-top: 0;
-`;
-
-const Title = styled.div`
-  width: 140px;
-  height: 24px;
-  overflow: hidden;
-  top: 0;
-  position: relative;
-  margin: 8px 16px 0px 16px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-`;
-
-const SubTitle = styled.div`
-  height: auto; /* 18px */
-  width: auto;
-  white-space: nowrap;
-  word-wrap: break-word;
-  word-break: break-word;
-  overflow: hidden;
-  font-weight: 500;
-  font-style: normal;
-  font-family: "Nunito", serif;
-  color: rgba(0, 0, 0, 0.4);
-  font-size: 14px;
-  letter-spacing: 0px;
-  line-height: 1.3;
-  text-align: left;
-  margin: 0px 0px 12px 16px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  margin-top: -4px;
+  margin-right: 8px;
 `;
 
 const DeactivatedWrapper = styled.div`
@@ -126,54 +95,59 @@ const DeactivatedWrapper = styled.div`
   margin-left: 25%;
 `;
 
-const OrganizationCard: FC<OrganizationCardProps> = ({
+const IdeaCard: FC<IdeaCardProps> = ({
   title,
-  projectroomsSize,
+  description,
+  district,
   organizationType,
-  img,
+  projectroomName,
+
   status,
   active,
   thisOrganizationId,
-  organization,
   handleButtonClick,
 }) => {
   return (
     <Wrapper
       status={status}
-      active={thisOrganizationId === organization?.organizationId}
+      // active={thisOrganizationId === organization?.organizationId}
     >
-      {/* {status !== "active" && (
+      <InnerWrapper>
+        {/* {status !== "active" && (
         <DeactivatedWrapper>
            <img src={NotPublishedIcon} width="100%" /> 
         </DeactivatedWrapper>
       )}
       <ExpandButton handleButtonClick={handleButtonClick} /> */}
 
-      <LogoWrapper>
-        <Thumbnail
-          img={
-            img
-            // ? img : placeHodlerImage && NoImage
-          }
-        />
-      </LogoWrapper>
+        <FlexWrapper
+          alignItems="center"
+          direction="horizontal"
+          gap="12px"
+          margin="10px 0px 12px 0px"
+        >
+          <Icon icon="Sonstige" />
+          <Typography variant="bodySm"> {district}</Typography>
+        </FlexWrapper>
 
-      <LogoPlacer>
-        <IconWrapper>
+        <Typography variant="h3"> {title}</Typography>
+
+        <FlexWrapper
+          alignItems="flex-start"
+          direction="horizontal"
+          gap="16px"
+          margin="10px 0px 12px 0px"
+        >
+          <Typography variant="bodyBg"> {description}</Typography>
+        </FlexWrapper>
+        <FlexWrapper alignItems="center" direction="horizontal" gap="14px">
           <Icon icon={organizationType} transform="scale(0.8)" />
-        </IconWrapper>
-      </LogoPlacer>
-      <Title>
-        <Typography variant="bodyBg">{title}</Typography>
-      </Title>
-      <SubTitle>
-        {projectroomsSize}{" "}
-        {projectroomsSize === 1
-          ? t("active_projectroom")
-          : t("active_projectrooms")}
-      </SubTitle>
+
+          <Typography variant="buttonSm">{projectroomName}</Typography>
+        </FlexWrapper>
+      </InnerWrapper>
     </Wrapper>
   );
 };
 
-export default OrganizationCard;
+export default IdeaCard;

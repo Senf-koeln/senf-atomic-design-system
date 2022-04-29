@@ -11,12 +11,13 @@ const Wrapper = styled.div<FlexWrapperProps>`
   flex-direction: ${(props) =>
     props.direction === "vertical" ? "column" : "row"};
   align-items: ${(props) => (props.alignItems ? props.alignItems : null)};
-  gap: ${(props) => (props.direction === "horizontal" ? "10px" : null)};
+  gap: ${(props) => (props.gap ? props.gap : null)};
 `;
 
 const FlexWrapper: FC<FlexWrapperProps> = ({
   children,
   direction,
+  gap,
   margin,
   width,
   alignItems,
@@ -24,6 +25,7 @@ const FlexWrapper: FC<FlexWrapperProps> = ({
   return (
     <Wrapper
       direction={direction}
+      gap={gap}
       margin={margin}
       width={width}
       alignItems={alignItems}
