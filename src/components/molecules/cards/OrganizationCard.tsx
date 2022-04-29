@@ -30,7 +30,7 @@ const Wrapper = styled.div<OrganizationCardProps>`
   }
 `;
 
-const LogoWrapper = styled.div`
+const LogoWrapper = styled.div<OrganizationCardProps>`
   position: relative;
   margin-top: 10px;
   margin-left: 50%;
@@ -41,12 +41,12 @@ const LogoWrapper = styled.div`
   padding-bottom: calc(100% - 22px);
   background-color: #ffffff;
   border-radius: 10px;
-  border: 1px solid rgba(195, 186, 162, 0.2);
+  border: 1px solid ${({ theme }) => theme.colors.greyscale.greyscale20tra};
   border-radius: 10px;
   overflow: hidden;
 `;
 
-const Thumbnail = styled.div`
+const Thumbnail = styled.div<OrganizationCardProps>`
   margin-top: 0px;
   margin-left: 50%;
   transform: translateX(-50%);
@@ -59,7 +59,7 @@ const Thumbnail = styled.div`
   background-position: center;
 `;
 
-const LogoPlacer = styled.div`
+const LogoPlacer = styled.div<OrganizationCardProps>`
   box-sizing: border-box;
   width: 28px;
   height: 28px;

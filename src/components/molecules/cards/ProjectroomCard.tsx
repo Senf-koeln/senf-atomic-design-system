@@ -8,6 +8,7 @@ import FlexWrapper from "../../atoms/layout/FlexWrapper";
 import Typography from "../../atoms/typography/Typography";
 import { ProjectroomCardProps } from "./ProjectroomCard.types";
 import { t } from "i18next";
+import ImagePlaceholder from "../../atoms/imagePlaceholder/ImagePlaceholder";
 
 const Wrapper = styled.div<ProjectroomCardProps>`
   float: left;
@@ -39,32 +40,6 @@ const Wrapper = styled.div<ProjectroomCardProps>`
 
 const InnerWrapper = styled.div`
   margin: 12px 18px;
-`;
-const LogoWrapper = styled.div`
-  position: relative;
-  box-sizing: border-box;
-  width: 118px;
-  height: 118px;
-  background-color: #ffffff;
-  border-radius: 10px;
-  border: 1px solid rgba(195, 186, 162, 0.2);
-  border-radius: 10px;
-  overflow: hidden;
-  flex-shrink: 0;
-`;
-
-const Thumbnail = styled.div`
-  margin-top: 0px;
-  margin-left: 50%;
-  transform: translateX(-50%);
-  box-sizing: border-box;
-  width: 100%;
-  padding-bottom: 100%;
-  overflow: visible;
-  background-image: url(${(props) => props.img});
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
 `;
 
 const LogoPlacer = styled.div`
@@ -129,14 +104,14 @@ const ProjectroomCard: FC<ProjectroomCardProps> = ({
           gap="16px"
           margin="10px 0px 12px 0px"
         >
-          <LogoWrapper>
-            <Thumbnail
-              img={
-                img
-                // ? img : placeHodlerImage && NoImage
-              }
-            />
-          </LogoWrapper>
+          <ImagePlaceholder
+            width="118px"
+            height="118px"
+            img={
+              img
+              // ? img : placeHodlerImage && NoImage
+            }
+          />
 
           <Typography variant="bodyBg"> {description}</Typography>
         </FlexWrapper>
@@ -144,7 +119,7 @@ const ProjectroomCard: FC<ProjectroomCardProps> = ({
           <Icon icon={organizationType} transform="scale(0.8)" />
 
           <LogoPlacer>
-            <Thumbnail
+            <ImagePlaceholder
               img={
                 logo
                 // ? img : placeHodlerImage && NoImage

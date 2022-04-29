@@ -26,6 +26,7 @@ const Wrapper = styled.div<IdeaCardProps>`
   margin-bottom: 10px;
   max-width: 400px;
   height: auto;
+  padding-bottom: ${(props) => (props.projectroomName ? "40px" : "0")};
   overflow: hidden;
 
   ${(props) => LayerWhiteFirstDefault}
@@ -40,61 +41,15 @@ const Wrapper = styled.div<IdeaCardProps>`
 const InnerWrapper = styled.div`
   margin: 12px 18px;
 `;
-const LogoWrapper = styled.div`
-  position: relative;
-  box-sizing: border-box;
-  width: 118px;
-  height: 118px;
-  background-color: #ffffff;
-  border-radius: 10px;
-  border: 1px solid rgba(195, 186, 162, 0.2);
-  border-radius: 10px;
-  overflow: hidden;
-  flex-shrink: 0;
-`;
 
-const Thumbnail = styled.div`
-  margin-top: 0px;
-  margin-left: 50%;
-  transform: translateX(-50%);
-  box-sizing: border-box;
-  width: 100%;
-  padding-bottom: 100%;
-  overflow: visible;
-  background-image: url(${(props) => props.img});
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-`;
-
-const LogoPlacer = styled.div`
-  box-sizing: border-box;
-  width: 28px;
-  height: 28px;
-  box-shadow: ${({ theme }) => theme.shadows[5]}
-      ${({ theme }) => theme.colors.brown.brown20tra},
-    ${({ theme }) => theme.shadows[3]}
-      ${({ theme }) => theme.colors.white.white20tra};
-  background-color: #faf8f3;
-  overflow: visible;
-  border-radius: 8px;
-  border: 2px solid rgba(255, 255, 255, 0.8);
-`;
-
-const IconWrapper = styled.div`
-  margin-top: -4px;
-  margin-right: 8px;
-`;
-
-const DeactivatedWrapper = styled.div`
+const ProjectroomOpenButton = styled.button`
   position: absolute;
-  top: 40px;
-  z-index: 5;
-  color: white;
-  width: 50%;
-  margin-left: 25%;
+  width: 100%;
+  height: 40px;
+  background-color: ${({ theme }) => theme.colors.greyscale.greyscale20};
+  border: 0;
+  bottom: 0;
 `;
-
 const IdeaCard: FC<IdeaCardProps> = ({
   title,
   description,
@@ -110,6 +65,7 @@ const IdeaCard: FC<IdeaCardProps> = ({
   return (
     <Wrapper
       status={status}
+      projectroomName={projectroomName}
       // active={thisOrganizationId === organization?.organizationId}
     >
       <InnerWrapper>
@@ -140,12 +96,22 @@ const IdeaCard: FC<IdeaCardProps> = ({
         >
           <Typography variant="bodyBg"> {description}</Typography>
         </FlexWrapper>
-        <FlexWrapper alignItems="center" direction="horizontal" gap="14px">
-          <Icon icon={organizationType} transform="scale(0.8)" />
-
-          <Typography variant="buttonSm">{projectroomName}</Typography>
-        </FlexWrapper>
       </InnerWrapper>
+
+      {projectroomName && (
+        <ProjectroomOpenButton>
+          <FlexWrapper
+            alignItems="center"
+            direction="horizontal"
+            gap="14px"
+            margin="0px 10px"
+          >
+            <Icon icon={organizationType} transform="scale(0.8)" />
+
+            <Typography variant="bodySm">{projectroomName}</Typography>
+          </FlexWrapper>
+        </ProjectroomOpenButton>
+      )}
     </Wrapper>
   );
 };

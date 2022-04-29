@@ -34,9 +34,16 @@ Idea.args = {
   description:
     "Die Verkehrsführung für Fahrradfahrer, die Richtung Rhein fahren, ist ganz gut gelöst mit einem eigen Fahrstreifen und Auffahrt um Rheinufer. Um so verwunderlich finde ich will",
   district: "Neuehrenfeld",
-  projectroomsSize: 2,
+};
+
+export const IdeaProjectroom = IdeaCardTemplate.bind({});
+IdeaProjectroom.args = {
+  title: "Ampel für Fahrradfahrer",
+  description:
+    "Die Verkehrsführung für Fahrradfahrer, die Richtung Rhein fahren, ist ganz gut gelöst mit einem eigen Fahrstreifen und Auffahrt um Rheinufer. Um so verwunderlich finde ich will",
+  district: "Neuehrenfeld",
   organizationType: "Stadtverwaltung",
-  img: "https://firebasestorage.googleapis.com/v0/b/senf-dev.appspot.com/o/organizationsData%2FQO0SOuQBIc9wEjpayU9e%2Flogo%2Flogo?alt=media&token=131ee6fa-19a0-4ee9-b8c0-43909e2373d6",
+  projectroomName: "Projektraum-Name",
 };
 
 export const Organization = Template.bind({});
