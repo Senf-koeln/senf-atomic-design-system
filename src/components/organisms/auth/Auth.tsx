@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import Button from "../../atoms/buttons/Button";
 import FlexWrapper from "../../atoms/layout/FlexWrapper";
 import Shape from "../../atoms/shapes/Shape";
-import Form from "../../molecules/form/Form";
+import Form from "../../molecules/Form/Form";
 import { AuthProps } from "./Auth.types";
 import { useFormik } from "formik";
 import * as yup from "yup";
