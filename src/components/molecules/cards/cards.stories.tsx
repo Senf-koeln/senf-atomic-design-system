@@ -31,8 +31,7 @@ const IdeaCardTemplate: Story<IdeaCardProps> = (args) => <IdeaCard {...args} />;
 export const Idea = IdeaCardTemplate.bind({});
 Idea.args = {
   title: "Ampel für Fahrradfahrer",
-  description:
-    "Die Verkehrsführung für Fahrradfahrer, die Richtung Rhein fahren, ist ganz gut gelöst mit einem eigen Fahrstreifen und Auffahrt um Rheinufer. Um so verwunderlich finde ich will",
+  body: "Die Verkehrsführung für Fahrradfahrer, die Richtung Rhein fahren, ist ganz gut gelöst mit einem eigen Fahrstreifen und Auffahrt um Rheinufer. Um so verwunderlich finde ich will",
   district: "Neuehrenfeld",
 };
 

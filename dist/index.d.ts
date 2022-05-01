@@ -32,6 +32,23 @@ interface ButtonProps {
 declare const Button: FC<ButtonProps>;
 
 /** @format */
+
+interface TertiaryButtonProps {
+    text?: string;
+    iconLeft?: string;
+    iconRight?: string;
+    fillWidth?: "max" | undefined;
+    loading?: boolean;
+    disabled?: boolean;
+    size?: "small" | "big";
+    onClick?: MouseEventHandler<HTMLButtonElement>;
+}
+
+/** @format */
+
+declare const TertiaryButton: FC<TertiaryButtonProps>;
+
+/** @format */
 interface IconProps {
     icon?: string;
     size?: "big" | undefined;
@@ -78,6 +95,7 @@ declare const Input: FC<InputProps>;
 
 interface FlexWrapperProps {
     direction?: "vertical" | "horizontal";
+    gap?: string;
     width?: string;
     margin?: string;
     alignItems?: "flex-start" | "center" | "flex-end";
@@ -152,6 +170,20 @@ declare const Auth: FC<AuthProps>;
 
 declare const theme: Theme;
 
+/** @format */
 declare const GlobalStyle: styled_components.GlobalStyleComponent<{}, styled_components.DefaultTheme>;
 
-export { Auth, Button, FlexWrapper, Form, GlobalStyle, Icon, Input, Loader, OrganizationCard, Shape, Typography, theme };
+declare const LayerWhiteFirstDefault: styled_components.FlattenInterpolation<styled_components.ThemeProps<any>>;
+declare const LayerWhiteFirstHover: styled_components.FlattenInterpolation<styled_components.ThemeProps<any>>;
+declare const LayerWhiteSecondDefault: styled_components.FlattenInterpolation<styled_components.ThemeProps<any>>;
+declare const LayerWhiteSecondHover: styled_components.FlattenInterpolation<styled_components.ThemeProps<any>>;
+declare const LayerYellowDefault: styled_components.FlattenInterpolation<styled_components.ThemeProps<any>>;
+declare const LayerYellowHover: styled_components.FlattenInterpolation<styled_components.ThemeProps<any>>;
+declare const LayerBrownDefault: styled_components.FlattenInterpolation<styled_components.ThemeProps<any>>;
+declare const LayerBrownHover: styled_components.FlattenInterpolation<styled_components.ThemeProps<any>>;
+declare const LayerGreyDefault: styled_components.FlattenInterpolation<styled_components.ThemeProps<any>>;
+declare const LayerGreyHover: styled_components.FlattenInterpolation<styled_components.ThemeProps<any>>;
+declare const LayerGreyButtonsDefault: styled_components.FlattenInterpolation<styled_components.ThemeProps<any>>;
+declare const LayerGreyButtonsHover: styled_components.FlattenInterpolation<styled_components.ThemeProps<any>>;
+
+export { Auth, Button, FlexWrapper, Form, GlobalStyle, Icon, Input, LayerBrownDefault, LayerBrownHover, LayerGreyButtonsDefault, LayerGreyButtonsHover, LayerGreyDefault, LayerGreyHover, LayerWhiteFirstDefault, LayerWhiteFirstHover, LayerWhiteSecondDefault, LayerWhiteSecondHover, LayerYellowDefault, LayerYellowHover, Loader, OrganizationCard, Shape, TertiaryButton, Typography, theme };

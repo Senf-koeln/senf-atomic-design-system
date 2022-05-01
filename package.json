@@ -1,6 +1,6 @@
 {
   "name": "senf-atomic-design-system",
-  "version": "1.0.37",
+  "version": "1.0.39",
   "description": "An atomic-design-system-library for all Senf-apps ",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -66,6 +66,7 @@
     "linkifyjs": "^3.0.5",
     "lottie-web": "^5.9.2",
     "react-i18next": "^11.16.7",
+    "react-infinite-scroller": "^1.2.6",
     "yup": "^0.32.11"
   }
 }
