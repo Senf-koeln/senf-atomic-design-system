@@ -100,7 +100,7 @@ const ProjectroomCard: FC<ProjectroomCardProps> = ({
 
         <FlexWrapper
           alignItems="flex-start"
-          direction="horizontal"
+          flexDirection="row"
           gap="16px"
           margin="10px 0px 12px 0px"
         >
@@ -115,7 +115,7 @@ const ProjectroomCard: FC<ProjectroomCardProps> = ({
 
           <Typography variant="bodyBg"> {description}</Typography>
         </FlexWrapper>
-        <FlexWrapper alignItems="center" direction="horizontal" gap="14px">
+        <FlexWrapper alignItems="center" flexDirection="row" gap="14px">
           <Icon icon={organizationType} transform="scale(0.8)" />
 
           <LogoPlacer>

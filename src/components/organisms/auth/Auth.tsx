@@ -193,12 +193,12 @@ const Auth: FC<AuthProps> = ({
         </g>
       </StyledSvg>
 
-      <FlexWrapper direction="vertical" width="80%" margin="25px 10%  0 10%">
+      <FlexWrapper flexDirection="column" width="80%" margin="25px 10%  0 10%">
         <Typography variant="h2" style={{ position: "relative" }}>
           {t("auth_headline")}
         </Typography>
         <FlexWrapper
-          direction="horizontal"
+          flexDirection="row"
           gap="10px"
           alignItems="center"
           margin="20px 0 0 0 "
@@ -242,7 +242,7 @@ const Auth: FC<AuthProps> = ({
         />
 
         <FlexWrapper
-          direction="horizontal"
+          flexDirection="row"
           gap="10px"
           alignItems="center"
           margin="14px 0 36px 0"

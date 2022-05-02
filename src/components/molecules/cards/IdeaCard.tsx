@@ -78,7 +78,7 @@ const IdeaCard: FC<IdeaCardProps> = ({
 
         <FlexWrapper
           alignItems="center"
-          direction="horizontal"
+          flexDirection="row"
           gap="12px"
           margin="10px 0px 12px 0px"
         >
@@ -90,7 +90,7 @@ const IdeaCard: FC<IdeaCardProps> = ({
 
         <FlexWrapper
           alignItems="flex-start"
-          direction="horizontal"
+          flexDirection="row"
           gap="16px"
           margin="10px 0px 12px 0px"
         >
@@ -102,7 +102,7 @@ const IdeaCard: FC<IdeaCardProps> = ({
         <ProjectroomOpenButton>
           <FlexWrapper
             alignItems="center"
-            direction="horizontal"
+            flexDirection="row"
             gap="14px"
             margin="0px 10px"
           >
