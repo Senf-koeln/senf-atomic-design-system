@@ -52,7 +52,7 @@ const ProjectroomOpenButton = styled.button`
 `;
 const IdeaCard: FC<IdeaCardProps> = ({
   title,
-  description,
+  body,
   district,
   organizationType,
   projectroomName,
@@ -94,7 +94,7 @@ const IdeaCard: FC<IdeaCardProps> = ({
           gap="16px"
           margin="10px 0px 12px 0px"
         >
-          <Typography variant="bodyBg"> {description}</Typography>
+          <Typography variant="bodyBg"> {body}</Typography>
         </FlexWrapper>
       </InnerWrapper>
 

@@ -3,6 +3,7 @@
 import { MouseEventHandler } from "react";
 export interface IdeaCardProps {
   title?: string;
+  body?: string;
   projectRoomsSize?: number;
   organizationType?:
     | "Vereine"

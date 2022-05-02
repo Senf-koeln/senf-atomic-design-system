@@ -21,7 +21,7 @@ export const LayerWhiteFirstHover = css`
   border: 2px solid ${({ theme }) => theme.colors.white.white40tra};
 `;
 
-export const LayerWhitSecondDefault = css`
+export const LayerWhiteSecondDefault = css`
   box-sizing: border-box;
   box-shadow: ${({ theme }) => theme.shadows[1]}
       ${({ theme }) => theme.colors.brown.brown20tra},
@@ -31,7 +31,7 @@ export const LayerWhitSecondDefault = css`
   border: 2px solid ${({ theme }) => theme.colors.white.white40tra};
 `;
 
-export const LayerWhitSecondHover = css`
+export const LayerWhiteSecondHover = css`
   box-sizing: border-box;
   box-shadow: ${({ theme }) => theme.shadows[1]}
       ${({ theme }) => theme.colors.brown.brown20tra},

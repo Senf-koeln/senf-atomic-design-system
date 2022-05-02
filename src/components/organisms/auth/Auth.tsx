@@ -85,18 +85,18 @@ const Auth: FC<AuthProps> = ({
       placeholder: "Confirm Password",
     },
     {
-      name: "username",
-      type: "username",
+      name: "handle",
+      type: "text",
       placeholder: "Username",
     },
     {
       name: "gender",
-      type: "gender",
+      type: "text",
       placeholder: "Gender",
     },
     {
       name: "age",
-      type: "age",
+      type: "text",
       placeholder: "Age",
     },
   ];
@@ -125,7 +125,7 @@ const Auth: FC<AuthProps> = ({
       .string()
       .required(t("confirmPassword"))
       .oneOf([yup.ref("password"), null], t("passwords_must_match")),
-    username: yup
+    handle: yup
       .string()
       .required(t("enter_username"))
       .min(3, t("username_too_short"))
@@ -149,7 +149,7 @@ const Auth: FC<AuthProps> = ({
       email: "",
       password: "",
       confirmPassword: "",
-      username: "",
+      handle: "",
       age: "",
       sex: "",
     },
