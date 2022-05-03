@@ -94,7 +94,7 @@ declare const Input: FC<InputProps>;
 /** @format */
 
 interface FlexWrapperProps {
-    direction?: "vertical" | "horizontal";
+    flexDirection?: "column" | "row";
     gap?: string;
     width?: string;
     height?: string;

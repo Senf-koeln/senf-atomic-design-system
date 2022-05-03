@@ -1,7 +1,9 @@
 /** @format */
 
 import { MouseEventHandler } from "react";
-export interface ListProps {
-  x?: string;
+export interface SubNavbarProps {
+  header?: string;
+  rightFunction?: string;
+
   onClick?: MouseEventHandler<HTMLButtonElement>;
 }

@@ -1,7 +1,7 @@
 /** @format */
 
 import { MouseEventHandler } from "react";
-export interface ListProps {
-  x?: string;
+export interface ExampleProps {
+  example?: string;
   onClick?: MouseEventHandler<HTMLButtonElement>;
 }
