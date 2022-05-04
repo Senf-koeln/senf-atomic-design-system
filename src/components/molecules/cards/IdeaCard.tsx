@@ -50,47 +50,39 @@ const ProjectroomOpenButton = styled.button`
   border: 0;
   bottom: 0;
 `;
-const IdeaCard: FC<IdeaCardProps> = ({
-  title,
-  body,
-  district,
-  organizationType,
-  projectroomName,
+const IdeaCard: FC<IdeaCardProps> = ({ data, handleButtonClick }) => {
+  const {
+    title,
+    body,
+    Stadtteil,
+    status,
 
-  status,
-  active,
-  thisOrganizationId,
-  handleButtonClick,
-}) => {
+    organizationType,
+    projectroomName,
+    thisOrganizationId,
+  } = data;
   return (
     <Wrapper
       status={status}
       projectroomName={projectroomName}
-      // active={thisOrganizationId === organization?.organizationId}
+      onClick={handleButtonClick}
     >
       <InnerWrapper>
-        {/* {status !== "active" && (
-        <DeactivatedWrapper>
-           <img src={NotPublishedIcon} width="100%" /> 
-        </DeactivatedWrapper>
-      )}
-      <ExpandButton handleButtonClick={handleButtonClick} /> */}
-
         <FlexWrapper
           alignItems="center"
-          direction="horizontal"
+          flexDirection="row"
           gap="12px"
           margin="10px 0px 12px 0px"
         >
           <Icon icon="Sonstige" />
-          <Typography variant="bodySm"> {district}</Typography>
+          <Typography variant="bodySm"> {Stadtteil}</Typography>
         </FlexWrapper>
 
         <Typography variant="h3"> {title}</Typography>
 
         <FlexWrapper
           alignItems="flex-start"
-          direction="horizontal"
+          flexDirection="row"
           gap="16px"
           margin="10px 0px 12px 0px"
         >
@@ -102,7 +94,7 @@ const IdeaCard: FC<IdeaCardProps> = ({
         <ProjectroomOpenButton>
           <FlexWrapper
             alignItems="center"
-            direction="horizontal"
+            flexDirection="row"
             gap="14px"
             margin="0px 10px"
           >

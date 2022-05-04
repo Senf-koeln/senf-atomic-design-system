@@ -127,20 +127,24 @@ const DeactivatedWrapper = styled.div`
 `;
 
 const OrganizationCard: FC<OrganizationCardProps> = ({
-  title,
-  projectroomsSize,
-  organizationType,
-  img,
-  status,
-  active,
-  thisOrganizationId,
-  organization,
+  data,
   handleButtonClick,
 }) => {
+  const {
+    title,
+    projectroomsSize,
+    organizationType,
+    status,
+    active,
+    thisOrganizationId,
+    organization,
+    imgUrl,
+  } = data;
   return (
     <Wrapper
       status={status}
       active={thisOrganizationId === organization?.organizationId}
+      onClick={handleButtonClick}
     >
       {/* {status !== "active" && (
         <DeactivatedWrapper>
@@ -152,7 +156,7 @@ const OrganizationCard: FC<OrganizationCardProps> = ({
       <LogoWrapper>
         <Thumbnail
           img={
-            img
+            imgUrl
             // ? img : placeHodlerImage && NoImage
           }
         />
