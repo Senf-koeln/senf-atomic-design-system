@@ -18,7 +18,7 @@ const AccordionWrapper = styled.ul<AccordionProps>`
   max-width: 30rem;
   padding: 20px;
   overflow: hidden;
-  .accordion-item + .accordion-item {
+  .accordion-item {
     border-top: 1px solid ${({ theme }) => theme.colors.brown.brown20tra};
   }
   .accordion-item-line {

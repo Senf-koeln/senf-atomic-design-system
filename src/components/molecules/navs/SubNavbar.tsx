@@ -14,7 +14,11 @@ const Wrapper = styled.div<SubNavbarProps>`
 const SubNavbar: FC<SubNavbarProps> = ({ header, rightFunction }) => {
   return (
     <Wrapper>
-      <FlexWrapper alignItems="center" justifyContent="space-between">
+      <FlexWrapper
+        alignItems="center"
+        justifyContent="space-between"
+        margin="12px 12px 10px 12px"
+      >
         <TertiaryButton iconLeft="arrowDown" />
         <Typography variant="h3">{header}</Typography>
         {rightFunction ? <TertiaryButton text={rightFunction} /> : <div />}

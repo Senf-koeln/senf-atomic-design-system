@@ -12,6 +12,9 @@ import { OrganizationCardProps } from "./OrganizationCard.types";
 import ProjectroomCard from "./ProjectroomCard";
 import { ProjectroomCardProps } from "./ProjectroomCard.types";
 
+import ObjectCard from "./ObjectCard";
+import { ObjectCardProps } from "./ObjectCard.types";
+
 export default {
   title: "Molecules/Cards",
   component: OrganizationCard,
@@ -27,6 +30,10 @@ const ProjectroomCardTemplate: Story<ProjectroomCardProps> = (args) => (
 );
 
 const IdeaCardTemplate: Story<IdeaCardProps> = (args) => <IdeaCard {...args} />;
+
+const ObjectTemplate: Story<ObjectCardProps> = (args) => (
+  <ObjectCard {...args} />
+);
 
 export const Idea = IdeaCardTemplate.bind({});
 Idea.args = {
@@ -50,7 +57,8 @@ Organization.args = {
   title: "Organization X",
   projectroomsSize: 2,
   organizationType: "Stadtverwaltung",
-  img: "https://firebasestorage.googleapis.com/v0/b/senf-dev.appspot.com/o/organizationsData%2FQO0SOuQBIc9wEjpayU9e%2Flogo%2Flogo?alt=media&token=131ee6fa-19a0-4ee9-b8c0-43909e2373d6",
+  imgUrl:
+    "https://firebasestorage.googleapis.com/v0/b/senf-dev.appspot.com/o/organizationsData%2FQO0SOuQBIc9wEjpayU9e%2Flogo%2Flogo?alt=media&token=131ee6fa-19a0-4ee9-b8c0-43909e2373d6",
 };
 
 export const Projectroom = ProjectroomCardTemplate.bind({});
@@ -62,5 +70,15 @@ Projectroom.args = {
   organizationName: "WandelWerk",
   logo: "https://firebasestorage.googleapis.com/v0/b/senf-dev.appspot.com/o/organizationsData%2FJn8lcWDW52jFVAd2UgQC%2Flogo%2Flogo?alt=media&token=978773ee-7e25-4833-a84b-5f7e49295f90",
   ideaSize: 2,
-  img: "https://firebasestorage.googleapis.com/v0/b/senf-dev.appspot.com/o/organizationsData%2FQO0SOuQBIc9wEjpayU9e%2Flogo%2Flogo?alt=media&token=131ee6fa-19a0-4ee9-b8c0-43909e2373d6",
+  imgUrl:
+    "https://firebasestorage.googleapis.com/v0/b/senf-dev.appspot.com/o/organizationsData%2FQO0SOuQBIc9wEjpayU9e%2Flogo%2Flogo?alt=media&token=131ee6fa-19a0-4ee9-b8c0-43909e2373d6",
+};
+
+export const Objects = ObjectTemplate.bind({});
+Objects.args = {
+  title: "Blumenkübel",
+  subTitle: "Kleingarten",
+  objectType: "Vereine",
+  imgUrl:
+    "https://firebasestorage.googleapis.com/v0/b/senf-dev.appspot.com/o/organizationsData%2FQO0SOuQBIc9wEjpayU9e%2Flogo%2Flogo?alt=media&token=131ee6fa-19a0-4ee9-b8c0-43909e2373d6",
 };

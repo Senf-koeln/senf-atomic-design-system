@@ -21,6 +21,16 @@ export const LayerWhiteFirstHover = css`
   border: 2px solid ${({ theme }) => theme.colors.white.white40tra};
 `;
 
+export const LayerWhiteFirstActive = css`
+  box-sizing: border-box;
+  box-shadow: ${({ theme }) => theme.shadows[0]}
+      ${({ theme }) => theme.colors.brown.brown20tra},
+    ${({ theme }) => theme.shadows[2]}
+      ${({ theme }) => theme.colors.white.white20tra};
+  background-color: ${({ theme }) => theme.colors.primary.primary50};
+  border: 2px solid ${({ theme }) => theme.colors.primary.primary140};
+`;
+
 export const LayerWhiteSecondDefault = css`
   box-sizing: border-box;
   box-shadow: ${({ theme }) => theme.shadows[1]}

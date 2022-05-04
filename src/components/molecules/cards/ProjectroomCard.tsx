@@ -71,18 +71,21 @@ const DeactivatedWrapper = styled.div`
 `;
 
 const ProjectroomCard: FC<ProjectroomCardProps> = ({
-  title,
-  description,
-  organizationType,
-  organizationName,
-  img,
-  logo,
-  ideaSize,
-  status,
-  active,
-  thisOrganizationId,
+  data,
   handleButtonClick,
 }) => {
+  const {
+    title,
+    description,
+    organizationType,
+    organizationName,
+    imgUrl,
+    logo,
+    ideaSize,
+    status,
+    active,
+    thisOrganizationId,
+  } = data;
   return (
     <Wrapper
       status={status}
@@ -108,7 +111,7 @@ const ProjectroomCard: FC<ProjectroomCardProps> = ({
             width="118px"
             height="118px"
             img={
-              img
+              imgUrl
               // ? img : placeHodlerImage && NoImage
             }
           />

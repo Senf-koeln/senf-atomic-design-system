@@ -1,7 +1,8 @@
 /** @format */
 
-import { MouseEventHandler } from "react";
+import { MouseEventHandler, ReactNode } from "react";
 export interface ListProps {
-  x?: string;
+  CardType?: React.ReactNode;
+  data?: Array<string>;
   onClick?: MouseEventHandler<HTMLButtonElement>;
 }

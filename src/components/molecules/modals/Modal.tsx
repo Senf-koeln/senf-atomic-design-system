@@ -15,7 +15,9 @@ const ModalContentWrapper = styled.div`
   transform: translate(-50%, -50%);
   width: 90%;
   max-width: 400px;
+  max-height: calc(100vh - 40px);
   overflow: scroll;
+
   ${(props) => LayerWhiteFirstDefault};
   border-radius: ${({ theme }) => theme.radii[4]}px;
 
