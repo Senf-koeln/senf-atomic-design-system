@@ -26,10 +26,12 @@ const Input: FunctionComponent<InputProps> = ({
   const isSecret = variant === "Secret";
   return (
     <Wrapper>
-      <Indication>
-        <label>{label}</label>
-        <p>{note}</p>
-      </Indication>
+      {(label || note) && (
+        <Indication>
+          {label && <label>{`${label}${required ? "*" : ""}`}</label>}
+          {note && <p>{note}</p>}
+        </Indication>
+      )}
       <InputField>
         {isSearch && <Icon icon="search" />}
         <TextField

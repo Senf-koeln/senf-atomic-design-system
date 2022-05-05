@@ -31,7 +31,8 @@ WithNote.args = {
 
 export const Required = Template.bind({});
 Required.args = {
-  label: "Label & Note",
+  label: "Required",
   note: "a note for extra info",
   placeholder: "Name",
+  required: true
 };
