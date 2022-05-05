@@ -15,7 +15,14 @@ const Template: Story<ButtonProps> = (args) => <Button {...args} />;
 
 export const IconText = Template.bind({});
 IconText.args = {
-  icon: "arrowdown",
+  icon: "check",
+  variant: "primary",
+  text: "Primary",
+};
+
+export const BigIconText = Template.bind({});
+BigIconText.args = {
+  icon: "search",
   variant: "primary",
   text: "Primary",
 };

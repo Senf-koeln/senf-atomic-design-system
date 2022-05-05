@@ -15,7 +15,28 @@ export default {
 
 const Template: Story<SubNavbarProps> = (args) => <SubNavbar {...args} />;
 
-export const Example = Template.bind({});
-Example.args = {
+export const FAQ = Template.bind({});
+FAQ.args = {
+  header: "FAQ",
+  iconLeft: "arrow",
+};
+
+export const Organisationen = Template.bind({});
+Organisationen.args = {
   header: "Organisationen",
+  iconLeft: "arrow",
+  iconLeftTransform: "rotate(90deg)",
+  textLeft: "zurück",
+};
+
+export const PageAllFunctions = Template.bind({});
+PageAllFunctions.args = {
+  header: "Page with all Functions",
+  iconLeft: "arrow",
+  iconLeftTransform: "rotate(90deg)",
+  textLeft: "zurück",
+
+  iconRight: "arrow",
+  iconRightTransform: "rotate(270deg)",
+  textRight: "weiter",
 };

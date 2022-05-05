@@ -40,7 +40,9 @@ declare const RoundedButton: FC<ButtonProps>;
 interface TertiaryButtonProps {
     text?: string;
     iconLeft?: string;
+    iconLeftTransform?: string;
     iconRight?: string;
+    iconRightTransform?: string;
     fillWidth?: "max" | undefined;
     loading?: boolean;
     disabled?: boolean;
@@ -134,6 +136,7 @@ interface FlexWrapperProps {
     margin?: string;
     alignItems?: "flex-start" | "center" | "flex-end";
     justifyContent?: "flex-start" | "center" | "flex-end";
+    flexWrap?: "nowrap" | "wrap" | "wrap-reverse";
     onClick?: MouseEventHandler<HTMLButtonElement>;
 }
 

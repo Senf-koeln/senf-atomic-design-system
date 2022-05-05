@@ -11,35 +11,47 @@ export default {
 
 const Template: Story<IconProps> = (args) => <Icon {...args} />;
 
-export const ArrowDown = Template.bind({});
-ArrowDown.args = {
-  icon: "arrowdown",
-  color: "black",
+export const Dot = Template.bind({});
+Dot.args = {
+  icon: "dot",
 };
 
-// export const ArrowUp = Template.bind({});
-// ArrowUp.args = {
-//   icon: "arrowup",
-//   color: "black",
-// };
-export const ArrowLeft = Template.bind({});
-ArrowLeft.args = {
-  icon: "arrowleft",
-  color: "black",
+export const Plus = Template.bind({});
+Plus.args = {
+  icon: "plus",
+  color: "#fed957",
 };
-// export const ArrowRight = Template.bind({});
-// ArrowRight.args = {
-//   icon: "arrowright",
-//   color: "black",
-// };
 
+export const Check = Template.bind({});
+Check.args = {
+  icon: "check",
+};
+
+export const Arrow = Template.bind({});
+Arrow.args = {
+  icon: "arrow",
+};
 export const Search = Template.bind({});
 Search.args = {
   icon: "search",
-  color: "black",
 };
+
 export const Bulb = Template.bind({});
 Bulb.args = {
   icon: "bulb",
-  color: "black",
+};
+
+export const Stats = Template.bind({});
+Stats.args = {
+  icon: "stats",
+};
+
+export const InfoFill = Template.bind({});
+InfoFill.args = {
+  icon: "infoFill",
+};
+
+export const Info = Template.bind({});
+Info.args = {
+  icon: "info",
 };
