@@ -52,7 +52,10 @@ const TertiaryButton: FC<TertiaryButtonProps> = ({
   text,
   children,
   iconLeft,
+  iconLeftTransform,
   iconRight,
+  iconRightTransform,
+
   size,
   fillWidth,
   loading,
@@ -73,7 +76,11 @@ const TertiaryButton: FC<TertiaryButtonProps> = ({
         <IconWrapperLeft text={text}>
           <Icon
             icon={iconLeft}
-            transform={size === "small" ? "scale(0.7)" : "scale(1)"}
+            transform={
+              size === "small"
+                ? `scale(0.7) ${iconLeftTransform}`
+                : `scale(1) ${iconLeftTransform}`
+            }
           />
         </IconWrapperLeft>
       )}
@@ -83,7 +90,11 @@ const TertiaryButton: FC<TertiaryButtonProps> = ({
         <IconWrapperRight text={text} iconLeft={iconLeft}>
           <Icon
             icon={iconRight}
-            transform={size === "small" ? "scale(0.7)" : "scale(1)"}
+            transform={
+              size === "small"
+                ? `scale(0.7) ${iconRightTransform}`
+                : `scale(1) ${iconRightTransform}`
+            }
           />
         </IconWrapperRight>
       )}

@@ -84,8 +84,6 @@ const Modal = ({ openModal, children }: ModalProps) => {
               trapFocus(e, submitRef.current, closeRef.current) // ideally we would use inert but it doesn't seem to be working
           }
         >
-          <SubNavbar header="FAQ" />
-
           {children}
         </ModalContentWrapper>
       </React.Fragment>,

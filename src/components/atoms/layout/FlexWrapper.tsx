@@ -16,6 +16,7 @@ const Wrapper = styled.div<FlexWrapperProps>`
   justify-content: ${(props) =>
     props.justifyContent ? props.justifyContent : null};
   gap: ${(props) => (props.gap ? props.gap : null)};
+  flex-wrap: ${(props) => (props.flexWrap ? props.flexWrap : null)};
 `;
 
 const FlexWrapper: FC<FlexWrapperProps> = ({
@@ -27,6 +28,7 @@ const FlexWrapper: FC<FlexWrapperProps> = ({
   alignItems,
   justifyContent,
   height,
+  flexWrap,
 }) => {
   return (
     <Wrapper
@@ -37,6 +39,7 @@ const FlexWrapper: FC<FlexWrapperProps> = ({
       height={height}
       alignItems={alignItems}
       justifyContent={justifyContent}
+      flexWrap={flexWrap}
     >
       {children}
     </Wrapper>
