@@ -1,20 +1,22 @@
 import styled from "styled-components";
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.div<{ disabled?: boolean }>`
   display: inline-flex;
   flex-direction: column;
   gap: 0.2rem;
   color: ${({ theme }) => theme.colors.black.black40tra};
   max-width: 13rem;
+  opacity: ${({ disabled }) => disabled && "0.5"};
   &:focus {
     outline: 3px solid ${(props) => props.theme.colors.primary.primary120};
     outline-offset: -3px;
   }
 `;
 
-export const Indication = styled.div`
+export const Indication = styled.div<{ error?: boolean }>`
   display: inline-flex;
   justify-content: space-between;
+  color: ${({ theme, error }) => error && theme.colors.signal.redDark};
   label {
     font-size: ${({ theme }) => theme.fontSizes[1]}rem;
     font-weight: ${({ theme }) => theme.fontWeights[1]};
@@ -49,7 +51,7 @@ export const TextField = styled.input`
   }
 
   &:focus {
-    outline: 3px solid ${(props) => props.theme.colors.primary.primary120};
+    outline: 3px solid ${({ theme }) => theme.colors.primary.primary120};
     outline-offset: -3px;
   }
 `;

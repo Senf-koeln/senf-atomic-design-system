@@ -25,9 +25,9 @@ const Input: FunctionComponent<InputProps> = ({
   const isSearch = variant === "Search";
   const isSecret = variant === "Secret";
   return (
-    <Wrapper>
+    <Wrapper disabled={disabled}>
       {(label || note) && (
-        <Indication>
+        <Indication error={error}>
           {label && <label>{`${label}${required ? "*" : ""}`}</label>}
           {note && <p>{note}</p>}
         </Indication>
@@ -37,6 +37,7 @@ const Input: FunctionComponent<InputProps> = ({
         <TextField
           type="text"
           placeholder={placeholder || `${isSearch && "Search"}`}
+          disabled={disabled}
         />
         {isSearch && <Icon icon="plus" />}
         {isSecret && <p>zeigen</p>}

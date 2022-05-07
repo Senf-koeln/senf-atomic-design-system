@@ -36,3 +36,19 @@ Required.args = {
   placeholder: "Name",
   required: true
 };
+
+export const Disabled = Template.bind({});
+Disabled.args = {
+  label: "disabled",
+  note: "a note for extra info",
+  placeholder: "Name",
+  disabled: true
+};
+
+export const Error = Template.bind({});
+Error.args = {
+  label: "Error",
+  note: "Error message",
+  placeholder: "Name",
+  error: true
+};
