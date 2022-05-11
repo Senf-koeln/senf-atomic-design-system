@@ -1,16 +1,9 @@
 /** @format */
 
-export { default as Loader } from "./components/atoms/animations/Loader";
-
-export { default as Button } from "./components/atoms/buttons/Button";
-export { default as RoundedButton } from "./components/atoms/buttons/RoundedButton";
-export { default as TertiaryButton } from "./components/atoms/buttons/TertiaryButton";
-
-export { default as Tag } from "./components/atoms/tag/Tag";
-
 export {
   LayerWhiteFirstDefault,
   LayerWhiteFirstHover,
+  LayerWhiteFirstActive,
   LayerWhiteSecondDefault,
   LayerWhiteSecondHover,
   LayerYellowDefault,
@@ -22,10 +15,15 @@ export {
   LayerGreyButtonsDefault,
   LayerGreyButtonsHover,
 } from "./components/atoms/layerStyles/LayerStyles";
-
+export { default as Loader } from "./components/atoms/animations/Loader";
+export { default as Button } from "./components/atoms/buttons/Button";
+export { default as RoundedButton } from "./components/atoms/buttons/RoundedButton";
+export { default as TertiaryButton } from "./components/atoms/buttons/TertiaryButton";
+export { default as Tag } from "./components/atoms/tag/Tag";
 export { default as Icon } from "./components/atoms/icons/Icon";
 export { default as Input } from "./components/atoms/inputs/Input";
 export { default as FlexWrapper } from "./components/atoms/layout/FlexWrapper";
+export { default as Divider } from "./components/atoms/divider/Divider";
 export { default as Shape } from "./components/atoms/shapes/Shape";
 export { default as Typography } from "./components/atoms/typography/Typography";
 
@@ -33,9 +31,11 @@ export { default as IdeaCard } from "./components/molecules/cards/IdeaCard";
 export { default as ProjectroomCard } from "./components/molecules/cards/ProjectroomCard";
 export { default as OrganizationCard } from "./components/molecules/cards/OrganizationCard";
 export { default as ObjectCard } from "./components/molecules/cards/ObjectCard";
-
 export { default as Form } from "./components/molecules/form/Form";
 export { default as List } from "./components/molecules/list/List";
+export { default as Modal } from "./components/molecules/modals/Modal";
+export { default as SubNavbar } from "./components/molecules/navs/SubNavbar";
+export { default as Accordion } from "./components/molecules/accordion/Accordion";
 
 export { default as Auth } from "./components/organisms/auth/Auth";
 

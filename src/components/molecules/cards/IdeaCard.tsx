@@ -60,12 +60,13 @@ const IdeaCard: FC<IdeaCardProps> = ({ data, handleButtonClick }) => {
     organizationType,
     projectroomName,
     thisOrganizationId,
+    screamId,
   } = data;
   return (
     <Wrapper
       status={status}
       projectroomName={projectroomName}
-      onClick={handleButtonClick}
+      onClick={() => handleButtonClick(screamId)}
     >
       <InnerWrapper>
         <FlexWrapper

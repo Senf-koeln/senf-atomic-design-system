@@ -105,6 +105,7 @@ const Button: FC<ButtonProps> = ({
   text,
   children,
   icon,
+  transform,
   size,
   variant,
   borderStyle,
@@ -129,10 +130,7 @@ const Button: FC<ButtonProps> = ({
       {children && children}
       {icon && (
         <IconWrapper text={text}>
-          <Icon
-            icon={icon}
-            transform={size === "small" ? "scale(0.7)" : "scale(1)"}
-          />
+          <Icon icon={icon} transform={transform} />
         </IconWrapper>
       )}
       {text}

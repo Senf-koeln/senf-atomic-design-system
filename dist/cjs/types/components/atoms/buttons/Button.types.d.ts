@@ -9,5 +9,6 @@ export interface ButtonProps {
     loading?: boolean;
     disabled?: boolean;
     size?: "small" | "big";
+    color?: string;
     onClick?: MouseEventHandler<HTMLButtonElement>;
 }

@@ -8,7 +8,8 @@ import { LayerWhiteFirstDefault } from "../../atoms/layerStyles/LayerStyles";
 import SubNavbar from "../navs/SubNavbar";
 import { ModalProps } from "./Modal.types";
 
-const ModalContentWrapper = styled.div`
+const ModalContentWrapper = styled.div<ModalProps>`
+  z-index: ${({ zIndex }) => (zIndex ? zIndex : 9999)};
   position: fixed;
   top: 50%;
   left: 50%;
@@ -25,7 +26,9 @@ const ModalContentWrapper = styled.div`
     ${({ theme }) => theme.colors.brown.brown20tra};
 `;
 
-const ModalBackground = styled.div`
+const ModalBackground = styled.div<ModalProps>`
+  z-index: ${({ zIndex }) => (zIndex ? zIndex : 9998)};
+
   position: fixed;
   left: 0;
   top: 0;
@@ -34,7 +37,13 @@ const ModalBackground = styled.div`
   height: 100vh;
 `;
 
-const Modal = ({ openModal, children }: ModalProps) => {
+const Modal: FC<ModalProps> = ({
+  openModal,
+  setOpenModal,
+  children,
+  zIndex,
+  portalId = "portal-root-modal",
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
@@ -44,7 +53,7 @@ const Modal = ({ openModal, children }: ModalProps) => {
     } else {
       handleClose();
     }
-  }, []);
+  }, [openModal]);
 
   const handleOpen = () => {
     setIsOpen(true);
@@ -70,25 +79,32 @@ const Modal = ({ openModal, children }: ModalProps) => {
   }, []);
 
   return (
-    isOpen &&
-    ReactDOM.createPortal(
-      <React.Fragment>
-        <ModalBackground />
-        <ModalContentWrapper
-          role="dialog"
-          aria-labelledby="modal-header"
-          onKeyDown={
-            (e) =>
-              submitRef?.current &&
-              closeRef?.current &&
-              trapFocus(e, submitRef.current, closeRef.current) // ideally we would use inert but it doesn't seem to be working
-          }
-        >
-          {children}
-        </ModalContentWrapper>
-      </React.Fragment>,
-      document.body
-    )
+    <React.Fragment>
+      {isOpen &&
+        ReactDOM.createPortal(
+          <React.Fragment>
+            <ModalBackground
+              zIndex={zIndex - 1}
+              onClick={() => setOpenModal(false)}
+            />
+            <ModalContentWrapper
+              zIndex={zIndex}
+              role="dialog"
+              aria-labelledby="modal-header"
+              onKeyDown={
+                (e) =>
+                  submitRef?.current &&
+                  closeRef?.current &&
+                  trapFocus(e, submitRef.current, closeRef.current) // ideally we would use inert but it doesn't seem to be working
+              }
+            >
+              {children}
+            </ModalContentWrapper>
+          </React.Fragment>,
+          document.body
+          // document.getElementById(portalId) as HTMLElement
+        )}
+    </React.Fragment>
   );
 };
 

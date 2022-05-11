@@ -55,7 +55,6 @@ const TertiaryButton: FC<TertiaryButtonProps> = ({
   iconLeftTransform,
   iconRight,
   iconRightTransform,
-
   size,
   fillWidth,
   loading,
