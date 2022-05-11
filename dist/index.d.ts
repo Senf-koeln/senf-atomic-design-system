@@ -1,7 +1,21 @@
-import { FC, MouseEventHandler, ChangeEventHandler } from 'react';
 import * as styled_components from 'styled-components';
+import { FC, MouseEventHandler, ChangeEventHandler } from 'react';
 import { Theme } from 'styled-system';
 export { default as i18n } from 'i18next';
+
+declare const LayerWhiteFirstDefault: styled_components.FlattenInterpolation<styled_components.ThemeProps<any>>;
+declare const LayerWhiteFirstHover: styled_components.FlattenInterpolation<styled_components.ThemeProps<any>>;
+declare const LayerWhiteFirstActive: styled_components.FlattenInterpolation<styled_components.ThemeProps<any>>;
+declare const LayerWhiteSecondDefault: styled_components.FlattenInterpolation<styled_components.ThemeProps<any>>;
+declare const LayerWhiteSecondHover: styled_components.FlattenInterpolation<styled_components.ThemeProps<any>>;
+declare const LayerYellowDefault: styled_components.FlattenInterpolation<styled_components.ThemeProps<any>>;
+declare const LayerYellowHover: styled_components.FlattenInterpolation<styled_components.ThemeProps<any>>;
+declare const LayerBrownDefault: styled_components.FlattenInterpolation<styled_components.ThemeProps<any>>;
+declare const LayerBrownHover: styled_components.FlattenInterpolation<styled_components.ThemeProps<any>>;
+declare const LayerGreyDefault: styled_components.FlattenInterpolation<styled_components.ThemeProps<any>>;
+declare const LayerGreyHover: styled_components.FlattenInterpolation<styled_components.ThemeProps<any>>;
+declare const LayerGreyButtonsDefault: styled_components.FlattenInterpolation<styled_components.ThemeProps<any>>;
+declare const LayerGreyButtonsHover: styled_components.FlattenInterpolation<styled_components.ThemeProps<any>>;
 
 /** @format */
 interface LoaderProps {
@@ -24,6 +38,7 @@ interface ButtonProps {
     loading?: boolean;
     disabled?: boolean;
     size?: "small" | "big";
+    color?: string;
     onClick?: MouseEventHandler<HTMLButtonElement>;
 }
 
@@ -69,19 +84,6 @@ interface TagProps {
 /** @format */
 
 declare const Tag: FC<TagProps>;
-
-declare const LayerWhiteFirstDefault: styled_components.FlattenInterpolation<styled_components.ThemeProps<any>>;
-declare const LayerWhiteFirstHover: styled_components.FlattenInterpolation<styled_components.ThemeProps<any>>;
-declare const LayerWhiteSecondDefault: styled_components.FlattenInterpolation<styled_components.ThemeProps<any>>;
-declare const LayerWhiteSecondHover: styled_components.FlattenInterpolation<styled_components.ThemeProps<any>>;
-declare const LayerYellowDefault: styled_components.FlattenInterpolation<styled_components.ThemeProps<any>>;
-declare const LayerYellowHover: styled_components.FlattenInterpolation<styled_components.ThemeProps<any>>;
-declare const LayerBrownDefault: styled_components.FlattenInterpolation<styled_components.ThemeProps<any>>;
-declare const LayerBrownHover: styled_components.FlattenInterpolation<styled_components.ThemeProps<any>>;
-declare const LayerGreyDefault: styled_components.FlattenInterpolation<styled_components.ThemeProps<any>>;
-declare const LayerGreyHover: styled_components.FlattenInterpolation<styled_components.ThemeProps<any>>;
-declare const LayerGreyButtonsDefault: styled_components.FlattenInterpolation<styled_components.ThemeProps<any>>;
-declare const LayerGreyButtonsHover: styled_components.FlattenInterpolation<styled_components.ThemeProps<any>>;
 
 /** @format */
 interface IconProps {
@@ -143,6 +145,21 @@ interface FlexWrapperProps {
 /** @format */
 
 declare const FlexWrapper: FC<FlexWrapperProps>;
+
+/** @format */
+
+interface DividerProps {
+    color?: string;
+    width?: string;
+    height?: string;
+    borderRadius?: string;
+    margin?: string;
+    onClick?: MouseEventHandler<HTMLButtonElement>;
+}
+
+/** @format */
+
+declare const Divider: FC<DividerProps>;
 
 /** @format */
 interface ShapeProps {
@@ -235,12 +252,57 @@ declare const Form: FC<FormProps>;
 interface ListProps {
     CardType?: React.ReactNode;
     data?: Array<string>;
-    onClick?: MouseEventHandler<HTMLButtonElement>;
+    onClick: MouseEventHandler<HTMLButtonElement>;
+    handleButtonClick: MouseEventHandler<HTMLButtonElement>;
 }
 
 /** @format */
 
 declare const List: FC<ListProps>;
+
+/** @format */
+
+interface ModalProps {
+    x?: string;
+    onClick?: MouseEventHandler<HTMLButtonElement>;
+    setOpenModal: (x: boolean) => void;
+    openModal: boolean;
+    children: React.ReactNode;
+    zIndex?: number | string;
+    portalId?: string;
+}
+
+/** @format */
+
+declare const Modal: FC<ModalProps>;
+
+/** @format */
+
+interface SubNavbarProps {
+    iconLeft?: string;
+    iconLeftTransform?: string;
+    textLeft?: string;
+    header?: string;
+    iconRight?: string;
+    iconRightTransform?: string;
+    textRight?: string;
+    onClick?: MouseEventHandler<HTMLButtonElement>;
+}
+
+/** @format */
+
+declare const SubNavbar: FC<SubNavbarProps>;
+
+/** @format */
+
+interface AccordionProps {
+    example?: string;
+    onClick?: MouseEventHandler<HTMLButtonElement>;
+}
+
+/** @format */
+
+declare const Accordion: FC<AccordionProps>;
 
 /** @format */
 
@@ -266,4 +328,4 @@ declare const theme: Theme;
 /** @format */
 declare const GlobalStyle: styled_components.GlobalStyleComponent<{}, styled_components.DefaultTheme>;
 
-export { Auth, Button, FlexWrapper, Form, GlobalStyle, Icon, IdeaCard, Input, LayerBrownDefault, LayerBrownHover, LayerGreyButtonsDefault, LayerGreyButtonsHover, LayerGreyDefault, LayerGreyHover, LayerWhiteFirstDefault, LayerWhiteFirstHover, LayerWhiteSecondDefault, LayerWhiteSecondHover, LayerYellowDefault, LayerYellowHover, List, Loader, ObjectCard, OrganizationCard, ProjectroomCard, RoundedButton, Shape, Tag, TertiaryButton, Typography, theme };
+export { Accordion, Auth, Button, Divider, FlexWrapper, Form, GlobalStyle, Icon, IdeaCard, Input, LayerBrownDefault, LayerBrownHover, LayerGreyButtonsDefault, LayerGreyButtonsHover, LayerGreyDefault, LayerGreyHover, LayerWhiteFirstActive, LayerWhiteFirstDefault, LayerWhiteFirstHover, LayerWhiteSecondDefault, LayerWhiteSecondHover, LayerYellowDefault, LayerYellowHover, List, Loader, Modal, ObjectCard, OrganizationCard, ProjectroomCard, RoundedButton, Shape, SubNavbar, Tag, TertiaryButton, Typography, theme };

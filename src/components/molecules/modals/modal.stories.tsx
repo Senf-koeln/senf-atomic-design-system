@@ -19,7 +19,6 @@ const Template: Story<ModalProps> = (args) => <Modal {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  text: "x",
   openModal: true,
   children: (
     <React.Fragment>

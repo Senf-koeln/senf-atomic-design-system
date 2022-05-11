@@ -71,7 +71,7 @@ const LogoPlacer = styled.div<ObjectCardProps>`
   overflow: visible;
   border-radius: 8px;
   border: 2px solid rgba(255, 255, 255, 0.8);
-  margin: 134px 134px 69px 16px;
+  margin: 134px 134px 54px 16px;
   position: absolute;
   bottom: 0;
   @media (max-width: 368px) {
@@ -90,46 +90,47 @@ const Title = styled.div`
   overflow: hidden;
   top: 0;
   position: relative;
-  margin: 8px 16px 0px 16px;
+  margin: 8px 16px 16px 16px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  text-align: center;
 `;
 
-const SubTitle = styled.div`
-  height: auto; /* 18px */
-  width: auto;
-  white-space: nowrap;
-  word-wrap: break-word;
-  word-break: break-word;
-  overflow: hidden;
-  font-weight: 500;
-  font-style: normal;
-  font-family: "Nunito", serif;
-  color: rgba(0, 0, 0, 0.4);
-  font-size: 14px;
-  letter-spacing: 0px;
-  line-height: 1.3;
-  text-align: left;
-  margin: 0px 0px 12px 16px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-`;
+// const SubTitle = styled.div`
+//   height: auto; /* 18px */
+//   width: auto;
+//   white-space: nowrap;
+//   word-wrap: break-word;
+//   word-break: break-word;
+//   overflow: hidden;
+//   font-weight: 500;
+//   font-style: normal;
+//   font-family: "Nunito", serif;
+//   color: rgba(0, 0, 0, 0.4);
+//   font-size: 14px;
+//   letter-spacing: 0px;
+//   line-height: 1.3;
+//   text-align: left;
+//   margin: 0px 0px 12px 16px;
+//   white-space: nowrap;
+//   overflow: hidden;
+//   text-overflow: ellipsis;
+// `;
 
-const DeactivatedWrapper = styled.div`
-  position: absolute;
-  top: 40px;
-  z-index: 5;
-  color: white;
-  width: 50%;
-  margin-left: 25%;
-`;
+// const DeactivatedWrapper = styled.div`
+//   position: absolute;
+//   top: 40px;
+//   z-index: 5;
+//   color: white;
+//   width: 50%;
+//   margin-left: 25%;
+// `;
 
 const ObjectCard: FC<ObjectCardProps> = ({ data, handleButtonClick }) => {
-  const { title, subTitle, objectType, imgUrl } = data;
+  const { title, subTitle, objectType, imgUrl, objectId } = data;
   return (
-    <Wrapper onClick={handleButtonClick}>
+    <Wrapper onClick={() => handleButtonClick(objectId)}>
       <LogoWrapper>
         <Thumbnail
           img={
@@ -147,7 +148,7 @@ const ObjectCard: FC<ObjectCardProps> = ({ data, handleButtonClick }) => {
       <Title>
         <Typography variant="bodyBg">{title}</Typography>
       </Title>
-      <SubTitle>{subTitle}</SubTitle>
+      {/* <SubTitle>{subTitle}</SubTitle> */}
     </Wrapper>
   );
 };

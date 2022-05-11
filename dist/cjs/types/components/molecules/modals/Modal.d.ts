@@ -1,5 +1,5 @@
 /** @format */
-import React from "react";
+import { FC } from "react";
 import { ModalProps } from "./Modal.types";
-declare const Modal: ({ openModal, children }: ModalProps) => false | React.ReactPortal;
+declare const Modal: FC<ModalProps>;
 export default Modal;

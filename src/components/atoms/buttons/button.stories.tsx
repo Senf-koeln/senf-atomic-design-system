@@ -74,3 +74,10 @@ Small.args = {
   size: "small",
   text: "Small",
 };
+
+export const SmallIcon = Template.bind({});
+SmallIcon.args = {
+  icon: "check",
+  size: "small",
+  text: "Small",
+};

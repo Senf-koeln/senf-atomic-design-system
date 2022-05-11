@@ -5,13 +5,13 @@ import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 
 import InfiniteScroll from "react-infinite-scroller";
-// import { usePrevious } from "../../../hooks/usePrevious";
+import { usePrevious } from "../../../hooks/usePrevious";
 
 import IdeaCard from "../cards/IdeaCard";
 import ProjectCard from "../cards/ProjectroomCard";
 import OrganizationCard from "../cards/OrganizationCard";
 import { ListProps } from "./List.types";
-import ObjectCard from "../cards/ObjectCard";
+// import ObjectCard from "../cards/ObjectCard";
 
 // import {
 //   NoMoreMainContent,
@@ -33,7 +33,7 @@ const NoIdeasYet = styled.div`
   text-align: center;
 `;
 
-const List: FC<ListProps> = ({ data, CardType }) => {
+const List: FC<ListProps> = ({ data, CardType, handleButtonClick }) => {
   let itemsPerPage = 1;
   const [hasMoreItems, sethasMoreItems] = useState(true);
   const [listItems, setListItems] = useState(itemsPerPage);
@@ -42,14 +42,16 @@ const List: FC<ListProps> = ({ data, CardType }) => {
     var items = [];
     if (dataArray.length !== 0) {
       for (var i = 0; i < listItems; i++) {
-        items.push(<ObjectCard data={dataArray[i]} />);
+        items.push(
+          <CardType data={dataArray[i]} handleButtonClick={handleButtonClick} />
+        );
       }
       return items;
     }
   };
 
   const loadMore = () => {
-    if (listItems === data.length) {
+    if (listItems === data?.length) {
       sethasMoreItems(false);
     } else {
       setTimeout(() => {

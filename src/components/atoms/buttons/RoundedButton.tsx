@@ -30,20 +30,22 @@ const StyledButton = styled.button<ButtonProps>`
   aspect-ratio: 1 / 1;
 
   //ADD THEME-RADII
-  border-radius: ${(props) => (props.variant === "plus" ? "28px" : "18px")};
+  border-radius: ${(props) => (props.size === "big" ? "28px" : "18px")};
 
   //ADD THEME-BORDER
   border: 2px solid #ffffff;
 
   //ADD THEME-SPACE?
-  height: ${(props) => (props.variant === "plus" ? "68px" : "50px")};
-  width: ${(props) => (props.variant === "plus" ? "68px" : "50px")};
+  height: ${(props) => (props.size === "big" ? "68px" : "50px")};
+  width: ${(props) => (props.size === "big" ? "68px" : "50px")};
 
   color: ${(props) => (props.loading === true ? "transparent" : "auto")};
   pointer-events: all;
 
   //ADD THEME-TRANSITION
   transition: 0.3s;
+
+  ${(props) => props.variant === "primary" && LayerYellowDefault}
 
   &:hover:enabled {
     transform: scale(1.088);
@@ -61,17 +63,24 @@ const IconWrapper = styled.div<ButtonProps>`
 const RoundedButton: FC<ButtonProps> = ({
   icon,
   variant,
+  size,
+  color,
   onClick,
   ...rest
 }) => {
   return (
-    <StyledButton type="button" variant={variant} onClick={onClick} {...rest}>
+    <StyledButton
+      type="button"
+      variant={variant}
+      size={size}
+      onClick={onClick}
+      {...rest}
+    >
       <IconWrapper>
         <Icon
-          icon={variant === "plus" ? "plus" : icon}
-          size={variant === "plus" ? "big" : undefined}
-          //ADD THEME-BASED COLOR TO ICON
-          color={variant === "plus" ? "rgb(226,183,54)" : undefined}
+          icon={icon}
+          transform={size === "big" ? "scale(1)" : "scale(0.7)"}
+          color={color}
         />
       </IconWrapper>
     </StyledButton>

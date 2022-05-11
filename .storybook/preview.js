@@ -12,6 +12,7 @@ export const decorators = [
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <Story />
+      <div id="portal-root-modal" />
     </ThemeProvider>
   ),
 ];
