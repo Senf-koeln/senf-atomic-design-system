@@ -1,6 +1,5 @@
 /** @format */
 
-import { t } from "i18next";
 import React, { FC } from "react";
 import styled from "styled-components";
 import Icon from "../../atoms/icons/Icon";
