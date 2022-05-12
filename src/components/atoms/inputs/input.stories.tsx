@@ -52,3 +52,20 @@ Error.args = {
   placeholder: "Name",
   error: true
 };
+
+export const Password = Template.bind({});
+Password.args = {
+  label: "Password",
+  placeholder: "Password",
+  type: "password"
+};
+
+export const TextArea = Template.bind({});
+TextArea.args = {
+  label: "Text Area",
+  note: "a note for extra info",
+  placeholder: "Enter your message here",
+  type: "textarea",
+  columns: 28,
+  rows: 12
+};

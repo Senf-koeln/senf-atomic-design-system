@@ -4,7 +4,7 @@ import { ChangeEventHandler } from "react";
 
 export interface InputProps {
   id?: string;
-  type?: string;
+  type?: React.HTMLInputTypeAttribute | "textarea";
   label?: string;
   note?: string;
   icon?: string;
@@ -13,10 +13,10 @@ export interface InputProps {
   error?: boolean;
   success?: boolean;
   disabled?: boolean;
-  rows?: string;
+  rows?: number;
+  columns?: number;
   value?: string;
   setValue?: ChangeEventHandler<HTMLInputElement>;
   onChange?: ChangeEventHandler<HTMLInputElement>;
   onClick?: ChangeEventHandler<HTMLInputElement>;
-  variant?: "Default" | "Search" | "Secret";
 }
