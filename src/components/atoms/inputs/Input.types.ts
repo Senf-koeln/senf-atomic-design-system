@@ -15,8 +15,8 @@ export interface InputProps {
   disabled?: boolean;
   rows?: number;
   columns?: number;
-  value?: string;
-  setValue?: ChangeEventHandler<HTMLInputElement>;
+  // value?: string; //! why are we passing value to input component?
+  // setValue?: ChangeEventHandler<HTMLInputElement>;  //! why are we passing setValue to input component?
   onChange?: ChangeEventHandler<HTMLInputElement>;
   onClick?: ChangeEventHandler<HTMLInputElement>;
 }

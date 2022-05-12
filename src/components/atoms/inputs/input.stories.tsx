@@ -69,3 +69,9 @@ TextArea.args = {
   columns: 28,
   rows: 12
 };
+
+
+export const Search = Template.bind({});
+Search.args = {
+  type: "search",
+};
