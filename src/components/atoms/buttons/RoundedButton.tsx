@@ -21,33 +21,31 @@ const StyledButton = styled.button<ButtonProps>`
   justify-content: center;
   align-items: center;
 
-  box-shadow: 0px 12px 18px -8px var(
-        --token-1b934134-2ca5-4f4e-85f7-23e508bbf2a5,
-        rgba(186, 160, 79, 0.2)
-      ) /* {"name":"Brown 020 transparent"} */,
-    0px -4px 10px 4px var(
-        --token-9d5754a0-f478-42c4-94f1-2a2608c50c5c,
-        rgba(255, 255, 255, 0.2)
-      ) /* {"name":"White 020 transparent"} */;
-  background-color: ${(props) => props.theme.colors.brown.brown4};
+  box-shadow: ${({ theme }) => theme.shadows[0]}
+      ${({ theme }) => theme.colors.brown.brown20tra},
+    ${({ theme }) => theme.shadows[2]}
+      ${({ theme }) => theme.colors.white.white20tra};
+  background-color: ${({ theme }) => theme.colors.brown.brown4};
 
   aspect-ratio: 1 / 1;
 
   //ADD THEME-RADII
-  border-radius: ${(props) => (props.variant === "plus" ? "28px" : "18px")};
+  border-radius: ${(props) => (props.size === "big" ? "28px" : "18px")};
 
   //ADD THEME-BORDER
   border: 2px solid #ffffff;
 
   //ADD THEME-SPACE?
-  height: ${(props) => (props.variant === "plus" ? "68px" : "50px")};
-  width: ${(props) => (props.variant === "plus" ? "68px" : "50px")};
+  height: ${(props) => (props.size === "big" ? "68px" : "50px")};
+  width: ${(props) => (props.size === "big" ? "68px" : "50px")};
 
   color: ${(props) => (props.loading === true ? "transparent" : "auto")};
   pointer-events: all;
 
   //ADD THEME-TRANSITION
   transition: 0.3s;
+
+  ${(props) => props.variant === "primary" && LayerYellowDefault}
 
   &:hover:enabled {
     transform: scale(1.088);
@@ -65,17 +63,24 @@ const IconWrapper = styled.div<ButtonProps>`
 const RoundedButton: FC<ButtonProps> = ({
   icon,
   variant,
+  size,
+  color,
   onClick,
   ...rest
 }) => {
   return (
-    <StyledButton type="button" variant={variant} onClick={onClick} {...rest}>
+    <StyledButton
+      type="button"
+      variant={variant}
+      size={size}
+      onClick={onClick}
+      {...rest}
+    >
       <IconWrapper>
         <Icon
-          icon={variant === "plus" ? "plus" : icon}
-          size={variant === "plus" ? "big" : undefined}
-          //ADD THEME-BASED COLOR TO ICON
-          color={variant === "plus" ? "rgb(226,183,54)" : undefined}
+          icon={icon}
+          transform={size === "big" ? "scale(1)" : "scale(0.7)"}
+          color={color}
         />
       </IconWrapper>
     </StyledButton>

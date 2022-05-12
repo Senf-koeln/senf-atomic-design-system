@@ -2,7 +2,7 @@
 import { ThemeProvider } from "styled-components";
 import { addDecorator } from "@storybook/react";
 import { withThemes } from "@react-theming/storybook-addon";
-import GlobalStyle from "../src/styles/globalStyle";
+import GlobalStyle from "../src/styles/globals";
 import theme from "../src/styles/theme";
 
 import i18n from "../src/util/i18n";
@@ -12,6 +12,7 @@ export const decorators = [
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <Story />
+      <div id="portal-root-modal" />
     </ThemeProvider>
   ),
 ];

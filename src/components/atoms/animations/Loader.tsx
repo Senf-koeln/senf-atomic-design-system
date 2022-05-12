@@ -4,6 +4,7 @@ import React, { FC, useRef, useEffect } from "react";
 import { LoaderProps } from "./Loader.types";
 import styled from "styled-components";
 import lottie from "lottie-web";
+import DotLoader from "../../../assets/lottieFiles/dotLoader.json";
 
 const StyledLoader = styled.div`
   width: ${(props) => (props.width ? props.width : "100%")};
@@ -20,7 +21,7 @@ const Loader: FC<LoaderProps> = ({ width, height }) => {
       renderer: "svg",
       loop: true,
       autoplay: true,
-      animationData: require("../../../assets/lottieFiles/dotLoader.json"),
+      animationData: DotLoader,
     });
   }, []);
 

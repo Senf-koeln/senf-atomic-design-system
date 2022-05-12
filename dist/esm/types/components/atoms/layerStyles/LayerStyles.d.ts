@@ -1,9 +1,10 @@
 export declare const LayerWhiteFirstDefault: import("styled-components").FlattenInterpolation<import("styled-components").ThemeProps<any>>;
 export declare const LayerWhiteFirstHover: import("styled-components").FlattenInterpolation<import("styled-components").ThemeProps<any>>;
-export declare const LayerWhitSecondDefault: import("styled-components").FlattenInterpolation<import("styled-components").ThemeProps<any>>;
-export declare const LayerWhitSecondHover: import("styled-components").FlattenInterpolation<import("styled-components").ThemeProps<any>>;
+export declare const LayerWhiteFirstActive: import("styled-components").FlattenInterpolation<import("styled-components").ThemeProps<any>>;
+export declare const LayerWhiteSecondDefault: import("styled-components").FlattenInterpolation<import("styled-components").ThemeProps<any>>;
+export declare const LayerWhiteSecondHover: import("styled-components").FlattenInterpolation<import("styled-components").ThemeProps<any>>;
 export declare const LayerYellowDefault: import("styled-components").FlattenInterpolation<import("styled-components").ThemeProps<any>>;
-export declare const LayerYellowHover: import("styled-components").FlattenSimpleInterpolation;
+export declare const LayerYellowHover: import("styled-components").FlattenInterpolation<import("styled-components").ThemeProps<any>>;
 export declare const LayerBrownDefault: import("styled-components").FlattenInterpolation<import("styled-components").ThemeProps<any>>;
 export declare const LayerBrownHover: import("styled-components").FlattenInterpolation<import("styled-components").ThemeProps<any>>;
 export declare const LayerGreyDefault: import("styled-components").FlattenInterpolation<import("styled-components").ThemeProps<any>>;

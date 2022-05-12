@@ -21,32 +21,22 @@ const Form: FC<FormProps> = ({
   maxWidth,
   ...props
 }) => {
-  const [outsideClick, setOutsideClick] = useState(false);
-
-  const outerRef = useRef();
-  useOnClickOutside(outerRef, () => {
-    setOutsideClick(true);
-
-    setTimeout(() => {
-      setOutsideClick(false);
-    }, 10000);
-  });
-
   return (
     <form>
-      <Wrapper margin={margin} maxWidth={maxWidth} ref={outerRef}>
-        {inputItems?.map((item) => {
+      <Wrapper margin={margin} maxWidth={maxWidth}>
+        {inputItems?.map(({ name, type, placeholder, label }) => {
           return (
             <Input
               //   key={item.id}
-              name={item.name}
-              type={item.type}
-              placeholder={item.placeholder}
-              label={item.label}
+              name={name}
+              type={type}
+              placeholder={placeholder}
+              label={label}
               onChange={formik?.handleChange}
-              value={formik?.values[item.name]}
-              error={outsideClick && Boolean(formik.errors[item.name])}
-              note={outsideClick && formik.errors[item.name]}
+              onBlur={formik?.handleBlur}
+              value={formik?.values[name]}
+              error={formik?.touched[name] && Boolean(formik?.errors[name])}
+              note={formik?.touched[name] && formik?.errors[name]}
             />
           );
         })}

@@ -2,7 +2,7 @@
 
 import React, { FC, useEffect, useState, useRef } from "react";
 import styled from "styled-components";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import Button from "../../atoms/buttons/Button";
 import FlexWrapper from "../../atoms/layout/FlexWrapper";
 import Shape from "../../atoms/shapes/Shape";
@@ -12,6 +12,8 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 
 import SenfManSquating from "../../../assets/illustrations/senfManSquatting.png";
+import Typography from "../../atoms/typography/Typography";
+import { openLink } from "../../../util/helpers";
 
 const StyledWrapper = styled.div<AuthProps>`
   position: relative;
@@ -83,18 +85,18 @@ const Auth: FC<AuthProps> = ({
       placeholder: "Confirm Password",
     },
     {
-      name: "username",
-      type: "username",
+      name: "handle",
+      type: "text",
       placeholder: "Username",
     },
     {
       name: "gender",
-      type: "gender",
+      type: "text",
       placeholder: "Gender",
     },
     {
       name: "age",
-      type: "age",
+      type: "text",
       placeholder: "Age",
     },
   ];
@@ -123,7 +125,7 @@ const Auth: FC<AuthProps> = ({
       .string()
       .required(t("confirmPassword"))
       .oneOf([yup.ref("password"), null], t("passwords_must_match")),
-    username: yup
+    handle: yup
       .string()
       .required(t("enter_username"))
       .min(3, t("username_too_short"))
@@ -138,7 +140,7 @@ const Auth: FC<AuthProps> = ({
       password: "",
     },
     validationSchema: loginValidationSchema,
-    validateOnMount: true,
+    validateOnMount: false,
     onSubmit: () => console.log("values"),
   });
 
@@ -147,12 +149,12 @@ const Auth: FC<AuthProps> = ({
       email: "",
       password: "",
       confirmPassword: "",
-      username: "",
+      handle: "",
       age: "",
       sex: "",
     },
     validationSchema: registerValidationSchema,
-    validateOnMount: true,
+    validateOnMount: false,
     validateOnChange: true,
     validateOnBlur: true,
     onSubmit: () => console.log("values"),
@@ -191,18 +193,21 @@ const Auth: FC<AuthProps> = ({
         </g>
       </StyledSvg>
 
-      <FlexWrapper direction="vertical" width="80%" margin="25px 10%  0 10%">
-        <h2 style={{ position: "relative" }}>
-          Hey, <br /> willkommen bei Senf.
-        </h2>
+      <FlexWrapper flexDirection="column" width="80%" margin="25px 10%  0 10%">
+        <Typography variant="h2" style={{ position: "relative" }}>
+          {t("auth_headline")}
+        </Typography>
         <FlexWrapper
-          direction="horizontal"
+          flexDirection="row"
+          gap="10px"
           alignItems="center"
           margin="20px 0 0 0 "
         >
           {variantState === "login" ? (
             <React.Fragment>
-              <p style={{ position: "relative" }}>Bist du neu?</p>{" "}
+              <Typography variant="bodyBg" style={{ position: "relative" }}>
+                {t("auth_login_user_redirection_question")}
+              </Typography>{" "}
               <a
                 style={{ position: "relative" }}
                 onClick={() => setVariantState("register")}
@@ -212,12 +217,14 @@ const Auth: FC<AuthProps> = ({
             </React.Fragment>
           ) : (
             <React.Fragment>
-              <p style={{ position: "relative" }}>Hast du einen Account?</p>
+              <Typography variant="bodyBg" style={{ position: "relative" }}>
+                {t("auth_register_user_redirection_question")}
+              </Typography>
               <a
                 style={{ position: "relative" }}
                 onClick={() => setVariantState("login")}
               >
-                Jetzt anmelden
+                {t("login_now")}
               </a>
             </React.Fragment>
           )}
@@ -235,18 +242,37 @@ const Auth: FC<AuthProps> = ({
         />
 
         <FlexWrapper
-          direction="horizontal"
+          flexDirection="row"
+          gap="10px"
           alignItems="center"
           margin="14px 0 36px 0"
         >
           {variantState === "login" ? (
             <React.Fragment>
-              <p style={{ position: "relative" }}>Passwort vergessen?</p>{" "}
-              <a style={{ position: "relative" }}>Zurücksetzen</a>
+              <p style={{ position: "relative" }}> {t("forgot_password")}</p>{" "}
+              <a style={{ position: "relative" }}>{t("reset")}</a>
             </React.Fragment>
           ) : (
             <React.Fragment>
-              <p style={{ position: "relative" }}>Hast du einen Account?</p>
+              <Typography variant="bodySm" style={{ position: "relative" }}>
+                <Trans i18nKey="register_agb">
+                  ...
+                  <span
+                    style={{ textDecoration: "underline" }}
+                    onClick={() => openLink("senf.koeln/agb")}
+                  >
+                    ...
+                  </span>
+                  ...
+                  <span
+                    style={{ textDecoration: "underline" }}
+                    onClick={() => openLink("senf.koeln/datenschutz")}
+                  >
+                    ...
+                  </span>
+                  ...
+                </Trans>
+              </Typography>
             </React.Fragment>
           )}
         </FlexWrapper>
@@ -257,8 +283,8 @@ const Auth: FC<AuthProps> = ({
           loading={loading}
           onClick={
             variantState === "register"
-              ? handleSubmitRegister
-              : handleSubmitLogin
+              ? () => handleSubmitRegister(formikRegisterStore)
+              : () => handleSubmitLogin(formikLoginStore)
           }
           disabled={
             variantState === "register"

@@ -23,7 +23,7 @@ const theme: Theme = {
   borderStyles: ["dashed", "solid"],
 
   //RADII are not complete/verified
-  radii: [10, 18, 20, 24, 28, 30],
+  radii: [8, 10, 18, 20, 24, 28, 30],
 
   //OPACITIES are not complete/verified
   opacities: [0.4, 0.6, 0.75],
@@ -33,6 +33,8 @@ const theme: Theme = {
     "0px 4px 6px -2px",
     "0px -4px 10px 4px",
     "0px -2px 5px 2px",
+    "0px 12px 18px -10px",
+    "0px 6px 8px -1px",
   ],
 
   //Does Louis define the TRANSITIONS??
@@ -105,6 +107,14 @@ const theme: Theme = {
       black60tra: "rgba(0, 0, 0, 0.6)",
       black40tra: "rgba(0, 0, 0, 0.4)",
       black30tra: "rgba(0, 0, 0, 0.3)",
+    },
+    white: {
+      white100: "rgba(255, 255, 255, 1)",
+      white80tra: "rgba(255, 255, 255, 0.8)",
+      white60tra: "rgba(255, 255, 255, 0.6)",
+      white40tra: "rgba(255, 255, 255, 0.4)",
+      white30tra: "rgba(255, 255, 255, 0.3)",
+      white20tra: "rgba(255, 255, 255, 0.2)",
     },
     signal: {
       redDark: "#ca3336",

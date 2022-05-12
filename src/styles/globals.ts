@@ -1,3 +1,5 @@
+/** @format */
+
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
@@ -24,6 +26,21 @@ p {
   margin: 0;
   padding: 0;
 }
+
+
+//ANIMATIONS
+
+@keyframes opacityTranslateYFrom50Animation {
+    0% {
+      opacity: 0;
+      transform: translateY(50%);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0%);
+    }
+  }
+
 `;
 
 export default GlobalStyle;

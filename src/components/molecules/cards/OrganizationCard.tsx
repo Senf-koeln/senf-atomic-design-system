@@ -20,59 +20,36 @@ const Wrapper = styled.div<OrganizationCardProps>`
 
   ${(props) => LayerWhiteFirstDefault}
 
-  /* box-shadow: 0px 12px 18px -8px rgba(186, 160, 79, 0.2),
-    0px -4px 10px 4px rgba(255, 255, 255, 0.2); */
-  /* background-color: ${(props) => (props.active ? "#feecab" : "#fcfbf8")};
-  border: 2px solid ${(props) => (props.active ? "#e8ba02" : "#ffffff")}; */
   filter: ${(props) =>
     props.status === "deactivated" || props.status === "uncompleted"
       ? "brightness(0.6)"
       : "brightness(1)"};
-  animation: OrganizationCardAnimation 0.8s;
+  animation: opacityTranslateYFrom50Animation 0.8s;
   @media (max-width: 768px) {
     width: calc(50% - 15px);
   }
-  @keyframes OrganizationCardAnimation {
-    0% {
-      opacity: 0;
-      transform: translateY(50%);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0%);
-    }
-  }
 `;
 
-const LogoWrapper = styled.div`
-  /* position: absolute;
-  width: calc(100% - 20px);
-  height: calc(100% - 60px);
-  margin: 10px;
-  flex: none;
-  border-radius: 18px;
-  overflow: hidden; */
+const LogoWrapper = styled.div<OrganizationCardProps>`
   position: relative;
   margin-top: 10px;
   margin-left: 50%;
   transform: translateX(-50%);
   box-sizing: border-box;
-  width: 158px;
   height: 0;
   width: calc(100% - 20px);
-  padding-bottom: calc(100% - 20px);
+  padding-bottom: calc(100% - 22px);
   background-color: #ffffff;
   border-radius: 10px;
-  border: 1px solid rgba(195, 186, 162, 0.2);
+  border: 1px solid ${({ theme }) => theme.colors.greyscale.greyscale20tra};
   border-radius: 10px;
   overflow: hidden;
 `;
 
-const Thumbnail = styled.div`
+const Thumbnail = styled.div<OrganizationCardProps>`
   margin-top: 0px;
   margin-left: 50%;
   transform: translateX(-50%);
-  box-sizing: border-box;
   width: 100%;
   padding-bottom: 100%;
   overflow: visible;
@@ -80,15 +57,16 @@ const Thumbnail = styled.div`
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  border-radius: 10px;
 `;
 
-const LogoPlacer = styled.div`
+const LogoPlacer = styled.div<OrganizationCardProps>`
   box-sizing: border-box;
   width: 28px;
   height: 28px;
-  box-shadow: 0px 6px 8px -1px rgba(186, 160, 79, 0.2),
-    0px -2px 5px 2px rgba(255, 255, 255, 0.2);
+  box-shadow: ${({ theme }) => theme.shadows[5]}
+      ${({ theme }) => theme.colors.brown.brown20tra},
+    ${({ theme }) => theme.shadows[3]}
+      ${({ theme }) => theme.colors.white.white20tra};
   background-color: #faf8f3;
   overflow: visible;
   border-radius: 8px;
@@ -149,20 +127,24 @@ const DeactivatedWrapper = styled.div`
 `;
 
 const OrganizationCard: FC<OrganizationCardProps> = ({
-  title,
-  projectRoomsSize,
-  organizationType,
-  img,
-  status,
-  active,
-  thisOrganizationId,
-  organization,
+  data,
   handleButtonClick,
 }) => {
+  const {
+    title,
+    projectroomsSize,
+    organizationType,
+    status,
+    active,
+    thisOrganizationId,
+    organization,
+    imgUrl,
+  } = data;
   return (
     <Wrapper
       status={status}
       active={thisOrganizationId === organization?.organizationId}
+      onClick={handleButtonClick}
     >
       {/* {status !== "active" && (
         <DeactivatedWrapper>
@@ -174,7 +156,7 @@ const OrganizationCard: FC<OrganizationCardProps> = ({
       <LogoWrapper>
         <Thumbnail
           img={
-            img
+            imgUrl
             // ? img : placeHodlerImage && NoImage
           }
         />
@@ -189,8 +171,8 @@ const OrganizationCard: FC<OrganizationCardProps> = ({
         <Typography variant="bodyBg">{title}</Typography>
       </Title>
       <SubTitle>
-        {projectRoomsSize}{" "}
-        {projectRoomsSize === 1
+        {projectroomsSize}{" "}
+        {projectroomsSize === 1
           ? t("active_projectroom")
           : t("active_projectrooms")}
       </SubTitle>
