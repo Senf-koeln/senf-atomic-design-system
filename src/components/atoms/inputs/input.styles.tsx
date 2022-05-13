@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
 
 export const Wrapper = styled.div<{ disabled?: boolean }>`
+  font-family: ${({ theme }) => theme.fontFamily};
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
