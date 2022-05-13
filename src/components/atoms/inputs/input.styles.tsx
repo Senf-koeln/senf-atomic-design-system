@@ -94,6 +94,9 @@ export const TextField = styled.input`
   ::-webkit-search-cancel-button {
     -webkit-appearance: none;
   }
+  &:focus {
+    outline: 0;
+  }
   &:focus-visible {
     outline: 0;
   }
