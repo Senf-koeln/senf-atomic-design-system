@@ -1,9 +1,6 @@
 import styled, { css } from "styled-components";
 
 export const HoverContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
   padding: 0.2rem;
   &:hover {
     border-radius: ${({ theme }) => theme.radii[0]}px;
@@ -48,7 +45,7 @@ export const InputField = styled.div<{ focus: boolean }>`
   border-radius: ${({ theme }) => theme.radii[1]}px;
   -webkit-border-radius: ${({ theme }) => theme.radii[1]}px;
   -moz-border-radius: ${({ theme }) => theme.radii[1]}px;
-  max-height: 2.1875rem;
+
   ${({ focus }) =>
     focus &&
     css`
