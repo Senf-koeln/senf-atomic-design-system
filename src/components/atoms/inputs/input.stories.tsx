@@ -16,70 +16,62 @@ Default.args = {
   placeholder: "Name",
 };
 
-export const Filled = Template.bind({});
-Filled.args = {
-  value: "Some value already in here",
+export const WithLabel = Template.bind({});
+WithLabel.args = {
+  placeholder: "Name",
+  label: "Label"
 };
 
-export const Label = Template.bind({});
-Label.args = {
+export const WithNote = Template.bind({});
+WithNote.args = {
+  placeholder: "Name",
   label: "Label",
-  placeholder: "Name",
-};
-
-export const LabelNote = Template.bind({});
-LabelNote.args = {
-  label: "Label & Note",
-  note: "a note for extra info",
-  placeholder: "Name",
+  note: "A note for extra info"
 };
 
 export const Required = Template.bind({});
 Required.args = {
   label: "Required",
-  required: true,
   note: "a note for extra info",
   placeholder: "Name",
+  required: true
 };
 
 export const Disabled = Template.bind({});
 Disabled.args = {
-  label: "Required",
+  label: "disabled",
   note: "a note for extra info",
   placeholder: "Name",
-  disabled: true,
+  disabled: true
 };
-
-// export const Success = Template.bind({});
-// Success.args = {
-//   disabled: false,
-//   label: "Success",
-// };
 
 export const Error = Template.bind({});
 Error.args = {
-  error: true,
-  disabled: false,
   label: "Error",
-  note: "a note for extra info",
+  note: "Error message",
+  placeholder: "Name",
+  error: true
 };
 
 export const Password = Template.bind({});
 Password.args = {
-  placeholder: "Enter password",
-  type: "password",
+  label: "Password",
+  placeholder: "Password",
+  type: "password"
 };
+
+export const TextArea = Template.bind({});
+TextArea.args = {
+  label: "Text Area",
+  note: "a note for extra info",
+  placeholder: "Enter your message here",
+  type: "textarea",
+  columns: 28,
+  rows: 12
+};
+
 
 export const Search = Template.bind({});
 Search.args = {
-  placeholder: "Search...",
   type: "search",
 };
-
-// export const TextArea = Template.bind({});
-// TextArea.args = {
-//   label: "Textarea",
-//   note: "a note for extra info",
-//   placeholder: "Enter your message",
-//   rows="5"
-// };

@@ -1,210 +1,83 @@
-/** @format */
-
-import React, { FC, Fragment, useState } from "react";
-import styled from "styled-components";
+import React, { ChangeEvent, FunctionComponent, useRef, useState } from "react";
+import {
+  TextField,
+  Indication,
+  InputField,
+  Wrapper,
+  HoverContainer,
+} from "./input.styles";
 import { InputProps } from "./Input.types";
 import Icon from "../icons/Icon";
 
-const InputGroup = styled.div<InputProps>`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  opacity: ${(props) => (props.disabled ? "0.5" : "1")};
-`;
-
-const StyledInput = styled.input<InputProps>`
-  font-family: "Nunito", serif;
-  background-color: rgba(255, 255, 255, 0.5);
-  outline: none;
-  padding: 14px;
-  padding-left: ${(props) => (props.type === "search" ? "40px" : "14px")};
-
-  /* border: solid ${(props) => (props.error ? "3px" : "2px")}
-    ${(props) =>
-    props.error
-      ? props.theme.colors.signal.red
-      : props.success
-      ? "#067d68"
-      : "rgba(255, 255, 255, 0)"}; */
-  border: 0;
-  outline: ${(props) => (props.error ? "3px" : "0px")} solid
-    ${(props) => props.theme.colors.signal.red};
-  outline-offset: -3px;
-  border-radius: 10px;
-  font-size: 16px;
-  text-align: left;
-
-  ::placeholder,
-  ::-webkit-input-placeholder {
-    color: rgba(0, 0, 0, 0.7);
-  }
-  :-ms-input-placeholder {
-    color: rgba(0, 0, 0, 0.7);
-  }
-  &:focus {
-    outline: 3px solid ${(props) => props.theme.colors.primary.primary120};
-    outline-offset: -3px;
-  }
-`;
-
-const FlexWrapper = styled.div<InputProps>`
-  display: flex;
-  justify-content: space-between;
-`;
-const StyledLabel = styled.div<InputProps>`
-  font-family: "Nunito", serif;
-  font-size: 14px;
-  color: #000000;
-  padding-bottom: 6px;
-  max-width: auto;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: flex-start;
-  overflow: visible;
-`;
-
-const StyledRequiredStar = styled.div<InputProps>`
-  margin-right: auto;
-`;
-
-const StyledNote = styled.div<InputProps>`
-  font-family: "Nunito", serif;
-
-  width: auto; /* 107px */
-  height: auto; /* 16px */
-  flex-shrink: 0;
-  white-space: pre;
-  overflow: visible;
-  font-weight: 400;
-  font-style: normal;
-  color: rgba(0, 0, 0, 0.4);
-  font-size: 12px;
-  letter-spacing: 0px;
-  line-height: 1.4;
-`;
-
-const StyledShowPassword = styled.div<InputProps>`
-  font-family: "Nunito", serif;
-
-  position: absolute;
-  right: 10px;
-  top: calc(50% - 4px);
-  font-size: 14px;
-  color: #a9150b8;
-  padding-top: 4px;
-  opacity: 0.31;
-`;
-// const StyledMessage = styled.div<InputProps>`
-//    font-size: 14px;
-//    color: #a9150b8;
-//    padding-top: 4px;
-// `;
-
-const StyledSearchIcon = styled.div<InputProps>`
-  position: absolute;
-  left: 10px;
-  top: calc(50% - 4px);
-  z-index: 2;
-`;
-const StyledSearchDelete = styled.button<InputProps>`
-  position: absolute;
-  right: 10px;
-  top: calc(50% - 4px);
-  outline: none;
-  border: 0;
-  background-color: transparent;
-`;
-
-const StyledText = styled.p<InputProps>`
-  margin: 0px;
-  color: ${(props) => (props.error ? props.theme.colors.signal.red : "#00000")};
-`;
-
-const Input: FC<InputProps> = ({
+const Input: FunctionComponent<InputProps> = ({
   id,
   type,
-  disabled,
-
   label,
   note,
+  icon,
   placeholder,
   required,
   error,
   success,
+  disabled,
+  columns,
   rows,
-  value,
-  setValue,
   onChange,
+  onClick,
   ...props
 }) => {
-  const [inputType, setInputType] = useState(type);
-
-  const passwordHide = () => {
-    if (inputType === "password") {
-      setInputType("text");
-    } else {
-      setInputType("password");
-    }
-  };
+  const [isSearch, setIsSearch] = useState(type === "search");
+  const [isPassword, setIsPassword] = useState(type === "password");
+  const [isFocused, setIsFocused] = useState(false);
+  const [value, setValue] = useState("");
+  const inputRef = useRef<HTMLInputElement>(null);
   return (
-    <InputGroup disabled={disabled}>
-      <FlexWrapper>
-        {label && (
-          <StyledLabel>
-            <StyledText>{label}</StyledText>
-          </StyledLabel>
-        )}
-        {required && (
-          <StyledRequiredStar>
-            {" "}
-            <StyledText disabled={disabled} error={error}>
-              *
-            </StyledText>
-          </StyledRequiredStar>
-        )}
-
-        {note && (
-          <StyledNote>
-            <StyledText disabled={disabled} error={error}>
-              {note}
-            </StyledText>
-          </StyledNote>
-        )}
-      </FlexWrapper>
-      <StyledInput
-        id={id}
-        type={type ? inputType : "text"}
-        value={value}
-        onChange={onChange}
-        disabled={disabled}
-        error={error}
-        success={success}
-        placeholder={placeholder}
-        {...props}
-      />
-
-      {/* ADD TEXTAREA WITH rows={rows ? rows : "1"}  */}
-      {type === "search" && (
-        <React.Fragment>
-          <StyledSearchIcon>
-            <Icon icon="search" />
-          </StyledSearchIcon>
-
-          <StyledSearchDelete onClick={setValue}>
-            <Icon icon="close" />
-          </StyledSearchDelete>
-        </React.Fragment>
+    <Wrapper disabled={disabled}>
+      {(label || note) && (
+        <Indication error={error}>
+          {label && <label>{`${label}${required ? "*" : ""}`}</label>}
+          {note && <p>{note}</p>}
+        </Indication>
       )}
-      {value && type === "password" && (
-        <StyledShowPassword onClick={passwordHide}>
-          <StyledText error={error}>
-            {inputType === "password" ? "zeigen" : "verstecken"}{" "}
-          </StyledText>
-        </StyledShowPassword>
-      )}
-      {/* <StyledMessage><StyledText error={error}>{message}</StyledText></StyledMessage> */}
-    </InputGroup>
+      <InputField
+        focus={isFocused}
+        onFocusCapture={() => setIsFocused((prevState) => !prevState)}
+        onBlurCapture={() => setIsFocused((prevState) => !prevState)}
+      >
+        {isSearch && <Icon icon="search" />}
+        <TextField
+          type={isPassword ? "password" : isSearch ? "search" : "text"}
+          placeholder={placeholder || `${isSearch ? "Search" : ""}`}
+          disabled={disabled}
+          rows={rows}
+          cols={columns}
+          value={value}
+          onChange={(e: React.FormEvent<HTMLInputElement>) =>
+            setValue(e.currentTarget.value)
+          }
+          as={type === "textarea" ? type : "input"}
+          ref={inputRef}
+        />
+        {isSearch && (
+          <HoverContainer>
+            <Icon
+              icon="plus"
+              onClick={() => {
+                inputRef.current!.focus();
+                setValue("");
+              }}
+            />
+          </HoverContainer>
+        )}
+        {type === "password" && (
+          <HoverContainer>
+            <button onClick={() => setIsPassword((prevState) => !prevState)}>
+              {isPassword ? "Zeigen" : "Verstecken"}
+            </button>
+          </HoverContainer>
+        )}
+      </InputField>
+    </Wrapper>
   );
 };
 
