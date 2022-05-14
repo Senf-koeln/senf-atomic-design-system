@@ -1,5 +1,11 @@
 import React, { ChangeEvent, FunctionComponent, useRef, useState } from "react";
-import { TextField, Indication, InputField, Wrapper } from "./input.styles";
+import {
+  TextField,
+  Indication,
+  InputField,
+  Wrapper,
+  HoverContainer,
+} from "./input.styles";
 import { InputProps } from "./Input.types";
 import Icon from "../icons/Icon";
 
@@ -53,18 +59,22 @@ const Input: FunctionComponent<InputProps> = ({
           ref={inputRef}
         />
         {isSearch && (
-          <Icon
-            icon="plus"
-            onClick={() => {
-              inputRef.current!.focus();
-              setValue("");
-            }}
-          />
+          <HoverContainer>
+            <Icon
+              icon="plus"
+              onClick={() => {
+                inputRef.current!.focus();
+                setValue("");
+              }}
+            />
+          </HoverContainer>
         )}
         {type === "password" && (
-          <button onClick={() => setIsPassword((prevState) => !prevState)}>
-            {isPassword ? "Zeigen" : "Verstecken"}
-          </button>
+          <HoverContainer>
+            <button onClick={() => setIsPassword((prevState) => !prevState)}>
+              {isPassword ? "Zeigen" : "Verstecken"}
+            </button>
+          </HoverContainer>
         )}
       </InputField>
     </Wrapper>

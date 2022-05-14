@@ -1,5 +1,16 @@
 import styled, { css } from "styled-components";
 
+export const HoverContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.2rem;
+  &:hover {
+    border-radius: ${({ theme }) => theme.radii[0]}px;
+    background-color: ${({ theme }) => theme.colors.greyscale.greyscale20tra};
+  }
+`;
+
 export const Wrapper = styled.div<{ disabled?: boolean }>`
   font-family: ${({ theme }) => theme.fontFamily};
   display: flex;
@@ -37,6 +48,7 @@ export const InputField = styled.div<{ focus: boolean }>`
   border-radius: ${({ theme }) => theme.radii[1]}px;
   -webkit-border-radius: ${({ theme }) => theme.radii[1]}px;
   -moz-border-radius: ${({ theme }) => theme.radii[1]}px;
+  max-height: 2.1875rem;
   ${({ focus }) =>
     focus &&
     css`
@@ -55,6 +67,7 @@ export const InputField = styled.div<{ focus: boolean }>`
     cursor: pointer;
     background-color: transparent;
     color: ${({ theme }) => theme.colors.primary.primary140};
+    font-weight: ${({ theme }) => theme.fontWeights[1]};
   }
 
   /* Styles for search input */
@@ -75,13 +88,13 @@ export const TextField = styled.input`
 
   /* Styles for search input */
   &[type="search"] {
-    & + svg {
+    & + ${HoverContainer} > svg {
       display: block;
-      transform: rotateZ(45deg);
+      transform: rotateZ(45deg) scale(0.7);
       cursor: pointer;
     }
     :placeholder-shown {
-      & + svg {
+      & + ${HoverContainer} > svg {
         display: none;
       }
     }
