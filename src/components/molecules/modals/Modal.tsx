@@ -15,7 +15,14 @@ const ModalContentWrapper = styled.div<ModalProps>`
   left: 50%;
   transform: translate(-50%, -50%);
   width: 90%;
-  max-width: 400px;
+  max-width: ${({ size }) =>
+    size === "xl"
+      ? "1200px"
+      : size === "l"
+      ? "800px"
+      : size === "m"
+      ? "600px"
+      : "400px"};
   max-height: calc(100vh - 40px);
   overflow: scroll;
 
@@ -42,6 +49,7 @@ const Modal: FC<ModalProps> = ({
   setOpenModal,
   children,
   zIndex,
+  size,
   portalId = "portal-root-modal",
 }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -90,6 +98,7 @@ const Modal: FC<ModalProps> = ({
             <ModalContentWrapper
               zIndex={zIndex}
               role="dialog"
+              size={size}
               aria-labelledby="modal-header"
               onKeyDown={
                 (e) =>
