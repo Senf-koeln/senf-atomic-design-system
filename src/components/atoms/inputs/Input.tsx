@@ -20,7 +20,6 @@ const Input: FunctionComponent<InputProps> = ({
   error,
   success,
   disabled,
-  columns,
   rows,
   onChange,
   onClick,
@@ -51,7 +50,6 @@ const Input: FunctionComponent<InputProps> = ({
           placeholder={placeholder || `${isSearch ? "Search" : ""}`}
           disabled={disabled}
           rows={rows}
-          cols={columns}
           value={value}
           onChange={(e: React.FormEvent<HTMLInputElement>) => {
             setValue(e.currentTarget.value);
