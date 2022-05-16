@@ -28,11 +28,30 @@ interface LoaderProps {
 declare const Loader: FC<LoaderProps>;
 
 /** @format */
+interface RangeSliderProps {
+    rangeValue: number;
+    setRangeValue: (x: boolean) => void;
+    rangeMin: number;
+    rangeMax: number;
+    lineColor?: string;
+    lineBorderColor?: string;
+    thumbColor?: string;
+    thumbBorderColor?: string;
+    leftTick?: string;
+    rightTick?: string;
+}
+
+/** @format */
+
+declare const RangeSlider: FC<RangeSliderProps>;
+
+/** @format */
 
 interface ButtonProps {
     text?: string;
     variant?: "primary" | "white" | "secondary" | "plus";
     icon?: string;
+    transform?: string;
     borderStyle?: "dashed" | "solid";
     fillWidth?: "max" | undefined;
     loading?: boolean;
@@ -264,6 +283,7 @@ declare const List: FC<ListProps>;
 
 interface ModalProps {
     x?: string;
+    size?: "xl" | "l" | "m";
     onClick?: MouseEventHandler<HTMLButtonElement>;
     setOpenModal: (x: boolean) => void;
     openModal: boolean;
@@ -328,4 +348,4 @@ declare const theme: Theme;
 /** @format */
 declare const GlobalStyle: styled_components.GlobalStyleComponent<{}, styled_components.DefaultTheme>;
 
-export { Accordion, Auth, Button, Divider, FlexWrapper, Form, GlobalStyle, Icon, IdeaCard, Input, LayerBrownDefault, LayerBrownHover, LayerGreyButtonsDefault, LayerGreyButtonsHover, LayerGreyDefault, LayerGreyHover, LayerWhiteFirstActive, LayerWhiteFirstDefault, LayerWhiteFirstHover, LayerWhiteSecondDefault, LayerWhiteSecondHover, LayerYellowDefault, LayerYellowHover, List, Loader, Modal, ObjectCard, OrganizationCard, ProjectroomCard, RoundedButton, Shape, SubNavbar, Tag, TertiaryButton, Typography, theme };
+export { Accordion, Auth, Button, Divider, FlexWrapper, Form, GlobalStyle, Icon, IdeaCard, Input, LayerBrownDefault, LayerBrownHover, LayerGreyButtonsDefault, LayerGreyButtonsHover, LayerGreyDefault, LayerGreyHover, LayerWhiteFirstActive, LayerWhiteFirstDefault, LayerWhiteFirstHover, LayerWhiteSecondDefault, LayerWhiteSecondHover, LayerYellowDefault, LayerYellowHover, List, Loader, Modal, ObjectCard, OrganizationCard, ProjectroomCard, RangeSlider, RoundedButton, Shape, SubNavbar, Tag, TertiaryButton, Typography, theme };

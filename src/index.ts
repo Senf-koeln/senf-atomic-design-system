@@ -16,6 +16,7 @@ export {
   LayerGreyButtonsHover,
 } from "./components/atoms/layerStyles/LayerStyles";
 export { default as Loader } from "./components/atoms/animations/Loader";
+export { default as RangeSlider } from "./components/atoms/rangeSlider/RangeSlider";
 export { default as Button } from "./components/atoms/buttons/Button";
 export { default as RoundedButton } from "./components/atoms/buttons/RoundedButton";
 export { default as TertiaryButton } from "./components/atoms/buttons/TertiaryButton";
