@@ -46,6 +46,7 @@ const Input: FunctionComponent<InputProps> = ({
       >
         {isSearch && <Icon icon="search" />}
         <TextField
+          as={type === "textarea" ? "textarea" : "input"}
           type={isPassword ? "password" : isSearch ? "search" : "text"}
           placeholder={placeholder || `${isSearch ? "Search" : ""}`}
           disabled={disabled}
@@ -55,7 +56,6 @@ const Input: FunctionComponent<InputProps> = ({
             setValue(e.currentTarget.value);
             receiveValue(e.currentTarget.value);
           }}
-          as={type === "textarea" ? type : "input"}
           ref={inputRef}
         />
         {isSearch && (
