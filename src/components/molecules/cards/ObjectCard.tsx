@@ -127,7 +127,7 @@ const Title = styled.div`
 // `;
 
 const ObjectCard: FC<ObjectCardProps> = ({ data, handleButtonClick }) => {
-  const { title, subTitle, objectType, imgUrl, objectId } = data;
+  const { title, imgUrl, objectId } = data;
   return (
     <Wrapper onClick={() => handleButtonClick(objectId)}>
       <LogoWrapper>
@@ -139,15 +139,9 @@ const ObjectCard: FC<ObjectCardProps> = ({ data, handleButtonClick }) => {
         />
       </LogoWrapper>
 
-      <LogoPlacer>
-        <IconWrapper>
-          <Icon icon={objectType} transform="scale(0.8)" />
-        </IconWrapper>
-      </LogoPlacer>
       <Title>
         <Typography variant="bodyBg">{title}</Typography>
       </Title>
-      {/* <SubTitle>{subTitle}</SubTitle> */}
     </Wrapper>
   );
 };

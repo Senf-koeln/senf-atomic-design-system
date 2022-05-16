@@ -33,7 +33,37 @@ const NoIdeasYet = styled.div`
   text-align: center;
 `;
 
-const List: FC<ListProps> = ({ data, CardType, handleButtonClick }) => {
+const List: FC<ListProps> = ({
+  loading,
+  dropdown,
+  data,
+  CardType,
+  handleButtonClick,
+}) => {
+  const dataLength = data.length;
+  const { t } = useTranslation();
+  const prevdataLength = usePrevious({ dataLength });
+  const prevDropdown = usePrevious({ dropdown });
+
+  useEffect(() => {
+    if (
+      (dataLength &&
+        prevdataLength &&
+        prevdataLength.dataLength !== dataLength) ||
+      (dropdown && prevDropdown && prevDropdown.dropdown !== dropdown)
+    ) {
+      const element = document.getElementById("List");
+
+      element?.scrollTo({
+        top: 0,
+        left: 0,
+      });
+
+      setListItems(1);
+      sethasMoreItems(true);
+    }
+  }, [loading, dropdown, dataLength]);
+
   let itemsPerPage = 1;
   const [hasMoreItems, sethasMoreItems] = useState(true);
   const [listItems, setListItems] = useState(itemsPerPage);
@@ -43,7 +73,12 @@ const List: FC<ListProps> = ({ data, CardType, handleButtonClick }) => {
     if (dataArray.length !== 0) {
       for (var i = 0; i < listItems; i++) {
         items.push(
-          <CardType data={dataArray[i]} handleButtonClick={handleButtonClick} />
+          dataArray[i]?.title && (
+            <CardType
+              data={dataArray[i]}
+              handleButtonClick={handleButtonClick}
+            />
+          )
         );
       }
       return items;

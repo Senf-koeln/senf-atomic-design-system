@@ -1,5 +1,5 @@
 import * as styled_components from 'styled-components';
-import { FC, MouseEventHandler, ChangeEventHandler } from 'react';
+import { FC, MouseEventHandler, ChangeEventHandler, FunctionComponent } from 'react';
 import { Theme } from 'styled-system';
 export { default as i18n } from 'i18next';
 
@@ -127,7 +127,7 @@ declare const Icon: FC<IconProps>;
 
 interface InputProps {
     id?: string;
-    type?: string;
+    type?: React.HTMLInputTypeAttribute | "textarea";
     label?: string;
     note?: string;
     icon?: string;
@@ -136,16 +136,13 @@ interface InputProps {
     error?: boolean;
     success?: boolean;
     disabled?: boolean;
-    rows?: string;
-    value?: string;
-    setValue?: ChangeEventHandler<HTMLInputElement>;
+    rows?: number;
     onChange?: ChangeEventHandler<HTMLInputElement>;
     onClick?: ChangeEventHandler<HTMLInputElement>;
+    receiveValue: (value?: string) => void;
 }
 
-/** @format */
-
-declare const Input: FC<InputProps>;
+declare const Input: FunctionComponent<InputProps>;
 
 /** @format */
 

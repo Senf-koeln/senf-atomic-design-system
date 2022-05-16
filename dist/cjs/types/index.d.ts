@@ -16,7 +16,7 @@ export { default as IdeaCard } from "./components/molecules/cards/IdeaCard";
 export { default as ProjectroomCard } from "./components/molecules/cards/ProjectroomCard";
 export { default as OrganizationCard } from "./components/molecules/cards/OrganizationCard";
 export { default as ObjectCard } from "./components/molecules/cards/ObjectCard";
-export { default as Form } from "./components/molecules/form/Form";
+export { default as Form } from "./components/molecules/Form/Form";
 export { default as List } from "./components/molecules/list/List";
 export { default as Modal } from "./components/molecules/modals/Modal";
 export { default as SubNavbar } from "./components/molecules/navs/SubNavbar";
