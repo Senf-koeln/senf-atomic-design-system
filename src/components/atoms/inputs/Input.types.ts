@@ -19,4 +19,5 @@ export interface InputProps {
   // setValue?: ChangeEventHandler<HTMLInputElement>;  //! why are we passing setValue to input component?
   onChange?: ChangeEventHandler<HTMLInputElement>;
   onClick?: ChangeEventHandler<HTMLInputElement>;
+  receiveValue: (value?: string) => void;
 }

@@ -24,6 +24,7 @@ const Input: FunctionComponent<InputProps> = ({
   rows,
   onChange,
   onClick,
+  receiveValue,
   ...props
 }) => {
   const [isSearch, setIsSearch] = useState(type === "search");
@@ -32,7 +33,7 @@ const Input: FunctionComponent<InputProps> = ({
   const [value, setValue] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
   return (
-    <Wrapper disabled={disabled}>
+    <Wrapper id={id} disabled={disabled}>
       {(label || note) && (
         <Indication error={error}>
           {label && <label>{`${label}${required ? "*" : ""}`}</label>}
@@ -52,9 +53,10 @@ const Input: FunctionComponent<InputProps> = ({
           rows={rows}
           cols={columns}
           value={value}
-          onChange={(e: React.FormEvent<HTMLInputElement>) =>
-            setValue(e.currentTarget.value)
-          }
+          onChange={(e: React.FormEvent<HTMLInputElement>) => {
+            setValue(e.currentTarget.value);
+            receiveValue(e.currentTarget.value);
+          }}
           as={type === "textarea" ? type : "input"}
           ref={inputRef}
         />
