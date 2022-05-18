@@ -48,6 +48,7 @@ const Example: FC<OrganizationPageProps> = ({ organization }) => {
       openDialog={true}
       right="0px"
       backgroundColor={theme.colors.beige.beige20}
+      overflow="hidden scroll"
     >
       <SVGWrapper>
         <svg
@@ -67,7 +68,7 @@ const Example: FC<OrganizationPageProps> = ({ organization }) => {
           />
         </svg>
       </SVGWrapper>
-      <FlexWrapper position="fixed" margin="20px" zIndex={2}>
+      <FlexWrapper position="fixed" margin="20px" width="50px" zIndex={2}>
         <RoundedButton icon="arrow" />
       </FlexWrapper>
 
