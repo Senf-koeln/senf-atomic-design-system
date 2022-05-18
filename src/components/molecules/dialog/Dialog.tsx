@@ -27,7 +27,8 @@ const DialogWrapper = styled.div<DialogProps>`
       : size === "m"
       ? "600px"
       : "400px"};
-  overflow: scroll;
+  overflow: ${({ overflow }) => (overflow ? overflow : "scroll")};
+
   background-color: ${({ backgroundColor }) =>
     backgroundColor ? backgroundColor : "white"};
 
@@ -46,6 +47,7 @@ const Dialog: FC<DialogProps> = ({
   zIndex,
   size,
   backgroundColor,
+  overflow,
   portalId = "portal-root-dialog",
 }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -92,6 +94,7 @@ const Dialog: FC<DialogProps> = ({
             zIndex={zIndex}
             boxShadow={boxShadow}
             backgroundColor={backgroundColor}
+            overflow={overflow}
             role="dialog"
             size={size}
             aria-labelledby="dialog-header"

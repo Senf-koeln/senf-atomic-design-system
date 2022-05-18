@@ -11,4 +11,5 @@ export interface ModalProps {
   children: React.ReactNode;
   zIndex?: number | string;
   portalId?: string;
+  overflow?: string;
 }

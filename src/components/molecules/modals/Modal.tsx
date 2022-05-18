@@ -24,7 +24,7 @@ const ModalContentWrapper = styled.div<ModalProps>`
       ? "600px"
       : "400px"};
   max-height: calc(100vh - 40px);
-  overflow: scroll;
+  overflow: ${({ overflow }) => (overflow ? overflow : "scroll")};
   background-color: ${({ backgroundColor }) =>
     backgroundColor ? backgroundColor : "white"};
   border-radius: ${({ theme }) => theme.radii[4]}px;
@@ -51,6 +51,7 @@ const Modal: FC<ModalProps> = ({
   zIndex,
   size,
   backgroundColor,
+  overflow,
   portalId = "portal-root-modal",
 }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -99,6 +100,7 @@ const Modal: FC<ModalProps> = ({
             <ModalContentWrapper
               zIndex={zIndex}
               backgroundColor={backgroundColor}
+              overflow={overflow}
               role="dialog"
               size={size}
               aria-labelledby="modal-header"

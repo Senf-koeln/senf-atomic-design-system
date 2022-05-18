@@ -14,4 +14,5 @@ export interface DialogProps {
   left?: string;
   right?: string;
   boxShadow?: string;
+  overflow?: string;
 }
