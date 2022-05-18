@@ -6,63 +6,58 @@ import styled from "styled-components";
 import { trapFocus } from "../../../hooks/trapFocus";
 import { LayerWhiteFirstDefault } from "../../atoms/layerStyles/LayerStyles";
 import SubNavbar from "../navs/SubNavbar";
-import { ModalProps } from "./Modal.types";
+import { DialogProps } from "./Dialog.types";
 
-const ModalContentWrapper = styled.div<ModalProps>`
+const DialogWrapper = styled.div<DialogProps>`
+  left: ${({ left }) => (left ? left : undefined)};
+  right: ${({ right }) => (right ? right : undefined)};
+
   z-index: ${({ zIndex }) => (zIndex ? zIndex : 9999)};
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 90%;
+  top: 0;
+  height: 100vh;
+  width: 100%;
   max-width: ${({ size }) =>
-    size === "xl"
+    size === "xxl"
+      ? "100vw"
+      : size === "xl"
       ? "1200px"
       : size === "l"
       ? "800px"
       : size === "m"
       ? "600px"
       : "400px"};
-  max-height: calc(100vh - 40px);
   overflow: scroll;
   background-color: ${({ backgroundColor }) =>
     backgroundColor ? backgroundColor : "white"};
-  border-radius: ${({ theme }) => theme.radii[4]}px;
 
-  box-shadow: ${({ theme }) => theme.shadows[0]}
-    ${({ theme }) => theme.colors.brown.brown20tra};
+  box-shadow: ${({ boxShadow }) => (boxShadow ? boxShadow : undefined)};
+
+  animation: opacityTranslateYFrom100Animation 0.2s;
 `;
 
-const ModalBackground = styled.div<ModalProps>`
-  z-index: ${({ zIndex }) => (zIndex ? zIndex : 9998)};
-
-  position: fixed;
-  left: 0;
-  top: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  width: 100vw;
-  height: 100vh;
-`;
-
-const Modal: FC<ModalProps> = ({
-  openModal,
-  setOpenModal,
+const Dialog: FC<DialogProps> = ({
+  left,
+  right,
+  boxShadow,
+  openDialog,
+  setOpenDialog,
   children,
   zIndex,
   size,
   backgroundColor,
-  portalId = "portal-root-modal",
+  portalId = "portal-root-dialog",
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    if (openModal) {
+    if (openDialog) {
       handleOpen();
     } else {
       handleClose();
     }
-  }, [openModal]);
+  }, [openDialog]);
 
   const handleOpen = () => {
     setIsOpen(true);
@@ -91,27 +86,24 @@ const Modal: FC<ModalProps> = ({
     <React.Fragment>
       {isOpen &&
         ReactDOM.createPortal(
-          <React.Fragment>
-            <ModalBackground
-              zIndex={zIndex - 1}
-              onClick={() => setOpenModal(false)}
-            />
-            <ModalContentWrapper
-              zIndex={zIndex}
-              backgroundColor={backgroundColor}
-              role="dialog"
-              size={size}
-              aria-labelledby="modal-header"
-              onKeyDown={
-                (e) =>
-                  submitRef?.current &&
-                  closeRef?.current &&
-                  trapFocus(e, submitRef.current, closeRef.current) // ideally we would use inert but it doesn't seem to be working
-              }
-            >
-              {children}
-            </ModalContentWrapper>
-          </React.Fragment>,
+          <DialogWrapper
+            left={left}
+            right={right}
+            zIndex={zIndex}
+            boxShadow={boxShadow}
+            backgroundColor={backgroundColor}
+            role="dialog"
+            size={size}
+            aria-labelledby="dialog-header"
+            onKeyDown={
+              (e) =>
+                submitRef?.current &&
+                closeRef?.current &&
+                trapFocus(e, submitRef.current, closeRef.current) // ideally we would use inert but it doesn't seem to be working
+            }
+          >
+            {children}
+          </DialogWrapper>,
           document.body
           // document.getElementById(portalId) as HTMLElement
         )}
@@ -119,4 +111,4 @@ const Modal: FC<ModalProps> = ({
   );
 };
 
-export default Modal;
+export default Dialog;
