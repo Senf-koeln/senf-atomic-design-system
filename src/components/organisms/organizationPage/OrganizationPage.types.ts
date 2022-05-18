@@ -1,7 +1,10 @@
 /** @format */
 
+import { Organization } from "./../../molecules/cards/cards.stories";
+/** @format */
+
 import { MouseEventHandler } from "react";
 export interface OrganizationPageProps {
-  example?: string;
+  organization?: Array<string>;
   onClick?: MouseEventHandler<HTMLButtonElement>;
 }
