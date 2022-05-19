@@ -1,39 +1,37 @@
 /** @format */
 
+import { useSpring } from "@react-spring/web";
+import { useDrag } from "@use-gesture/react";
 import React, { FC, useEffect, useRef, useState } from "react";
 import ReactDOM from "react-dom";
 import styled from "styled-components";
 import { trapFocus } from "../../../hooks/trapFocus";
 import { LayerWhiteFirstDefault } from "../../atoms/layerStyles/LayerStyles";
 import SubNavbar from "../navs/SubNavbar";
-import { ModalProps } from "./Modal.types";
+import { SwipeModalProps } from "./SwipeModal.types";
+import { animated } from "@react-spring/web";
 
-const Wrapper = styled.div<ModalProps>`
+const DragWrapper = styled(animated.div)`
   z-index: ${({ zIndex }) => (zIndex ? zIndex : 9999)};
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 90%;
-  max-width: ${({ size }) =>
-    size === "xl"
-      ? "1200px"
-      : size === "l"
-      ? "800px"
-      : size === "m"
-      ? "600px"
-      : "400px"};
-  max-height: calc(100vh - 40px);
+  overscroll-behavior: contain;
+  overflow-x: hidden;
+  width: 100%;
+  height: 100%;
+  left: 0;
+
   overflow: ${({ overflow }) => (overflow ? overflow : "scroll")};
   background-color: ${({ backgroundColor }) =>
     backgroundColor ? backgroundColor : "white"};
-  border-radius: ${({ theme }) => theme.radii[4]}px;
-
+  border-radius: ${({ theme }) => theme.radii[4]}px
+    ${({ theme }) => theme.radii[4]}px 0px 0px;
   box-shadow: ${({ theme }) => theme.shadows[0]}
     ${({ theme }) => theme.colors.brown.brown20tra};
+
+  position: absolute;
+  animation: organizationOverviewEnterAnimation 0.5s;
 `;
 
-const Background = styled.div<ModalProps>`
+const Background = styled.div<SwipeModalProps>`
   z-index: ${({ zIndex }) => (zIndex ? zIndex : 9998)};
 
   position: fixed;
@@ -44,7 +42,19 @@ const Background = styled.div<ModalProps>`
   height: 100vh;
 `;
 
-const Modal: FC<ModalProps> = ({
+export const Header = styled(animated.div)`
+  position: sticky;
+  width: 100%;
+  /* background-color: #fed957; */
+  z-index: 25;
+  height: ${({ headerComponentHeight }) =>
+    headerComponentHeight ? headerComponentHeight : "100px"};
+  z-index: 99;
+`;
+
+const SwipeModal: FC<SwipeModalProps> = ({
+  HeaderComponent,
+  headerComponentHeight,
   openModal,
   setOpenModal,
   children,
@@ -52,7 +62,6 @@ const Modal: FC<ModalProps> = ({
   size,
   backgroundColor,
   overflow,
-  portalId = "portal-root-modal",
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -88,16 +97,66 @@ const Modal: FC<ModalProps> = ({
     }
   }, []);
 
+  const [props, set] = useSpring(() => ({
+    x: 0,
+    y: 0,
+    scale: 1,
+    transform: `translateY(${30}px)`,
+    overflow: "hidden",
+    touchAction: "none",
+    userSelect: "none",
+  }));
+
+  const bind = useDrag(
+    ({ last, down, movement: [, my], offset: [, y] }) => {
+      if (last && my > 50) {
+        set({
+          transform: `translateY(${window.innerHeight}px)`,
+          touchAction: "none",
+        });
+
+        setTimeout(() => {
+          window.history.pushState(null, null, "/projectRooms");
+          setIsOpen(false);
+        }, 150);
+        setTimeout(() => {
+          set({
+            transform: `translateY(${30}px)`,
+            touchAction: "none",
+          });
+        }, 300);
+      }
+      console.log(my);
+
+      set({ y: down ? my : 0 });
+    },
+    {
+      pointer: { touch: true },
+      bounds: {
+        enabled: true,
+      },
+    }
+  );
+
+  const setClose = () => {
+    set({
+      transform: `translateY(${window.innerHeight}px)`,
+      touchAction: "none",
+    });
+    setTimeout(() => {
+      // window.history.pushState(null, null, "/projectRooms");
+      setIsOpen(false);
+    }, 150);
+  };
+
   return (
     <React.Fragment>
       {isOpen &&
         ReactDOM.createPortal(
           <React.Fragment>
-            <Background
-              zIndex={zIndex - 1}
-              onClick={() => setOpenModal(false)}
-            />
-            <Wrapper
+            <Background zIndex={zIndex - 1} onClick={setClose} />
+            <DragWrapper
+              style={props}
               zIndex={zIndex}
               backgroundColor={backgroundColor}
               overflow={overflow}
@@ -111,8 +170,11 @@ const Modal: FC<ModalProps> = ({
                   trapFocus(e, submitRef.current, closeRef.current) // ideally we would use inert but it doesn't seem to be working
               }
             >
+              <Header headerComponentHeight={headerComponentHeight} {...bind()}>
+                {HeaderComponent}
+              </Header>
               {children}
-            </Wrapper>
+            </DragWrapper>
           </React.Fragment>,
           document.body
           // document.getElementById(portalId) as HTMLElement
@@ -121,4 +183,4 @@ const Modal: FC<ModalProps> = ({
   );
 };
 
-export default Modal;
+export default SwipeModal;

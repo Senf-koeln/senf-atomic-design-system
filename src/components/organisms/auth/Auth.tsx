@@ -162,7 +162,7 @@ const Auth: FC<AuthProps> = ({
 
   return (
     <StyledWrapper>
-      <Shape />
+      <Shape variant={0} position="absolute" marginTop="288px" />
       <RectShape />
       <Img src={SenfManSquating} alt="Illustration" />
 

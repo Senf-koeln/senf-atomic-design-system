@@ -5,9 +5,9 @@ import styled from "styled-components";
 import { ShapeProps } from "./Shape.types";
 
 const StyledWrapper = styled.div<ShapeProps>`
-  position: absolute;
+  position: ${({ position }) => (position ? position : "relative")};
   width: 100%;
-  margin-top: 288px;
+  margin-top: ${({ marginTop }) => (marginTop ? marginTop : "0px")};
   z-index: 0;
   display: flex;
   flex-direction: column;
@@ -36,12 +36,27 @@ const Shapes = [
       fill="rgb(254, 217, 87)"
     ></path>
   </svg>,
+
+  <svg
+    width="100%"
+    height="100%"
+    viewBox="0 0 390 500"
+    preserveAspectRatio="none"
+    style={{ marginTop: "-10px" }}
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M139 84.5C65 68.9 22 91 0 107.5V0H390.5V54C363.5 45.5 334 47 313.5 63.5C288.5 83.6219 231.5 104 139 84.5Z"
+      fill="#FED957"
+    />
+  </svg>,
 ];
 
-const Shape: FC<ShapeProps> = ({ variant }) => {
+const Shape: FC<ShapeProps> = ({ variant, position, marginTop }) => {
   return (
-    <StyledWrapper>
-      {Shapes[0]} <RemainingSpaceFill />
+    <StyledWrapper position={position} marginTop={marginTop}>
+      {Shapes[variant]} <RemainingSpaceFill />
     </StyledWrapper>
   );
 };

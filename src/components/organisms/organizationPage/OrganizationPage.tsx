@@ -156,7 +156,7 @@ const Example: FC<OrganizationPageProps> = ({ organization, data }) => {
           margin="24px"
           width="calc(100% - 48px)"
           alignItems="center"
-          gap="10px"
+          gap="12px"
         >
           <LogoPlacer>
             <Icon icon={organization.organizationType} transform="scale(0.7)" />
@@ -173,13 +173,19 @@ const Example: FC<OrganizationPageProps> = ({ organization, data }) => {
           {(organization.contact ||
             organization.weblink ||
             organization.address) && (
-            <Button variant="secondary" text={t("contact")} fillWidth="max" />
+            <Button
+              variant="secondary"
+              text={t("contact")}
+              fillWidth="max"
+              size="small"
+            />
           )}
           {organization.faqs && (
             <Button
               variant="secondary"
               text={t("faq")}
               fillWidth="max"
+              size="small"
               onClick={() => setFaqOpen(true)}
             />
           )}
