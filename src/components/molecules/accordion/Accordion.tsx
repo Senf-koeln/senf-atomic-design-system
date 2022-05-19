@@ -15,7 +15,6 @@ const AccordionWrapper = styled.ul<AccordionProps>`
   list-style: none;
   margin: 0;
   padding: 0;
-  max-width: 30rem;
   padding: 0px 20px 20px 20px;
   overflow: hidden;
   .accordion-item {
@@ -69,9 +68,10 @@ export const AccordionItem = memo(({ header, body, defaultOpen = false }) => {
 
         <Icon
           icon="arrow"
+          transform="scale(0.7)"
           style={{
             ...(isOpen && {
-              transform: "rotate(180deg)",
+              transform: "rotate(180deg) scale(0.7)",
             }),
           }}
         />

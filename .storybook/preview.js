@@ -13,6 +13,7 @@ export const decorators = [
       <GlobalStyle />
       <Story />
       <div id="portal-root-modal" />
+      <div id="portal-root-dialog" />
     </ThemeProvider>
   ),
 ];

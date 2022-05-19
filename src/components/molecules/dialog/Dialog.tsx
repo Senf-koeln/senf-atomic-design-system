@@ -108,7 +108,7 @@ const Dialog: FC<DialogProps> = ({
             {children}
           </DialogWrapper>,
           document.body
-          // document.getElementById(portalId) as HTMLElement
+          //  document.getElementById(portalId) as HTMLElement
         )}
     </React.Fragment>
   );
