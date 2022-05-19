@@ -38,7 +38,6 @@ const InnerWrapper = styled.div<OrganizationsOverviewProps>`
 
 const OrganizationsOverview: FC<OrganizationsOverviewProps> = ({
   data,
-  text,
   selectedOrganizationTypes,
 }) => {
   const { t } = useTranslation();
@@ -53,37 +52,15 @@ const OrganizationsOverview: FC<OrganizationsOverviewProps> = ({
           variant="secondary"
           borderStyle="dashed"
           size="small"
-          text="+ Organisation anlegen"
+          text={t("createOrganization")}
           fillWidth="max"
+          // onClick={
+          //   user.authenticated
+          //     ? openCreateOrganization
+          //     : () => setOpenModalAuthenticate(true)
+          // }
         />
       </FlexWrapper>
-      {/* <Toolbar
-        swipeListType="organizationsOverview"
-        type="standalone"
-        loading={loading}
-        handleDropdown={handleDropdown}
-        dropdown={dropdown}
-        dataFinalLength={dataFinalLength}
-        setSearchOpen={setSearchOpen}
-        searchOpen={searchOpen}
-        setSearchTerm={setSearchTerm}
-        searchTerm={searchTerm}
-      />
-
-      <ButtonWrapper>
-        <Button
-          variant="secondary"
-          borderStyle="dashed"
-          onClick={
-            user.authenticated
-              ? openCreateOrganization
-              : () => setOpenModalAuthenticate(true)
-          }
-        >
-          {t("createOrganization")}
-        </Button>
-      </ButtonWrapper> */}
-
       <List CardType={OrganizationCard} data={data} />
     </InnerWrapper>
   );

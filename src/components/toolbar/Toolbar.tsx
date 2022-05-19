@@ -114,6 +114,7 @@ const Toolbar: FC<ToolbarProps> = ({
         variant="secondary"
         icon="search"
         size="small"
+        transform="scale(0.7)"
         onClick={setSearch}
         searchTerm={searchTerm}
         searchOpen={searchOpen}

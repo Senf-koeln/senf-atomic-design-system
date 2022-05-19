@@ -10,5 +10,6 @@ module.exports = {
     "@storybook/addon-essentials",
     "@react-theming/storybook-addon",
     "storybook-react-i18next",
+    "@storybook/addon-viewport",
   ],
 };
