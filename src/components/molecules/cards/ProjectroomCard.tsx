@@ -20,7 +20,7 @@ const Wrapper = styled.div<ProjectroomCardProps>`
   height: auto;
   border-radius: 18px;
 
-  width: 95%;
+  width: 100%;
 
   margin-left: auto;
   margin-right: auto;
@@ -76,7 +76,7 @@ const ProjectroomCard: FC<ProjectroomCardProps> = ({
 }) => {
   const {
     title,
-    description,
+    brief,
     organizationType,
     organizationName,
     imgUrl,
@@ -116,7 +116,7 @@ const ProjectroomCard: FC<ProjectroomCardProps> = ({
             }
           />
 
-          <Typography variant="bodyBg"> {description}</Typography>
+          <Typography variant="bodyBg"> {brief}</Typography>
         </FlexWrapper>
         <FlexWrapper alignItems="center" flexDirection="row" gap="14px">
           <Icon icon={organizationType} transform="scale(0.8)" />

@@ -4,6 +4,7 @@ import { addDecorator } from "@storybook/react";
 import { withThemes } from "@react-theming/storybook-addon";
 import GlobalStyle from "../src/styles/globals";
 import theme from "../src/styles/theme";
+import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
 
 import i18n from "../src/util/i18n";
 
@@ -13,6 +14,7 @@ export const decorators = [
       <GlobalStyle />
       <Story />
       <div id="portal-root-modal" />
+      <div id="portal-root-dialog" />
     </ThemeProvider>
   ),
 ];
@@ -25,6 +27,9 @@ export const parameters = {
     de: { title: "German", left: "🇩🇪" },
   },
   actions: { argTypesRegex: "^on[A-Z].*" },
+  viewport: {
+    viewports: INITIAL_VIEWPORTS,
+  },
   backgrounds: {
     default: "lightgrey",
     values: [

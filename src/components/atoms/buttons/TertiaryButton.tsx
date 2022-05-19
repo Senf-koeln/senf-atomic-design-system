@@ -77,8 +77,8 @@ const TertiaryButton: FC<TertiaryButtonProps> = ({
             icon={iconLeft}
             transform={
               size === "small"
-                ? `scale(0.7) ${iconLeftTransform}`
-                : `scale(1) ${iconLeftTransform}`
+                ? ` ${iconLeftTransform ? iconLeftTransform : "scale(0.7)"}`
+                : ` ${iconLeftTransform ? iconLeftTransform : "scale(0.7)"}`
             }
           />
         </IconWrapperLeft>
@@ -91,8 +91,8 @@ const TertiaryButton: FC<TertiaryButtonProps> = ({
             icon={iconRight}
             transform={
               size === "small"
-                ? `scale(0.7) ${iconRightTransform}`
-                : `scale(1) ${iconRightTransform}`
+                ? `${iconLeftTransform ? iconLeftTransform : "scale(0.7)"}`
+                : `${iconLeftTransform ? iconLeftTransform : "scale(0.7)"}`
             }
           />
         </IconWrapperRight>

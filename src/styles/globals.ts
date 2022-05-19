@@ -43,6 +43,21 @@ p {
     }
   }
 
+  @keyframes opacityTranslateYFrom100Animation {
+  0% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  50% {
+    opacity: 0.1;
+    transform: translateY(50%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+}
+
 `;
 
 export default GlobalStyle;

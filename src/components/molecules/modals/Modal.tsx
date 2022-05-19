@@ -8,7 +8,7 @@ import { LayerWhiteFirstDefault } from "../../atoms/layerStyles/LayerStyles";
 import SubNavbar from "../navs/SubNavbar";
 import { ModalProps } from "./Modal.types";
 
-const ModalContentWrapper = styled.div<ModalProps>`
+const Wrapper = styled.div<ModalProps>`
   z-index: ${({ zIndex }) => (zIndex ? zIndex : 9999)};
   position: fixed;
   top: 50%;
@@ -24,16 +24,16 @@ const ModalContentWrapper = styled.div<ModalProps>`
       ? "600px"
       : "400px"};
   max-height: calc(100vh - 40px);
-  overflow: scroll;
-
-  ${(props) => LayerWhiteFirstDefault};
+  overflow: ${({ overflow }) => (overflow ? overflow : "scroll")};
+  background-color: ${({ backgroundColor }) =>
+    backgroundColor ? backgroundColor : "white"};
   border-radius: ${({ theme }) => theme.radii[4]}px;
 
   box-shadow: ${({ theme }) => theme.shadows[0]}
     ${({ theme }) => theme.colors.brown.brown20tra};
 `;
 
-const ModalBackground = styled.div<ModalProps>`
+const Background = styled.div<ModalProps>`
   z-index: ${({ zIndex }) => (zIndex ? zIndex : 9998)};
 
   position: fixed;
@@ -50,6 +50,8 @@ const Modal: FC<ModalProps> = ({
   children,
   zIndex,
   size,
+  backgroundColor,
+  overflow,
   portalId = "portal-root-modal",
 }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -91,12 +93,14 @@ const Modal: FC<ModalProps> = ({
       {isOpen &&
         ReactDOM.createPortal(
           <React.Fragment>
-            <ModalBackground
+            <Background
               zIndex={zIndex - 1}
               onClick={() => setOpenModal(false)}
             />
-            <ModalContentWrapper
+            <Wrapper
               zIndex={zIndex}
+              backgroundColor={backgroundColor}
+              overflow={overflow}
               role="dialog"
               size={size}
               aria-labelledby="modal-header"
@@ -108,7 +112,7 @@ const Modal: FC<ModalProps> = ({
               }
             >
               {children}
-            </ModalContentWrapper>
+            </Wrapper>
           </React.Fragment>,
           document.body
           // document.getElementById(portalId) as HTMLElement

@@ -5,26 +5,34 @@ import styled from "styled-components";
 import { FlexWrapperProps } from "./FlexWrapper.types";
 
 const Wrapper = styled.div<FlexWrapperProps>`
-  width: ${(props) => (props.width ? props.width : "100%")};
-  height: ${(props) => (props.height ? props.height : "auto")};
+  position: ${({ position }) => (position ? position : "relative")};
+  left: ${({ left }) => (left ? left : undefined)};
+  right: ${({ right }) => (right ? right : undefined)};
+  width: ${({ width }) => (width ? width : "100%")};
+  height: ${({ height }) => (height ? height : "auto")};
 
-  margin: ${(props) => (props.margin ? props.margin : "0")};
+  margin: ${({ margin }) => (margin ? margin : "0")};
   display: flex;
-  flex-direction: ${(props) =>
-    props.flexDirection === "column" ? "column" : "row"};
-  align-items: ${(props) => (props.alignItems ? props.alignItems : null)};
-  justify-content: ${(props) =>
-    props.justifyContent ? props.justifyContent : null};
-  gap: ${(props) => (props.gap ? props.gap : null)};
-  flex-wrap: ${(props) => (props.flexWrap ? props.flexWrap : null)};
+  flex-direction: ${({ flexDirection }) =>
+    flexDirection === "column" ? "column" : "row"};
+  align-items: ${({ alignItems }) => (alignItems ? alignItems : null)};
+  justify-content: ${({ justifyContent }) =>
+    justifyContent ? justifyContent : null};
+  gap: ${({ gap }) => (gap ? gap : null)};
+  flex-wrap: ${({ flexWrap }) => (flexWrap ? flexWrap : null)};
+  z-index: ${({ zIndex }) => (zIndex ? zIndex : undefined)};
 `;
 
 const FlexWrapper: FC<FlexWrapperProps> = ({
   children,
+  position,
   flexDirection,
   gap,
   margin,
   width,
+  left,
+  right,
+  zIndex,
   alignItems,
   justifyContent,
   height,
@@ -32,11 +40,15 @@ const FlexWrapper: FC<FlexWrapperProps> = ({
 }) => {
   return (
     <Wrapper
+      position={position}
       flexDirection={flexDirection}
       gap={gap}
       margin={margin}
       width={width}
       height={height}
+      left={left}
+      right={right}
+      zIndex={zIndex}
       alignItems={alignItems}
       justifyContent={justifyContent}
       flexWrap={flexWrap}
