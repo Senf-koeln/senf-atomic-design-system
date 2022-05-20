@@ -112,6 +112,7 @@ const theme: Theme = {
       white100: "rgba(255, 255, 255, 1)",
       white80tra: "rgba(255, 255, 255, 0.8)",
       white60tra: "rgba(255, 255, 255, 0.6)",
+      white50tra: "rgba(255, 255, 255, 0.5)",
       white40tra: "rgba(255, 255, 255, 0.4)",
       white30tra: "rgba(255, 255, 255, 0.3)",
       white20tra: "rgba(255, 255, 255, 0.2)",
