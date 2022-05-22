@@ -44,7 +44,7 @@ export const InputField = styled.div<{ focus: boolean }>`
   gap: 0.5rem;
   padding: 0.7rem 0.7rem 0.7rem 0.9rem;
   min-height: 50px;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: ${({ theme }) => theme.colors.white.white50tra};
   border-radius: ${({ theme }) => theme.radii[1]}px;
   -webkit-border-radius: ${({ theme }) => theme.radii[1]}px;
   -moz-border-radius: ${({ theme }) => theme.radii[1]}px;
