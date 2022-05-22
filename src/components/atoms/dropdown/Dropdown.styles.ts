@@ -1,3 +1,5 @@
+/** @format */
+
 import styled from "styled-components";
 import arrow from "../../../assets/rawSvgs/arrow.svg";
 
@@ -10,8 +12,8 @@ export const Selector = styled.select`
   appearance: none;
   background-image: url("${arrow}");
   background-repeat: no-repeat;
-  background-position: 98%;
-  background-size: 1rem;
+  background-position: calc(100% - 1rem);
+  background-size: 0.9rem;
 
   &:focus {
     outline: 0;
