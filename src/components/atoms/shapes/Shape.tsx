@@ -8,9 +8,10 @@ const StyledWrapper = styled.div<ShapeProps>`
   position: ${({ position }) => (position ? position : "relative")};
   width: 100%;
   margin-top: ${({ marginTop }) => (marginTop ? marginTop : "0px")};
-  z-index: 0;
+  z-index: -1;
   display: flex;
   flex-direction: column;
+  pointer-events: none;
 `;
 
 //NOT WORKING

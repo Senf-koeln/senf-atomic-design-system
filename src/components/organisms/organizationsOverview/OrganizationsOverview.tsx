@@ -44,10 +44,10 @@ const OrganizationsOverview: FC<OrganizationsOverviewProps> = ({
   console.log(isMobileCustom());
   const content = (
     <InnerWrapper isMobileCustom={isMobileCustom}>
-      <FlexWrapper margin="16px 12px 8px 12px" width="calc(100% - 24px)">
+      <FlexWrapper margin="16px 12px 16px 12px" width="calc(100% - 24px)">
         <Toolbar />
       </FlexWrapper>
-      <FlexWrapper margin="0px 12px 16px 12px" width="calc(100% - 24px)">
+      <FlexWrapper margin="0px 12px 6px 12px" width="calc(100% - 24px)">
         <Button
           variant="secondary"
           borderStyle="dashed"
@@ -70,6 +70,7 @@ const OrganizationsOverview: FC<OrganizationsOverviewProps> = ({
       backgroundColor={theme.colors.beige.beige20}
       openModal={true}
       headerComponentHeight="102px"
+      headerComponentBackgroundColor={theme.colors.beige.beige20}
       HeaderComponent={
         <React.Fragment>
           <Shape variant={1} position="absolute" marginTop="0px" />
@@ -77,6 +78,7 @@ const OrganizationsOverview: FC<OrganizationsOverviewProps> = ({
           <SubNavbar
             iconLeft="arrow"
             header={t("organizations")}
+            handlebar={true}
             // iconRight="plus"
             // iconRightTransform="rotate(45deg)"
           />

@@ -49,12 +49,18 @@ export const Header = styled(animated.div)`
   z-index: 25;
   height: ${({ headerComponentHeight }) =>
     headerComponentHeight ? headerComponentHeight : "100px"};
+  background-color: ${({ headerComponentBackgroundColor }) =>
+    headerComponentBackgroundColor
+      ? headerComponentBackgroundColor
+      : undefined};
+
   z-index: 99;
 `;
 
 const SwipeModal: FC<SwipeModalProps> = ({
   HeaderComponent,
   headerComponentHeight,
+  headerComponentBackgroundColor,
   openModal,
   setOpenModal,
   children,
@@ -170,7 +176,11 @@ const SwipeModal: FC<SwipeModalProps> = ({
                   trapFocus(e, submitRef.current, closeRef.current) // ideally we would use inert but it doesn't seem to be working
               }
             >
-              <Header headerComponentHeight={headerComponentHeight} {...bind()}>
+              <Header
+                headerComponentHeight={headerComponentHeight}
+                headerComponentBackgroundColor={headerComponentBackgroundColor}
+                {...bind()}
+              >
                 {HeaderComponent}
               </Header>
               {children}

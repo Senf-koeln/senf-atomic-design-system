@@ -13,8 +13,21 @@ const Wrapper = styled.div<SubNavbarProps>`
   position: relative;
 `;
 
+const HandleBar = styled.div`
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 99;
+  width: 50px;
+  height: 2px;
+  background-color: ${({ theme }) => theme.colors.primary.primary120};
+  border-radius: 1px;
+`;
+
 const LeftWrapper = styled.div<SubNavbarProps>`
   position: absolute;
+  top: 8px;
   left: 12px;
   display: flex;
   height: 100%;
@@ -22,6 +35,7 @@ const LeftWrapper = styled.div<SubNavbarProps>`
 `;
 const CenterWrapper = styled.div<SubNavbarProps>`
   position: absolute;
+  top: 8px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -30,6 +44,7 @@ const CenterWrapper = styled.div<SubNavbarProps>`
 `;
 const RightWrapper = styled.div<SubNavbarProps>`
   position: absolute;
+  top: 8px;
   right: 12px;
   display: flex;
   height: 100%;
@@ -43,9 +58,11 @@ const SubNavbar: FC<SubNavbarProps> = ({
   textRight,
   iconRight,
   iconRightTransform,
+  handlebar,
 }) => {
   return (
     <Wrapper>
+      {handlebar && <HandleBar />}
       <LeftWrapper>
         <TertiaryButton
           iconLeft={iconLeft}

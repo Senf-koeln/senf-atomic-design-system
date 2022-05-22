@@ -41,6 +41,9 @@ Idea.args = {
     title: "Ampel für Fahrradfahrer",
     body: "Die Verkehrsführung für Fahrradfahrer, die Richtung Rhein fahren, ist ganz gut gelöst mit einem eigen Fahrstreifen und Auffahrt um Rheinufer. Um so verwunderlich finde ich will",
     Stadtteil: "Neuehrenfeld",
+    Thema: "Rad",
+    ideaCount: 5,
+    commentCount: 7,
   },
 };
 
@@ -52,6 +55,9 @@ IdeaProjectroom.args = {
     Stadtteil: "Neuehrenfeld",
     organizationType: "Stadtverwaltung",
     projectroomName: "Projektraum-Name",
+    Thema: "Rad",
+    ideaCount: 5,
+    commentCount: 7,
   },
 };
 
