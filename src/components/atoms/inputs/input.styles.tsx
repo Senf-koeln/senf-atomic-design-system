@@ -1,7 +1,9 @@
+/** @format */
+
 import styled, { css } from "styled-components";
 
 export const HoverContainer = styled.div`
-  padding: 0.2rem;
+  padding: 0.35rem;
   &:hover {
     border-radius: ${({ theme }) => theme.radii[0]}px;
     background-color: ${({ theme }) => theme.colors.greyscale.greyscale20tra};
@@ -40,7 +42,8 @@ export const InputField = styled.div<{ focus: boolean }>`
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.5rem 1rem;
+  padding: 0.7rem 0.7rem 0.7rem 0.9rem;
+  min-height: 50px;
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: ${({ theme }) => theme.radii[1]}px;
   -webkit-border-radius: ${({ theme }) => theme.radii[1]}px;
@@ -69,7 +72,7 @@ export const InputField = styled.div<{ focus: boolean }>`
 
   /* Styles for search input */
   svg {
-    opacity: 0.3;
+    opacity: 0.8;
     width: 16px;
     height: 16px;
     color: ${({ theme }) => theme.colors.black.black100};
