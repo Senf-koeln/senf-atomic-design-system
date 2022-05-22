@@ -6,6 +6,7 @@ import styled from "styled-components";
 import { isMobileCustom } from "../../../hooks/customDeviceDetect";
 import theme from "../../../styles/theme";
 import Button from "../../atoms/buttons/Button";
+import RoundedButton from "../../atoms/buttons/RoundedButton";
 import FlexWrapper from "../../atoms/layout/FlexWrapper";
 import Shape from "../../atoms/shapes/Shape";
 import Typography from "../../atoms/typography/Typography";
@@ -30,6 +31,10 @@ const Wrapper = styled.div<OrganizationsOverviewProps>`
   transition: 0.3s;
   box-shadow: 40px 8px 30px -12px rgba(0, 0, 0, 0.2);
   transition: 0.5s;
+
+  @media (max-width: 1350px) {
+    width: ${({ open }) => (open ? "calc(100vw - 200px)" : "400px")};
+  }
 `;
 
 const InnerWrapper = styled.div<OrganizationsOverviewProps>`
@@ -126,6 +131,9 @@ const OrganizationsOverview: FC<OrganizationsOverviewProps> = ({
   ) : (
     <Wrapper open={open}>
       <SVGWrapper searchOpen={searchOpen}>
+        <FlexWrapper position="fixed" margin="20px" width="50px" zIndex={2}>
+          <RoundedButton icon="arrow" />
+        </FlexWrapper>
         <HeaderWrapper>
           <FlexWrapper
             margin="20px"
