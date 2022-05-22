@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import arrow from "../../../assets/rawSvgs/arrow.svg"
-
+import arrow from "../../../assets/rawSvgs/arrow.svg";
 
 export const Selector = styled.select`
+  flex: 1;
   border: 0;
 
   -webkit-appearance: none;
