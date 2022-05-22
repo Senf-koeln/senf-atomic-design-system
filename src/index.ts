@@ -1,6 +1,7 @@
 /** @format */
 
 export {
+  LayerWhiteGradientBordersDefault,
   LayerWhiteFirstDefault,
   LayerWhiteFirstHover,
   LayerWhiteFirstActive,

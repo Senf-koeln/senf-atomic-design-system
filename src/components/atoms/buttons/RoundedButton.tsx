@@ -8,6 +8,7 @@ import {
   LayerGreyButtonsHover,
   LayerWhiteFirstDefault,
   LayerWhiteFirstHover,
+  LayerWhiteGradientBordersDefault,
   LayerYellowDefault,
   LayerYellowHover,
 } from "../layerStyles/LayerStyles";
@@ -21,11 +22,11 @@ const StyledButton = styled.button<ButtonProps>`
   justify-content: center;
   align-items: center;
 
-  box-shadow: ${({ theme }) => theme.shadows[0]}
+  /* box-shadow: ${({ theme }) => theme.shadows[0]}
       ${({ theme }) => theme.colors.brown.brown20tra},
     ${({ theme }) => theme.shadows[2]}
       ${({ theme }) => theme.colors.white.white20tra};
-  background-color: ${({ theme }) => theme.colors.brown.brown4};
+  background-color: ${({ theme }) => theme.colors.brown.brown4}; */
 
   aspect-ratio: 1 / 1;
 
@@ -45,7 +46,10 @@ const StyledButton = styled.button<ButtonProps>`
   //ADD THEME-TRANSITION
   transition: 0.3s;
 
-  ${(props) => props.variant === "primary" && LayerYellowDefault}
+  ${(props) =>
+    props.variant === "primary"
+      ? LayerYellowDefault
+      : LayerWhiteGradientBordersDefault}
 
   &:hover:enabled {
     transform: scale(1.088);

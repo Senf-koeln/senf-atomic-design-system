@@ -30,5 +30,5 @@ AddButtonYellow.args = {
 
 export const BackButton = Template.bind({});
 BackButton.args = {
-  icon: "arrowdown",
+  icon: "arrow",
 };

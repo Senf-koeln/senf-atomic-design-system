@@ -1,6 +1,25 @@
 /** @format */
 import { css } from "styled-components";
 
+export const LayerWhiteGradientBordersDefault = css`
+  box-sizing: border-box;
+  box-shadow: ${({ theme }) => theme.shadows[0]}
+      ${({ theme }) => theme.colors.brown.brown20tra},
+    ${({ theme }) => theme.shadows[2]}
+      ${({ theme }) => theme.colors.white.white20tra};
+  background-color: ${({ theme }) => theme.colors.brown.brown4};
+
+  border: solid 2px transparent;
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0)
+    ),
+    linear-gradient(180deg, #fff, #f8f5ed);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  box-shadow: 2px 1000px 1px ${({ theme }) => theme.colors.brown.brown4} inset;
+`;
+
 export const LayerWhiteFirstDefault = css`
   box-sizing: border-box;
   box-shadow: ${({ theme }) => theme.shadows[0]}
@@ -56,7 +75,17 @@ export const LayerYellowDefault = css`
     ${({ theme }) => theme.colors.primaryHoverLayerShadowColor};
   background-color: ${({ theme }) => theme.colors.primary.primary100};
   overflow: visible;
-  border: 2px solid rgba(186, 160, 79, 0.1);
+
+  border: solid 2px transparent;
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0)
+    ),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.3), rgba(186, 160, 79, 0.04));
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  box-shadow: 2px 1000px 1px ${({ theme }) => theme.colors.primary.primary100}
+    inset;
 `;
 
 export const LayerYellowHover = css`
@@ -65,7 +94,18 @@ export const LayerYellowHover = css`
     ${({ theme }) => theme.colors.primaryHoverLayerShadowColor};
   background-color: ${({ theme }) => theme.colors.primary.primary120};
   overflow: visible;
-  border: 2px solid rgba(186, 160, 79, 0.1);
+  /* border: 2px solid rgba(186, 160, 79, 0.1); */
+
+  border: solid 2px transparent;
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0)
+    ),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.3), rgba(186, 160, 79, 0.04));
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  box-shadow: 2px 1000px 1px ${({ theme }) => theme.colors.primary.primary120}
+    inset;
 `;
 
 export const LayerBrownDefault = css`
