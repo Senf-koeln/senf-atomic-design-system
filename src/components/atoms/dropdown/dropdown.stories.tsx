@@ -62,12 +62,16 @@ Gender.args = {
   id: "Gender",
   listItems: ["Non-binary", "Female", "Male"],
 };
-// export const MultiDropdowns = Template.bind({});
-// MultiDropdowns.args = {
-//   id: "MultiDropdowns",
-//   listItems: [
-//     ["Non-binary", "Female", "Male"],
-//     ["Non-binary", "Female", "Male"],
-//     ["Non-binary", "Female", "Male"],
-//   ],
-// };
+
+export const MultiDropdowns = Template.bind({});
+MultiDropdowns.args = {
+  id: "MultiDropdowns",
+  label: "Label",
+  note: "A note for extra info",
+  multi: true,
+  listItems: [
+    ["Non-binary", "Female", "Male"],
+    ["Non-binary", "Female", "Male"],
+    ["Non-binary", "Female", "Male"],
+  ],
+};
