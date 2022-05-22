@@ -14,7 +14,7 @@ import InfiniteScroll from "react-infinite-scroller";
 import Toolbar from "../../molecules/Toolbar/Toolbar";
 import { Background } from "../../atoms/Backgrounds/GradientBackgrounds";
 import { CustomIconButton } from "../../atoms/CustomButtons/CustomButton";
-import { isMobileCustom } from "../../../util/customDeviceDetect";
+import { isMobileCustom } from "../../../hooks/customDeviceDetect";
 import {
   Covers,
   CoverWrapper,

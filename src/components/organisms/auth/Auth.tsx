@@ -14,40 +14,35 @@ import * as yup from "yup";
 import SenfManSquating from "../../../assets/illustrations/senfManSquatting.png";
 import Typography from "../../atoms/typography/Typography";
 import { openLink } from "../../../util/helpers";
+import Wave from "../../atoms/shapes/Wave";
 
-const StyledWrapper = styled.div<AuthProps>`
+const Wrapper = styled.div<AuthProps>`
   position: relative;
   width: 100%;
   max-width: 400px;
   min-height: 100vh;
   background-color: ${(props) => props.theme.colors.beige.beige20};
+  overflow: hidden;
 `;
 
-const RectShape = styled.div`
-  position: absolute;
-  width: 100%;
-  top: 400px;
-  height: calc(100% - 400px);
-  background-color: ${(props) => props.theme.colors.primary.primary100};
-`;
 const Img = styled.img`
   position: absolute;
-  margin-left: calc(50% - 60px);
-  margin-top: 183px;
+  right: 24px;
+  margin-top: 91px;
   width: 126px;
-  z-index: 2;
+  z-index: 1;
+  pointer-events: none;
+  user-select: none;
 `;
 const StyledSvg = styled.svg`
-  position: relative;
-  margin-left: calc(50% - 20px);
-  margin-top: 285px;
-  z-index: 1;
+  position: absolute;
+  right: -67px;
+  margin-top: 193px;
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
 `;
-const ContentWrapper = styled.div`
-  width: 80%;
-  margin-left: 10%;
-  position: relative;
-`;
+
 const Auth: FC<AuthProps> = ({
   variant,
   loading,
@@ -55,6 +50,10 @@ const Auth: FC<AuthProps> = ({
   handleSubmitLogin,
 }) => {
   const { t } = useTranslation();
+  const [googleLoading, setGoogleLoading] = useState(false);
+  const [appleLoading, setAppleLoading] = useState(false);
+  const [emailLoading, setEmailLoading] = useState(false);
+
   const [variantState, setVariantState] = useState("login");
 
   useEffect(() => {
@@ -161,9 +160,9 @@ const Auth: FC<AuthProps> = ({
   });
 
   return (
-    <StyledWrapper>
-      <Shape variant={0} position="absolute" marginTop="288px" />
-      <RectShape />
+    <Wrapper>
+      <Wave />
+
       <Img src={SenfManSquating} alt="Illustration" />
 
       <StyledSvg xmlns="http://www.w3.org/2000/svg" width="175" height="69">
@@ -193,11 +192,75 @@ const Auth: FC<AuthProps> = ({
         </g>
       </StyledSvg>
 
-      <FlexWrapper flexDirection="column" width="80%" margin="25px 10%  0 10%">
-        <Typography variant="h2" style={{ position: "relative" }}>
-          {t("auth_headline")}
+      <FlexWrapper
+        flexDirection="column"
+        width="80%"
+        margin="180px 10% 0px 10%"
+        position="relative"
+        zIndex={9999}
+      >
+        <Typography variant="h1" style={{ position: "relative" }}>
+          {t("infopage_addMustard_1")}
         </Typography>
-        <FlexWrapper
+        <Typography variant="h1" style={{ position: "relative" }}>
+          {t("infopage_addMustard_2")}
+        </Typography>
+
+        <FlexWrapper margin="25px 0px 24px 0px">
+          <Typography variant="bodyBg" style={{ position: "relative" }}>
+            {t("auth_subheadline")}
+          </Typography>
+        </FlexWrapper>
+        <FlexWrapper gap="16px" flexDirection="column">
+          <Button
+            variant="white"
+            fillWidth="max"
+            text="Mit Google anmelden"
+            loading={googleLoading}
+            onClick={() => setGoogleLoading(true)}
+          />
+
+          <Button
+            variant="white"
+            fillWidth="max"
+            text="Mit Apple anmelden"
+            loading={loading}
+            onClick={() => console.log("")}
+          />
+
+          <Button
+            variant="white"
+            fillWidth="max"
+            text="Mit Email-Adresse anmelden"
+            loading={loading}
+            onClick={() => console.log("")}
+            icon="mail"
+          />
+        </FlexWrapper>
+
+        <FlexWrapper margin="24px 0px">
+          <Typography variant="bodySm">
+            <Trans i18nKey="register_agb">
+              ...
+              <span
+                style={{ textDecoration: "underline", fontWeight: "700" }}
+                onClick={() => openLink("senf.koeln/agb")}
+              >
+                ...
+              </span>
+              ...
+              <span
+                style={{ textDecoration: "underline", fontWeight: "700" }}
+                onClick={() => openLink("senf.koeln/datenschutz")}
+              >
+                ...
+              </span>
+              ...
+            </Trans>
+          </Typography>
+        </FlexWrapper>
+
+        {/* <FlexWrapper
           flexDirection="row"
           gap="10px"
           alignItems="center"
@@ -228,9 +291,9 @@ const Auth: FC<AuthProps> = ({
               </a>
             </React.Fragment>
           )}
-        </FlexWrapper>
+        </FlexWrapper> */}
 
-        <Form
+        {/* <Form
           margin="24px 0 0 0"
           width="100%"
           inputItems={
@@ -239,9 +302,9 @@ const Auth: FC<AuthProps> = ({
           formik={
             variantState === "register" ? formikRegisterStore : formikLoginStore
           }
-        />
+        /> */}
 
-        <FlexWrapper
+        {/* <FlexWrapper
           flexDirection="row"
           gap="10px"
           alignItems="center"
@@ -275,8 +338,8 @@ const Auth: FC<AuthProps> = ({
               </Typography>
             </React.Fragment>
           )}
-        </FlexWrapper>
-        <Button
+        </FlexWrapper> */}
+        {/* <Button
           variant="white"
           fillWidth="max"
           text="Anmelden"
@@ -291,9 +354,9 @@ const Auth: FC<AuthProps> = ({
               ? !formikRegisterStore?.isValid
               : !formikLoginStore?.isValid
           }
-        />
+        /> */}
       </FlexWrapper>
-    </StyledWrapper>
+    </Wrapper>
   );
 };
 

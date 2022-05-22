@@ -8,6 +8,8 @@ import FlexWrapper from "../../atoms/layout/FlexWrapper";
 import Typography from "../../atoms/typography/Typography";
 import { IdeaCardProps } from "./IdeaCard.types";
 import { t } from "i18next";
+import TertiaryButton from "../../atoms/buttons/TertiaryButton";
+import setColorByTopic from "../../../data/setColorByTopic";
 
 const Wrapper = styled.div<IdeaCardProps>`
   float: left;
@@ -39,7 +41,7 @@ const Wrapper = styled.div<IdeaCardProps>`
 `;
 
 const InnerWrapper = styled.div`
-  margin: 12px 18px;
+  margin: 12px 12px 12px 18px;
 `;
 
 const ProjectroomOpenButton = styled.button`
@@ -56,7 +58,9 @@ const IdeaCard: FC<IdeaCardProps> = ({ data, handleButtonClick }) => {
     body,
     Stadtteil,
     status,
-
+    Thema,
+    ideaCount,
+    commentCount,
     organizationType,
     projectroomName,
     thisOrganizationId,
@@ -72,11 +76,22 @@ const IdeaCard: FC<IdeaCardProps> = ({ data, handleButtonClick }) => {
         <FlexWrapper
           alignItems="center"
           flexDirection="row"
-          gap="12px"
+          gap="5px"
           margin="10px 0px 12px 0px"
         >
-          <Icon icon="Sonstige" />
-          <Typography variant="bodySm"> {Stadtteil}</Typography>
+          <Icon icon="dot" color={setColorByTopic(Thema)} />
+          <Typography variant="bodySm" color={setColorByTopic(Thema)}>
+            {Stadtteil}
+          </Typography>
+          <FlexWrapper
+            alignItems="center"
+            justifyContent="flex-end"
+            flexDirection="row"
+            margin="0px 0px 0px auto"
+          >
+            <TertiaryButton iconLeft="flameOutline" text={ideaCount} />
+            <TertiaryButton iconLeft="commentOutline" text={commentCount} />
+          </FlexWrapper>
         </FlexWrapper>
 
         <Typography variant="h3"> {title}</Typography>

@@ -11,10 +11,8 @@ const Wrapper = styled.div<ToolbarProps>`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 50px;
   width: 100%;
-  transition: height 0.5s;
-  padding-bottom: ${(props) => (props.searchOpen ? "70px" : "10px")};
+  padding-bottom: ${(props) => (props.searchOpen ? "70px" : "0px")};
   transition: 0.5s;
   animation: ToolbarAnimation 0.7s;
   pointer-events: none;

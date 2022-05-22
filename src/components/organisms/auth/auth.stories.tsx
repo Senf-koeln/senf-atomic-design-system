@@ -22,20 +22,3 @@ Login.args = {
   loading: false,
   formikRegisterStore: { isValid: true },
 };
-
-export const LoginDisabled = Template.bind({});
-LoginDisabled.args = {
-  variant: "login",
-};
-
-export const LoginLoading = Template.bind({});
-LoginLoading.args = {
-  variant: "login",
-  formikLoginStore: { isValid: true },
-  loading: true,
-};
-
-export const Register = Template.bind({});
-Register.args = {
-  variant: "register",
-};
