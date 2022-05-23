@@ -3,8 +3,10 @@ import styled from "styled-components";
 import { TypographyProps } from "./Typography.types";
 
 const Typography = styled.p<TypographyProps>`
-  font-family: ${({ fontFamily, theme }) => fontFamily || theme.fontFamily};
-
+  font-family: ${({ fontFamily, theme }) => fontFamily || theme.fontFamily };
+  font-size: ${({ fontSize }) => fontSize };
+  color: ${({ color }) => color };
+  text-align: ${({ textAlign }) => textAlign };
   ${({ variant, theme }) => {
     let fontSize: string;
     let fontWeight: number | string;
