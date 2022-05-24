@@ -21,9 +21,9 @@ const Wrapper = styled.div<IdeaCardProps>`
   height: auto;
   border-radius: 18px;
 
-  width: 95%;
+  width: calc(100% - 20px);
 
-  margin-left: auto;
+  margin-left: 10px;
   margin-right: auto;
   margin-bottom: 10px;
   max-width: 400px;

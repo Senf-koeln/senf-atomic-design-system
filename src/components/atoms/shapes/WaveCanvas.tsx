@@ -11,11 +11,12 @@ const WaveCanvas = ({ canvasRef, props }) => {
         display: "block",
         width: "490px",
         height: "870px",
-        top: "170px",
-        position: "absolute",
+        top: props.top,
+        position: props.position ? props.position : "absolute",
         opacity: 1,
         zIndex: 0,
         pointerEvents: "none",
+        transition: "2s",
       }}
       ref={canvasRef}
       {...props}
