@@ -309,7 +309,7 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
             <Typography variant="h3" style={{ fontWeight: 900 }}>
               Alle Ideen
             </Typography>
-            <Typography variant="h3" style={{ color: "#d6ab00" }}>
+            <Typography variant="h3" color="#d6ab00">
               Projekträume
             </Typography>
           </FlexWrapper>
