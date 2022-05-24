@@ -36,9 +36,9 @@ const Wave = (props) => {
 
     // Wave gradient
     const gradient = ctx.createRadialGradient(100, 0, 500, 100, 250, 1500);
-    gradient.addColorStop(0, "#Fed957");
-    gradient.addColorStop(0.25, "#Fed957");
-    gradient.addColorStop(0.6, "#Fed957");
+    gradient.addColorStop(0, props.color);
+    gradient.addColorStop(0.25, props.color);
+    gradient.addColorStop(0.6, props.color);
     ctx.fillStyle = gradient;
 
     ctx.beginPath();

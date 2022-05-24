@@ -73,7 +73,7 @@ const theme: Theme = {
       brown50: "#dccfa7",
       brown35: "#e7dec2",
       brown20: "#f1ecdc",
-      brown10: "#faf8f3",
+      brown10: "#F8F5ED",
       brown7: "#faf8f3",
       brown4: "#fcfbf8",
       brown75tra: "rgba(186, 160, 79, 0.75)",

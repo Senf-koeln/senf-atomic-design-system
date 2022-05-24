@@ -34,6 +34,16 @@ const SVGWrapper = styled.div`
   height: 300px;
 `;
 
+const ImageWrapper = styled.div`
+  ${(props) => LayerWhiteFirstDefault}
+  width:158px;
+  height: 158px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 const LogoPlacer = styled.div`
   box-sizing: border-box;
   width: 28px;
@@ -118,7 +128,13 @@ const Example: FC<OrganizationPageProps> = ({ organization, data }) => {
         </FlexWrapper>
 
         {/* {organization?.userIds.includes(user.userId) && ( ROUNDEDMENUBUTTON)} */}
-        <FlexWrapper position="absolute" margin="20px" right="0px" width="50px">
+        <FlexWrapper
+          position="absolute"
+          margin="20px"
+          right="0px"
+          width="50px"
+          zIndex={2}
+        >
           <RoundedButton icon="Menu" />
         </FlexWrapper>
 
@@ -127,13 +143,14 @@ const Example: FC<OrganizationPageProps> = ({ organization, data }) => {
           margin="20px"
           width="calc(100% - 40px)"
         >
-          <ImagePlaceholder
-            img={logo ? logo : null}
-            borderRadius="18px"
-            height="158px"
-            width="158px"
-            layerStyle={LayerWhiteFirstDefault}
-          />
+          <ImageWrapper>
+            <ImagePlaceholder
+              img={logo ? logo : null}
+              borderRadius="18px"
+              height="calc(100% - 40px)"
+              width="calc(100% - 40px)"
+            />
+          </ImageWrapper>
         </FlexWrapper>
 
         {organization?.status === "deactivated" ? (

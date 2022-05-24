@@ -38,6 +38,18 @@ const StyledButton = styled.button<TagProps>`
   //ADD THEME-SPACE?
   padding: 14px 10px 14px 10px;
 
+  animation: tagsAnimation 0.4s;
+  @keyframes tagsAnimation {
+    0% {
+      transform:scale(0.8);
+  opacity:  0;
+    }
+    100% {
+      transform:scale(1));
+  opacity:  1;
+    }
+  };
+
   ${(props) => (props.active ? LayerWhiteFirstActive : LayerWhiteFirstDefault)}
 
   &:hover:enabled {

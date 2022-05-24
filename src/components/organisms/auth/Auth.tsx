@@ -161,7 +161,7 @@ const Auth: FC<AuthProps> = ({
 
   return (
     <Wrapper>
-      <Wave />
+      <Wave color="#fed957" top="170px" />
 
       <Img src={SenfManSquating} alt="Illustration" />
 

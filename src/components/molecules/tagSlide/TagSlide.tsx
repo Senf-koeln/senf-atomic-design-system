@@ -4,6 +4,7 @@ import React, { FC, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import organizationTypes from "../../../data/organizationTypes";
+import setColorByTopic from "../../../data/setColorByTopic";
 import topics from "../../../data/topiccs";
 import Tag from "../../atoms/tag/Tag";
 import { TagSlideProps } from "./TagSlide.types";
@@ -26,11 +27,9 @@ const Wrapper = styled.div<TagSlideProps>`
       : "none"};
   width: 100%;
   overflow-x: scroll;
+  overflow-y: visible;
   -webkit-overflow-scrolling: touch;
   transition: 1s;
-  padding-bottom: 20px;
-  padding-top: 20px;
-  margin-top: -20px;
   /* animation: FilterWrapperMobileAnimation 1s;
   @keyframes FilterWrapperMobileAnimation {
     0% {
@@ -126,7 +125,7 @@ const TagSlide: FC<TagSlideProps> = ({
                     selectedTopics.includes(topic.name) &&
                     selectedTopics?.length !== 7
                   }
-                  color={topic.color}
+                  iconColor={setColorByTopic(topic.name)}
                   text={topic.label}
                   icon="dot"
                   // hide={
@@ -158,7 +157,6 @@ const TagSlide: FC<TagSlideProps> = ({
                       organizationTypes.name
                     ) && selectedOrganizationTypes.length !== 7
                   }
-                  color={organizationTypes.color}
                   text={organizationTypes.label}
                   icon={organizationTypes.name}
                   // hide={
