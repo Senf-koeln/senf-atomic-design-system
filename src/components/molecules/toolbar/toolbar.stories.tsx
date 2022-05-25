@@ -17,5 +17,15 @@ const Template: Story<ToolbarProps> = (args) => <Toolbar {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  text: "x",
+  sortOptions={[
+    { name: "newest", label: t("newest_ideas") },
+    { name: "hottest", label: t("hottest_ideas") },
+  ]}
+  statusOptions={[
+    { name: "Unprocessed", label: t("unprocessed") },
+    { name: "Accepted", label: t("accepted") },
+    { name: "Planning", label: t("planning") },
+    { name: "Implemented", label: t("implemented") },
+    { name: "Rejected", label: t("rejected") },
+  ]}
 };

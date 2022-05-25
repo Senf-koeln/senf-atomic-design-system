@@ -16,7 +16,7 @@ import List from "../../molecules/list/List";
 import SwipeModal from "../../molecules/modals/SwipeModal";
 import SubNavbar from "../../molecules/navs/SubNavbar";
 import TagSlide from "../../molecules/tagSlide/TagSlide";
-import Toolbar from "../../toolbar/Toolbar";
+import Toolbar from "../../molecules/toolbar/Toolbar";
 import { OrganizationsOverviewProps } from "./OrganizationsOverview.types";
 
 const Wrapper = styled.div<OrganizationsOverviewProps>`
