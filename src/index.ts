@@ -24,7 +24,7 @@ export { default as TertiaryButton } from "./components/atoms/buttons/TertiaryBu
 export { default as Tag } from "./components/atoms/tag/Tag";
 export { default as Icon } from "./components/atoms/icons/Icon";
 export { default as Input } from "./components/atoms/inputs/Input";
-export { default as FlexWrapper } from "./components/atoms/layout/FlexWrapper";
+export { default as Box } from "./components/atoms/box/Box";
 export { default as Divider } from "./components/atoms/divider/Divider";
 export { default as Shape } from "./components/atoms/shapes/Shape";
 export { default as Typography } from "./components/atoms/typography/Typography";

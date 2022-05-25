@@ -11,39 +11,11 @@ import { TagSlideProps } from "./TagSlide.types";
 
 const Wrapper = styled.div<TagSlideProps>`
   z-index: 1;
-  position: ${(props) =>
-    props.placing !== "list" && props.placing !== "insights" && isMobileCustom
-      ? "fixed"
-      : "relative"};
-  top: ${(props) =>
-    props.placing === "list"
-      ? "0px"
-      : props.placing === "insights"
-      ? "20px"
-      : "none"};
-  top: ${(props) =>
-    props.placing !== "list" && props.placing !== "insights" && isMobileCustom
-      ? "60px"
-      : "none"};
   width: 100%;
   overflow-x: scroll;
   overflow-y: visible;
   -webkit-overflow-scrolling: touch;
   transition: 1s;
-  /* animation: FilterWrapperMobileAnimation 1s;
-  @keyframes FilterWrapperMobileAnimation {
-    0% {
-      margin-left: 100%;
-    }
-    100% {
-      margin-left: 10px;
-    }
-  } */
-  @media (min-width: 768px) {
-    top: 0;
-    padding-left: 0;
-    padding-bottom: 0;
-  }
 `;
 
 const InnerWrapper = styled.div<TagSlideProps>`

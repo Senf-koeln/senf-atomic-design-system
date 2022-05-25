@@ -4,7 +4,7 @@ import React, { FC } from "react";
 import styled from "styled-components";
 import Icon from "../../atoms/icons/Icon";
 import { LayerWhiteFirstDefault } from "../../atoms/layerStyles/LayerStyles";
-import FlexWrapper from "../../atoms/layout/FlexWrapper";
+import Box from "../../atoms/box/Box";
 import Typography from "../../atoms/typography/Typography";
 import { ProjectroomCardProps } from "./ProjectroomCard.types";
 import { t } from "i18next";
@@ -101,7 +101,7 @@ const ProjectroomCard: FC<ProjectroomCardProps> = ({
 
         <Typography variant="h3"> {title}</Typography>
 
-        <FlexWrapper
+        <Box
           alignItems="flex-start"
           flexDirection="row"
           gap="16px"
@@ -117,8 +117,8 @@ const ProjectroomCard: FC<ProjectroomCardProps> = ({
           />
 
           <Typography variant="bodyBg"> {brief}</Typography>
-        </FlexWrapper>
-        <FlexWrapper alignItems="center" flexDirection="row" gap="14px">
+        </Box>
+        <Box alignItems="center" flexDirection="row" gap="14px">
           <Icon icon={organizationType} transform="scale(0.8)" />
 
           <LogoPlacer>
@@ -137,7 +137,7 @@ const ProjectroomCard: FC<ProjectroomCardProps> = ({
             </IconWrapper>
             <Typography variant="buttonSm">{ideaSize} </Typography>
           </div>
-        </FlexWrapper>
+        </Box>
       </InnerWrapper>
     </Wrapper>
   );

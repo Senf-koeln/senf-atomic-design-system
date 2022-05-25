@@ -1,7 +1,7 @@
 /** @format */
 
 import React, { FC, useState } from "react";
-import FlexWrapper from "../layout/FlexWrapper";
+import Box from "../box/Box";
 import Typography from "../typography/Typography";
 import { Wrapper, Input } from "./rangeSlider.styles";
 import { RangeSliderProps } from "./RangeSlider.types";
@@ -39,10 +39,10 @@ const RangeSlider: FC<RangeSliderProps> = ({
         thumbColor={thumbColor}
         thumbBorderColor={thumbBorderColor}
       />
-      <FlexWrapper margin="10px 13px" justifyContent="space-between">
+      <Box margin="10px 13px" justifyContent="space-between">
         <Typography variant="bodySm">{leftTick}</Typography>
         <Typography variant="bodySm">{rightTick}</Typography>
-      </FlexWrapper>
+      </Box>
     </Wrapper>
   );
 };

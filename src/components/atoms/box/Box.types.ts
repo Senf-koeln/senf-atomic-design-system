@@ -1,7 +1,7 @@
 /** @format */
 
 import { MouseEventHandler } from "react";
-export interface FlexWrapperProps {
+export interface BoxProps {
   flexDirection?: "column" | "row";
   gap?: string;
   width?: string;

@@ -4,7 +4,7 @@ import React, { FC, useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 import { Trans, useTranslation } from "react-i18next";
 import Button from "../../atoms/buttons/Button";
-import FlexWrapper from "../../atoms/layout/FlexWrapper";
+import Box from "../../atoms/box/Box";
 import Shape from "../../atoms/shapes/Shape";
 import Form from "../../molecules/form/Form";
 import { AuthProps } from "./Auth.types";
@@ -192,9 +192,8 @@ const Auth: FC<AuthProps> = ({
         </g>
       </StyledSvg>
 
-      <FlexWrapper
+      <Box
         flexDirection="column"
-        width="80%"
         margin="180px 10% 0px 10%"
         position="relative"
         zIndex={9999}
@@ -206,12 +205,12 @@ const Auth: FC<AuthProps> = ({
           {t("infopage_addMustard_2")}
         </Typography>
 
-        <FlexWrapper margin="25px 0px 24px 0px">
+        <Box margin="25px 0px 24px 0px">
           <Typography variant="bodyBg" style={{ position: "relative" }}>
             {t("auth_subheadline")}
           </Typography>
-        </FlexWrapper>
-        <FlexWrapper gap="16px" flexDirection="column">
+        </Box>
+        <Box gap="16px" flexDirection="column">
           <Button
             variant="white"
             fillWidth="max"
@@ -236,9 +235,9 @@ const Auth: FC<AuthProps> = ({
             onClick={() => console.log("")}
             icon="mail"
           />
-        </FlexWrapper>
+        </Box>
 
-        <FlexWrapper margin="24px 0px">
+        <Box margin="24px 0px">
           <Typography variant="bodySm">
             <Trans i18nKey="register_agb">
               ...
@@ -258,9 +257,9 @@ const Auth: FC<AuthProps> = ({
               ...
             </Trans>
           </Typography>
-        </FlexWrapper>
+        </Box>
 
-        {/* <FlexWrapper
+        {/* <Box
           flexDirection="row"
           gap="10px"
           alignItems="center"
@@ -291,7 +290,7 @@ const Auth: FC<AuthProps> = ({
               </a>
             </React.Fragment>
           )}
-        </FlexWrapper> */}
+        </Box> */}
 
         {/* <Form
           margin="24px 0 0 0"
@@ -304,7 +303,7 @@ const Auth: FC<AuthProps> = ({
           }
         /> */}
 
-        {/* <FlexWrapper
+        {/* <Box
           flexDirection="row"
           gap="10px"
           alignItems="center"
@@ -338,7 +337,7 @@ const Auth: FC<AuthProps> = ({
               </Typography>
             </React.Fragment>
           )}
-        </FlexWrapper> */}
+        </Box> */}
         {/* <Button
           variant="white"
           fillWidth="max"
@@ -355,7 +354,7 @@ const Auth: FC<AuthProps> = ({
               : !formikLoginStore?.isValid
           }
         /> */}
-      </FlexWrapper>
+      </Box>
     </Wrapper>
   );
 };

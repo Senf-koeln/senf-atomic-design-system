@@ -5,7 +5,7 @@ import styled from "styled-components";
 import Dialog from "../../molecules/dialog/Dialog";
 import RoundedButton from "../../atoms/buttons/RoundedButton";
 import { OrganizationPageProps } from "./OrganizationPage.types";
-import FlexWrapper from "../../atoms/layout/FlexWrapper";
+import Box from "../../atoms/box/Box";
 import ImagePlaceholder from "../../atoms/imagePlaceholder/ImagePlaceholder";
 import {
   LayerWhiteFirstDefault,
@@ -123,26 +123,16 @@ const Example: FC<OrganizationPageProps> = ({ organization, data }) => {
             />
           </svg>
         </SVGWrapper>
-        <FlexWrapper position="fixed" margin="20px" width="50px" zIndex={2}>
+        <Box position="fixed" margin="20px" zIndex={2}>
           <RoundedButton icon="arrow" />
-        </FlexWrapper>
+        </Box>
 
         {/* {organization?.userIds.includes(user.userId) && ( ROUNDEDMENUBUTTON)} */}
-        <FlexWrapper
-          position="absolute"
-          margin="20px"
-          right="0px"
-          width="50px"
-          zIndex={2}
-        >
+        <Box position="absolute" margin="20px" right="0px" zIndex={2}>
           <RoundedButton icon="Menu" />
-        </FlexWrapper>
+        </Box>
 
-        <FlexWrapper
-          justifyContent="center"
-          margin="20px"
-          width="calc(100% - 40px)"
-        >
+        <Box justifyContent="center" margin="20px">
           <ImageWrapper>
             <ImagePlaceholder
               img={logo ? logo : null}
@@ -151,42 +141,32 @@ const Example: FC<OrganizationPageProps> = ({ organization, data }) => {
               width="calc(100% - 40px)"
             />
           </ImageWrapper>
-        </FlexWrapper>
+        </Box>
 
         {organization?.status === "deactivated" ? (
-          <FlexWrapper margin="24px" width="calc(100% - 48px)">
+          <Box margin="24px">
             {/* //ADD COLOR TO TYPOGRAPHY COMPONENT and THEME COLOR*/}
             <Typography variant="h3" color="#ca3336">
               {t("organization_is_deactivated")}
             </Typography>
-          </FlexWrapper>
+          </Box>
         ) : (
           organization?.status === "uncompleted" && (
-            <FlexWrapper margin="24px" width="calc(100% - 48px)">
+            <Box margin="24px">
               <Typography variant="h3" color="#ca3336">
                 {t("organization_is_uncompleted")}
               </Typography>
-            </FlexWrapper>
+            </Box>
           )
         )}
-        <FlexWrapper
-          margin="24px"
-          width="calc(100% - 48px)"
-          alignItems="center"
-          gap="12px"
-        >
+        <Box margin="24px" alignItems="center" gap="12px">
           <LogoPlacer>
             <Icon icon={organization.organizationType} transform="scale(0.7)" />
           </LogoPlacer>
           <Typography variant="h3"> {organization.title}</Typography>
-        </FlexWrapper>
+        </Box>
 
-        <FlexWrapper
-          margin="24px"
-          width="calc(100% - 48px)"
-          alignItems="center"
-          gap="10px"
-        >
+        <Box margin="24px" alignItems="center" gap="10px">
           {(organization.contact ||
             organization.weblink ||
             organization.address) && (
@@ -206,8 +186,8 @@ const Example: FC<OrganizationPageProps> = ({ organization, data }) => {
               onClick={() => setFaqOpen(true)}
             />
           )}
-        </FlexWrapper>
-        <FlexWrapper margin="21px 0px 0px 18px" width="calc(100% - 36px)">
+        </Box>
+        <Box margin="21px 0px 0px 18px">
           <TertiaryButton
             text={t("information")}
             iconRight="arrow"
@@ -218,29 +198,25 @@ const Example: FC<OrganizationPageProps> = ({ organization, data }) => {
             }
             onClick={() => setInfoOpen(!infoOpen)}
           />
-        </FlexWrapper>
-        <FlexWrapper margin="0px 0px 0px 24px" width="calc(100% - 48px)">
+        </Box>
+        <Box margin="0px 0px 0px 24px">
           <InfoWidget
             onClick={() => setInfoOpen(!infoOpen)}
             infoOpen={infoOpen}
           >
             <Typography variant="bodyBg">{organization.description}</Typography>
           </InfoWidget>
-        </FlexWrapper>
+        </Box>
 
         <Divider margin="14px 24px 16px 24px" width="calc(100% - 48px)" />
-        <FlexWrapper
-          margin="0px 0px 0px 24px"
-          width="calc(100% - 48px)"
-          gap="10px"
-        >
+        <Box margin="0px 0px 0px 24px" gap="10px">
           <Typography variant="buttonBg">Unsere Projekträume</Typography>
           <Typography variant="buttonBg">Kalender</Typography>
-        </FlexWrapper>
+        </Box>
 
-        <FlexWrapper margin="0px 12px" width="calc(100% - 24px)">
+        <Box margin="0px 12px">
           <List CardType={ProjectroomCard} data={data} />
-        </FlexWrapper>
+        </Box>
       </Dialog>
     </React.Fragment>
   );

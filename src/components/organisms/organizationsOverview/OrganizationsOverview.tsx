@@ -7,16 +7,15 @@ import { isMobileCustom } from "../../../hooks/customDeviceDetect";
 import theme from "../../../styles/theme";
 import Button from "../../atoms/buttons/Button";
 import RoundedButton from "../../atoms/buttons/RoundedButton";
-import FlexWrapper from "../../atoms/layout/FlexWrapper";
+import Box from "../../atoms/box/Box";
 import Shape from "../../atoms/shapes/Shape";
 import Typography from "../../atoms/typography/Typography";
-import Accordion from "../../molecules/accordion/Accordion";
 import OrganizationCard from "../../molecules/cards/OrganizationCard";
 import List from "../../molecules/list/List";
 import SwipeModal from "../../molecules/modals/SwipeModal";
 import SubNavbar from "../../molecules/navs/SubNavbar";
 import TagSlide from "../../molecules/tagSlide/TagSlide";
-import Toolbar from "../../toolbar/Toolbar";
+import Toolbar from "../../molecules/toolbar/Toolbar";
 import { OrganizationsOverviewProps } from "./OrganizationsOverview.types";
 
 const Wrapper = styled.div<OrganizationsOverviewProps>`
@@ -108,10 +107,10 @@ const OrganizationsOverview: FC<OrganizationsOverviewProps> = ({
       }
     >
       <InnerWrapper isMobileCustom={isMobileCustom}>
-        <FlexWrapper margin="16px 12px 16px 12px" width="calc(100% - 24px)">
+        <Box margin="16px 12px 16px 12px">
           <Toolbar />
-        </FlexWrapper>
-        <FlexWrapper margin="0px 12px 6px 12px" width="calc(100% - 24px)">
+        </Box>
+        <Box margin="0px 12px 6px 12px">
           <Button
             variant="secondary"
             borderStyle="dashed"
@@ -124,22 +123,18 @@ const OrganizationsOverview: FC<OrganizationsOverviewProps> = ({
             //     : () => setOpenModalAuthenticate(true)
             // }
           />
-        </FlexWrapper>
+        </Box>
         <List CardType={OrganizationCard} data={data} />
       </InnerWrapper>
     </SwipeModal>
   ) : (
     <Wrapper open={open}>
       <SVGWrapper searchOpen={searchOpen}>
-        <FlexWrapper position="fixed" margin="20px" width="50px" zIndex={2}>
+        <Box position="fixed" margin="20px" zIndex={2}>
           <RoundedButton icon="arrow" />
-        </FlexWrapper>
+        </Box>
         <HeaderWrapper>
-          <FlexWrapper
-            margin="20px"
-            width="calc(100% - 40px)"
-            justifyContent="center"
-          >
+          <Box margin="20px" justifyContent="center">
             <Typography
               variant="h2"
               // fontSize={document.body.clientWidth > 368 ? "22px" : "19px"}
@@ -147,11 +142,11 @@ const OrganizationsOverview: FC<OrganizationsOverviewProps> = ({
             >
               {t("organizations")}
             </Typography>
-          </FlexWrapper>
+          </Box>
 
-          <FlexWrapper margin="16px 12px 16px 12px" width="calc(100% - 24px)">
+          <Box margin="16px 12px 16px 12px">
             <Toolbar />
-          </FlexWrapper>
+          </Box>
 
           {/* <ButtonWrapper>
             <Button

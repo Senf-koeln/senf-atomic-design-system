@@ -13,16 +13,17 @@ import { SwipeModalProps } from "./SwipeModal.types";
 import { animated } from "@react-spring/web";
 import { isMobileCustom } from "../../../hooks/customDeviceDetect";
 import Typography from "../../atoms/typography/Typography";
-import FlexWrapper from "../../atoms/layout/FlexWrapper";
+import Box from "../../atoms/box/Box";
 import RoundedButton from "../../atoms/buttons/RoundedButton";
 import theme from "../../../styles/theme";
 import Shape from "../../atoms/shapes/Shape";
 import Wave from "../../atoms/shapes/Wave";
 import TagSlide from "../../molecules/tagSlide/TagSlide";
-import Toolbar from "../../toolbar/Toolbar";
+import Toolbar from "../../molecules/toolbar/Toolbar";
 import List from "../../molecules/list/List";
 import Button from "../../atoms/buttons/Button";
 import IdeaCard from "../../molecules/cards/IdeaCard";
+import { useTranslation } from "react-i18next";
 
 const DragWrapper = styled(animated.div)`
   z-index: ${({ zIndex }) => (zIndex ? zIndex : 9999)};
@@ -30,20 +31,15 @@ const DragWrapper = styled(animated.div)`
   overflow-x: hidden;
   width: 100%;
   height: 100%;
-  left: 0;
-
+  left: 0px;
   overflow: ${({ overflow }) => (overflow ? overflow : "scroll")};
-  background-color: ${({ backgroundBeige }) =>
-    backgroundBeige
-      ? theme.colors.primary.primary100
-      : theme.colors.primary.primary100};
+  background-color: ${({ theme }) => theme.colors.primary.primary100};
   border-radius: ${({ theme }) => theme.radii[4]}px
     ${({ theme }) => theme.radii[4]}px 0px 0px;
   box-shadow: ${({ theme }) => theme.shadows[0]}
     ${({ theme }) => theme.colors.brown.brown20tra};
 
   position: absolute;
-  animation: organizationOverviewEnterAnimation 0.5s;
 `;
 
 const InnerWrapper = styled.div<OrganizationsOverviewProps>`
@@ -51,16 +47,10 @@ const InnerWrapper = styled.div<OrganizationsOverviewProps>`
   pointer-events: all;
   height: calc(100% - 120px);
   width: 100%;
-  margin-top: ${(props) => (props.isMobileCustom ? "-10px" : "0px")};
-  overflow: scroll;
   z-index: 1;
   margin-left: 50%;
-  padding-bottom: 200px;
   transform: translateX(-50%);
   width: 100%;
-  max-width: 800px;
-  display: flex;
-  flex-direction: column;
 `;
 
 const RoundedButtonWrapper = styled.div`
@@ -86,7 +76,7 @@ export const Header = styled(animated.div)`
 `;
 
 const ToolbarWrapper = styled.div`
-  margin-top: ${({ swipedUp }) => (swipedUp ? "16px" : "-36px")};
+  margin-top: ${({ swipedUp }) => (swipedUp ? "16px" : "-46px")};
   transition: 0.5s;
   margin-left: 12px;
   width: calc(100% - 24px);
@@ -104,7 +94,7 @@ const HandleBar = styled.div`
   border-radius: 1px;
 `;
 
-const Wrapper = styled.div<MainSwipeListProps>``;
+const TagSlideWrapper = styled.div<MainSwipeListProps>``;
 
 const MainSwipeList: FC<MainSwipeListProps> = ({
   openModal,
@@ -119,7 +109,9 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
   openInsightsPage,
   selectedTopics,
   data,
+  setOpenOrganizationsOverview,
 }) => {
+  const { t } = useTranslation();
   const [swipePercentage, setSwipePercentage] = useState(0);
 
   const [swipedUp, setSwipedUp] = useState(false);
@@ -137,7 +129,8 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
   }));
 
   const [listHeaderProps, setListHeaderProps] = useSpring(() => ({
-    height: "70px",
+    height: "80px",
+    overflow: "hidden",
   }));
   // const setSwipeUp = () => {
   //   // dispatch(setSwipePositionUp());
@@ -230,6 +223,9 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
           touchAction: "none",
         });
         setSwipedUp(false);
+        setListHeaderProps({
+          overflow: "hidden",
+        });
 
         // dispatch(setSwipePositionDown());
 
@@ -246,6 +242,9 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
         });
 
         setSwipedUp(true);
+        setListHeaderProps({
+          overflow: "visible",
+        });
 
         // dispatch(setSwipePositionUp());
 
@@ -262,7 +261,7 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
             ? `${70 + 80 * swipePercentage}px`
             : last && my < -50
             ? "120px"
-            : "70px",
+            : "80px",
         });
       }
       if (swipedUp && my > 2) {
@@ -270,7 +269,7 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
           height: down
             ? `${120 - 80 * swipePercentage}px`
             : last && my > 50
-            ? "70px"
+            ? "80px"
             : "120px",
         });
       }
@@ -302,24 +301,52 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
           />
         </RoundedButtonWrapper>
         <Header {...bind()} swipedUp={swipedUp} style={listHeaderProps}>
-          <FlexWrapper
+          <Box
             margin={swipedUp ? "32px 24px 20px 24px" : "26px 24px 20px 24px"}
             gap="20px"
           >
-            <Typography variant="h3" style={{ fontWeight: 900 }}>
+            <Typography
+              variant="h3"
+              color="black"
+              fontWeight={900}
+              fontSize="5.6vw"
+            >
               Alle Ideen
             </Typography>
-            <Typography variant="h3" style={{ color: "#d6ab00" }}>
+            <Typography
+              variant="h3"
+              color="#d6ab00"
+              fontWeight={900}
+              fontSize="5.6vw"
+            >
               Projekträume
             </Typography>
-          </FlexWrapper>
-
-          <TagSlide type="topics" selectedTopics={selectedTopics} />
+          </Box>
+          <TagSlideWrapper>
+            <TagSlide type="topics" selectedTopics={selectedTopics} />
+          </TagSlideWrapper>
         </Header>
 
         <InnerWrapper isMobileCustom={isMobileCustom}>
           <ToolbarWrapper swipedUp={swipedUp}>
-            <Toolbar />
+            <Toolbar
+              setSearchOpen={setSearchOpen}
+              searchOpen={searchOpen}
+              secondButtonClick={setOpenOrganizationsOverview}
+              searchPlaceholder={t("searchBar")}
+              activeSortOptionLabel={t("newest_ideas")}
+              sortOptions={[
+                { name: "newest", label: t("newest_ideas") },
+                { name: "hottest", label: t("hottest_ideas") },
+              ]}
+              statusOptions={[
+                { name: "Unprocessed", label: t("unprocessed") },
+                { name: "Accepted", label: t("accepted") },
+                { name: "Planning", label: t("planning") },
+                { name: "Implemented", label: t("implemented") },
+                { name: "Rejected", label: t("rejected") },
+              ]}
+            />
           </ToolbarWrapper>
           <List CardType={IdeaCard} data={data} />
         </InnerWrapper>
