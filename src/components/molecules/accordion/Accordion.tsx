@@ -8,7 +8,7 @@ import { usePrevious } from "../../../hooks/usePrevious";
 import { useMeasure } from "../../../hooks/useMeasure";
 import Linkify from "linkify-react";
 import Typography from "../../atoms/typography/Typography";
-import FlexWrapper from "../../atoms/layout/FlexWrapper";
+import Box from "../../atoms/box/Box";
 import Icon from "../../atoms/icons/Icon";
 
 const AccordionWrapper = styled.ul<AccordionProps>`
@@ -84,7 +84,7 @@ export const AccordionItem = memo(({ header, body, defaultOpen = false }) => {
         }}
       >
         <div {...bind} className="accordion-item-content">
-          <FlexWrapper margin="0px 0px 20px 0px">
+          <Box margin="0px 0px 20px 0px">
             <Typography variant="bodyBg">
               <Linkify
                 options={{
@@ -97,7 +97,7 @@ export const AccordionItem = memo(({ header, body, defaultOpen = false }) => {
                 {body}
               </Linkify>
             </Typography>
-          </FlexWrapper>
+          </Box>
         </div>
       </a.div>
     </li>

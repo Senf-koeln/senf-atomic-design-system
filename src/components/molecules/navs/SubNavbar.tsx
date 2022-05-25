@@ -3,7 +3,6 @@
 import React, { FC } from "react";
 import styled from "styled-components";
 import TertiaryButton from "../../atoms/buttons/TertiaryButton";
-import FlexWrapper from "../../atoms/layout/FlexWrapper";
 import Typography from "../../atoms/typography/Typography";
 import { SubNavbarProps } from "./SubNavbar.types";
 

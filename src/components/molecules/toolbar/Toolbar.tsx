@@ -6,7 +6,7 @@ import styled from "styled-components";
 import Button from "../../atoms/buttons/Button";
 import TertiaryButton from "../../atoms/buttons/TertiaryButton";
 import Input from "../../atoms/inputs/Input";
-import FlexWrapper from "../../atoms/layout/FlexWrapper";
+import Box from "../../atoms/box/Box";
 import { ToolbarProps } from "./Toolbar.types";
 
 const Wrapper = styled.div<ToolbarProps>`
@@ -86,7 +86,7 @@ const Toolbar: FC<ToolbarProps> = ({
         iconRightTransform="rotate(0deg)"
       />
 
-      <FlexWrapper gap="8px" width="auto">
+      <Box gap="8px">
         <Button
           variant="secondary"
           icon="stats"
@@ -104,7 +104,7 @@ const Toolbar: FC<ToolbarProps> = ({
           searchTerm={searchTerm}
           searchOpen={searchOpen}
         />
-      </FlexWrapper>
+      </Box>
 
       {/* {isMobileCustom && <Background onClick={handleClickSwipe} />} */}
       {searchOpen && (

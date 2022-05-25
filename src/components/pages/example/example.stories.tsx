@@ -8,7 +8,7 @@ import Example from "./Example";
 import { ExampleProps } from "./Example.types";
 
 export default {
-  title: "Templates/Example",
+  title: "Organisms/Example",
   component: Example,
   argTypes: {},
 } as Meta<typeof Example>;

@@ -5,9 +5,9 @@ import styled from "styled-components";
 import TagSlide from "../../molecules/tagSlide/TagSlide";
 import MainSwipeList from "../../organisms/mainSwipeList/MainSwipeList";
 import OrganizationsOverview from "../../organisms/organizationsOverview/OrganizationsOverview";
-import { MainAppProps } from "./MainApp.types";
+import { HomescreenMainappProps } from "./HomescreenMainapp.types";
 
-const Wrapper = styled.div<MainAppProps>`
+const Wrapper = styled.div<HomescreenMainappProps>`
   position: fixed;
   width: 100vw;
   height: 100vh;
@@ -16,14 +16,14 @@ const Wrapper = styled.div<MainAppProps>`
   overflow: hidden;
 `;
 
-const TagSlideWrapper = styled.div<MainAppProps>`
+const TagSlideWrapper = styled.div<HomescreenMainappProps>`
   position: fixed;
   width: 100vw;
   top: 50px;
   left: 0;
 `;
 
-const MainApp: FC<MainAppProps> = ({ selectedTopics }) => {
+const HomescreenMainapp: FC<HomescreenMainappProps> = ({ selectedTopics }) => {
   const [openOrganizationsOverview, setOpenOrganizationsOverview] =
     useState(false);
   return (
@@ -132,4 +132,4 @@ const MainApp: FC<MainAppProps> = ({ selectedTopics }) => {
   );
 };
 
-export default MainApp;
+export default HomescreenMainapp;

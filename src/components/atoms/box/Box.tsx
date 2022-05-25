@@ -2,13 +2,13 @@
 
 import React, { FC } from "react";
 import styled from "styled-components";
-import { FlexWrapperProps } from "./FlexWrapper.types";
+import { BoxProps } from "./Box.types";
 
-const Wrapper = styled.div<FlexWrapperProps>`
+const Wrapper = styled.div<BoxProps>`
   position: ${({ position }) => (position ? position : "relative")};
   left: ${({ left }) => (left ? left : undefined)};
   right: ${({ right }) => (right ? right : undefined)};
-  width: ${({ width }) => (width ? width : "100%")};
+  width: ${({ width }) => (width ? width : "auto")};
   height: ${({ height }) => (height ? height : "auto")};
 
   margin: ${({ margin }) => (margin ? margin : "0")};
@@ -23,7 +23,7 @@ const Wrapper = styled.div<FlexWrapperProps>`
   z-index: ${({ zIndex }) => (zIndex ? zIndex : undefined)};
 `;
 
-const FlexWrapper: FC<FlexWrapperProps> = ({
+const Box: FC<BoxProps> = ({
   children,
   position,
   flexDirection,
@@ -58,4 +58,4 @@ const FlexWrapper: FC<FlexWrapperProps> = ({
   );
 };
 
-export default FlexWrapper;
+export default Box;

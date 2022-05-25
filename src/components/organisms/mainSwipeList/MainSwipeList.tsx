@@ -13,7 +13,7 @@ import { SwipeModalProps } from "./SwipeModal.types";
 import { animated } from "@react-spring/web";
 import { isMobileCustom } from "../../../hooks/customDeviceDetect";
 import Typography from "../../atoms/typography/Typography";
-import FlexWrapper from "../../atoms/layout/FlexWrapper";
+import Box from "../../atoms/box/Box";
 import RoundedButton from "../../atoms/buttons/RoundedButton";
 import theme from "../../../styles/theme";
 import Shape from "../../atoms/shapes/Shape";
@@ -301,7 +301,7 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
           />
         </RoundedButtonWrapper>
         <Header {...bind()} swipedUp={swipedUp} style={listHeaderProps}>
-          <FlexWrapper
+          <Box
             margin={swipedUp ? "32px 24px 20px 24px" : "26px 24px 20px 24px"}
             gap="20px"
           >
@@ -321,7 +321,7 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
             >
               Projekträume
             </Typography>
-          </FlexWrapper>
+          </Box>
           <TagSlideWrapper>
             <TagSlide type="topics" selectedTopics={selectedTopics} />
           </TagSlideWrapper>
