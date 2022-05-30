@@ -7,7 +7,7 @@ import Button from "../../atoms/buttons/Button";
 import Box from "../../atoms/box/Box";
 import Shape from "../../atoms/shapes/Shape";
 import Form from "../../molecules/form/Form";
-import { AuthProps } from "./Auth.types";
+import { AuthOptionsProps } from "./AuthOptionsOptions.types";
 import { useFormik } from "formik";
 import * as yup from "yup";
 
@@ -19,7 +19,7 @@ import Mail from "../../../assets/icons/Mail";
 import Google from "../../../assets/icons/Google";
 import Apple from "../../../assets/icons/Apple";
 
-const Wrapper = styled.div<AuthProps>`
+const Wrapper = styled.div<AuthOptionsProps>`
   position: relative;
   width: 100%;
   max-width: 400px;
@@ -46,7 +46,7 @@ const StyledSvg = styled.svg`
   user-select: none;
 `;
 
-const Auth: FC<AuthProps> = ({
+const AuthOptions: FC<AuthOptionsProps> = ({
   variant,
   loading,
   handleSubmitRegister,
@@ -364,4 +364,4 @@ const Auth: FC<AuthProps> = ({
   );
 };
 
-export default Auth;
+export default AuthOptions;

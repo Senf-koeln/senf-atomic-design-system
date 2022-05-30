@@ -39,7 +39,7 @@ export { default as Modal } from "./components/molecules/modals/Modal";
 export { default as SubNavbar } from "./components/molecules/navs/SubNavbar";
 export { default as Accordion } from "./components/molecules/accordion/Accordion";
 
-export { default as Auth } from "./components/templates/auth/Auth";
+export { default as Auth } from "./components/templates/auth/AuthOptions";
 
 export { default as theme } from "./styles/theme";
 export { default as GlobalStyle } from "./styles/globals";
