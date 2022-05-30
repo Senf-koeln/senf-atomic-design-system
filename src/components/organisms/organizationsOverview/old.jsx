@@ -38,7 +38,7 @@ import { stateCreateOrganizationsFunc } from "../../../redux/actions/organizatio
 import List from "../../molecules/List/List";
 
 import MainModal from "../../atoms/Layout/MainModal";
-import LoginRegistration from "../Auth/LoginRegistration";
+import LoginRegistration from "../../templates/auth/LoginRegistration";
 import { SubmitButton } from "../../atoms/CustomButtons/SubmitButton";
 import { StyledH3 } from "../../../styles/GlobalStyle";
 

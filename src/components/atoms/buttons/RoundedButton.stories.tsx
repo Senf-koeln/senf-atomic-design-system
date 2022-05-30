@@ -4,6 +4,7 @@ import React from "react";
 import { Story, Meta } from "@storybook/react";
 import RoundedButton from "./RoundedButton";
 import { ButtonProps } from "./Button.types";
+import Plus from "../../../assets/icons/Plus";
 
 export default {
   title: "Atom/RoundedButton",
@@ -15,8 +16,8 @@ const Template: Story<ButtonProps> = (args) => <RoundedButton {...args} />;
 
 export const AddButton = Template.bind({});
 AddButton.args = {
-  icon: "plus",
-  color: "rgb(226,183,54)",
+  icon: <Plus color="rgb(226,183,54)" transform="scale(1.5)" />,
+
   size: "big",
 };
 

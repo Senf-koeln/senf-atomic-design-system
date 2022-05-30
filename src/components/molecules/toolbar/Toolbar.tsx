@@ -66,6 +66,10 @@ const Toolbar: FC<ToolbarProps> = ({
   sortOptions,
   statusOptions,
   activeSortOptionLabel,
+
+  secondButtonClick,
+  secondButtonLabel,
+  secondButtonIcon,
 }) => {
   const { t } = useTranslation();
 
@@ -87,14 +91,16 @@ const Toolbar: FC<ToolbarProps> = ({
       />
 
       <Box gap="8px">
-        <Button
-          variant="secondary"
-          icon="stats"
-          text={t("statistics")}
-          size="small"
-          transform="scale(0.7)"
-          onClick={setSearch}
-        />
+        {secondButtonClick && (
+          <Button
+            variant="secondary"
+            icon={secondButtonIcon}
+            text={secondButtonLabel}
+            size="small"
+            transform="scale(0.7)"
+            onClick={secondButtonClick}
+          />
+        )}
         <Button
           variant="secondary"
           icon="search"

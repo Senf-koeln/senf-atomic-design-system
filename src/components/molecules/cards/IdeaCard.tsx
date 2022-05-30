@@ -10,6 +10,9 @@ import { IdeaCardProps } from "./IdeaCard.types";
 import { t } from "i18next";
 import TertiaryButton from "../../atoms/buttons/TertiaryButton";
 import setColorByTopic from "../../../data/setColorByTopic";
+import Dot from "../../../assets/icons/Dot";
+import FlameInactive from "../../../assets/icons/FlameInactive";
+import CommentInactive from "../../../assets/icons/CommentInactive";
 
 const Wrapper = styled.div<IdeaCardProps>`
   float: left;
@@ -79,7 +82,7 @@ const IdeaCard: FC<IdeaCardProps> = ({ data, handleButtonClick }) => {
           gap="5px"
           margin="10px 0px 12px 0px"
         >
-          <Icon icon="dot" color={setColorByTopic(Thema)} />
+          <Icon icon={<Dot color={setColorByTopic(Thema)} />} />
           <Typography variant="bodySm" color={setColorByTopic(Thema)}>
             {Stadtteil}
           </Typography>
@@ -89,8 +92,11 @@ const IdeaCard: FC<IdeaCardProps> = ({ data, handleButtonClick }) => {
             flexDirection="row"
             margin="0px 0px 0px auto"
           >
-            <TertiaryButton iconLeft="flameOutline" text={ideaCount} />
-            <TertiaryButton iconLeft="commentOutline" text={commentCount} />
+            <TertiaryButton iconLeft={<FlameInactive />} text={ideaCount} />
+            <TertiaryButton
+              iconLeft={<CommentInactive />}
+              text={commentCount}
+            />
           </Box>
         </Box>
 
@@ -115,7 +121,6 @@ const IdeaCard: FC<IdeaCardProps> = ({ data, handleButtonClick }) => {
             margin="0px 10px"
           >
             <Icon icon={organizationType} transform="scale(0.8)" />
-
             <Typography variant="bodySm">{projectroomName}</Typography>
           </Box>
         </ProjectroomOpenButton>

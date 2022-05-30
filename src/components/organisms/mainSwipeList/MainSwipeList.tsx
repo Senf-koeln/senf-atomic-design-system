@@ -24,6 +24,7 @@ import List from "../../molecules/list/List";
 import Button from "../../atoms/buttons/Button";
 import IdeaCard from "../../molecules/cards/IdeaCard";
 import { useTranslation } from "react-i18next";
+import Plus from "../../../assets/icons/Plus";
 
 const DragWrapper = styled(animated.div)`
   z-index: ${({ zIndex }) => (zIndex ? zIndex : 9999)};
@@ -40,6 +41,11 @@ const DragWrapper = styled(animated.div)`
     ${({ theme }) => theme.colors.brown.brown20tra};
 
   position: absolute;
+
+  @media (min-width: 768px) {
+    width: 400px;
+    border-radius: 0px;
+  }
 `;
 
 const InnerWrapper = styled.div<OrganizationsOverviewProps>`
@@ -110,6 +116,9 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
   selectedTopics,
   data,
   setOpenOrganizationsOverview,
+  seccondButtonClick,
+  secondButtonLabel,
+  secondButtonIcon,
 }) => {
   const { t } = useTranslation();
   const [swipePercentage, setSwipePercentage] = useState(0);
@@ -286,53 +295,65 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
 
   return (
     <React.Fragment>
-      <DragWrapper style={springProps}>
-        <HandleBar />
+      <DragWrapper style={isMobileCustom() ? springProps : null}>
         <Wave
           color={theme.colors.beige.beige20}
-          top={swipedUp ? "0px" : "200px"}
+          top={swipedUp || !isMobileCustom() ? "0px" : "200px"}
           position="fixed"
         />
-        <RoundedButtonWrapper swipedUp={swipedUp}>
-          <RoundedButton
-            size="big"
-            icon="plus"
-            color={theme.colors.primary.primary120}
-          />
-        </RoundedButtonWrapper>
-        <Header {...bind()} swipedUp={swipedUp} style={listHeaderProps}>
-          <Box
-            margin={swipedUp ? "32px 24px 20px 24px" : "26px 24px 20px 24px"}
-            gap="20px"
-          >
-            <Typography
-              variant="h3"
-              color="black"
-              fontWeight={900}
-              fontSize="5.6vw"
-            >
-              Alle Ideen
-            </Typography>
-            <Typography
-              variant="h3"
-              color="#d6ab00"
-              fontWeight={900}
-              fontSize="5.6vw"
-            >
-              Projekträume
-            </Typography>
-          </Box>
-          <TagSlideWrapper>
-            <TagSlide type="topics" selectedTopics={selectedTopics} />
-          </TagSlideWrapper>
-        </Header>
+        {isMobileCustom() && (
+          <React.Fragment>
+            <HandleBar />
+            <RoundedButtonWrapper swipedUp={swipedUp}>
+              <RoundedButton
+                size="big"
+                icon={
+                  <Plus
+                    color={theme.colors.primary.primary120}
+                    transform="scale(1.5)"
+                  />
+                }
+              />
+            </RoundedButtonWrapper>
+            <Header {...bind()} swipedUp={swipedUp} style={listHeaderProps}>
+              <Box
+                margin={
+                  swipedUp ? "32px 24px 20px 24px" : "26px 24px 20px 24px"
+                }
+                gap="20px"
+              >
+                <Typography
+                  variant="h3"
+                  color="black"
+                  fontWeight={900}
+                  fontSize="5.6vw"
+                >
+                  Alle Ideen
+                </Typography>
+                <Typography
+                  variant="h3"
+                  color="#d6ab00"
+                  fontWeight={900}
+                  fontSize="5.6vw"
+                >
+                  Projekträume
+                </Typography>
+              </Box>
+              <TagSlideWrapper>
+                <TagSlide type="topics" selectedTopics={selectedTopics} />
+              </TagSlideWrapper>
+            </Header>
+          </React.Fragment>
+        )}
 
         <InnerWrapper isMobileCustom={isMobileCustom}>
-          <ToolbarWrapper swipedUp={swipedUp}>
+          <ToolbarWrapper swipedUp={swipedUp || !isMobileCustom()}>
             <Toolbar
               setSearchOpen={setSearchOpen}
               searchOpen={searchOpen}
-              secondButtonClick={setOpenOrganizationsOverview}
+              secondButtonClick={seccondButtonClick}
+              secondButtonText={secondButtonLabel}
+              secondButtonIcon={secondButtonIcon}
               searchPlaceholder={t("searchBar")}
               activeSortOptionLabel={t("newest_ideas")}
               sortOptions={[

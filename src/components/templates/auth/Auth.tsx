@@ -15,6 +15,9 @@ import SenfManSquating from "../../../assets/illustrations/senfManSquatting.png"
 import Typography from "../../atoms/typography/Typography";
 import { openLink } from "../../../util/helpers";
 import Wave from "../../atoms/shapes/Wave";
+import Mail from "../../../assets/icons/Mail";
+import Google from "../../../assets/icons/Google";
+import Apple from "../../../assets/icons/Apple";
 
 const Wrapper = styled.div<AuthProps>`
   position: relative;
@@ -215,6 +218,7 @@ const Auth: FC<AuthProps> = ({
             variant="white"
             fillWidth="max"
             text="Mit Google anmelden"
+            icon={<Google />}
             loading={googleLoading}
             onClick={() => setGoogleLoading(true)}
           />
@@ -224,6 +228,7 @@ const Auth: FC<AuthProps> = ({
             fillWidth="max"
             text="Mit Apple anmelden"
             loading={loading}
+            icon={<Apple />}
             onClick={() => console.log("")}
           />
 
@@ -233,7 +238,7 @@ const Auth: FC<AuthProps> = ({
             text="Mit Email-Adresse anmelden"
             loading={loading}
             onClick={() => console.log("")}
-            icon="mail"
+            icon={<Mail />}
           />
         </Box>
 
