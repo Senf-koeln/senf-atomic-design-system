@@ -44,6 +44,7 @@ const DragWrapper = styled(animated.div)`
 
   @media (min-width: 768px) {
     width: 400px;
+    max-width: 400px;
     border-radius: 0px;
   }
 `;
@@ -299,7 +300,7 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
         <Wave
           color={theme.colors.beige.beige20}
           top={swipedUp || !isMobileCustom() ? "0px" : "200px"}
-          position="fixed"
+          // position="fixed"
         />
         {isMobileCustom() && (
           <React.Fragment>

@@ -25,12 +25,17 @@ const Wrapper = styled.div<ModalProps>`
       : "400px"};
   max-height: calc(100vh - 40px);
   overflow: ${({ overflow }) => (overflow ? overflow : "scroll")};
-  background-color: ${({ backgroundColor }) =>
-    backgroundColor ? backgroundColor : "white"};
+  background-color: ${({ backgroundColor, theme }) =>
+    backgroundColor === "primary"
+      ? theme.colors.primary.primary100
+      : backgroundColor === "beige"
+      ? theme.colors.beige.beige20
+      : "white"};
   border-radius: ${({ theme }) => theme.radii[4]}px;
 
   box-shadow: ${({ theme }) => theme.shadows[0]}
     ${({ theme }) => theme.colors.brown.brown20tra};
+  transition: 0.2s;
 `;
 
 const Background = styled.div<ModalProps>`

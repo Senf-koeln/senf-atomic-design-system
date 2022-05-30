@@ -8,7 +8,7 @@ import Auth from "./Auth";
 import { AuthProps } from "./Auth.types";
 
 export default {
-  title: "Organisms/Auth",
+  title: "Templates/Auth",
   component: Auth,
   argTypes: {},
 } as Meta<typeof Auth>;

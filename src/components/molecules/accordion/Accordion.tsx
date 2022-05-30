@@ -10,12 +10,13 @@ import Linkify from "linkify-react";
 import Typography from "../../atoms/typography/Typography";
 import Box from "../../atoms/box/Box";
 import Icon from "../../atoms/icons/Icon";
+import Arrow from "../../../assets/icons/Arrow";
 
 const AccordionWrapper = styled.ul<AccordionProps>`
   list-style: none;
   margin: 0;
   padding: 0;
-  padding: 0px 20px 20px 20px;
+  /* padding: 0px 20px 20px 20px; */
   overflow: hidden;
   .accordion-item {
     border-top: 1px solid ${({ theme }) => theme.colors.brown.brown20tra};
@@ -67,7 +68,7 @@ export const AccordionItem = memo(({ header, body, defaultOpen = false }) => {
         </Typography>
 
         <Icon
-          icon="arrow"
+          icon={<Arrow transform="rotate(90deg)" />}
           transform="scale(0.7)"
           style={{
             ...(isOpen && {
