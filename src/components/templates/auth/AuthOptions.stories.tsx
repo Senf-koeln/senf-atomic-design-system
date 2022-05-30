@@ -3,17 +3,17 @@
 import React from "react";
 import { Story, Meta } from "@storybook/react";
 
-import Auth from "./Auth";
+import AuthOptions from "./AuthOptions";
 
-import { AuthProps } from "./Auth.types";
+import { AuthOptionsProps } from "./AuthOptions.types";
 
 export default {
-  title: "Organisms/Auth",
-  component: Auth,
+  title: "Templates/AuthOptions",
+  component: AuthOptions,
   argTypes: {},
-} as Meta<typeof Auth>;
+} as Meta<typeof AuthOptions>;
 
-const Template: Story<AuthProps> = (args) => <Auth {...args} />;
+const Template: Story<AuthOptionsProps> = (args) => <AuthOptions {...args} />;
 
 export const Login = Template.bind({});
 

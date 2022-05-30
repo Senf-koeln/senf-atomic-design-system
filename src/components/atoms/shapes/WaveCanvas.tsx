@@ -9,7 +9,7 @@ const WaveCanvas = ({ canvasRef, props }) => {
       style={{
         transform: "rotate(-6deg) translateX(-50px)",
         display: "block",
-        width: "490px",
+        width: "130%",
         height: "870px",
         top: props.top,
         position: props.position ? props.position : "absolute",

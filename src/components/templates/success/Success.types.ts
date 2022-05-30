@@ -1,7 +1,7 @@
 /** @format */
 
 import { MouseEventHandler } from "react";
-export interface AuthProps {
+export interface SuccessProps {
   text?: string;
   variant?: "register" | "login";
   loading?: boolean;

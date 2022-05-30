@@ -3,6 +3,8 @@
 import React, { FC, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
+import Dot from "../../../assets/icons/Dot";
+import DotAllTopics from "../../../assets/icons/DotAllTopics";
 import organizationTypes from "../../../data/organizationTypes";
 import setColorByTopic from "../../../data/setColorByTopic";
 import topics from "../../../data/topiccs";
@@ -81,7 +83,7 @@ const TagSlide: FC<TagSlideProps> = ({
                 : selectedOrganizationTypes?.length === 7
             }
             color="#000000"
-            icon="topics-all"
+            icon={<DotAllTopics />}
             text={
               type === "topics" ? t("topics_all") : t("organizationTypes_all")
             }
@@ -97,9 +99,8 @@ const TagSlide: FC<TagSlideProps> = ({
                     selectedTopics.includes(topic.name) &&
                     selectedTopics?.length !== 7
                   }
-                  iconColor={setColorByTopic(topic.name)}
                   text={topic.label}
-                  icon="dot"
+                  icon={<Dot color={setColorByTopic(topic.name)} />}
                   // hide={
                   //   (placing === "list" && swipePosition === "bottom") ||
                   //   (placing !== "list" &&
