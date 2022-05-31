@@ -12,11 +12,16 @@ import { openLink } from "../../../util/helpers";
 import Mail from "../../../assets/icons/Mail";
 import Google from "../../../assets/icons/Google";
 import Apple from "../../../assets/icons/Apple";
+import Facebook from "../../../assets/icons/Facebook";
 
-const AuthOptions: FC<AuthOptionsProps> = ({ loading, setPage }) => {
+const AuthOptions: FC<AuthOptionsProps> = ({
+  handleGoogleSignIn,
+  googleLoading,
+  handleFacebookSignIn,
+  facebookLoading,
+  setPage,
+}) => {
   const { t } = useTranslation();
-  const [googleLoading, setGoogleLoading] = useState(false);
-  const [appleLoading, setAppleLoading] = useState(false);
 
   return (
     <Box
@@ -44,23 +49,22 @@ const AuthOptions: FC<AuthOptionsProps> = ({ loading, setPage }) => {
           text="Mit Google anmelden"
           icon={<Google />}
           loading={googleLoading}
-          onClick={() => setGoogleLoading(true)}
+          onClick={handleGoogleSignIn}
         />
 
         <Button
           variant="white"
           fillWidth="max"
-          text="Mit Apple anmelden"
-          loading={loading}
-          icon={<Apple />}
-          onClick={() => console.log("")}
+          text="Mit Facebook anmelden"
+          loading={facebookLoading}
+          icon={<Facebook />}
+          onClick={handleFacebookSignIn}
         />
 
         <Button
           variant="white"
           fillWidth="max"
           text="Mit Email-Adresse anmelden"
-          loading={loading}
           onClick={() => setPage("authEmail")}
           icon={<Mail />}
         />

@@ -1,5 +1,8 @@
+/** @format */
+
 import React, { FunctionComponent } from "react";
-import { Wrapper, Indication, InputField } from "../inputs/input.styles";
+import Box from "../box/Box";
+import { Wrapper, Label, Note, InputField } from "../inputs/input.styles";
 import { Selector } from "./Dropdown.styles";
 import { DropdownProps } from "./Dropdown.types";
 
@@ -20,11 +23,11 @@ const Dropdown: FunctionComponent<DropdownProps> = ({
   }
   return (
     <Wrapper>
-      <Indication>
-        <label htmlFor={id}>{label}</label>
-        <p>{note}</p>
-      </Indication>
-      <div style={{ display: "flex", gap: "0.5rem" }}>
+      <Box>
+        <Label htmlFor={id}>{label}</Label>
+        <Note>{note}</Note>
+      </Box>
+      <Box gap="0.5rem">
         {multi ? (
           (listItems as string[][]).map((arrItem) => (
             <InputField multi as={Selector} name={id} id={id}>
@@ -40,7 +43,7 @@ const Dropdown: FunctionComponent<DropdownProps> = ({
             ))}
           </InputField>
         )}
-      </div>
+      </Box>
     </Wrapper>
   );
 };

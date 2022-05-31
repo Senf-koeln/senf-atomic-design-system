@@ -20,22 +20,25 @@ export const Wrapper = styled.div<{ disabled?: boolean }>`
   opacity: ${({ disabled }) => disabled && "0.5"};
 `;
 
-export const Indication = styled.div<{ error?: boolean }>`
-  display: flex;
-  justify-content: space-between;
+export const Label = styled.label<{ error?: boolean }>`
+  align-self: flex-start;
+  flex: auto;
   color: ${({ theme, error }) => error && theme.colors.signal.redDark};
-  label {
-    font-size: ${({ theme }) => theme.fontSizes[1]}rem;
-    font-weight: ${({ theme }) => theme.fontWeights[1]};
-    line-height: ${({ theme }) => theme.lineHeight[0]};
-  }
 
-  p {
-    font-size: ${({ theme }) => theme.fontSizes[0]}rem;
-    text-align: end;
-    line-height: ${({ theme }) => theme.lineHeight[2]};
-    flex-basis: 7rem;
-  }
+  font-size: ${({ theme }) => theme.fontSizes[1]}rem;
+  font-weight: ${({ theme }) => theme.fontWeights[1]};
+  line-height: ${({ theme }) => theme.lineHeight[0]};
+`;
+
+export const Note = styled.p<{ error?: boolean }>`
+  align-self: flex-end;
+  flex: auto;
+  color: ${({ theme, error }) => error && theme.colors.signal.redDark};
+
+  font-size: ${({ theme }) => theme.fontSizes[0]}rem;
+  text-align: end;
+  line-height: ${({ theme }) => theme.lineHeight[2]};
+  flex-basis: 7rem;
 `;
 
 export const InputField = styled.div<{ focus: boolean }>`
@@ -83,7 +86,7 @@ export const TextField = styled.input`
   /* font-size: ${({ theme }) => theme.fontSizes[2]}rem; */
   border: 0;
   flex: 1;
-  background-color: transparent;
+  background-color: transparent !important;
   color: rgb(51, 51, 51);
 
   /* Styles for search input */

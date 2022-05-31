@@ -13,12 +13,14 @@ import * as yup from "yup";
 import Typography from "../../atoms/typography/Typography";
 import { openLink } from "../../../util/helpers";
 import Dropdown from "../../atoms/dropdown/Dropdown";
+import theme from "../../../styles/theme";
 
 const AuthEmail: FC<AuthEmailProps> = ({
   variant,
   loading,
   handleSubmitRegister,
   handleSubmitLogin,
+  errorMessage,
   setPage,
 }) => {
   const { t } = useTranslation();
@@ -111,7 +113,7 @@ const AuthEmail: FC<AuthEmailProps> = ({
       handle: "",
     },
     validationSchema: registerValidationSchema,
-    validateOnMount: false,
+    validateOnMount: true,
     validateOnChange: true,
     validateOnBlur: true,
     onSubmit: () => console.log("values"),
@@ -177,6 +179,12 @@ const AuthEmail: FC<AuthEmailProps> = ({
               ["gender", "Female", "Male"],
             ]}
           />
+        )}
+
+        {errorMessage && (
+          <Typography variant="bodySm" color={theme.colors.signal.redDark}>
+            {errorMessage}
+          </Typography>
         )}
       </Box>
 

@@ -10,10 +10,10 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import Typography from "../../atoms/typography/Typography";
 import Form from "../../molecules/form/Form";
+import theme from "../../../styles/theme";
 
 const AuthResetEmail: FC<AuthResetEmailProps> = ({
-  variant,
-  loading,
+  resetLoading,
   handleSubmitResetEmail,
 }) => {
   const { t } = useTranslation();
@@ -32,7 +32,9 @@ const AuthResetEmail: FC<AuthResetEmailProps> = ({
       email: "",
     },
     validationSchema: validationSchema,
-    validateOnMount: false,
+    validateOnMount: true,
+    validateOnChange: true,
+    validateOnBlur: true,
     onSubmit: () => console.log("values"),
   });
 
@@ -56,13 +58,20 @@ const AuthResetEmail: FC<AuthResetEmailProps> = ({
       </Box>
       <Box gap="16px" flexDirection="column" width="100%">
         <Form width="100%" inputItems={inputItems} formik={formikStore} />
+
+        {dataSuccess && (
+          <Typography variant="bodySm" color={theme.colors.signal.greenDark}>
+            {dataSuccess}
+          </Typography>
+        )}
+
         <Button
           variant="white"
           fillWidth="max"
           text={t("reset")}
-          loading={loading}
+          loading={resetLoading}
           onClick={() => handleSubmitResetEmail(formikStore)}
-          disabled={formikStore?.isValid}
+          disabled={!formikStore?.isValid}
         />
       </Box>{" "}
     </Box>

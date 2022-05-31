@@ -1,16 +1,21 @@
+/** @format */
+
 import React, { ChangeEvent, FunctionComponent, useRef, useState } from "react";
 import {
   TextField,
-  Indication,
+  Note,
+  Label,
   InputField,
   Wrapper,
   HoverContainer,
 } from "./input.styles";
 import { InputProps } from "./Input.types";
 import Icon from "../icons/Icon";
+import Box from "../box/Box";
 
 const Input: FunctionComponent<InputProps> = ({
   id,
+  name,
   type,
   label,
   note,
@@ -22,6 +27,8 @@ const Input: FunctionComponent<InputProps> = ({
   disabled,
   rows,
   onChange,
+  value,
+  onBlur,
   onClick,
   receiveValue,
   ...props
@@ -29,32 +36,39 @@ const Input: FunctionComponent<InputProps> = ({
   const [isSearch, setIsSearch] = useState(type === "search");
   const [isPassword, setIsPassword] = useState(type === "password");
   const [isFocused, setIsFocused] = useState(false);
-  const [value, setValue] = useState("");
+  // const [value, setValue] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
   return (
-    <Wrapper id={id} disabled={disabled}>
+    <Wrapper disabled={disabled}>
       {(label || note) && (
-        <Indication error={error}>
-          {label && <label>{`${label}${required ? "*" : ""}`}</label>}
-          {note && <p>{note}</p>}
-        </Indication>
+        <Box>
+          {label && (
+            <Label error={error}>{`${label}${required ? "*" : ""}`}</Label>
+          )}
+          {note && <Note error={error}>{note}</Note>}
+        </Box>
       )}
+
       <InputField
+        id={id}
         focus={isFocused}
         onFocusCapture={() => setIsFocused((prevState) => !prevState)}
         onBlurCapture={() => setIsFocused((prevState) => !prevState)}
+        onBlur={(event) => onBlur(event)}
       >
         {isSearch && <Icon icon="search" />}
         <TextField
+          id={name}
           type={isPassword ? "password" : isSearch ? "search" : "text"}
           placeholder={placeholder || `${isSearch ? "Search" : ""}`}
           disabled={disabled}
           rows={rows}
           value={value}
-          onChange={(e: React.FormEvent<HTMLInputElement>) => {
-            setValue(e.currentTarget.value);
-            receiveValue(e.currentTarget.value);
-          }}
+          // onChange={(e: React.FormEvent<HTMLInputElement>) => {
+          //   setValue(e.currentTarget.value);
+          //   receiveValue(e.currentTarget.value);
+          // }}
+          onChange={onChange}
           ref={inputRef}
           as={type === "textarea" ? "textarea" : "input"}
         />
@@ -62,10 +76,11 @@ const Input: FunctionComponent<InputProps> = ({
           <HoverContainer>
             <Icon
               icon="plus"
-              onClick={() => {
-                inputRef.current!.focus();
-                setValue("");
-              }}
+              onClick={() => onChange("")}
+              // onClick={() => {
+              //   inputRef.current!.focus();
+              //   setValue("");
+              // }}
             />
           </HoverContainer>
         )}

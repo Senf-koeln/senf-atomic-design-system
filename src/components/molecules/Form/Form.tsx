@@ -27,7 +27,7 @@ const Form: FC<FormProps> = ({
         {inputItems?.map(({ name, type, placeholder, label }) => {
           return (
             <Input
-              //   key={item.id}
+              id={name}
               name={name}
               type={type}
               placeholder={placeholder}

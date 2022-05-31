@@ -54,83 +54,96 @@ const StyledSvg = styled.svg`
 const Auth: FC<AuthProps> = ({
   handleClose,
   handleSubmitRegister,
+  registerLoading,
   handleSubmitLogin,
+  loginLoading,
+  handleGoogleSignIn,
+  googleLoading,
+  handleFacebookSignIn,
+  facebookLoading,
+  resetLoading,
+  handleSubmitResetEmail,
   socialLoginVerified,
   emailRegistrationSubmitted,
   emailVerified,
+  errorMessage,
+  dataSuccess,
 }) => {
   const [page, setPage] = useState("authOptions");
-  const setOpenModal = () => {};
   return (
-    <Modal
-      openModal={true}
-      setOpenModal={setOpenModal}
-      zIndex="999999999"
-      backgroundColor="beige"
-    >
-      <Wrapper>
-        <Box margin="24px" position="absolute" zIndex={999}>
-          <RoundedButton
-            icon={
-              page === "authOptions" ? (
-                <Plus transform="rotate(45deg)" />
-              ) : (
-                <Arrow transform="rotate(180deg)" />
-              )
-            }
-            onClick={
-              page === "authOptions"
-                ? handleClose
-                : () => setPage("authOptions")
-            }
-          />
-        </Box>
-        <Wave color="#fed957" top="170px" />
+    <Wrapper>
+      <Box margin="24px" position="absolute" zIndex={999}>
+        <RoundedButton
+          icon={
+            page === "authOptions" ? (
+              <Plus transform="rotate(45deg)" />
+            ) : (
+              <Arrow transform="rotate(180deg)" />
+            )
+          }
+          onClick={
+            page === "authOptions" ? handleClose : () => setPage("authOptions")
+          }
+        />
+      </Box>
+      <Wave color="#fed957" top="170px" />
 
-        <Img src={SenfManSquating} alt="Illustration" />
+      <Img src={SenfManSquating} alt="Illustration" />
 
-        <StyledSvg xmlns="http://www.w3.org/2000/svg" width="175" height="69">
-          <g>
-            <defs>
-              <linearGradient
-                id="idX0hbBYeIVg-1861781537"
-                gradientTransform="rotate(154, 0.5, 0.5)"
-              >
-                <stop
-                  offset="0"
-                  stop-color="rgba(186, 163, 79, 0)"
-                  stop-opacity="0"
-                ></stop>
-                <stop
-                  offset="1"
-                  stop-color="rgba(119, 108, 70, 0.46)"
-                  stop-opacity="0.46"
-                ></stop>
-              </linearGradient>
-            </defs>
-            <path
-              d="M 0.5 68.5 L 174.5 0.5 L 174.5 33.5 L 56.5 67 L 62 55.5 L 26 67 Z"
-              fill="url(#idX0hbBYeIVg-1861781537)"
-              stroke="hsla(0, 0%, 100%, 0)"
-            ></path>
-          </g>
-        </StyledSvg>
+      <StyledSvg xmlns="http://www.w3.org/2000/svg" width="175" height="69">
+        <g>
+          <defs>
+            <linearGradient
+              id="idX0hbBYeIVg-1861781537"
+              gradientTransform="rotate(154, 0.5, 0.5)"
+            >
+              <stop
+                offset="0"
+                stop-color="rgba(186, 163, 79, 0)"
+                stop-opacity="0"
+              ></stop>
+              <stop
+                offset="1"
+                stop-color="rgba(119, 108, 70, 0.46)"
+                stop-opacity="0.46"
+              ></stop>
+            </linearGradient>
+          </defs>
+          <path
+            d="M 0.5 68.5 L 174.5 0.5 L 174.5 33.5 L 56.5 67 L 62 55.5 L 26 67 Z"
+            fill="url(#idX0hbBYeIVg-1861781537)"
+            stroke="hsla(0, 0%, 100%, 0)"
+          ></path>
+        </g>
+      </StyledSvg>
 
-        {page === "authOptions" && !emailRegistrationSubmitted ? (
-          <AuthOptions setPage={setPage} />
-        ) : page === "authEmail" && !emailRegistrationSubmitted ? (
-          <AuthEmail
-            setPage={setPage}
-            handleSubmitRegister={handleSubmitRegister}
-            handleSubmitLogin={handleSubmitLogin}
-          />
-        ) : page === "authResetEmail" ? (
-          <AuthResetEmail />
-        ) : (
-          <AuthVerifyEmail />
-        )}
-      </Wrapper>
-    </Modal>
+      {page === "authOptions" && !emailRegistrationSubmitted ? (
+        <AuthOptions
+          handleGoogleSignIn={handleGoogleSignIn}
+          googleLoading={googleLoading}
+          handleFacebookSignIn={handleFacebookSignIn}
+          facebookLoading={facebookLoading}
+          setPage={setPage}
+        />
+      ) : page === "authEmail" && !emailRegistrationSubmitted ? (
+        <AuthEmail
+          setPage={setPage}
+          handleSubmitRegister={handleSubmitRegister}
+          handleSubmitLogin={handleSubmitLogin}
+          registerLoading={registerLoading}
+          loginLoading={loginLoading}
+          errorMessage={errorMessage}
+        />
+      ) : page === "authResetEmail" ? (
+        <AuthResetEmail
+          resetLoading={resetLoading}
+          handleSubmitResetEmail={handleSubmitResetEmail}
+          dataSuccess={dataSuccess}
+        />
+      ) : (
+        <AuthVerifyEmail />
+      )}
+    </Wrapper>
   );
 };
 
