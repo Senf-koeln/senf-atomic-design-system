@@ -6,9 +6,9 @@ import WaveCanvas from "./WaveCanvas";
 
 const Wave = (props) => {
   const { devicePixelRatio: ratio = 1 } = window;
-  const waveTotal = isMobileCustom() ? 10 : 30;
+  const waveTotal = isMobileCustom() ? 12 : 30;
   const waveHeight = 50;
-  const waveSpeed = 0.2;
+  const waveSpeed = 0.1;
 
   const contextRef = useRef(null);
   const canvasRef = useRef(null);
@@ -80,7 +80,7 @@ const Wave = (props) => {
       (waveHeight / 2) * Math.sin(node[2] / 15) +
         ctx.canvas.height / (2 * ratio) -
         (ctx.canvas.height / ratio) * 0.45 +
-        waveHeight,
+        waveHeight / 6,
       node[2] + node[3],
       node[3],
     ]);

@@ -122,6 +122,7 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
   secondButtonIcon,
 }) => {
   const { t } = useTranslation();
+  const isMobile = isMobileCustom();
   const [swipePercentage, setSwipePercentage] = useState(0);
 
   const [swipedUp, setSwipedUp] = useState(false);
@@ -195,10 +196,10 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
   // }, [openScream]);
 
   // useEffect(() => {
-  //   if (isMobileCustom() && swipePosition === "bottom") {
+  //   if (isMobile && swipePosition === "bottom") {
   //     setSwipeDown();
   //   }
-  //   if (isMobileCustom() && swipePosition === "top") {
+  //   if (isMobile && swipePosition === "top") {
   //     setSwipeUp();
   //   }
   // }, [swipePosition]);
@@ -296,13 +297,13 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
 
   return (
     <React.Fragment>
-      <DragWrapper style={isMobileCustom() ? springProps : null}>
+      <DragWrapper style={isMobile ? springProps : null}>
         <Wave
           color={theme.colors.beige.beige20}
-          top={swipedUp || !isMobileCustom() ? "0px" : "200px"}
+          top={swipedUp || !isMobile ? "0px" : "200px"}
           // position="fixed"
         />
-        {isMobileCustom() && (
+        {isMobile && (
           <React.Fragment>
             <HandleBar />
             <RoundedButtonWrapper swipedUp={swipedUp}>
@@ -348,7 +349,7 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
         )}
 
         <InnerWrapper isMobileCustom={isMobileCustom}>
-          <ToolbarWrapper swipedUp={swipedUp || !isMobileCustom()}>
+          <ToolbarWrapper swipedUp={swipedUp || !isMobile}>
             <Toolbar
               setSearchOpen={setSearchOpen}
               searchOpen={searchOpen}
