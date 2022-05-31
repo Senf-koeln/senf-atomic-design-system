@@ -17,5 +17,32 @@ const Template: Story<AuthProps> = (args) => <Auth {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  text: "x",
+  handleClose: () => {},
+  handleSubmitRegister: () => {},
+  registerLoading: false,
+  handleSubmitLogin: () => {},
+  loginLoading: false,
+  handleGoogleSignIn: () => {},
+  googleLoading: false,
+  handleFacebookSignIn: () => {},
+  facebookLoading: false,
+  resetLoading: () => {},
+  handleSubmitResetEmail: () => {},
+  socialLoginVerified: false,
+  emailRegistrationSubmitted: false,
+  emailVerified: false,
+};
+
+export const ResetEmailPage = Template.bind({});
+ResetEmailPage.args = {
+  page: "authResetEmail",
+};
+export const VerifyPage = Template.bind({});
+VerifyPage.args = {
+  emailRegistrationSubmitted: true,
+};
+
+export const SuccessPage = Template.bind({});
+SuccessPage.args = {
+  socialLoginVerified: true,
 };
