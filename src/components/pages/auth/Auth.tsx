@@ -29,7 +29,7 @@ const Wrapper = styled.div<AuthProps>`
   position: relative;
   width: 100%;
   max-width: 400px;
-  min-height: 100vh;
+  min-height: 700px;
   background-color: ${(props) => props.theme.colors.beige.beige20};
   overflow: hidden;
 `;
@@ -72,20 +72,24 @@ const Auth: FC<AuthProps> = ({
   const [page, setPage] = useState("authOptions");
   return (
     <Wrapper>
-      <Box margin="24px" position="absolute" zIndex={999}>
-        <RoundedButton
-          icon={
-            page === "authOptions" ? (
-              <Plus transform="rotate(45deg)" />
-            ) : (
-              <Arrow transform="rotate(180deg)" />
-            )
-          }
-          onClick={
-            page === "authOptions" ? handleClose : () => setPage("authOptions")
-          }
-        />
-      </Box>
+      {handleClose !== undefined && (
+        <Box margin="24px" position="absolute" zIndex={999}>
+          <RoundedButton
+            icon={
+              page === "authOptions" ? (
+                <Plus transform="rotate(45deg)" />
+              ) : (
+                <Arrow transform="rotate(180deg)" />
+              )
+            }
+            onClick={
+              page === "authOptions"
+                ? handleClose
+                : () => setPage("authOptions")
+            }
+          />
+        </Box>
+      )}
       <Wave color="#fed957" top="170px" />
 
       <Img src={SenfManSquating} alt="Illustration" />

@@ -6,6 +6,7 @@ import { Story, Meta } from "@storybook/react";
 import Toolbar from "./Toolbar";
 
 import { ToolbarProps } from "./Toolbar.types";
+import { useTranslation } from "react-i18next";
 
 export default {
   title: "Molecules/Toolbar",
@@ -15,17 +16,18 @@ export default {
 
 const Template: Story<ToolbarProps> = (args) => <Toolbar {...args} />;
 
-export const Default = Template.bind({});
-Default.args = {
-  sortOptions={[
-    { name: "newest", label: t("newest_ideas") },
-    { name: "hottest", label: t("hottest_ideas") },
-  ]}
-  statusOptions={[
-    { name: "Unprocessed", label: t("unprocessed") },
-    { name: "Accepted", label: t("accepted") },
-    { name: "Planning", label: t("planning") },
-    { name: "Implemented", label: t("implemented") },
-    { name: "Rejected", label: t("rejected") },
-  ]}
+export const IdeaList = Template.bind({});
+IdeaList.args = {
+  activeSortOptionLabel: "Neuste zuerst",
+  sortOptions: [
+    { name: "newest", label: "newest_ideas" },
+    { name: "hottest", label: "hottest_ideas" },
+  ],
+  statusOptions: [
+    { name: "Unprocessed", label: "unprocessed" },
+    { name: "Accepted", label: "accepted" },
+    { name: "Planning", label: "planning" },
+    { name: "Implemented", label: "implemented" },
+    { name: "Rejected", label: "rejected" },
+  ],
 };

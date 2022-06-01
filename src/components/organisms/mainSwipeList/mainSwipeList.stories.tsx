@@ -19,9 +19,10 @@ const Template: Story<MainSwipeListProps> = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
+  type: "ideas",
   selectedTopics: ["Versorgung"],
 
-  data: [
+  ideasData: [
     {
       screamId: "omweqsDYlFMkmTFAX1Ba",
       lat: 50.96734458192481,
@@ -531,6 +532,92 @@ Default.args = {
       Stadtteil: "Mülheim",
       color: "#f6c095",
       locationHeader: "Mülheimer Freiheit 142",
+    },
+  ],
+};
+
+export const ProjectRoomSwipeList = Template.bind({});
+ProjectRoomSwipeList.args = {
+  type: "projectrooms",
+
+  selectedTopics: ["Versorgung"],
+
+  projectRoomsData: [
+    {
+      centerLat: 50.96447910444719,
+      zoom: 12.5,
+      description_about: "room description",
+      description_procedure: "room description",
+      organizationType: "Initiativen",
+      projectRoomId: "Y2dFTmJ2FIzD1YqPCotk",
+      weblinkTitle: "Website",
+      description_learnmore: null,
+      contactTitle: "Kontakt",
+      owner: "Neue Organisation",
+      createdAt: "2022-05-31T12:41:10.338Z",
+      weblink: "",
+      geoData:
+        '{"type":"FeatureCollection","features":[{"id":"1fd84b9011288075e06623625fed2972","type":"Feature","properties":{},"geometry":{"coordinates":[[[6.848024518461614,50.99077694309838],[6.95969680827622,50.938181265796004],[6.9300793748909655,50.969378911207144],[6.848024518461614,50.99077694309838]]],"type":"Polygon"}}]}',
+      status: "active",
+      calendar: false,
+      title: "room description",
+      contact: "",
+      logoURL:
+        "https://firebasestorage.googleapis.com/v0/b/senf-dev.appspot.com/o/organizationsData%2FrATYNDh5gfJGYMTKlCVC%2FY2dFTmJ2FIzD1YqPCotk%2Fthumbnail?alt=media&token=b805c2fe-e647-453e-a057-9cca7108b8a4",
+      centerLong: 6.903860663368917,
+      description_motivation: null,
+      organizationId: "rATYNDh5gfJGYMTKlCVC",
+      brief: "room description",
+      icon: {
+        type: "svg",
+        key: null,
+        ref: null,
+        props: {
+          id: "Ebene_1",
+          "data-name": "Ebene 1",
+          xmlns: "http://www.w3.org/2000/svg",
+          viewBox: "0 0 16 16",
+          children: [
+            {
+              type: "path",
+              key: null,
+              ref: null,
+              props: {
+                d: "M7.35,12.66a1.08,1.08,0,0,1-.46.27.18.18,0,0,0-.13.15L6.6,14.47a.72.72,0,0,0,.64.81.73.73,0,0,0,.61-.21l1.9-1.9a5.51,5.51,0,0,0,1.16-1.75,8.59,8.59,0,0,0,.26-2.14A.17.17,0,0,0,11,9.09a.19.19,0,0,0-.13.05Z",
+              },
+              _owner: null,
+            },
+            {
+              type: "path",
+              key: null,
+              ref: null,
+              props: {
+                d: "M3.35,8.66,6.88,5.11a.18.18,0,0,0,0-.25.19.19,0,0,0-.13-.05,9.06,9.06,0,0,0-2.2.25A5.5,5.5,0,0,0,2.83,6.24L.93,8.14a.73.73,0,0,0,0,1,.72.72,0,0,0,.52.21l1.49-.17a.18.18,0,0,0,.15-.13A1.06,1.06,0,0,1,3.35,8.66Z",
+              },
+              _owner: null,
+            },
+            {
+              type: "path",
+              key: null,
+              ref: null,
+              props: {
+                d: "M3.75,11.24a1.54,1.54,0,0,0-2.27.25A10.76,10.76,0,0,0,0,15.1.73.73,0,0,0,.53,16,.77.77,0,0,0,.9,16a10.91,10.91,0,0,0,3.6-1.46,1.54,1.54,0,0,0,.25-2.27Z",
+              },
+              _owner: null,
+            },
+            {
+              type: "path",
+              key: null,
+              ref: null,
+              props: {
+                d: "M15.58,0a8.65,8.65,0,0,0-3.24,1.15c-.46.46-7.1,7.13-8.11,8.12a.19.19,0,0,0,0,.26l2.24,2.24a.2.2,0,0,0,.25,0l8.12-8.12A8.48,8.48,0,0,0,16,.42.35.35,0,0,0,15.71,0Z",
+              },
+              _owner: null,
+            },
+          ],
+        },
+        _owner: null,
+      },
     },
   ],
 };

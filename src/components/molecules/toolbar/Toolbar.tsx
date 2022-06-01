@@ -69,9 +69,7 @@ const Toolbar: FC<ToolbarProps> = ({
   statusOptions,
   activeSortOptionLabel,
 
-  secondButtonClick,
-  secondButtonLabel,
-  secondButtonIcon,
+  secondButton,
 }) => {
   const { t } = useTranslation();
 
@@ -92,16 +90,7 @@ const Toolbar: FC<ToolbarProps> = ({
       />
 
       <Box gap="8px">
-        {secondButtonClick && (
-          <Button
-            variant="secondary"
-            icon={secondButtonIcon}
-            text={secondButtonLabel}
-            size="small"
-            transform="scale(0.7)"
-            onClick={secondButtonClick}
-          />
-        )}
+        {secondButton}
         <Button
           variant="secondary"
           icon={<Search />}
@@ -121,6 +110,7 @@ const Toolbar: FC<ToolbarProps> = ({
             placeholder={searchPlaceholder}
             onChange={setSearchTerm}
             value={searchTerm}
+            setSearchTerm={setSearchTerm}
           />
         </SearchbarWrapper>
       )}

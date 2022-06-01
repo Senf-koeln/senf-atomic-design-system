@@ -45,7 +45,7 @@ export const InputField = styled.div<{ focus: boolean }>`
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.7rem 0.7rem 0.7rem 0.9rem;
+  padding: 0.58rem 0.6rem 0.58rem 0.9rem;
   min-height: 50px;
   background-color: ${({ theme }) => theme.colors.white.white50tra};
   border-radius: ${({ theme }) => theme.radii[1]}px;
@@ -59,19 +59,23 @@ export const InputField = styled.div<{ focus: boolean }>`
       outline-offset: -3px;
     `}
 
+  input {
+    max-height: 50px !important;
+  }
+
   /* Styles for textarea */
   textarea {
     resize: none;
   }
 
   /* Styles for password input */
-  button {
+  /* button {
     border: 0;
     cursor: pointer;
     background-color: transparent;
     color: ${({ theme }) => theme.colors.primary.primary140};
     font-weight: ${({ theme }) => theme.fontWeights[1]};
-  }
+  } */
 
   /* Styles for search input */
   svg {
@@ -90,7 +94,7 @@ export const TextField = styled.input`
   color: rgb(51, 51, 51);
 
   /* Styles for search input */
-  &[type="search"] {
+  /* &[type="search"] {
     & + ${HoverContainer} > svg {
       display: block;
       transform: rotateZ(45deg) scale(0.7);
@@ -100,8 +104,8 @@ export const TextField = styled.input`
       & + ${HoverContainer} > svg {
         display: none;
       }
-    }
-  }
+    } 
+  }*/
 
   ::placeholder,
   ::-webkit-input-placeholder {
