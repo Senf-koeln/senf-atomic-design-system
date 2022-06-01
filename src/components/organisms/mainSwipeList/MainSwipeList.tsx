@@ -60,6 +60,10 @@ const InnerWrapper = styled.div<OrganizationsOverviewProps>`
   margin-left: 50%;
   transform: translateX(-50%);
   width: 100%;
+
+  @media (min-width: 768px) {
+    height: 100%;
+  }
 `;
 
 const RoundedButtonWrapper = styled.div`
@@ -366,7 +370,7 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
                 <Button
                   variant="secondary"
                   size="small"
-                  text={type === "ideas" ? t("stats") : t("organizations")}
+                  text={type === "ideas" ? t("statistics") : t("organizations")}
                   icon={type === "ideas" ? <Stats /> : null}
                   onClick={() => {}}
                 />

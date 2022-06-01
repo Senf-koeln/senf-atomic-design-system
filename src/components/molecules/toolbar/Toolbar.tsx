@@ -87,6 +87,7 @@ const Toolbar: FC<ToolbarProps> = ({
         onClick={handleDropdown}
         text={activeSortOptionLabel}
         iconRight={<Arrow transform="rotate(90deg)" />}
+        variant="semibold"
       />
 
       <Box gap="8px">

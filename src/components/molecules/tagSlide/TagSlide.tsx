@@ -3,10 +3,12 @@
 import React, { FC, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
+import AllOrganizationTypes from "../../../assets/icons/AllOrganizationTypes";
 import Dot from "../../../assets/icons/Dot";
 import DotAllTopics from "../../../assets/icons/DotAllTopics";
 import organizationTypes from "../../../data/organizationTypes";
 import setColorByTopic from "../../../data/setColorByTopic";
+import setOrganizationTypeIcon from "../../../data/setOrganizationTypeIcon";
 import topics from "../../../data/topiccs";
 import Tag from "../../atoms/tag/Tag";
 import { TagSlideProps } from "./TagSlide.types";
@@ -83,7 +85,9 @@ const TagSlide: FC<TagSlideProps> = ({
                 : selectedOrganizationTypes?.length === 7
             }
             color="#000000"
-            icon={<DotAllTopics />}
+            icon={
+              type === "topics" ? <DotAllTopics /> : <AllOrganizationTypes />
+            }
             text={
               type === "topics" ? t("topics_all") : t("organizationTypes_all")
             }
@@ -131,7 +135,7 @@ const TagSlide: FC<TagSlideProps> = ({
                     ) && selectedOrganizationTypes.length !== 7
                   }
                   text={organizationTypes.label}
-                  icon={organizationTypes.name}
+                  icon={setOrganizationTypeIcon(organizationTypes.name)}
                   // hide={
                   //   (placing === "list" && swipePosition === "bottom") ||
                   //   (placing !== "list" &&

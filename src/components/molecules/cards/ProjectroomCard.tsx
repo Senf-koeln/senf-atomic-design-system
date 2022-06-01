@@ -9,6 +9,7 @@ import Typography from "../../atoms/typography/Typography";
 import { ProjectroomCardProps } from "./ProjectroomCard.types";
 import { t } from "i18next";
 import ImagePlaceholder from "../../atoms/imagePlaceholder/ImagePlaceholder";
+import Bulb from "../../../assets/icons/Bulb";
 
 const Wrapper = styled.div<ProjectroomCardProps>`
   float: left;
@@ -133,7 +134,7 @@ const ProjectroomCard: FC<ProjectroomCardProps> = ({
 
           <div style={{ marginLeft: "auto", display: "flex" }}>
             <IconWrapper>
-              <Icon icon="bulb" />
+              <Icon icon={<Bulb />} />
             </IconWrapper>
             <Typography variant="buttonSm">{ideaSize} </Typography>
           </div>
