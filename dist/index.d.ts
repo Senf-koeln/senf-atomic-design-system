@@ -83,6 +83,8 @@ interface TertiaryButtonProps {
     loading?: boolean;
     disabled?: boolean;
     size?: "small" | "big";
+    variant?: "medium" | "semibold" | "bold";
+    color?: string;
     onClick?: MouseEventHandler<HTMLButtonElement>;
 }
 

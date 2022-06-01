@@ -45,7 +45,7 @@ export const InputField = styled.div<{ focus: boolean }>`
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.58rem 0.6rem 0.58rem 0.9rem;
+  padding: 0 0.6rem 0 0.9rem;
   min-height: 50px;
   background-color: ${({ theme }) => theme.colors.white.white50tra};
   border-radius: ${({ theme }) => theme.radii[1]}px;
@@ -65,6 +65,7 @@ export const InputField = styled.div<{ focus: boolean }>`
 
   /* Styles for textarea */
   textarea {
+    padding: 0.7rem 0rem 0.7rem 0rem;
     resize: none;
   }
 
