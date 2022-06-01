@@ -26,7 +26,7 @@ Default.args = {
   googleLoading: false,
   handleFacebookSignIn: () => {},
   facebookLoading: false,
-  resetLoading: () => {},
+  resetLoading: false,
   handleSubmitResetEmail: () => {},
   socialLoginVerified: false,
   emailRegistrationSubmitted: false,

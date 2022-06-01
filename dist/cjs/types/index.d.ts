@@ -1,5 +1,5 @@
 /** @format */
-export { LayerWhiteFirstDefault, LayerWhiteFirstHover, LayerWhiteFirstActive, LayerWhiteSecondDefault, LayerWhiteSecondHover, LayerYellowDefault, LayerYellowHover, LayerBrownDefault, LayerBrownHover, LayerGreyDefault, LayerGreyHover, LayerGreyButtonsDefault, LayerGreyButtonsHover, } from "./components/atoms/layerStyles/LayerStyles";
+export { LayerWhiteGradientBordersDefault, LayerWhiteFirstDefault, LayerWhiteFirstHover, LayerWhiteFirstActive, LayerWhiteSecondDefault, LayerWhiteSecondHover, LayerYellowDefault, LayerYellowHover, LayerBrownDefault, LayerBrownHover, LayerGreyDefault, LayerGreyHover, LayerGreyButtonsDefault, LayerGreyButtonsHover, } from "./components/atoms/layerStyles/LayerStyles";
 export { default as Loader } from "./components/atoms/animations/Loader";
 export { default as RangeSlider } from "./components/atoms/rangeSlider/RangeSlider";
 export { default as Button } from "./components/atoms/buttons/Button";
@@ -8,7 +8,7 @@ export { default as TertiaryButton } from "./components/atoms/buttons/TertiaryBu
 export { default as Tag } from "./components/atoms/tag/Tag";
 export { default as Icon } from "./components/atoms/icons/Icon";
 export { default as Input } from "./components/atoms/inputs/Input";
-export { default as FlexWrapper } from "./components/atoms/layout/FlexWrapper";
+export { default as Box } from "./components/atoms/box/Box";
 export { default as Divider } from "./components/atoms/divider/Divider";
 export { default as Shape } from "./components/atoms/shapes/Shape";
 export { default as Typography } from "./components/atoms/typography/Typography";
@@ -21,7 +21,7 @@ export { default as List } from "./components/molecules/list/List";
 export { default as Modal } from "./components/molecules/modals/Modal";
 export { default as SubNavbar } from "./components/molecules/navs/SubNavbar";
 export { default as Accordion } from "./components/molecules/accordion/Accordion";
-export { default as Auth } from "./components/organisms/auth/Auth";
+export { default as Auth } from "./components/pages/auth/Auth";
 export { default as theme } from "./styles/theme";
 export { default as GlobalStyle } from "./styles/globals";
 export { default as i18n } from "./util/i18n";

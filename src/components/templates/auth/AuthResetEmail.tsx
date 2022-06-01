@@ -15,6 +15,7 @@ import theme from "../../../styles/theme";
 const AuthResetEmail: FC<AuthResetEmailProps> = ({
   resetLoading,
   handleSubmitResetEmail,
+  dataSuccess,
 }) => {
   const { t } = useTranslation();
 

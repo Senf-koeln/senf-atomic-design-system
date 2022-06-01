@@ -8,5 +8,6 @@ export interface SubNavbarProps {
     iconRight?: string;
     iconRightTransform?: string;
     textRight?: string;
+    handlebar?: boolean;
     onClick?: MouseEventHandler<HTMLButtonElement>;
 }

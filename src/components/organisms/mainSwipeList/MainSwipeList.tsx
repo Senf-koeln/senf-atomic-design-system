@@ -25,6 +25,8 @@ import Button from "../../atoms/buttons/Button";
 import IdeaCard from "../../molecules/cards/IdeaCard";
 import { useTranslation } from "react-i18next";
 import Plus from "../../../assets/icons/Plus";
+import ProjectroomCard from "../../molecules/cards/ProjectroomCard";
+import Stats from "../../../assets/icons/Stats";
 
 const DragWrapper = styled(animated.div)`
   z-index: ${({ zIndex }) => (zIndex ? zIndex : 9999)};
@@ -117,7 +119,11 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
   selectedTopics,
   data,
   setOpenOrganizationsOverview,
-  seccondButtonClick,
+
+  ideasData,
+  projectRoomsData,
+  type,
+  secondButtonClick,
   secondButtonLabel,
   secondButtonIcon,
 }) => {
@@ -128,6 +134,7 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
   const [swipedUp, setSwipedUp] = useState(false);
 
   const [searchOpen, setSearchOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const [springProps, setSpring] = useSpring(() => ({
     x: 0,
@@ -353,9 +360,17 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
             <Toolbar
               setSearchOpen={setSearchOpen}
               searchOpen={searchOpen}
-              secondButtonClick={seccondButtonClick}
-              secondButtonText={secondButtonLabel}
-              secondButtonIcon={secondButtonIcon}
+              searchTerm={searchTerm}
+              setSearchTerm={setSearchTerm}
+              secondButton={
+                <Button
+                  variant="secondary"
+                  size="small"
+                  text={type === "ideas" ? t("stats") : t("organizations")}
+                  icon={type === "ideas" ? <Stats /> : null}
+                  onClick={() => {}}
+                />
+              }
               searchPlaceholder={t("searchBar")}
               activeSortOptionLabel={t("newest_ideas")}
               sortOptions={[
@@ -371,7 +386,10 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
               ]}
             />
           </ToolbarWrapper>
-          <List CardType={IdeaCard} data={data} />
+          <List
+            CardType={type === "ideas" ? IdeaCard : ProjectroomCard}
+            data={type === "ideas" ? ideasData : projectRoomsData}
+          />
         </InnerWrapper>
       </DragWrapper>
     </React.Fragment>

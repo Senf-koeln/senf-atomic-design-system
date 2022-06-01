@@ -14,6 +14,7 @@ import Typography from "../../atoms/typography/Typography";
 import { openLink } from "../../../util/helpers";
 import Dropdown from "../../atoms/dropdown/Dropdown";
 import theme from "../../../styles/theme";
+import TertiaryButton from "../../atoms/buttons/TertiaryButton";
 
 const AuthEmail: FC<AuthEmailProps> = ({
   variant,
@@ -122,7 +123,7 @@ const AuthEmail: FC<AuthEmailProps> = ({
   return (
     <Box
       flexDirection="column"
-      margin="180px 10% 0px 10%"
+      margin="180px 10% 50px 10%"
       position="relative"
       zIndex={9999}
     >
@@ -133,30 +134,26 @@ const AuthEmail: FC<AuthEmailProps> = ({
         {t("infopage_addMustard_2")}
       </Typography>
 
-      <Box margin="25px 0px 24px 0px" alignItems="center" gap="10px">
+      <Box margin="25px 0px 24px 0px" alignItems="center" gap="5px">
         {variantState === "login" ? (
           <React.Fragment>
             <Typography variant="bodyBg" style={{ position: "relative" }}>
               {t("auth_login_user_redirection_question")}
             </Typography>{" "}
-            <a
-              style={{ position: "relative" }}
+            <TertiaryButton
+              text={t("register_now")}
               onClick={() => setVariantState("register")}
-            >
-              {t("register_now")}
-            </a>
+            />
           </React.Fragment>
         ) : (
           <React.Fragment>
             <Typography variant="bodyBg" style={{ position: "relative" }}>
               {t("auth_register_user_redirection_question")}
             </Typography>
-            <a
-              style={{ position: "relative" }}
+            <TertiaryButton
+              text={t("login_now")}
               onClick={() => setVariantState("login")}
-            >
-              {t("login_now")}
-            </a>
+            />
           </React.Fragment>
         )}
       </Box>
@@ -190,19 +187,17 @@ const AuthEmail: FC<AuthEmailProps> = ({
 
       <Box
         flexDirection="row"
-        gap="10px"
+        gap="5px"
         alignItems="center"
         margin="14px 0 36px 0"
       >
         {variantState === "login" ? (
           <React.Fragment>
             <p style={{ position: "relative" }}> {t("forgot_password")}</p>{" "}
-            <a
-              style={{ position: "relative" }}
+            <TertiaryButton
+              text={t("reset")}
               onClick={() => setPage("authResetEmail")}
-            >
-              {t("reset")}
-            </a>
+            />
           </React.Fragment>
         ) : (
           <React.Fragment>
