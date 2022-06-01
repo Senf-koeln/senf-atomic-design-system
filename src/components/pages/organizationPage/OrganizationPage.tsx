@@ -197,11 +197,10 @@ const Example: FC<OrganizationPageProps> = ({ organization, data }) => {
         <Box margin="21px 0px 0px 18px">
           <TertiaryButton
             text={t("information")}
-            iconRight="arrow"
-            iconRightTransform={
-              infoOpen
-                ? "rotate(180deg) scale(0.7)"
-                : "rotate(270deg) scale(0.7)"
+            iconRight={
+              <Arrow
+                transform={infoOpen ? "rotate(-90deg) " : "rotate(0deg) "}
+              />
             }
             onClick={() => setInfoOpen(!infoOpen)}
           />

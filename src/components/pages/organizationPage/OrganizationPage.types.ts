@@ -1,6 +1,6 @@
 /** @format */
 
-import { Organization } from "./../../molecules/cards/cards.stories";
+import { Organization } from "../../molecules/cards/cards.stories";
 /** @format */
 
 import { MouseEventHandler } from "react";

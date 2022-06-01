@@ -10,6 +10,7 @@ import { ProjectroomCardProps } from "./ProjectroomCard.types";
 import { t } from "i18next";
 import ImagePlaceholder from "../../atoms/imagePlaceholder/ImagePlaceholder";
 import Bulb from "../../../assets/icons/Bulb";
+import setOrganizationTypeIcon from "../../../data/setOrganizationTypeIcon";
 
 const Wrapper = styled.div<ProjectroomCardProps>`
   float: left;
@@ -120,7 +121,10 @@ const ProjectroomCard: FC<ProjectroomCardProps> = ({
           <Typography variant="bodyBg"> {brief}</Typography>
         </Box>
         <Box alignItems="center" flexDirection="row" gap="14px">
-          <Icon icon={organizationType} transform="scale(0.8)" />
+          <Icon
+            icon={setOrganizationTypeIcon(organizationType)}
+            transform="scale(0.8)"
+          />
 
           <LogoPlacer>
             <ImagePlaceholder
