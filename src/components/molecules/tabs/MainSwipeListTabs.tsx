@@ -6,7 +6,9 @@ import Box from "../../atoms/box/Box";
 import Typography from "../../atoms/typography/Typography";
 import { MainSwipeListTabsProps } from "./MainSwipeListTabs.types";
 
-const Wrapper = styled.div<MainSwipeListTabsProps>``;
+const Tab = styled.div<MainSwipeListTabsProps>`
+  margin: 10px;
+`;
 
 const MainSwipeListTabs: FC<MainSwipeListTabsProps> = ({
   swipedUp,
@@ -15,7 +17,7 @@ const MainSwipeListTabs: FC<MainSwipeListTabsProps> = ({
 }) => {
   return (
     <Box margin={swipedUp ? "22px 14px 10px 14px" : "16px 14px 10px 14px"}>
-      <Box onClick={() => setOrder(1)} margin="10px">
+      <Tab onClick={() => setOrder(1)}>
         <Typography
           variant="h3"
           color="black"
@@ -24,8 +26,8 @@ const MainSwipeListTabs: FC<MainSwipeListTabsProps> = ({
         >
           Alle Ideen
         </Typography>
-      </Box>
-      <Box onClick={() => setOrder(2)} margin="10px">
+      </Tab>
+      <Tab onClick={() => setOrder(2)}>
         <Typography
           variant="h3"
           color="#d6ab00"
@@ -34,7 +36,7 @@ const MainSwipeListTabs: FC<MainSwipeListTabsProps> = ({
         >
           Projekträume
         </Typography>
-      </Box>
+      </Tab>
     </Box>
   );
 };

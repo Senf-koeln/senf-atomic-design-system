@@ -53,6 +53,9 @@ const TagSlide: FC<TagSlideProps> = ({
   openScream,
   selectedTopics,
   selectedOrganizationTypes,
+
+  handleSelectTopics,
+  handleSelectOrganizationTypes,
 }) => {
   const { t } = useTranslation();
 
@@ -74,11 +77,11 @@ const TagSlide: FC<TagSlideProps> = ({
             //       openOrganization ||
             //       swipePosition === "top"))
             // }
-            // onClick={
-            //   type === "topics"
-            //     ? () => dispatch(handleTopicSelectorRedux("all"))
-            //     : () => dispatch(handleOrganizationTypesSelectorRedux("all"))
-            // }
+             onClick={
+               type === "topics"
+                 ? () => handleSelectTopics("all")
+                 : () => handleSelectOrganizationTypes("all"))
+             }
             active={
               type === "topics"
                 ? selectedTopics.length === 7
@@ -98,7 +101,7 @@ const TagSlide: FC<TagSlideProps> = ({
                 <Tag
                   key={topic.name}
                   placing={placing}
-                  // onClick={() => dispatch(handleTopicSelectorRedux(topic.name))}
+                  onClick={() => handleSelectTopics(topic.name)}
                   active={
                     selectedTopics.includes(topic.name) &&
                     selectedTopics?.length !== 7
@@ -122,13 +125,8 @@ const TagSlide: FC<TagSlideProps> = ({
                 <Tag
                   key={organizationTypes.name}
                   placing={placing}
-                  // onClick={() =>
-                  //   dispatch(
-                  //     handleOrganizationTypesSelectorRedux(
-                  //       organizationTypes.name
-                  //     )
-                  //   )
-                  // }
+                   onClick={() => handleSelectOrganizationTypes("all")}
+                 
                   active={
                     selectedOrganizationTypes.includes(
                       organizationTypes.name

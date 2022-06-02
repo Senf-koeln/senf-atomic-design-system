@@ -46,6 +46,10 @@ const DragWrapper = styled(animated.div)`
   position: absolute;
   pointer-events: all;
 
+  transform: ${(props) =>
+    props.$openOrganizationsOverview ||
+    (props.$openStatistics && "scale(1.9) translateY(-20px)")};
+
   @media (min-width: 768px) {
     width: 400px;
     max-width: 400px;
@@ -119,11 +123,6 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
   size,
   children,
 
-  openOrganizationsPage,
-  openInsightsPage,
-  data,
-  setOpenOrganizationsOverview,
-
   swipedUp,
   setSwipedUp,
   openScream,
@@ -141,6 +140,13 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
 
   selectedTopics,
   selectedOrganizationTypes,
+  handleSelectTopics,
+  handleSelectOrganizationTypes,
+
+  setOpenStatistics,
+  openStatistics,
+  setOpenOrganizationsOverview,
+  openOrganizationsOverview,
 
   handleButtonOpenCard,
   handleButtonLike,
@@ -239,11 +245,11 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
   //   }
   // }, [searchOpen]);
 
-  // useEffect(() => {
-  //   setSpring({
-  //     transition: "0.5s",
-  //   });
-  // }, [openOrganizationsPage, openInsightsPage]);
+  useEffect(() => {
+    setSpring({
+      transition: "0.5s",
+    });
+  }, [openStatistics, openOrganizationsOverview]);
 
   const bind = useDrag(
     ({ last, down, movement: [, my], offset: [, y] }) => {
@@ -319,7 +325,11 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
 
   return (
     <React.Fragment>
-      <DragWrapper style={isMobile ? springProps : null}>
+      <DragWrapper
+        style={isMobile ? springProps : null}
+        $openOrganizationsOverview={openOrganizationsOverview}
+        $openStatistics={openStatistics}
+      >
         <Wave
           color={theme.colors.beige.beige20}
           top={swipedUp || !isMobile ? "0px" : "200px"}
@@ -350,6 +360,8 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
                   type={order === "ideas" ? "topics" : "organizationTypes"}
                   selectedTopics={selectedTopics}
                   selectedOrganizationTypes={selectedOrganizationTypes}
+                  handleSelectTopics={handleSelectTopics}
+                  handleSelectOrganizationTypes={handleSelectOrganizationTypes}
                 />
               </TagSlideWrapper>
             </Header>
@@ -369,6 +381,11 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
                   size="small"
                   text={
                     order === "ideas" ? t("statistics") : t("organizations")
+                  }
+                  onClick={
+                    order === "ideas"
+                      ? () => setOpenStatistics(true)
+                      : () => setOpenOrganizationsOverview(true)
                   }
                   icon={order === "ideas" ? <Stats /> : null}
                   onClick={() => {}}

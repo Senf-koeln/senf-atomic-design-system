@@ -77,7 +77,7 @@ const List: FC<ListProps> = ({
     if (dataArray?.length !== 0) {
       for (var i = 0; i < listItems; i++) {
         items.push(
-          dataArray[i].title && (
+          dataArray[i]?.title && (
             <Box margin="10px 10px 0px 10px">
               <CardType
                 data={dataArray[i]}

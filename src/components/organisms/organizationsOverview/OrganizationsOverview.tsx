@@ -76,19 +76,19 @@ const OrganizationsOverview: FC<OrganizationsOverviewProps> = ({
   open = true,
   data,
   selectedOrganizationTypes,
+  handleSelectOrganizationTypes,
   user,
   openCreateOrganization,
   setOpenModalAuthenticate,
 }) => {
   const { t } = useTranslation();
+  const isMobileCustom = isMobileCustom();
   const [searchOpen, setSearchOpen] = useState(false);
 
-  console.log(isMobileCustom());
-
-  return isMobileCustom() ? (
+  return isMobileCustom ? (
     <SwipeModal
       backgroundColor={theme.colors.beige.beige20}
-      openModal={true}
+      openModal={open}
       headerComponentHeight="102px"
       headerComponentBackgroundColor={theme.colors.beige.beige20}
       HeaderComponent={
@@ -105,6 +105,7 @@ const OrganizationsOverview: FC<OrganizationsOverviewProps> = ({
           <TagSlide
             type="organizationTypes"
             selectedOrganizationTypes={selectedOrganizationTypes}
+            handleSelectOrganizationTypes={handleSelectOrganizationTypes}
           />
         </React.Fragment>
       }
