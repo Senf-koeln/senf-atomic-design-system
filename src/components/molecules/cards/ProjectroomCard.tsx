@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { FC } from "react";
+import React, { FC, useEffect, useState } from "react";
 import styled from "styled-components";
 import Icon from "../../atoms/icons/Icon";
 import { LayerWhiteFirstDefault } from "../../atoms/layerStyles/LayerStyles";
@@ -13,6 +13,7 @@ import Bulb from "../../../assets/icons/Bulb";
 import setOrganizationTypeIcon from "../../../data/setOrganizationTypeIcon";
 
 const Wrapper = styled.div<ProjectroomCardProps>`
+  cursor: pointer;
   float: left;
   overflow: hidden;
   position: relative;
@@ -32,6 +33,12 @@ const Wrapper = styled.div<ProjectroomCardProps>`
       ? "brightness(0.6)"
       : "brightness(1)"};
   animation: opacityTranslateYFrom50Animation 0.8s;
+
+  transition: 0.3s;
+  &:hover {
+    transform: scale(103%);
+    background-color: #fefefd;
+  }
 `;
 
 const InnerWrapper = styled.div`
@@ -68,20 +75,39 @@ const DeactivatedWrapper = styled.div`
 const ProjectroomCard: FC<ProjectroomCardProps> = ({
   data,
   handleButtonOpenCard,
+  organizations,
 }) => {
   const {
     projectRoomId,
     title,
     brief,
-    organizationType,
-    organizationName,
-    imgUrl,
-    logo,
+    logoURL,
     ideaSize,
     status,
     active,
-    thisOrganizationId,
+    organizationId,
   } = data;
+
+  const cardOrganizationId = organizationId;
+  const [organizationCardData, setOrganizationCardData] = useState([]);
+
+  useEffect(() => {
+    if (organizations) {
+      organizations.map(
+        ({ organizationId, title, organizationType, logoURL }) => {
+          if (cardOrganizationId === organizationId) {
+            setOrganizationCardData([
+              ...organizationCardData,
+              title,
+              organizationType,
+              logoURL,
+            ]);
+          }
+        }
+      );
+    }
+  }, [organizations]);
+
   return (
     <Wrapper
       status={status}
@@ -108,7 +134,7 @@ const ProjectroomCard: FC<ProjectroomCardProps> = ({
             width="118px"
             height="118px"
             img={
-              imgUrl
+              logoURL
               // ? img : placeHodlerImage && NoImage
             }
           />
@@ -117,19 +143,19 @@ const ProjectroomCard: FC<ProjectroomCardProps> = ({
         </Box>
         <Box alignItems="center" flexDirection="row" gap="14px">
           <Icon
-            icon={setOrganizationTypeIcon(organizationType)}
+            icon={setOrganizationTypeIcon(organizationCardData[1])}
             // transform="scale(0.8)"
           />
 
           <LogoPlacer>
             <ImagePlaceholder
               img={
-                logo
+                organizationCardData[2]
                 // ? img : placeHodlerImage && NoImage
               }
             />
           </LogoPlacer>
-          <Typography variant="buttonSm">{organizationName}</Typography>
+          <Typography variant="buttonSm">{organizationCardData[0]}</Typography>
 
           <div style={{ marginLeft: "auto", display: "flex" }}>
             <IconWrapper>

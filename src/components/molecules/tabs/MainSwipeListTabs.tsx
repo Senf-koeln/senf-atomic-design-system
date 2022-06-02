@@ -2,12 +2,17 @@
 
 import React, { FC } from "react";
 import styled from "styled-components";
+import { isMobileCustom } from "../../../hooks/customDeviceDetect";
 import Box from "../../atoms/box/Box";
 import Typography from "../../atoms/typography/Typography";
 import { MainSwipeListTabsProps } from "./MainSwipeListTabs.types";
 
+const Wrapper = styled.div<MainSwipeListTabsProps>`
+  margin-top: ${({ isMobile }) => !isMobile && "15px"};
+`;
+
 const Tab = styled.div<MainSwipeListTabsProps>`
-  margin: 10px;
+  margin: ${({ isMobile }) => (isMobile ? "10px" : "0px 10px 5px 10px")};
 `;
 
 const MainSwipeListTabs: FC<MainSwipeListTabsProps> = ({
@@ -15,29 +20,35 @@ const MainSwipeListTabs: FC<MainSwipeListTabsProps> = ({
   order,
   setOrder,
 }) => {
+  const isMobile = isMobileCustom();
   return (
-    <Box margin={swipedUp ? "22px 14px 10px 14px" : "16px 14px 10px 14px"}>
-      <Tab onClick={() => setOrder(1)}>
-        <Typography
-          variant="h3"
-          color="black"
-          fontWeight={900}
-          fontSize="5.6vw"
-        >
-          Alle Ideen
-        </Typography>
-      </Tab>
-      <Tab onClick={() => setOrder(2)}>
-        <Typography
-          variant="h3"
-          color="#d6ab00"
-          fontWeight={900}
-          fontSize="5.6vw"
-        >
-          Projekträume
-        </Typography>
-      </Tab>
-    </Box>
+    <Wrapper isMobile={isMobile}>
+      <Box
+        margin={swipedUp ? "22px 14px 10px 14px" : "16px 14px 10px 14px"}
+        flexDirection={isMobile ? "row" : "column"}
+      >
+        <Tab onClick={() => setOrder(1)} isMobile={isMobile}>
+          <Typography
+            variant="h3"
+            color={order === "ideas" ? "black" : "#d6ab00"}
+            fontWeight={900}
+            fontSize={isMobile ? "5.6vw" : "22px"}
+          >
+            Alle Ideen
+          </Typography>
+        </Tab>
+        <Tab onClick={() => setOrder(2)}>
+          <Typography
+            variant="h3"
+            color={order !== "ideas" ? "black" : "#d6ab00"}
+            fontWeight={900}
+            fontSize={isMobile ? "5.6vw" : "22px"}
+          >
+            Projekträume
+          </Typography>
+        </Tab>
+      </Box>
+    </Wrapper>
   );
 };
 

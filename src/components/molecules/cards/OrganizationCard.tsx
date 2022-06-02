@@ -3,6 +3,7 @@
 import { t } from "i18next";
 import React, { FC } from "react";
 import styled from "styled-components";
+import setOrganizationTypeIcon from "../../../data/setOrganizationTypeIcon";
 import Icon from "../../atoms/icons/Icon";
 import { LayerWhiteFirstDefault } from "../../atoms/layerStyles/LayerStyles";
 import Typography from "../../atoms/typography/Typography";
@@ -138,7 +139,7 @@ const OrganizationCard: FC<OrganizationCardProps> = ({
     active,
     thisOrganizationId,
     organization,
-    imgUrl,
+    logoURL,
   } = data;
   return (
     <Wrapper
@@ -156,7 +157,7 @@ const OrganizationCard: FC<OrganizationCardProps> = ({
       <LogoWrapper>
         <Thumbnail
           img={
-            imgUrl
+            logoURL
             // ? img : placeHodlerImage && NoImage
           }
         />
@@ -164,7 +165,7 @@ const OrganizationCard: FC<OrganizationCardProps> = ({
 
       <LogoPlacer>
         <IconWrapper>
-          <Icon icon={organizationType} transform="scale(0.8)" />
+          <Icon icon={setOrganizationTypeIcon(organizationType)} />
         </IconWrapper>
       </LogoPlacer>
       <Title>

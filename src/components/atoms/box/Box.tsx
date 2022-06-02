@@ -5,6 +5,8 @@ import styled from "styled-components";
 import { BoxProps } from "./Box.types";
 
 const Wrapper = styled.div<BoxProps>`
+  display: ${({ display }) => (display ? display : "flex")};
+
   position: ${({ position }) => (position ? position : "relative")};
   left: ${({ left }) => (left ? left : undefined)};
   right: ${({ right }) => (right ? right : undefined)};
@@ -13,7 +15,6 @@ const Wrapper = styled.div<BoxProps>`
   max-width: ${({ maxWidth }) => (maxWidth ? maxWidth : "auto")};
 
   margin: ${({ margin }) => (margin ? margin : "0")};
-  display: flex;
   flex-direction: ${({ flexDirection }) =>
     flexDirection === "column" ? "column" : "row"};
   align-items: ${({ alignItems }) => (alignItems ? alignItems : null)};
@@ -26,6 +27,7 @@ const Wrapper = styled.div<BoxProps>`
 
 const Box: FC<BoxProps> = ({
   children,
+  display,
   position,
   flexDirection,
   gap,
@@ -42,6 +44,7 @@ const Box: FC<BoxProps> = ({
 }) => {
   return (
     <Wrapper
+      display={display}
       position={position}
       flexDirection={flexDirection}
       gap={gap}

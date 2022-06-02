@@ -77,14 +77,14 @@ const TagSlide: FC<TagSlideProps> = ({
             //       openOrganization ||
             //       swipePosition === "top"))
             // }
-             onClick={
-               type === "topics"
-                 ? () => handleSelectTopics("all")
-                 : () => handleSelectOrganizationTypes("all"))
-             }
+            onClick={
+              type === "topics"
+                ? () => handleSelectTopics("all")
+                : () => handleSelectOrganizationTypes("all")
+            }
             active={
               type === "topics"
-                ? selectedTopics.length === 7
+                ? selectedTopics?.length === 7
                 : selectedOrganizationTypes?.length === 7
             }
             color="#000000"
@@ -103,7 +103,7 @@ const TagSlide: FC<TagSlideProps> = ({
                   placing={placing}
                   onClick={() => handleSelectTopics(topic.name)}
                   active={
-                    selectedTopics.includes(topic.name) &&
+                    selectedTopics?.includes(topic.name) &&
                     selectedTopics?.length !== 7
                   }
                   text={topic.label}
@@ -125,12 +125,13 @@ const TagSlide: FC<TagSlideProps> = ({
                 <Tag
                   key={organizationTypes.name}
                   placing={placing}
-                   onClick={() => handleSelectOrganizationTypes("all")}
-                 
+                  onClick={() =>
+                    handleSelectOrganizationTypes(organizationTypes.name)
+                  }
                   active={
-                    selectedOrganizationTypes.includes(
+                    selectedOrganizationTypes?.includes(
                       organizationTypes.name
-                    ) && selectedOrganizationTypes.length !== 7
+                    ) && selectedOrganizationTypes?.length !== 7
                   }
                   text={organizationTypes.label}
                   icon={setOrganizationTypeIcon(organizationTypes.name)}

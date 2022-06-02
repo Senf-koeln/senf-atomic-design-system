@@ -157,7 +157,23 @@ const Wave = (props) => {
     // };
   }, [draw]);
 
-  return <WaveCanvas canvasRef={canvasRef} props={props} />;
+  return (
+    <div
+      style={{
+        width: "100%",
+        height: "100%",
+        position: "absolute",
+        overflow: "hidden",
+        top: props.top,
+        position: props.position ? props.position : "absolute",
+        zIndex: 0,
+        pointerEvents: "none",
+        transition: "2s",
+      }}
+    >
+      <WaveCanvas canvasRef={canvasRef} props={props} />
+    </div>
+  );
 };
 
 export default memo(Wave);

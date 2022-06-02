@@ -35,10 +35,12 @@ const NoIdeasYet = styled.div`
 `;
 
 const List: FC<ListProps> = ({
+  listType,
   loading,
   dropdown,
   data,
   CardType,
+  organizations,
   handleButtonOpenCard,
   handleButtonLike,
   handleButtonComment,
@@ -78,9 +80,13 @@ const List: FC<ListProps> = ({
       for (var i = 0; i < listItems; i++) {
         items.push(
           dataArray[i]?.title && (
-            <Box margin="10px 10px 0px 10px">
+            <Box
+              margin="16px 16px 0px 16px"
+              display={listType === "grid" ? "inline-block" : "flex"}
+            >
               <CardType
                 data={dataArray[i]}
+                organizations={organizations}
                 handleButtonOpenCard={handleButtonOpenCard}
                 handleButtonLike={handleButtonLike}
                 handleButtonComment={handleButtonComment}

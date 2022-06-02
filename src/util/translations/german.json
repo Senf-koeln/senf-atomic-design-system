@@ -60,8 +60,8 @@
   "aToZ": "A > Z",
   "zToA": "Z > A",
   "sortBy": "Sortieren nach",
-  "newest_ideas": "Neuste Ideen",
-  "hottest_ideas": "Schärfste Ideen",
+  "newest_ideas": "Neuste zuerst",
+  "hottest_ideas": "Schärfste zuerst",
 
   "newest_projectrooms": "Neuste Projekträume",
   "aToZ_projectrooms": "A > Z Projekträume",

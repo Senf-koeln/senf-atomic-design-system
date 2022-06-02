@@ -18,6 +18,7 @@ import CommentActive from "../../../assets/icons/CommentActive";
 import setOrganizationTypeIcon from "../../../data/setOrganizationTypeIcon";
 
 const Wrapper = styled.div<IdeaCardProps>`
+  cursor: pointer;
   float: left;
   overflow: hidden;
   position: relative;
@@ -38,6 +39,12 @@ const Wrapper = styled.div<IdeaCardProps>`
       ? "brightness(0.6)"
       : "brightness(1)"};
   animation: opacityTranslateYFrom50Animation 0.8s;
+
+  transition: 0.3s;
+  &:hover {
+    transform: scale(103%);
+    background-color: #fefefd;
+  }
 `;
 
 const InnerWrapper = styled.div`
@@ -99,10 +106,14 @@ const IdeaCard: FC<IdeaCardProps> = ({
           alignItems="center"
           flexDirection="row"
           gap="5px"
-          margin="10px 0px 12px 0px"
+          margin="8px 0px 4px 0px"
         >
           <Icon icon={<Dot color={setColorByTopic(Thema)} />} />
-          <Typography variant="bodySm" color={setColorByTopic(Thema)}>
+          <Typography
+            variant="bodySm"
+            fontWeight={600}
+            color={setColorByTopic(Thema)}
+          >
             {Stadtteil}
           </Typography>
           <Box
@@ -131,8 +142,7 @@ const IdeaCard: FC<IdeaCardProps> = ({
         <Box
           alignItems="flex-start"
           flexDirection="row"
-          gap="16px"
-          margin="10px 0px 12px 0px"
+          margin="8px 0px 8px 0px"
         >
           <Typography variant="bodyBg"> {body}</Typography>
         </Box>

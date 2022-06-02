@@ -38,10 +38,14 @@ export { default as List } from "./components/molecules/list/List";
 export { default as Modal } from "./components/molecules/modals/Modal";
 export { default as SubNavbar } from "./components/molecules/navs/SubNavbar";
 export { default as Accordion } from "./components/molecules/accordion/Accordion";
+export { default as TagSlide } from "./components/molecules/tagSlide/TagSlide";
 
+export { default as MenuSidebar } from "./components/organisms/menuSidebar/MenuSidebar";
 export { default as MainSwipeList } from "./components/organisms/mainSwipeList/MainSwipeList";
 
 export { default as Auth } from "./components/pages/auth/Auth";
+export { default as OrganizationPage } from "./components/pages/organizationPage/OrganizationPage";
+export { default as OrganizationsOverview } from "./components/pages/organizationsOverview/OrganizationsOverview";
 
 export { default as theme } from "./styles/theme";
 export { default as GlobalStyle } from "./styles/globals";

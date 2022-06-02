@@ -145,6 +145,7 @@ declare const Input: FunctionComponent<InputProps>;
 /** @format */
 
 interface BoxProps {
+    display?: "flex" | "inline-flex" | "inline" | "block" | "none";
     flexDirection?: "column" | "row";
     gap?: string;
     height?: string;
@@ -336,6 +337,28 @@ declare const Accordion: FC<AccordionProps>;
 
 /** @format */
 
+interface TagSlideProps {
+    example?: string;
+    onClick?: MouseEventHandler<HTMLButtonElement>;
+}
+
+/** @format */
+
+declare const TagSlide: FC<TagSlideProps>;
+
+/** @format */
+
+interface MenuSidebarProps {
+    example?: string;
+    onClick?: MouseEventHandler<HTMLButtonElement>;
+}
+
+/** @format */
+
+declare const MenuSidebar: FC<MenuSidebarProps>;
+
+/** @format */
+
 interface MainSwipeListProps {
     example?: string;
     onClick?: MouseEventHandler<HTMLButtonElement>;
@@ -367,9 +390,29 @@ declare const Auth: FC<AuthProps>;
 
 /** @format */
 
+interface OrganizationPageProps {
+    organization?: Array<string>;
+    onClick?: MouseEventHandler<HTMLButtonElement>;
+}
+
+/** @format */
+
+declare const Example: FC<OrganizationPageProps>;
+
+/** @format */
+
+interface OrganizationsOverviewProps {
+    example?: string;
+    onClick?: MouseEventHandler<HTMLButtonElement>;
+}
+
+declare const OrganizationsOverview: FC<OrganizationsOverviewProps>;
+
+/** @format */
+
 declare const theme: Theme;
 
 /** @format */
 declare const GlobalStyle: styled_components.GlobalStyleComponent<{}, styled_components.DefaultTheme>;
 
-export { Accordion, Auth, Box, Button, Divider, Form, GlobalStyle, Icon, IdeaCard, Input, LayerBrownDefault, LayerBrownHover, LayerGreyButtonsDefault, LayerGreyButtonsHover, LayerGreyDefault, LayerGreyHover, LayerWhiteFirstActive, LayerWhiteFirstDefault, LayerWhiteFirstHover, LayerWhiteGradientBordersDefault, LayerWhiteSecondDefault, LayerWhiteSecondHover, LayerYellowDefault, LayerYellowHover, List, Loader, MainSwipeList, Modal, ObjectCard, OrganizationCard, ProjectroomCard, RangeSlider, RoundedButton, Shape, SubNavbar, Tag, TertiaryButton, Typography, theme };
+export { Accordion, Auth, Box, Button, Divider, Form, GlobalStyle, Icon, IdeaCard, Input, LayerBrownDefault, LayerBrownHover, LayerGreyButtonsDefault, LayerGreyButtonsHover, LayerGreyDefault, LayerGreyHover, LayerWhiteFirstActive, LayerWhiteFirstDefault, LayerWhiteFirstHover, LayerWhiteGradientBordersDefault, LayerWhiteSecondDefault, LayerWhiteSecondHover, LayerYellowDefault, LayerYellowHover, List, Loader, MainSwipeList, MenuSidebar, Modal, ObjectCard, OrganizationCard, Example as OrganizationPage, OrganizationsOverview, ProjectroomCard, RangeSlider, RoundedButton, Shape, SubNavbar, Tag, TagSlide, TertiaryButton, Typography, theme };

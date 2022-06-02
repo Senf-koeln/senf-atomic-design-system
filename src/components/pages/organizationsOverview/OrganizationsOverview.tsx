@@ -17,12 +17,15 @@ import SubNavbar from "../../molecules/navs/SubNavbar";
 import TagSlide from "../../molecules/tagSlide/TagSlide";
 import Toolbar from "../../molecules/toolbar/Toolbar";
 import { OrganizationsOverviewProps } from "./OrganizationsOverview.types";
+import Arrow from "../../../assets/icons/Arrow";
 
 const Wrapper = styled.div<OrganizationsOverviewProps>`
   background-color: ${({ theme }) => theme.colors.beige.beige20};
-  margin-left: 200px;
+  margin-left: 80px;
+  margin-top: 10px;
   width: ${({ open }) => (open ? "calc(100vw - 605px)" : "400px")};
-  height: 100vh;
+  height: calc(100vh - 20px);
+  border-radius: 18px;
   overflow-y: scroll;
   z-index: 90;
   top: 0;
@@ -41,7 +44,7 @@ const InnerWrapper = styled.div<OrganizationsOverviewProps>`
   pointer-events: all;
   height: calc(100% - 120px);
   width: 100%;
-  margin-top: ${(props) => (props.isMobileCustom ? "-10px" : "0px")};
+  margin-top: ${(props) => (props.isMobile ? "-10px" : "0px")};
   overflow: scroll;
   z-index: 1;
   margin-left: 50%;
@@ -73,7 +76,8 @@ const HeaderWrapper = styled.div`
 `;
 
 const OrganizationsOverview: FC<OrganizationsOverviewProps> = ({
-  open = true,
+  openOrganizationsModal = true,
+  setOpenOrganizationsOverview,
   data,
   selectedOrganizationTypes,
   handleSelectOrganizationTypes,
@@ -82,13 +86,13 @@ const OrganizationsOverview: FC<OrganizationsOverviewProps> = ({
   setOpenModalAuthenticate,
 }) => {
   const { t } = useTranslation();
-  const isMobileCustom = isMobileCustom();
+  const isMobile = isMobileCustom();
   const [searchOpen, setSearchOpen] = useState(false);
 
-  return isMobileCustom ? (
+  return isMobile ? (
     <SwipeModal
       backgroundColor={theme.colors.beige.beige20}
-      openModal={open}
+      openModal={openOrganizationsModal}
       headerComponentHeight="102px"
       headerComponentBackgroundColor={theme.colors.beige.beige20}
       HeaderComponent={
@@ -110,7 +114,7 @@ const OrganizationsOverview: FC<OrganizationsOverviewProps> = ({
         </React.Fragment>
       }
     >
-      <InnerWrapper isMobileCustom={isMobileCustom}>
+      <InnerWrapper isMobile={isMobile}>
         <Box margin="16px 12px 16px 12px">
           <Toolbar />
         </Box>
@@ -132,10 +136,17 @@ const OrganizationsOverview: FC<OrganizationsOverviewProps> = ({
       </InnerWrapper>
     </SwipeModal>
   ) : (
-    <Wrapper open={open}>
+    <Wrapper open={openOrganizationsModal}>
       <SVGWrapper searchOpen={searchOpen}>
         <Box position="fixed" margin="20px" zIndex={2}>
-          <RoundedButton icon="arrow" />
+          <RoundedButton
+            icon={
+              <Arrow
+                transform="rotate(180deg)"
+                onClick={() => setOpenOrganizationsOverview(false)}
+              />
+            }
+          />
         </Box>
         <HeaderWrapper>
           <Box margin="20px" justifyContent="center">
@@ -153,7 +164,7 @@ const OrganizationsOverview: FC<OrganizationsOverviewProps> = ({
               setSearchOpen={setSearchOpen}
               searchOpen={searchOpen}
               secondButtonClick={
-                user.authenticated
+                user?.authenticated
                   ? openCreateOrganization
                   : () => setOpenModalAuthenticate(true)
               }
@@ -189,8 +200,8 @@ const OrganizationsOverview: FC<OrganizationsOverviewProps> = ({
         </svg>
       </SVGWrapper>
 
-      <InnerWrapper isMobileCustom={isMobileCustom}>
-        <List CardType={OrganizationCard} data={data} />
+      <InnerWrapper isMobile={isMobile}>
+        <List CardType={OrganizationCard} data={data} listType="grid" />
       </InnerWrapper>
     </Wrapper>
   );
