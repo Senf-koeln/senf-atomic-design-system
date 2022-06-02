@@ -72,8 +72,8 @@ const Auth: FC<AuthProps> = ({
   const [page, setPage] = useState("authOptions");
   return (
     <Wrapper>
-      {handleClose !== undefined && (
-        <Box margin="24px" position="absolute" zIndex={999}>
+      <Box margin="24px" position="absolute" zIndex={999}>
+        {handleClose !== undefined ? (
           <RoundedButton
             icon={
               page === "authOptions" ? (
@@ -88,8 +88,16 @@ const Auth: FC<AuthProps> = ({
                 : () => setPage("authOptions")
             }
           />
-        </Box>
-      )}
+        ) : (
+          page !== "authOptions" && (
+            <RoundedButton
+              icon={<Arrow transform="rotate(180deg)" />}
+              onClick={() => setPage("authOptions")}
+            />
+          )
+        )}
+      </Box>
+
       <Wave color="#fed957" top="170px" />
 
       <Img src={SenfManSquating} alt="Illustration" />

@@ -14,20 +14,14 @@ import setOrganizationTypeIcon from "../../../data/setOrganizationTypeIcon";
 
 const Wrapper = styled.div<ProjectroomCardProps>`
   float: left;
-  margin: 10px 0px 0px 10px;
   overflow: hidden;
   position: relative;
   box-sizing: border-box;
-  width: 178px;
   height: auto;
   border-radius: 18px;
 
   width: 100%;
 
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 10px;
-  max-width: 400px;
   height: auto;
   overflow: hidden;
 
@@ -59,7 +53,6 @@ const LogoPlacer = styled.div`
 `;
 
 const IconWrapper = styled.div`
-  margin-top: -4px;
   margin-right: 8px;
 `;
 
@@ -74,9 +67,10 @@ const DeactivatedWrapper = styled.div`
 
 const ProjectroomCard: FC<ProjectroomCardProps> = ({
   data,
-  handleButtonClick,
+  handleButtonOpenCard,
 }) => {
   const {
+    projectRoomId,
     title,
     brief,
     organizationType,
@@ -91,6 +85,7 @@ const ProjectroomCard: FC<ProjectroomCardProps> = ({
   return (
     <Wrapper
       status={status}
+      onClick={() => handleButtonOpenCard(projectRoomId)}
       // active={thisOrganizationId === organization?.organizationId}
     >
       <InnerWrapper>
@@ -123,7 +118,7 @@ const ProjectroomCard: FC<ProjectroomCardProps> = ({
         <Box alignItems="center" flexDirection="row" gap="14px">
           <Icon
             icon={setOrganizationTypeIcon(organizationType)}
-            transform="scale(0.8)"
+            // transform="scale(0.8)"
           />
 
           <LogoPlacer>

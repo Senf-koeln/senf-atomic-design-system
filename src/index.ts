@@ -39,6 +39,8 @@ export { default as Modal } from "./components/molecules/modals/Modal";
 export { default as SubNavbar } from "./components/molecules/navs/SubNavbar";
 export { default as Accordion } from "./components/molecules/accordion/Accordion";
 
+export { default as MainSwipeList } from "./components/organisms/mainSwipeList/MainSwipeList";
+
 export { default as Auth } from "./components/pages/auth/Auth";
 
 export { default as theme } from "./styles/theme";

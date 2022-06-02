@@ -13,23 +13,20 @@ import setColorByTopic from "../../../data/setColorByTopic";
 import Dot from "../../../assets/icons/Dot";
 import FlameInactive from "../../../assets/icons/FlameInactive";
 import CommentInactive from "../../../assets/icons/CommentInactive";
+import FlameActive from "../../../assets/icons/FlameActive";
+import CommentActive from "../../../assets/icons/CommentActive";
+import setOrganizationTypeIcon from "../../../data/setOrganizationTypeIcon";
 
 const Wrapper = styled.div<IdeaCardProps>`
   float: left;
-  margin: 10px 0px 0px 10px;
   overflow: hidden;
   position: relative;
   box-sizing: border-box;
-  width: 178px;
-  height: auto;
+
   border-radius: 18px;
 
-  width: calc(100% - 20px);
+  width: 100%;
 
-  margin-left: 10px;
-  margin-right: auto;
-  margin-bottom: 10px;
-  max-width: 400px;
   height: auto;
   padding-bottom: ${(props) => (props.projectroomName ? "40px" : "0")};
   overflow: hidden;
@@ -55,25 +52,47 @@ const ProjectroomOpenButton = styled.button`
   border: 0;
   bottom: 0;
 `;
-const IdeaCard: FC<IdeaCardProps> = ({ data, handleButtonClick }) => {
+const IdeaCard: FC<IdeaCardProps> = ({
+  data,
+  handleButtonOpenCard,
+  handleButtonLike,
+  handleButtonComment,
+  user,
+}) => {
   const {
     title,
     body,
     Stadtteil,
     status,
     Thema,
-    ideaCount,
+    likeCount,
     commentCount,
     organizationType,
     projectroomName,
     thisOrganizationId,
     screamId,
   } = data;
+
+  const liked = () => {
+    if (user?.likes && user?.likes.find((like) => like.screamId === screamId))
+      return true;
+    else return false;
+  };
+
+  const commented = () => {
+    if (
+      user?.comments &&
+      user?.comments.find((comment) => comment.screamId === screamId)
+    )
+      return true;
+    else return false;
+  };
+
   return (
     <Wrapper
       status={status}
       projectroomName={projectroomName}
-      onClick={() => handleButtonClick(screamId)}
+      onClick={(event) => handleButtonOpenCard(event, screamId)}
     >
       <InnerWrapper>
         <Box
@@ -92,10 +111,17 @@ const IdeaCard: FC<IdeaCardProps> = ({ data, handleButtonClick }) => {
             flexDirection="row"
             margin="0px 0px 0px auto"
           >
-            <TertiaryButton iconLeft={<FlameInactive />} text={ideaCount} />
             <TertiaryButton
-              iconLeft={<CommentInactive />}
+              variant="semibold"
+              iconLeft={liked() ? <FlameActive /> : <FlameInactive />}
+              text={likeCount}
+              onClick={(event) => handleButtonLike(event, screamId)}
+            />
+            <TertiaryButton
+              variant="semibold"
+              iconLeft={commented() ? <CommentActive /> : <CommentInactive />}
               text={commentCount}
+              onClick={(event) => handleButtonComment(event, screamId)}
             />
           </Box>
         </Box>
@@ -120,7 +146,10 @@ const IdeaCard: FC<IdeaCardProps> = ({ data, handleButtonClick }) => {
             gap="14px"
             margin="0px 10px"
           >
-            <Icon icon={organizationType} transform="scale(0.8)" />
+            <Icon
+              icon={setOrganizationTypeIcon(organizationType)}
+              // transform="scale(0.8)"
+            />
             <Typography variant="bodySm">{projectroomName}</Typography>
           </Box>
         </ProjectroomOpenButton>

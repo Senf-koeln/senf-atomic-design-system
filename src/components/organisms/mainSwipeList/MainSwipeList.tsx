@@ -27,9 +27,10 @@ import { useTranslation } from "react-i18next";
 import Plus from "../../../assets/icons/Plus";
 import ProjectroomCard from "../../molecules/cards/ProjectroomCard";
 import Stats from "../../../assets/icons/Stats";
+import MainSwipeListTabs from "../../molecules/tabs/MainSwipeListTabs";
 
 const DragWrapper = styled(animated.div)`
-  z-index: ${({ zIndex }) => (zIndex ? zIndex : 9999)};
+  z-index: ${({ zIndex }) => (zIndex ? zIndex : 995)};
   overscroll-behavior: contain;
   overflow-x: hidden;
   width: 100%;
@@ -43,6 +44,7 @@ const DragWrapper = styled(animated.div)`
     ${({ theme }) => theme.colors.brown.brown20tra};
 
   position: absolute;
+  pointer-events: all;
 
   @media (min-width: 768px) {
     width: 400px;
@@ -116,29 +118,38 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
   overflow,
   size,
   children,
-  openScream,
-  swipePosition,
+
   openOrganizationsPage,
   openInsightsPage,
-  selectedTopics,
   data,
   setOpenOrganizationsOverview,
 
+  swipedUp,
+  setSwipedUp,
+  openScream,
+
   ideasData,
   projectRoomsData,
-  type,
-  secondButtonClick,
-  secondButtonLabel,
-  secondButtonIcon,
+
+  order,
+  setOrder,
+
+  searchTerm,
+  setSearchTerm,
+  searchOpen,
+  setSearchOpen,
+
+  selectedTopics,
+  selectedOrganizationTypes,
+
+  handleButtonOpenCard,
+  handleButtonLike,
+  handleButtonComment,
+  user,
 }) => {
   const { t } = useTranslation();
   const isMobile = isMobileCustom();
   const [swipePercentage, setSwipePercentage] = useState(0);
-
-  const [swipedUp, setSwipedUp] = useState(false);
-
-  const [searchOpen, setSearchOpen] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
 
   const [springProps, setSpring] = useSpring(() => ({
     x: 0,
@@ -185,26 +196,26 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
   //   setSearchOpen(false);
   // };
 
-  // useEffect(() => {
-  //   if (openScream) {
-  //     setSpring({
-  //       transform: `translateY(${window.innerHeight + 20}px)`,
-  //       touchAction: "none",
-  //     });
-  //   } else {
-  //     if (swipePosition === "bottom") {
-  //       setSpring({
-  //         transform: `translateY(${window.innerHeight - 120}px)`,
-  //         touchAction: "none",
-  //       });
-  //     } else {
-  //       setSpring({
-  //         transform: `translateY(${30}px)`,
-  //         touchAction: "unset",
-  //       });
-  //     }
-  //   }
-  // }, [openScream]);
+  useEffect(() => {
+    if (openScream) {
+      setSpring({
+        transform: `translateY(${window.innerHeight + 20}px)`,
+        touchAction: "none",
+      });
+    } else {
+      if (!swipedUp) {
+        setSpring({
+          transform: `translateY(${window.innerHeight - 160}px)`,
+          touchAction: "none",
+        });
+      } else {
+        setSpring({
+          transform: `translateY(${30}px)`,
+          touchAction: "unset",
+        });
+      }
+    }
+  }, [openScream]);
 
   // useEffect(() => {
   //   if (isMobile && swipePosition === "bottom") {
@@ -244,11 +255,11 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
           transform: `translateY(${window.innerHeight - 160}px)`,
           touchAction: "none",
         });
-        setSwipedUp(false);
         setListHeaderProps({
           overflow: "hidden",
         });
 
+        setSwipedUp(false);
         // dispatch(setSwipePositionDown());
 
         // setListHeaderProps({
@@ -329,31 +340,17 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
               />
             </RoundedButtonWrapper>
             <Header {...bind()} swipedUp={swipedUp} style={listHeaderProps}>
-              <Box
-                margin={
-                  swipedUp ? "32px 24px 20px 24px" : "26px 24px 20px 24px"
-                }
-                gap="20px"
-              >
-                <Typography
-                  variant="h3"
-                  color="black"
-                  fontWeight={900}
-                  fontSize="5.6vw"
-                >
-                  Alle Ideen
-                </Typography>
-                <Typography
-                  variant="h3"
-                  color="#d6ab00"
-                  fontWeight={900}
-                  fontSize="5.6vw"
-                >
-                  Projekträume
-                </Typography>
-              </Box>
+              <MainSwipeListTabs
+                swipedUp={swipedUp}
+                order={order}
+                setOrder={setOrder}
+              />
               <TagSlideWrapper>
-                <TagSlide type="topics" selectedTopics={selectedTopics} />
+                <TagSlide
+                  type={order === "ideas" ? "topics" : "organizationTypes"}
+                  selectedTopics={selectedTopics}
+                  selectedOrganizationTypes={selectedOrganizationTypes}
+                />
               </TagSlideWrapper>
             </Header>
           </React.Fragment>
@@ -370,8 +367,10 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
                 <Button
                   variant="secondary"
                   size="small"
-                  text={type === "ideas" ? t("statistics") : t("organizations")}
-                  icon={type === "ideas" ? <Stats /> : null}
+                  text={
+                    order === "ideas" ? t("statistics") : t("organizations")
+                  }
+                  icon={order === "ideas" ? <Stats /> : null}
                   onClick={() => {}}
                 />
               }
@@ -391,8 +390,12 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
             />
           </ToolbarWrapper>
           <List
-            CardType={type === "ideas" ? IdeaCard : ProjectroomCard}
-            data={type === "ideas" ? ideasData : projectRoomsData}
+            CardType={order === "ideas" ? IdeaCard : ProjectroomCard}
+            data={order === "ideas" ? ideasData : projectRoomsData}
+            handleButtonOpenCard={handleButtonOpenCard}
+            handleButtonLike={handleButtonLike}
+            handleButtonComment={handleButtonComment}
+            user={user}
           />
         </InnerWrapper>
       </DragWrapper>

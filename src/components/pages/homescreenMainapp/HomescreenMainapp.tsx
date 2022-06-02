@@ -48,11 +48,24 @@ const MainColumnWrapper = styled.div`
 
 const HomescreenMainapp: FC<HomescreenMainappProps> = ({
   selectedTopics,
-  ideaData,
+  selectedOrganizationTypes,
+  ideasData,
+  projectroomsData,
   organizationsData,
 }) => {
   const [openOrganizationsOverview, setOpenOrganizationsOverview] =
     useState(false);
+
+  const handleButtonOpenCard = () => {
+    () => {};
+  };
+  const handleButtonLike = () => {
+    () => {};
+  };
+  const handleButtonComment = () => {
+    () => {};
+  };
+  const user = null;
   return (
     <Wrapper>
       {isMobileCustom() && (
@@ -65,8 +78,14 @@ const HomescreenMainapp: FC<HomescreenMainappProps> = ({
       <MainColumnWrapper>
         <MainSwipeList
           setOpenOrganizationsOverview={setOpenOrganizationsOverview}
-          data={ideaData}
+          ideasData={ideasData}
+          projectroomsData={projectroomsData}
           selectedTopics={["Versorgung"]}
+          selectedOrganiztaionTypes={["Vereine"]}
+          handleButtonOpenCard={handleButtonOpenCard}
+          handleButtonLike={handleButtonLike}
+          handleButtonComment={handleButtonComment}
+          user={user}
         />
       </MainColumnWrapper>
 

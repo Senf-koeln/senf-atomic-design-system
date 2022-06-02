@@ -1,4 +1,5 @@
 /** @format */
+import React from "react";
 import Initiativen from "../assets/icons/Initiativen";
 import Politik from "../assets/icons/Politik";
 import Vereine from "../assets/icons/Vereine";

@@ -76,7 +76,7 @@ export const Projectroom = ProjectroomCardTemplate.bind({});
 Projectroom.args = {
   data: {
     title: "Projektraum Titel X",
-    description:
+    brief:
       "Wir bringen die Ideen und Visionen für die Zukunft des Liebigquartiers und einen sozial-ökologischen Wandel zusammen!",
     organizationType: "Initiativen",
     organizationName: "WandelWerk",
