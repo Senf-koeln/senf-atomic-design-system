@@ -15,7 +15,7 @@ const Template: Story<DropdownProps> = (args) => <Dropdown {...args} />;
 export const Default = Template.bind({});
 Default.args = {
   id: "default",
-  listItems: [
+  listItems: {country: [
     { label: "🇨🇳  China", value: "China" },
     { label: "🇮🇳  India", value: "India" },
     { label: "🇺🇸  United States", value: "United States" },
@@ -40,7 +40,10 @@ Default.args = {
     { label: "🇮🇹  Italy", value: "Italy" },
     { label: "🇹🇿  Tanzania", value: "Tanzania" },
     { label: "🇿🇦  South Africa", value: "South Africa" },
-  ],
+  ]},
+  recieveValue(value) {
+    console.log(value);
+  },
 };
 export const DefaultWithLabelAndNote = Default.bind({});
 DefaultWithLabelAndNote.args = {
@@ -48,23 +51,32 @@ DefaultWithLabelAndNote.args = {
   label: "Land",
   note: "A note for extra info",
   listItems: Default.args.listItems,
+  recieveValue(value) {
+    console.log(value)
+  }
 };
 
 export const Andrede = Template.bind({});
 Andrede.args = {
   id: "Andrede",
-  listItems: ["Mr.", "Mrs.", "Miss", "Ms.", "Dr.", "Prof.", "Rev."].map(
+  listItems: {Andrede: ["Mr.", "Mrs.", "Miss", "Ms.", "Dr.", "Prof.", "Rev."].map(
     (item) => ({ label: item, value: item })
-  ),
+  )},
+  recieveValue(value) {
+    console.log(value)
+  }
 };
 
 export const Gender = Template.bind({});
 Gender.args = {
   id: "Gender",
-  listItems: ["Non-binary", "Female", "Male"].map((item) => ({
+  listItems: {Gender: ["Non-binary", "Female", "Male"].map((item) => ({
     label: item,
     value: item,
-  })),
+  }))},
+  recieveValue(value) {
+    console.log(value);
+  }
 };
 
 export const MultiDropdowns = Template.bind({});
@@ -91,4 +103,8 @@ MultiDropdowns.args = {
       { label: "Male", value: "Female" },
     ],
   },
+  recieveValue(value) {
+    console.log(value);
+    
+  }
 };

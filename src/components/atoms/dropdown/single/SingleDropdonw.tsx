@@ -7,17 +7,21 @@ const SingleDropdown: FunctionComponent<DropdownProps<false>> = ({
   id,
   placeholder,
   listItems,
+  recieveValue
 }) => {
-  const [selectedItem, setSelectedItem] = useState<string>();
+  const listItemKey = Object.keys(listItems)[0];
+
   return (
     <>
-      <InputField multi as={Selector} name={id} id={id}>
+      <InputField multi as={Selector} name={id} id={id} onChange={(e) => {
+        recieveValue({[listItemKey]: e.currentTarget.value});
+      }}>
         {placeholder && (
           <option disabled selected hidden>
             {placeholder}
           </option>
         )}
-        {listItems.map((item) => (
+        {Object.values(listItems)[0].map((item) => (
           <option value={item.value}>{item.label}</option>
         ))}
       </InputField>

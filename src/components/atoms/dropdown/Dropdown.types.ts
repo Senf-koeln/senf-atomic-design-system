@@ -1,3 +1,7 @@
+type listItem = {
+  value: string;
+  label: string;
+}
 export type DropdownProps<TMultiple = boolean> = TMultiple extends true
   ? {
       id: string;
@@ -6,6 +10,7 @@ export type DropdownProps<TMultiple = boolean> = TMultiple extends true
       note?: string;
       multi?: TMultiple;
       listItems: MultiListItems;
+      recieveValue: (value: SelectedListItem ) => void
     }
   : {
       id: string;
@@ -13,11 +18,12 @@ export type DropdownProps<TMultiple = boolean> = TMultiple extends true
       label?: string;
       note?: string;
       multi?: TMultiple;
-      listItems: { value: string; label: string }[];
+      listItems: {[index: string]: listItem[]};
+      recieveValue: (value: SelectedListItem ) => void
     };
 export interface MultiListItems {
-  [index: string]: {
-    value: string;
-    label: string;
-  }[];
+  [index: string]: listItem[];
+}
+export interface SelectedListItem {
+  [k: string]: string | undefined; 
 }
