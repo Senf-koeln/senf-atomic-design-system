@@ -147,6 +147,16 @@
   "email_not_verified": "Du hast deine Email-Adresse noch nicht verifiziert!",
   "email_not_valid": "Dies ist keine gültige E-Mail Adresse",
   "enter_valid_email": "Eine gültige E-Mail eingeben",
+
+  "verify_header_1": "Fast",
+  "verify_header_2": "geschafft!",
+  "reset_header_1": "Passwort",
+  "reset_header_2": "zurücksetzen",
+
+  "email_receive": "Du bekommst in den nächsten Minuten von uns eine E-Mail.",
+  "email_spam_folder": "evtl. im Junk-Ordner",
+  "email_verification_link": "Bitte öffne sie und klicke auf den Link um deinen Account zu verifizieren.",
+
   "enter_organizations_name": "Geben Sie den Namen der Organisation ein",
   "orgaznizations_name_too_short": "Name der Organisation ist zu kurz",
   "organizations_name_too_long": "Name der Organisation ist zu lang",
@@ -287,6 +297,7 @@
   "infopage_block3_subtitle": "Wir konnten bereits tolle Kooperationen eingehen. Wenn auch dich unsere Denkweise anspricht, lass uns quatschen!",
   "infopage_illustrator": "Illustratorin: Gizem Güvendag",
 
+  "Success_subheadline": "Wir freuen uns über deine Ideen! Was möchtest du als nächstes tun?",
   "restart": "Neustarten",
   "continue_creation": "Erstellung fortsetzen",
   "projectRoom_title": "Projektraum-Name",

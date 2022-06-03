@@ -1,7 +1,7 @@
 /** @format */
+/// <reference types="react" />
 export interface IconProps {
-    icon?: string;
-    size?: "big" | undefined;
-    color?: string;
-    transform?: string;
+    width?: string;
+    height?: string;
+    icon: React.ReactNode;
 }

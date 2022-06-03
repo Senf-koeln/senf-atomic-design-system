@@ -98,7 +98,7 @@ const LoaderWrapper = styled.span`
 `;
 
 const IconWrapper = styled.div<ButtonProps>`
-  padding-right: ${(props) => (props.text === undefined ? "0px" : "5px")};
+  padding-right: ${(props) => (props.text === undefined ? "0px" : "10px")};
 `;
 
 const Button: FC<ButtonProps> = ({

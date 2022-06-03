@@ -1,3 +1,4 @@
+export declare const LayerWhiteGradientBordersDefault: import("styled-components").FlattenInterpolation<import("styled-components").ThemeProps<any>>;
 export declare const LayerWhiteFirstDefault: import("styled-components").FlattenInterpolation<import("styled-components").ThemeProps<any>>;
 export declare const LayerWhiteFirstHover: import("styled-components").FlattenInterpolation<import("styled-components").ThemeProps<any>>;
 export declare const LayerWhiteFirstActive: import("styled-components").FlattenInterpolation<import("styled-components").ThemeProps<any>>;

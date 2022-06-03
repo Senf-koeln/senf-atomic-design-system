@@ -76,6 +76,9 @@ const OrganizationsOverview: FC<OrganizationsOverviewProps> = ({
   open = true,
   data,
   selectedOrganizationTypes,
+  user,
+  openCreateOrganization,
+  setOpenModalAuthenticate,
 }) => {
   const { t } = useTranslation();
   const [searchOpen, setSearchOpen] = useState(false);
@@ -145,22 +148,30 @@ const OrganizationsOverview: FC<OrganizationsOverviewProps> = ({
           </Box>
 
           <Box margin="16px 12px 16px 12px">
-            <Toolbar />
-          </Box>
-
-          {/* <ButtonWrapper>
-            <Button
-              variant="secondary"
-              borderStyle="dashed"
-              size="small"
-              text={t("createOrganization")}
-              // onClick={
-              //   user.authenticated
-              //     ? openCreateOrganization
-              //     : () => setOpenModalAuthenticate(true)
-              // }
+            <Toolbar
+              setSearchOpen={setSearchOpen}
+              searchOpen={searchOpen}
+              secondButtonClick={
+                user.authenticated
+                  ? openCreateOrganization
+                  : () => setOpenModalAuthenticate(true)
+              }
+              secondButtonLabel={t("createOrganization")}
+              searchPlaceholder={t("searchBar")}
+              activeSortOptionLabel={t("newest_ideas")}
+              sortOptions={[
+                { name: "newest", label: t("newest_ideas") },
+                { name: "hottest", label: t("hottest_ideas") },
+              ]}
+              statusOptions={[
+                { name: "Unprocessed", label: t("unprocessed") },
+                { name: "Accepted", label: t("accepted") },
+                { name: "Planning", label: t("planning") },
+                { name: "Implemented", label: t("implemented") },
+                { name: "Rejected", label: t("rejected") },
+              ]}
             />
-          </ButtonWrapper> */}
+          </Box>
         </HeaderWrapper>
         <svg
           width="100%"

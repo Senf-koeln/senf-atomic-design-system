@@ -8,6 +8,8 @@ import TertiaryButton from "../../atoms/buttons/TertiaryButton";
 import Input from "../../atoms/inputs/Input";
 import Box from "../../atoms/box/Box";
 import { ToolbarProps } from "./Toolbar.types";
+import Arrow from "../../../assets/icons/Arrow";
+import Search from "../../../assets/icons/Search";
 
 const Wrapper = styled.div<ToolbarProps>`
   display: flex;
@@ -66,6 +68,8 @@ const Toolbar: FC<ToolbarProps> = ({
   sortOptions,
   statusOptions,
   activeSortOptionLabel,
+
+  secondButton,
 }) => {
   const { t } = useTranslation();
 
@@ -82,22 +86,14 @@ const Toolbar: FC<ToolbarProps> = ({
       <TertiaryButton
         onClick={handleDropdown}
         text={activeSortOptionLabel}
-        iconRight="arrow"
-        iconRightTransform="rotate(0deg)"
+        iconRight={<Arrow transform="rotate(90deg)" />}
       />
 
       <Box gap="8px">
+        {secondButton}
         <Button
           variant="secondary"
-          icon="stats"
-          text={t("statistics")}
-          size="small"
-          transform="scale(0.7)"
-          onClick={setSearch}
-        />
-        <Button
-          variant="secondary"
-          icon="search"
+          icon={<Search />}
           size="small"
           transform="scale(0.7)"
           onClick={setSearch}
@@ -114,6 +110,7 @@ const Toolbar: FC<ToolbarProps> = ({
             placeholder={searchPlaceholder}
             onChange={setSearchTerm}
             value={searchTerm}
+            setSearchTerm={setSearchTerm}
           />
         </SearchbarWrapper>
       )}

@@ -1,8 +1,11 @@
+/** @format */
+
 import React, { FunctionComponent } from "react";
 import { Wrapper, Indication } from "../inputs/input.styles";
 import { DropdownProps, MultiListItems } from "./Dropdown.types";
 import MultiDropdown from "./multi/MultiDropdown";
 import SingleDropdown from "./single/SingleDropdonw";
+
 
 const Dropdown: FunctionComponent<DropdownProps> = ({
   id,
@@ -15,11 +18,11 @@ const Dropdown: FunctionComponent<DropdownProps> = ({
 }) => {
   return (
     <Wrapper>
-      <Indication>
-        <label htmlFor={id}>{label}</label>
-        <p>{note}</p>
-      </Indication>
-      <div style={{ display: "flex", gap: "0.5rem" }}>
+      <Box>
+        <Label htmlFor={id}>{label}</Label>
+        <Note>{note}</Note>
+      </Box>
+      <Box gap="0.5rem">
         {multi ? (
           <MultiDropdown
             id={id}
@@ -35,7 +38,7 @@ const Dropdown: FunctionComponent<DropdownProps> = ({
             recieveValue={recieveValue}
           />
         )}
-      </div>
+      </Box>
     </Wrapper>
   );
 };

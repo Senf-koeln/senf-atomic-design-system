@@ -1,4 +1,6 @@
 /** @format */
 export interface ShapeProps {
-    variant?: string;
+    variant?: number;
+    position?: string;
+    marginTop?: string;
 }

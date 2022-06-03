@@ -4,8 +4,9 @@ import { MouseEventHandler } from "react";
 export interface BoxProps {
   flexDirection?: "column" | "row";
   gap?: string;
-  width?: string;
   height?: string;
+  width?: string;
+  maxWidth?: string;
   margin?: string;
   left?: string | number;
   right?: string | number;

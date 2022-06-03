@@ -27,7 +27,7 @@ const StyledButton = styled.button<TertiaryButtonProps>`
   pointer-events: all;
 
   //ADD THEME-SPACE?
-  padding: 4px 6px 4px 6px;
+  padding: 4px 7px 4px 7px;
   border: 0;
   background-color: transparent;
 
@@ -56,7 +56,9 @@ const TertiaryButton: FC<TertiaryButtonProps> = ({
   iconRight,
   iconRightTransform,
   size,
+  variant,
   fillWidth,
+  color,
   loading,
   onClick,
   ...rest
@@ -76,23 +78,36 @@ const TertiaryButton: FC<TertiaryButtonProps> = ({
           <Icon
             icon={iconLeft}
             transform={
-              size === "small"
-                ? ` ${iconLeftTransform ? iconLeftTransform : "scale(0.7)"}`
-                : ` ${iconLeftTransform ? iconLeftTransform : "scale(0.7)"}`
+              iconLeftTransform ? iconLeftTransform : "scale(0.7)"
+              // size === "small"
+              //   ? ` ${iconLeftTransform ? iconLeftTransform : "scale(0.7)"}`
+              //   : ` ${iconLeftTransform ? iconLeftTransform : "scale(0.7)"}`
             }
           />
         </IconWrapperLeft>
       )}
-      {text && <Typography variant={"buttonBg"}> {text}</Typography>}
+      {text && (
+        <Typography
+          variant={size === "small" ? "buttonSm" : "buttonBg"}
+          fontWeight={
+            variant === "medium" ? 500 : variant === "semibold" ? 600 : 700
+          }
+          color={color}
+        >
+          {" "}
+          {text}
+        </Typography>
+      )}
 
       {iconRight && (
         <IconWrapperRight text={text} iconLeft={iconLeft}>
           <Icon
             icon={iconRight}
             transform={
-              size === "small"
-                ? `${iconLeftTransform ? iconLeftTransform : "scale(0.7)"}`
-                : `${iconLeftTransform ? iconLeftTransform : "scale(0.7)"}`
+              iconLeftTransform ? iconLeftTransform : "scale(0.7)"
+              // size === "small"
+              //   ? `${iconLeftTransform ? iconLeftTransform : "scale(0.7)"}`
+              //   : `${iconLeftTransform ? iconLeftTransform : "scale(0.7)"}`
             }
           />
         </IconWrapperRight>

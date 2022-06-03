@@ -20,29 +20,32 @@ export const Wrapper = styled.div<{ disabled?: boolean }>`
   opacity: ${({ disabled }) => disabled && "0.5"};
 `;
 
-export const Indication = styled.div<{ error?: boolean }>`
-  display: flex;
-  justify-content: space-between;
+export const Label = styled.label<{ error?: boolean }>`
+  align-self: flex-start;
+  flex: auto;
   color: ${({ theme, error }) => error && theme.colors.signal.redDark};
-  label {
-    font-size: ${({ theme }) => theme.fontSizes[1]}rem;
-    font-weight: ${({ theme }) => theme.fontWeights[1]};
-    line-height: ${({ theme }) => theme.lineHeight[0]};
-  }
 
-  p {
-    font-size: ${({ theme }) => theme.fontSizes[0]}rem;
-    text-align: end;
-    line-height: ${({ theme }) => theme.lineHeight[2]};
-    flex-basis: 7rem;
-  }
+  font-size: ${({ theme }) => theme.fontSizes[1]}rem;
+  font-weight: ${({ theme }) => theme.fontWeights[1]};
+  line-height: ${({ theme }) => theme.lineHeight[0]};
+`;
+
+export const Note = styled.p<{ error?: boolean }>`
+  align-self: flex-end;
+  flex: auto;
+  color: ${({ theme, error }) => error && theme.colors.signal.redDark};
+
+  font-size: ${({ theme }) => theme.fontSizes[0]}rem;
+  text-align: end;
+  line-height: ${({ theme }) => theme.lineHeight[2]};
+  flex-basis: 7rem;
 `;
 
 export const InputField = styled.div<{ focus: boolean }>`
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.7rem 0.7rem 0.7rem 0.9rem;
+  padding: 0.58rem 0.6rem 0.58rem 0.9rem;
   min-height: 50px;
   background-color: ${({ theme }) => theme.colors.white.white50tra};
   border-radius: ${({ theme }) => theme.radii[1]}px;
@@ -56,19 +59,23 @@ export const InputField = styled.div<{ focus: boolean }>`
       outline-offset: -3px;
     `}
 
+  input {
+    max-height: 50px !important;
+  }
+
   /* Styles for textarea */
   textarea {
     resize: none;
   }
 
   /* Styles for password input */
-  button {
+  /* button {
     border: 0;
     cursor: pointer;
     background-color: transparent;
     color: ${({ theme }) => theme.colors.primary.primary140};
     font-weight: ${({ theme }) => theme.fontWeights[1]};
-  }
+  } */
 
   /* Styles for search input */
   svg {
@@ -83,11 +90,11 @@ export const TextField = styled.input`
   /* font-size: ${({ theme }) => theme.fontSizes[2]}rem; */
   border: 0;
   flex: 1;
-  background-color: transparent;
+  background-color: transparent !important;
   color: rgb(51, 51, 51);
 
   /* Styles for search input */
-  &[type="search"] {
+  /* &[type="search"] {
     & + ${HoverContainer} > svg {
       display: block;
       transform: rotateZ(45deg) scale(0.7);
@@ -97,8 +104,8 @@ export const TextField = styled.input`
       & + ${HoverContainer} > svg {
         display: none;
       }
-    }
-  }
+    } 
+  }*/
 
   ::placeholder,
   ::-webkit-input-placeholder {

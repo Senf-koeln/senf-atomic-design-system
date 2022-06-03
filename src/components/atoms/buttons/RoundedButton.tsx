@@ -2,6 +2,7 @@
 
 import React, { FC } from "react";
 import styled from "styled-components";
+import Plus from "../../../assets/icons/Plus";
 import Icon from "../icons/Icon";
 import {
   LayerGreyButtonsDefault,
@@ -81,11 +82,7 @@ const RoundedButton: FC<ButtonProps> = ({
       {...rest}
     >
       <IconWrapper>
-        <Icon
-          icon={icon}
-          transform={size === "big" ? "scale(1)" : "scale(0.7)"}
-          color={color}
-        />
+        <Icon icon={icon} width={size === "big" ? "24px" : "16px"} />
       </IconWrapper>
     </StyledButton>
   );

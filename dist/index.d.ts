@@ -1,8 +1,10 @@
+/// <reference types="react" />
 import * as styled_components from 'styled-components';
 import { FC, MouseEventHandler, ChangeEventHandler, FunctionComponent } from 'react';
 import { Theme } from 'styled-system';
 export { default as i18n } from 'i18next';
 
+declare const LayerWhiteGradientBordersDefault: styled_components.FlattenInterpolation<styled_components.ThemeProps<any>>;
 declare const LayerWhiteFirstDefault: styled_components.FlattenInterpolation<styled_components.ThemeProps<any>>;
 declare const LayerWhiteFirstHover: styled_components.FlattenInterpolation<styled_components.ThemeProps<any>>;
 declare const LayerWhiteFirstActive: styled_components.FlattenInterpolation<styled_components.ThemeProps<any>>;
@@ -73,9 +75,9 @@ declare const RoundedButton: FC<ButtonProps>;
 
 interface TertiaryButtonProps {
     text?: string;
-    iconLeft?: string;
+    iconLeft?: React.ReactNode;
     iconLeftTransform?: string;
-    iconRight?: string;
+    iconRight?: React.ReactNode;
     iconRightTransform?: string;
     fillWidth?: "max" | undefined;
     loading?: boolean;
@@ -93,7 +95,7 @@ declare const TertiaryButton: FC<TertiaryButtonProps>;
 interface TagProps {
     text?: string;
     variant?: "primary" | "white" | "secondary" | "plus";
-    icon?: string;
+    icon?: React.ReactNode;
     iconColor?: string;
     fillWidth?: "max" | undefined;
     active?: boolean;
@@ -106,21 +108,13 @@ declare const Tag: FC<TagProps>;
 
 /** @format */
 interface IconProps {
-    icon?: string;
-    size?: "big" | undefined;
-    color?: string;
-    transform?: string;
+    width?: string;
+    height?: string;
+    icon: React.ReactNode;
 }
 
 /** @format */
 
-/**
- * An Icon is a piece of visual element, but we must ensure its accessibility while using it.
- * It can have 2 purposes:
- *
- * - *decorative only*: for example, it illustrates a label next to it. We must ensure that it is ignored by screen readers, by setting `aria-hidden` attribute (ex: `<Icon icon="check" aria-hidden />`)
- * - *non-decorative*: it means that it delivers information. For example, an icon as only child in a button. The meaning can be obvious visually, but it must have a proper text alternative via `aria-label` for screen readers. (ex: `<Icon icon="print" aria-label="Print this document" />`)
- */
 declare const Icon: FC<IconProps>;
 
 /** @format */
@@ -142,25 +136,32 @@ interface InputProps {
     receiveValue: (value?: string) => void;
 }
 
+/** @format */
+
 declare const Input: FunctionComponent<InputProps>;
 
 /** @format */
 
-interface FlexWrapperProps {
+interface BoxProps {
     flexDirection?: "column" | "row";
     gap?: string;
-    width?: string;
     height?: string;
+    width?: string;
+    maxWidth?: string;
     margin?: string;
+    left?: string | number;
+    right?: string | number;
+    zIndex?: string | number;
     alignItems?: "flex-start" | "center" | "flex-end";
     justifyContent?: "flex-start" | "center" | "flex-end";
     flexWrap?: "nowrap" | "wrap" | "wrap-reverse";
+    position?: "fixed" | "absolute" | "relative" | "sticky";
     onClick?: MouseEventHandler<HTMLButtonElement>;
 }
 
 /** @format */
 
-declare const FlexWrapper: FC<FlexWrapperProps>;
+declare const Box: FC<BoxProps>;
 
 /** @format */
 
@@ -179,15 +180,22 @@ declare const Divider: FC<DividerProps>;
 
 /** @format */
 interface ShapeProps {
-    variant?: string;
+    variant?: number;
+    position?: string;
+    marginTop?: string;
 }
 
 /** @format */
 
 declare const Shape: FC<ShapeProps>;
 
+/** @format */
 interface TypographyProps {
-    fontFamily: string;
+    fontFamily?: string;
+    fontSize?: string;
+    fontWeight?: string | number;
+    color?: string;
+    textAlign?: string;
     variant: "h1" | "h2" | "h3" | "buttonBg" | "buttonSm" | "bodyBg" | "bodySm" | "footnote";
 }
 
@@ -305,6 +313,7 @@ interface SubNavbarProps {
     iconRight?: string;
     iconRightTransform?: string;
     textRight?: string;
+    handlebar?: boolean;
     onClick?: MouseEventHandler<HTMLButtonElement>;
 }
 
@@ -324,16 +333,21 @@ interface AccordionProps {
 declare const Accordion: FC<AccordionProps>;
 
 /** @format */
-
 interface AuthProps {
-    text?: string;
-    variant?: "register" | "login";
-    loading?: boolean;
-    onClick?: MouseEventHandler<HTMLButtonElement>;
-    formikRegisterStore?: Function;
-    formikLoginStore?: Function;
-    handleSubmitRegister?: Function;
-    handleSubmitLogin?: Function;
+    handleClose?: (x: boolean) => void;
+    handleSubmitRegister?: any;
+    registerLoading?: boolean;
+    handleSubmitLogin?: any;
+    loginLoading?: boolean;
+    handleGoogleSignIn?: any;
+    googleLoading?: boolean;
+    handleFacebookSignIn?: any;
+    facebookLoading?: boolean;
+    resetLoading?: any;
+    handleSubmitResetEmail?: any;
+    socialLoginVerified?: boolean;
+    emailRegistrationSubmitted?: boolean;
+    emailVerified?: boolean;
 }
 
 /** @format */
@@ -347,4 +361,4 @@ declare const theme: Theme;
 /** @format */
 declare const GlobalStyle: styled_components.GlobalStyleComponent<{}, styled_components.DefaultTheme>;
 
-export { Accordion, Auth, Button, Divider, FlexWrapper, Form, GlobalStyle, Icon, IdeaCard, Input, LayerBrownDefault, LayerBrownHover, LayerGreyButtonsDefault, LayerGreyButtonsHover, LayerGreyDefault, LayerGreyHover, LayerWhiteFirstActive, LayerWhiteFirstDefault, LayerWhiteFirstHover, LayerWhiteSecondDefault, LayerWhiteSecondHover, LayerYellowDefault, LayerYellowHover, List, Loader, Modal, ObjectCard, OrganizationCard, ProjectroomCard, RangeSlider, RoundedButton, Shape, SubNavbar, Tag, TertiaryButton, Typography, theme };
+export { Accordion, Auth, Box, Button, Divider, Form, GlobalStyle, Icon, IdeaCard, Input, LayerBrownDefault, LayerBrownHover, LayerGreyButtonsDefault, LayerGreyButtonsHover, LayerGreyDefault, LayerGreyHover, LayerWhiteFirstActive, LayerWhiteFirstDefault, LayerWhiteFirstHover, LayerWhiteGradientBordersDefault, LayerWhiteSecondDefault, LayerWhiteSecondHover, LayerYellowDefault, LayerYellowHover, List, Loader, Modal, ObjectCard, OrganizationCard, ProjectroomCard, RangeSlider, RoundedButton, Shape, SubNavbar, Tag, TertiaryButton, Typography, theme };
