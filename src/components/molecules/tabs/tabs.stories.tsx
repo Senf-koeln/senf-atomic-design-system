@@ -19,5 +19,6 @@ const Template: Story<MainSwipeListTabsProps> = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
+  order: "ideas",
   text: "x",
 };

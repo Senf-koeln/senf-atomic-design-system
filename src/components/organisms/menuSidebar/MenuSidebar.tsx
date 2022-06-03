@@ -2,7 +2,10 @@
 
 import React, { FC } from "react";
 import styled from "styled-components";
+import Info from "../../../assets/icons/Info";
+import Mail from "../../../assets/icons/Mail";
 import More from "../../../assets/icons/More";
+import User from "../../../assets/icons/User";
 import Box from "../../atoms/box/Box";
 import Button from "../../atoms/buttons/Button";
 import Icon from "../../atoms/icons/Icon";
@@ -43,14 +46,43 @@ const Wrapper = styled.div<MenuSidebarProps>`
 //   bottom: 0;
 // `;
 
-const MenuSidebar: FC<MenuSidebarProps> = ({}) => {
+const MenuSidebar: FC<MenuSidebarProps> = ({
+  handleOpenMyAccount,
+  handleOpenInfoPage,
+}) => {
   return (
     <Wrapper>
-      <Box gap="14px" flexDirection="column" margin="10px 0px">
-        <Button variant="white" size="small" icon={<More />} />
-        <Button variant="white" size="small" icon={<More />} />
-        <Button variant="white" size="small" icon={<More />} />
-        <Button variant="white" size="small" icon={<More />} />
+      <Box
+        flexDirection="column"
+        margin="10px 0px"
+        justifyContent="space-between"
+        height="calc(100% - 20px)"
+      >
+        <Box gap="14px" flexDirection="column">
+          <Button variant="white" size="small" icon={<More />} />
+          <Button
+            variant="white"
+            size="small"
+            icon={<Info />}
+            onClick={() => handleOpenInfoPage(true)}
+          />
+          <Button variant="white" size="small" icon={<More />} />
+        </Box>
+        <Box gap="14px" flexDirection="column">
+          <Button
+            variant="white"
+            size="small"
+            icon={<User />}
+            onClick={() => {
+              handleOpenMyAccount(true);
+            }}
+          />
+        </Box>
+
+        <Box gap="14px" flexDirection="column">
+          <Button variant="white" size="small" icon={<Mail />} />
+          <Button variant="white" size="small" icon={<More />} />
+        </Box>
       </Box>
     </Wrapper>
   );

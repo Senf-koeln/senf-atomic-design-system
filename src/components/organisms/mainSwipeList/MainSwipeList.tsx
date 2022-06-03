@@ -161,6 +161,8 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
   handleButtonLike,
   handleButtonComment,
   user,
+
+  setPostIdeaOpen,
 }) => {
   const { t } = useTranslation();
   const isMobile = isMobileCustom();
@@ -409,6 +411,7 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
                 transform="scale(2)"
               />
             }
+            onClick={() => setPostIdeaOpen(true)}
           />
         </RoundedButtonWrapper>
         <Header {...bind()} swipedUp={swipedUp} style={listHeaderProps}>

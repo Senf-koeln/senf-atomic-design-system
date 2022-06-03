@@ -13,6 +13,12 @@ const Wrapper = styled.div<MainSwipeListTabsProps>`
 
 const Tab = styled.div<MainSwipeListTabsProps>`
   margin: ${({ isMobile }) => (isMobile ? "10px" : "0px 10px 5px 10px")};
+  color: ${({ active, theme }) =>
+    active ? "black" : theme.colors.primary.primary160};
+
+  &:hover {
+    color: ${({ active }) => (active ? "black" : "#c79f00")};
+  }
 `;
 
 const MainSwipeListTabs: FC<MainSwipeListTabsProps> = ({
@@ -27,20 +33,26 @@ const MainSwipeListTabs: FC<MainSwipeListTabsProps> = ({
         margin={swipedUp ? "22px 14px 10px 14px" : "16px 14px 10px 14px"}
         flexDirection={isMobile ? "row" : "column"}
       >
-        <Tab onClick={() => setOrder(1)} isMobile={isMobile}>
+        <Tab
+          onClick={() => setOrder(1)}
+          isMobile={isMobile}
+          active={order === "ideas"}
+        >
           <Typography
             variant="h3"
-            color={order === "ideas" ? "black" : "#d6ab00"}
+            // color={order === "ideas" ? "black" : "#d6ab00"}
+            color="inherit"
             fontWeight={900}
             fontSize={isMobile ? "5.6vw" : "22px"}
           >
             Alle Ideen
           </Typography>
         </Tab>
-        <Tab onClick={() => setOrder(2)}>
+        <Tab onClick={() => setOrder(2)} active={order === "projectrooms"}>
           <Typography
             variant="h3"
-            color={order !== "ideas" ? "black" : "#d6ab00"}
+            color="inherit"
+            // color={order !== "ideas" ? "black" : "#d6ab00"}
             fontWeight={900}
             fontSize={isMobile ? "5.6vw" : "22px"}
           >

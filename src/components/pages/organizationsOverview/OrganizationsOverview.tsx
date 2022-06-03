@@ -140,12 +140,8 @@ const OrganizationsOverview: FC<OrganizationsOverviewProps> = ({
       <SVGWrapper searchOpen={searchOpen}>
         <Box position="fixed" margin="20px" zIndex={2}>
           <RoundedButton
-            icon={
-              <Arrow
-                transform="rotate(180deg)"
-                onClick={() => setOpenOrganizationsOverview(false)}
-              />
-            }
+            icon={<Arrow transform="rotate(180deg)" />}
+            onClick={() => setOpenOrganizationsOverview(false)}
           />
         </Box>
         <HeaderWrapper>
