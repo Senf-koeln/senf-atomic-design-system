@@ -28,6 +28,7 @@ import Plus from "../../../assets/icons/Plus";
 import ProjectroomCard from "../../molecules/cards/ProjectroomCard";
 import Stats from "../../../assets/icons/Stats";
 import MainSwipeListTabs from "../../molecules/tabs/MainSwipeListTabs";
+import MenuSidebar from "../menuSidebar/MenuSidebar";
 
 const DragWrapper = styled(animated.div)`
   z-index: ${({ zIndex }) => (zIndex ? zIndex : 995)};
@@ -51,8 +52,8 @@ const DragWrapper = styled(animated.div)`
     "scale(0.9) translateY(-20px)"};
   /* transform: scale(0.9) translateY(-20px); */
   @media (min-width: 768px) {
-    width: 400px;
-    max-width: 400px;
+    width: 470px;
+    max-width: 470px;
     border-radius: 18px;
     margin: 10px;
     height: calc(100vh - 20px);
@@ -61,6 +62,12 @@ const DragWrapper = styled(animated.div)`
 `;
 
 const InnerWrapper = styled.div<OrganizationsOverviewProps>`
+  @media (min-width: 768px) {
+    padding-left: 59px;
+  }
+`;
+
+const ContentWrapper = styled.div<OrganizationsOverviewProps>`
   overflow-y: scroll;
   pointer-events: all;
   height: calc(100% - 120px);
@@ -163,6 +170,9 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
   user,
 
   setPostIdeaOpen,
+
+  handleOpenMyAccount,
+  setInfoPageOpen,
 }) => {
   const { t } = useTranslation();
   const isMobile = isMobileCustom();
@@ -179,7 +189,7 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
   }));
 
   const [listHeaderProps, setListHeaderProps] = useSpring(() => ({
-    height: isMobile ? "80px" : !isMobile && searchOpen ? "220px" : "170px",
+    height: isMobile ? "80px" : !isMobile && searchOpen ? "210px" : "160px",
     overflow: "hidden",
   }));
   // const setSwipeUp = () => {
@@ -395,56 +405,63 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
         $openOrganizationsOverview={openOrganizationsOverview}
         $openStatistics={openStatistics}
       >
+        {!isMobile && (
+          <MenuSidebar
+            handleOpenMyAccount={handleOpenMyAccount}
+            setInfoPageOpen={setInfoPageOpen}
+          />
+        )}
         <Wave
           color={theme.colors.beige.beige20}
           top={swipedUp || !isMobile ? "0px" : "200px"}
           // position="fixed"
         />
+        <InnerWrapper>
+          {isMobile && <HandleBar />}
+          <RoundedButtonWrapper swipedUp={swipedUp}>
+            <RoundedButton
+              size="big"
+              icon={
+                <Plus
+                  color={theme.colors.primary.primary120}
+                  transform="scale(2)"
+                />
+              }
+              onClick={() => setPostIdeaOpen(true)}
+            />
+          </RoundedButtonWrapper>
+          <Header {...bind()} swipedUp={swipedUp} style={listHeaderProps}>
+            <MainSwipeListTabs
+              swipedUp={swipedUp}
+              order={order}
+              setOrder={setOrder}
+            />
+            {isMobile && (
+              <TagSlideWrapper>
+                <TagSlide
+                  type={order === "ideas" ? "topics" : "organizationTypes"}
+                  selectedTopics={selectedTopics}
+                  selectedOrganizationTypes={selectedOrganizationTypes}
+                  handleSelectTopics={handleSelectTopics}
+                  handleSelectOrganizationTypes={handleSelectOrganizationTypes}
+                />
+              </TagSlideWrapper>
+            )}
+            {!isMobile && toolbarComponent}
+          </Header>
 
-        {isMobile && <HandleBar />}
-        <RoundedButtonWrapper swipedUp={swipedUp}>
-          <RoundedButton
-            size="big"
-            icon={
-              <Plus
-                color={theme.colors.primary.primary120}
-                transform="scale(2)"
-              />
-            }
-            onClick={() => setPostIdeaOpen(true)}
-          />
-        </RoundedButtonWrapper>
-        <Header {...bind()} swipedUp={swipedUp} style={listHeaderProps}>
-          <MainSwipeListTabs
-            swipedUp={swipedUp}
-            order={order}
-            setOrder={setOrder}
-          />
-          {isMobile && (
-            <TagSlideWrapper>
-              <TagSlide
-                type={order === "ideas" ? "topics" : "organizationTypes"}
-                selectedTopics={selectedTopics}
-                selectedOrganizationTypes={selectedOrganizationTypes}
-                handleSelectTopics={handleSelectTopics}
-                handleSelectOrganizationTypes={handleSelectOrganizationTypes}
-              />
-            </TagSlideWrapper>
-          )}
-          {!isMobile && toolbarComponent}
-        </Header>
-
-        <InnerWrapper isMobileCustom={isMobileCustom}>
-          {isMobile && toolbarComponent}
-          <List
-            CardType={order === "ideas" ? IdeaCard : ProjectroomCard}
-            data={order === "ideas" ? ideasData : projectRoomsData}
-            organizations={organizations}
-            handleButtonOpenCard={handleButtonOpenCard}
-            handleButtonLike={handleButtonLike}
-            handleButtonComment={handleButtonComment}
-            user={user}
-          />
+          <ContentWrapper isMobileCustom={isMobileCustom}>
+            {isMobile && toolbarComponent}
+            <List
+              CardType={order === "ideas" ? IdeaCard : ProjectroomCard}
+              data={order === "ideas" ? ideasData : projectRoomsData}
+              organizations={organizations}
+              handleButtonOpenCard={handleButtonOpenCard}
+              handleButtonLike={handleButtonLike}
+              handleButtonComment={handleButtonComment}
+              user={user}
+            />
+          </ContentWrapper>
         </InnerWrapper>
       </DragWrapper>
     </React.Fragment>

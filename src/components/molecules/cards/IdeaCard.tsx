@@ -99,7 +99,7 @@ const IdeaCard: FC<IdeaCardProps> = ({
     <Wrapper
       status={status}
       projectroomName={projectroomName}
-      onClick={(event) => handleButtonOpenCard(event, screamId)}
+      onClick={(event) => handleButtonOpenCard(event, "ideaCard", screamId)}
     >
       <InnerWrapper>
         <Box

@@ -129,7 +129,7 @@ const DeactivatedWrapper = styled.div`
 
 const OrganizationCard: FC<OrganizationCardProps> = ({
   data,
-  handleButtonClick,
+  handleButtonOpenCard,
 }) => {
   const {
     title,
@@ -137,15 +137,17 @@ const OrganizationCard: FC<OrganizationCardProps> = ({
     organizationType,
     status,
     active,
-    thisOrganizationId,
+    organizationId,
     organization,
     logoURL,
   } = data;
   return (
     <Wrapper
       status={status}
-      active={thisOrganizationId === organization?.organizationId}
-      onClick={handleButtonClick}
+      active={organizationId === organization?.organizationId}
+      onClick={(event) =>
+        handleButtonOpenCard(event, "organizationCard", organizationId)
+      }
     >
       {/* {status !== "active" && (
         <DeactivatedWrapper>

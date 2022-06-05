@@ -8,6 +8,7 @@ import More from "../../../assets/icons/More";
 import User from "../../../assets/icons/User";
 import Box from "../../atoms/box/Box";
 import Button from "../../atoms/buttons/Button";
+import Divider from "../../atoms/divider/Divider";
 import Icon from "../../atoms/icons/Icon";
 import {
   LayerWhiteFirstDefault,
@@ -16,19 +17,15 @@ import {
 import { MenuSidebarProps } from "./MenuSidebar.types";
 
 const Wrapper = styled.div<MenuSidebarProps>`
-  position: fixed;
-  width: 60px;
-  height: calc(100vh - 20px);
-  padding: 10px;
-  margin: 10px;
+  position: absolute;
+  width: 85px;
+  height: 100%;
+  padding: 20px 10px 20px 12px;
   left: 0;
   top: 0;
-  border-radius: 18px;
   overflow: hidden;
-  background-color: ${({ theme }) => theme.colors.greyscale.greyscale20};
   z-index: 2;
-
-  ${(props) => LayerWhiteSecondDefault}
+  display: flex;
 `;
 
 // const ButtonPlacer = styled.div<OrganizationCardProps>`
@@ -46,29 +43,40 @@ const Wrapper = styled.div<MenuSidebarProps>`
 //   bottom: 0;
 // `;
 
+// const StyledDivider = styled.div<DividerProps>`
+//   position: relative;
+//   width: 2px;
+//   height: 100%;
+//   border-radius: ${({ borderRadius }) => (borderRadius ? borderRadius : "0")};
+
+//   background-color: ${({ theme }) => theme.colors.brown.brown20tra};
+
+//   margin: 0;
+// `;
+
 const MenuSidebar: FC<MenuSidebarProps> = ({
   handleOpenMyAccount,
-  handleOpenInfoPage,
+  setInfoPageOpen,
 }) => {
   return (
     <Wrapper>
       <Box
         flexDirection="column"
-        margin="10px 0px"
         justifyContent="space-between"
-        height="calc(100% - 20px)"
+        alignItems="center"
+        height="100%"
+        width="36px"
       >
-        <Box gap="14px" flexDirection="column">
+        <Box gap="14px" flexDirection="column" width="36px">
+          <Button variant="primary" size="small" text={<More />} />
           <Button variant="white" size="small" icon={<More />} />
+
           <Button
             variant="white"
             size="small"
             icon={<Info />}
-            onClick={() => handleOpenInfoPage(true)}
+            onClick={() => setInfoPageOpen(true)}
           />
-          <Button variant="white" size="small" icon={<More />} />
-        </Box>
-        <Box gap="14px" flexDirection="column">
           <Button
             variant="white"
             size="small"
@@ -79,11 +87,16 @@ const MenuSidebar: FC<MenuSidebarProps> = ({
           />
         </Box>
 
-        <Box gap="14px" flexDirection="column">
+        <Box gap="14px" flexDirection="column" width="36px">
+          <Button variant="white" size="small" text={"DE"} />
+          <Divider />
+
           <Button variant="white" size="small" icon={<Mail />} />
           <Button variant="white" size="small" icon={<More />} />
         </Box>
       </Box>
+
+      <Divider height="100%" width="2px" margin="0px 16px 0px 10px" />
     </Wrapper>
   );
 };

@@ -8,7 +8,7 @@ import Typography from "../../atoms/typography/Typography";
 import { MainSwipeListTabsProps } from "./MainSwipeListTabs.types";
 
 const Wrapper = styled.div<MainSwipeListTabsProps>`
-  margin-top: ${({ isMobile }) => !isMobile && "15px"};
+  margin-top: ${({ isMobile }) => !isMobile && "8px"};
 `;
 
 const Tab = styled.div<MainSwipeListTabsProps>`

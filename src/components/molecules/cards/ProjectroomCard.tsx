@@ -111,7 +111,9 @@ const ProjectroomCard: FC<ProjectroomCardProps> = ({
   return (
     <Wrapper
       status={status}
-      onClick={() => handleButtonOpenCard(projectRoomId)}
+      onClick={(event) =>
+        handleButtonOpenCard(event, "projectroomCard", projectRoomId)
+      }
       // active={thisOrganizationId === organization?.organizationId}
     >
       <InnerWrapper>

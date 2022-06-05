@@ -21,7 +21,7 @@ export const decorators = [
 
 export const parameters = {
   i18n,
-  locale: "en",
+  locale: "de",
   locales: {
     en: { title: "English", left: "🇺🇸" },
     de: { title: "German", left: "🇩🇪" },
