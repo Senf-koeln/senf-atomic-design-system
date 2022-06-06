@@ -10,12 +10,13 @@ import Typography from "../../atoms/typography/Typography";
 import { OrganizationCardProps } from "./OrganizationCard.types";
 
 const Wrapper = styled.div<OrganizationCardProps>`
+  cursor: pointer;
   float: left;
   margin: 10px 0px 0px 10px;
   overflow: hidden;
   position: relative;
   box-sizing: border-box;
-  width: 178px;
+  width: auto;
   height: auto;
   border-radius: 18px;
 
@@ -26,8 +27,19 @@ const Wrapper = styled.div<OrganizationCardProps>`
       ? "brightness(0.6)"
       : "brightness(1)"};
   animation: opacityTranslateYFrom50Animation 0.8s;
+
+  transition: 0.3s;
+  &:hover {
+    transform: scale(103%);
+    background-color: #fefefd;
+  }
+
   @media (max-width: 768px) {
     width: calc(50% - 15px);
+  }
+
+  @media (min-width: 768px) {
+    margin: 16px 8px 0px 8px;
   }
 `;
 

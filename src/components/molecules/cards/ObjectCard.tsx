@@ -8,6 +8,7 @@ import Typography from "../../atoms/typography/Typography";
 import { ObjectCardProps } from "./ObjectCard.types";
 
 const Wrapper = styled.div<ObjectCardProps>`
+  cursor: pointer;
   float: left;
   margin: 10px 0px 0px 10px;
   overflow: hidden;
@@ -24,6 +25,13 @@ const Wrapper = styled.div<ObjectCardProps>`
       ? "brightness(0.6)"
       : "brightness(1)"};
   animation: opacityTranslateYFrom50Animation 0.8s;
+
+  transition: 0.3s;
+  &:hover {
+    transform: scale(103%);
+    background-color: #fefefd;
+  }
+
   @media (max-width: 768px) {
     width: calc(50% - 15px);
   }

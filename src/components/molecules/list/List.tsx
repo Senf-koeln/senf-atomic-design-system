@@ -82,7 +82,7 @@ const List: FC<ListProps> = ({
           dataArray[i]?.title && (
             <Box
               margin="16px 16px 0px 16px"
-              display={listType === "grid" ? "inline-block" : "flex"}
+              display={listType === "grid" ? "contents" : "flex"}
             >
               <CardType
                 data={dataArray[i]}

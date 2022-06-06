@@ -48,7 +48,11 @@ const MainSwipeListTabs: FC<MainSwipeListTabsProps> = ({
             Alle Ideen
           </Typography>
         </Tab>
-        <Tab onClick={() => setOrder(2)} active={order === "projectrooms"}>
+        <Tab
+          onClick={() => setOrder(2)}
+          isMobile={isMobile}
+          active={order === "projectrooms"}
+        >
           <Typography
             variant="h3"
             color="inherit"

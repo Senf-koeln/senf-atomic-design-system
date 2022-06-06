@@ -46,6 +46,7 @@ export { default as MainSwipeList } from "./components/organisms/mainSwipeList/M
 export { default as Auth } from "./components/pages/auth/Auth";
 export { default as OrganizationPage } from "./components/pages/organizationPage/OrganizationPage";
 export { default as OrganizationsOverview } from "./components/pages/organizationsOverview/OrganizationsOverview";
+export { default as StatisticsOverview } from "./components/pages/statisticsOverview/StatisticsOverview";
 
 export { default as theme } from "./styles/theme";
 export { default as GlobalStyle } from "./styles/globals";

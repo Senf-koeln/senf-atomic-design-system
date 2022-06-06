@@ -2,7 +2,7 @@
 import * as styled_components from 'styled-components';
 import { FC, MouseEventHandler, ChangeEventHandler, FunctionComponent } from 'react';
 import { Theme } from 'styled-system';
-export { default as i18n } from 'i18next';
+import * as i18next from 'i18next';
 
 declare const LayerWhiteGradientBordersDefault: styled_components.FlattenInterpolation<styled_components.ThemeProps<any>>;
 declare const LayerWhiteFirstDefault: styled_components.FlattenInterpolation<styled_components.ThemeProps<any>>;
@@ -415,4 +415,7 @@ declare const theme: Theme;
 /** @format */
 declare const GlobalStyle: styled_components.GlobalStyleComponent<{}, styled_components.DefaultTheme>;
 
-export { Accordion, Auth, Box, Button, Divider, Form, GlobalStyle, Icon, IdeaCard, Input, LayerBrownDefault, LayerBrownHover, LayerGreyButtonsDefault, LayerGreyButtonsHover, LayerGreyDefault, LayerGreyHover, LayerWhiteFirstActive, LayerWhiteFirstDefault, LayerWhiteFirstHover, LayerWhiteGradientBordersDefault, LayerWhiteSecondDefault, LayerWhiteSecondHover, LayerYellowDefault, LayerYellowHover, List, Loader, MainSwipeList, MenuSidebar, Modal, ObjectCard, OrganizationCard, Example as OrganizationPage, OrganizationsOverview, ProjectroomCard, RangeSlider, RoundedButton, Shape, SubNavbar, Tag, TagSlide, TertiaryButton, Typography, theme };
+/** @format */
+declare const i18n: i18next.i18n;
+
+export { Accordion, Auth, Box, Button, Divider, Form, GlobalStyle, Icon, IdeaCard, Input, LayerBrownDefault, LayerBrownHover, LayerGreyButtonsDefault, LayerGreyButtonsHover, LayerGreyDefault, LayerGreyHover, LayerWhiteFirstActive, LayerWhiteFirstDefault, LayerWhiteFirstHover, LayerWhiteGradientBordersDefault, LayerWhiteSecondDefault, LayerWhiteSecondHover, LayerYellowDefault, LayerYellowHover, List, Loader, MainSwipeList, MenuSidebar, Modal, ObjectCard, OrganizationCard, Example as OrganizationPage, OrganizationsOverview, ProjectroomCard, RangeSlider, RoundedButton, Shape, SubNavbar, Tag, TagSlide, TertiaryButton, Typography, i18n, theme };

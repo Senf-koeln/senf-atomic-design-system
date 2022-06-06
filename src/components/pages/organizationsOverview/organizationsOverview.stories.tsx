@@ -8,7 +8,7 @@ import OrganizationsOverview from "./OrganizationsOverview";
 import { OrganizationsOverviewProps } from "./OrganizationsOverview.types";
 
 export default {
-  title: "Organisms/OrganizationsOverview",
+  title: "Pages/OrganizationsOverview",
   component: OrganizationsOverview,
   argTypes: {},
 } as Meta<typeof OrganizationsOverview>;

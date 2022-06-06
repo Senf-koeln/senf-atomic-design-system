@@ -7,15 +7,21 @@ import theme from "../src/styles/theme";
 import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
 
 import i18n from "../src/util/i18n";
+import React from "react";
+import { I18nextProvider } from "react-i18next";
 
 export const decorators = [
   (Story) => (
-    <ThemeProvider theme={theme}>
-      <GlobalStyle />
-      <Story />
-      <div id="portal-root-modal" />
-      <div id="portal-root-dialog" />
-    </ThemeProvider>
+    <React.Suspense fallback="Loading">
+      <I18nextProvider i18n={i18n}>
+        <ThemeProvider theme={theme}>
+          <GlobalStyle />
+          <Story />
+          <div id="portal-root-modal" />
+          <div id="portal-root-dialog" />
+        </ThemeProvider>
+      </I18nextProvider>
+    </React.Suspense>
   ),
 ];
 

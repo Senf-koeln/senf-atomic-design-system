@@ -16,10 +16,10 @@ import SwipeModal from "../../molecules/modals/SwipeModal";
 import SubNavbar from "../../molecules/navs/SubNavbar";
 import TagSlide from "../../molecules/tagSlide/TagSlide";
 import Toolbar from "../../molecules/toolbar/Toolbar";
-import { OrganizationsOverviewProps } from "./OrganizationsOverview.types";
+import { StatisticsOverviewProps } from "./StatisticsOverview.types";
 import Arrow from "../../../assets/icons/Arrow";
 
-const Wrapper = styled.div<OrganizationsOverviewProps>`
+const Wrapper = styled.div<StatisticsOverviewProps>`
   background-color: ${({ theme }) => theme.colors.beige.beige20};
   margin-left: 10px;
   margin-top: 10px;
@@ -39,7 +39,7 @@ const Wrapper = styled.div<OrganizationsOverviewProps>`
   }
 `;
 
-const InnerWrapper = styled.div<OrganizationsOverviewProps>`
+const InnerWrapper = styled.div<StatisticsOverviewProps>`
   overflow-y: scroll;
   pointer-events: all;
   height: calc(100% - 120px);
@@ -75,15 +75,10 @@ const HeaderWrapper = styled.div`
   background-color: transparent;
 `;
 
-const OrganizationsOverview: FC<OrganizationsOverviewProps> = ({
-  openOrganizationsModal = true,
-  setOpenOrganizationsOverview,
-  data,
-  selectedOrganizationTypes,
-  handleSelectOrganizationTypes,
-  user,
-  openCreateOrganization,
-  setOpenModalAuthenticate,
+const StatisticsOverview: FC<StatisticsOverviewProps> = ({
+  openStatisticsModal = true,
+  setOpenStatisticsOverview,
+  children,
 }) => {
   const { t } = useTranslation();
   const isMobile = isMobileCustom();
@@ -92,7 +87,7 @@ const OrganizationsOverview: FC<OrganizationsOverviewProps> = ({
   return isMobile ? (
     <SwipeModal
       backgroundColor={theme.colors.beige.beige20}
-      openModal={openOrganizationsModal}
+      openModal={openStatisticsModal}
       headerComponentHeight="102px"
       headerComponentBackgroundColor={theme.colors.beige.beige20}
       HeaderComponent={
@@ -101,47 +96,23 @@ const OrganizationsOverview: FC<OrganizationsOverviewProps> = ({
 
           <SubNavbar
             iconLeft={<Arrow transform="rotate(90deg)" />}
-            header={t("organizations")}
+            header={t("statistics")}
             handlebar={true}
             // iconRight="plus"
             // iconRightTransform="rotate(45deg)"
           />
-          <TagSlide
-            type="organizationTypes"
-            selectedOrganizationTypes={selectedOrganizationTypes}
-            handleSelectOrganizationTypes={handleSelectOrganizationTypes}
-          />
         </React.Fragment>
       }
     >
-      <InnerWrapper isMobile={isMobile}>
-        <Box margin="16px 12px 16px 12px">
-          <Toolbar />
-        </Box>
-        <Box margin="0px 12px 6px 12px">
-          <Button
-            variant="secondary"
-            borderStyle="dashed"
-            size="small"
-            text={t("createOrganization")}
-            fillWidth="max"
-            // onClick={
-            //   user.authenticated
-            //     ? openCreateOrganization
-            //     : () => setOpenModalAuthenticate(true)
-            // }
-          />
-        </Box>
-        <List CardType={OrganizationCard} data={data} listType="grid" />
-      </InnerWrapper>
+      <InnerWrapper isMobile={isMobile}>{children}</InnerWrapper>
     </SwipeModal>
   ) : (
-    <Wrapper open={openOrganizationsModal}>
+    <Wrapper open={openStatisticsModal}>
       <SVGWrapper searchOpen={searchOpen}>
         <Box position="fixed" margin="20px" zIndex={2}>
           <RoundedButton
             icon={<Arrow transform="rotate(180deg)" />}
-            onClick={() => setOpenOrganizationsOverview(false)}
+            onClick={() => setOpenStatisticsOverview(false)}
           />
         </Box>
         <HeaderWrapper>
@@ -151,34 +122,8 @@ const OrganizationsOverview: FC<OrganizationsOverviewProps> = ({
               // fontSize={document.body.clientWidth > 368 ? "22px" : "19px"}
               textAlign="center"
             >
-              {t("organizations")}
+              {t("statistics")}
             </Typography>
-          </Box>
-
-          <Box margin="16px 12px 16px 12px">
-            <Toolbar
-              setSearchOpen={setSearchOpen}
-              searchOpen={searchOpen}
-              secondButtonClick={
-                user?.authenticated
-                  ? openCreateOrganization
-                  : () => setOpenModalAuthenticate(true)
-              }
-              secondButtonLabel={t("createOrganization")}
-              searchPlaceholder={t("searchBar")}
-              activeSortOptionLabel={t("newest_ideas")}
-              sortOptions={[
-                { name: "newest", label: t("newest_ideas") },
-                { name: "hottest", label: t("hottest_ideas") },
-              ]}
-              statusOptions={[
-                { name: "Unprocessed", label: t("unprocessed") },
-                { name: "Accepted", label: t("accepted") },
-                { name: "Planning", label: t("planning") },
-                { name: "Implemented", label: t("implemented") },
-                { name: "Rejected", label: t("rejected") },
-              ]}
-            />
           </Box>
         </HeaderWrapper>
         <svg
@@ -196,11 +141,9 @@ const OrganizationsOverview: FC<OrganizationsOverviewProps> = ({
         </svg>
       </SVGWrapper>
 
-      <InnerWrapper isMobile={isMobile}>
-        <List CardType={OrganizationCard} data={data} listType="grid" />
-      </InnerWrapper>
+      <InnerWrapper isMobile={isMobile}>{children} </InnerWrapper>
     </Wrapper>
   );
 };
 
-export default OrganizationsOverview;
+export default StatisticsOverview;
