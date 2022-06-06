@@ -10,13 +10,16 @@ import Typography from "../../atoms/typography/Typography";
 import { TabsProps } from "./Tabs.types";
 
 const Wrapper = styled.div<TabsProps>`
+  width: 100%;
   margin-top: ${({ isMobile }) => !isMobile && "8px"};
 `;
 
 const Tab = styled.div<TabsProps>`
   cursor: pointer;
+  width: calc(${({ tabs }) => (tabs.length ? `100% / ${tabs.length}` : 1)});
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 5px;
   opacity: ${({ active, theme }) => (active ? 1 : 0.6)};
 
@@ -38,7 +41,7 @@ const TabUnderline = styled.div<TabsProps>`
   transition: 0.3s;
 `;
 
-const Tabs: FC<TabsProps> = ({ tabs }) => {
+const Tabs: FC<TabsProps> = ({ tabs, fontSize }) => {
   // order, setOrder
   const [order, setOrder] = useState(0);
   const isMobile = isMobileCustom();
@@ -50,10 +53,14 @@ const Tabs: FC<TabsProps> = ({ tabs }) => {
             onClick={() => setOrder(index + 1)}
             isMobile={isMobile}
             active={order === index + 1}
+            tabs={tabs}
           >
             {tab.icon && <Icon icon={tab.icon} />}
 
-            <Typography variant="buttonBg" color="inherit">
+            <Typography
+              variant={fontSize ? fontSize : "buttonBg"}
+              color="inherit"
+            >
               {tab.text}
             </Typography>
           </Tab>

@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { FC } from "react";
+import React, { FC, useEffect, useState } from "react";
 import styled from "styled-components";
 import Icon from "../../atoms/icons/Icon";
 import {
@@ -28,6 +28,13 @@ import CommentCard from "./commentCard";
 import Wave from "../../atoms/shapes/Wave";
 import theme from "../../../styles/theme";
 import More from "../../../assets/icons/More";
+import Tabs from "../tabs/Tabs";
+import Stats from "../../../assets/icons/Stats";
+import Info from "../../../assets/icons/Info";
+import Bulb from "../../../assets/icons/Bulb";
+import User from "../../../assets/icons/User";
+import dayjs from "dayjs";
+import Mail from "../../../assets/icons/Mail";
 
 const Wrapper = styled.div<IdeaDetailCardProps>`
   display: flex;
@@ -43,11 +50,13 @@ const Wrapper = styled.div<IdeaDetailCardProps>`
   overflow: hidden;
 `;
 const InnerWrapper = styled.div`
-  margin: 10px 10px 0px 70px;
+  padding: 10px 10px 0px 70px;
 
   display: flex;
   flex-direction: column;
   position: relative;
+  height: 100%;
+  overflow-y: scroll;
 `;
 const CardWrapper = styled.div<IdeaDetailCardProps>`
   float: left;
@@ -61,7 +70,9 @@ const CardWrapper = styled.div<IdeaDetailCardProps>`
   max-width: 400px;
 
   height: auto;
-  padding-bottom: ${(props) => (props.projectroomName ? "40px" : "0")};
+  flex: none;
+  padding-bottom: ${({ projectroomCardData }) =>
+    projectroomCardData ? "40px" : "0"};
   overflow: hidden;
 
   ${(props) => LayerWhiteFirstDefault}
@@ -70,7 +81,7 @@ const CardWrapper = styled.div<IdeaDetailCardProps>`
     props.status === "deactivated" || props.status === "uncompleted"
       ? "brightness(0.6)"
       : "brightness(1)"};
-  animation: opacityTranslateYFrom50Animation 0.8s;
+  /* animation: opacityTranslateYFrom50Animation 0.8s; */
 `;
 
 const InnerCardWrapper = styled.div`
@@ -87,6 +98,7 @@ const ProjectroomOpenButton = styled.button`
 `;
 const IdeaDetailCard: FC<IdeaDetailCardProps> = ({
   data,
+  projectroomsData,
   handleButtonCloseCard,
   handleButtonLike,
   handleButtonComment,
@@ -96,17 +108,21 @@ const IdeaDetailCard: FC<IdeaDetailCardProps> = ({
     title,
     body,
     Stadtteil,
+    locationHeader,
     status,
     Thema,
     likeCount,
     commentCount,
     organizationType,
-    projectroomName,
+    projectroomId: cardProjectroomId,
     thisOrganizationId,
     screamId,
+    userHandle,
+    createdAt,
     comments,
   } = data;
   const { t } = useTranslation();
+  const [projectroomCardData, setProjectroomCardData] = useState(null);
 
   const liked = () => {
     if (user?.likes && user?.likes.find((like) => like.screamId === screamId))
@@ -122,6 +138,20 @@ const IdeaDetailCard: FC<IdeaDetailCardProps> = ({
       return true;
     else return false;
   };
+
+  useEffect(() => {
+    if (projectroomsData) {
+      projectroomsData.map(({ projectroomId, title, organizationType }) => {
+        if (cardProjectroomId === projectroomId) {
+          setProjectroomCardData([
+            ...projectroomCardData,
+            title,
+            organizationType,
+          ]);
+        }
+      });
+    }
+  }, [projectroomsData]);
 
   return (
     <Wrapper>
@@ -148,7 +178,7 @@ const IdeaDetailCard: FC<IdeaDetailCardProps> = ({
       </Box>
 
       <InnerWrapper>
-        <CardWrapper status={status} projectroomName={projectroomName}>
+        <CardWrapper status={status} projectroomCardData={projectroomCardData}>
           <InnerCardWrapper>
             <Box
               alignItems="center"
@@ -189,6 +219,18 @@ const IdeaDetailCard: FC<IdeaDetailCardProps> = ({
 
             <Typography variant="h3"> {title}</Typography>
 
+            <Box margin="10px 0px 20px 0px">
+              <Tabs
+                fontSize="buttonSm"
+                order={0}
+                tabs={[
+                  { icon: <Bulb />, text: "Beschreibung" },
+                  { icon: <Info />, text: "Status" },
+                  { icon: <Stats />, text: "Statistiken" },
+                ]}
+              />
+            </Box>
+
             <Box
               alignItems="flex-start"
               flexDirection="row"
@@ -196,9 +238,32 @@ const IdeaDetailCard: FC<IdeaDetailCardProps> = ({
             >
               <Typography variant="bodyBg"> {body}</Typography>
             </Box>
+            <Box flexDirection="column" gap="5px">
+              <Box gap="5px">
+                <Icon icon={<Mail />} />{" "}
+                <Typography variant="buttonSm">{locationHeader}</Typography>
+              </Box>
+
+              <Box gap="5px">
+                <Icon icon={<User />} />{" "}
+                <Typography variant="buttonSm">{userHandle}</Typography>
+                <Typography
+                  variant="buttonSm"
+                  color={theme.colors.black.black40tra}
+                >
+                  {t("at")}
+                </Typography>
+                <Typography
+                  variant="buttonSm"
+                  color={theme.colors.black.black40tra}
+                >
+                  {dayjs(createdAt).format("DD.MM.YYYY")}
+                </Typography>
+              </Box>
+            </Box>
           </InnerCardWrapper>
 
-          {projectroomName && (
+          {projectroomCardData && (
             <ProjectroomOpenButton>
               <Box
                 alignItems="center"
@@ -206,11 +271,10 @@ const IdeaDetailCard: FC<IdeaDetailCardProps> = ({
                 gap="14px"
                 margin="0px 10px"
               >
-                <Icon
-                  icon={setOrganizationTypeIcon(organizationType)}
-                  // transform="scale(0.8)"
-                />
-                <Typography variant="bodySm">{projectroomName}</Typography>
+                <Icon icon={setOrganizationTypeIcon(projectroomCardData[1])} />
+                <Typography variant="bodySm">
+                  {projectroomCardData[0]}
+                </Typography>
               </Box>
             </ProjectroomOpenButton>
           )}
