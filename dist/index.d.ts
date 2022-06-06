@@ -2,7 +2,7 @@
 import * as styled_components from 'styled-components';
 import { FC, MouseEventHandler, ChangeEventHandler, FunctionComponent } from 'react';
 import { Theme } from 'styled-system';
-export { default as i18n } from 'i18next';
+import * as i18next from 'i18next';
 
 declare const LayerWhiteGradientBordersDefault: styled_components.FlattenInterpolation<styled_components.ThemeProps<any>>;
 declare const LayerWhiteFirstDefault: styled_components.FlattenInterpolation<styled_components.ThemeProps<any>>;
@@ -83,6 +83,8 @@ interface TertiaryButtonProps {
     loading?: boolean;
     disabled?: boolean;
     size?: "small" | "big";
+    variant?: "medium" | "semibold" | "bold";
+    color?: string;
     onClick?: MouseEventHandler<HTMLButtonElement>;
 }
 
@@ -143,6 +145,7 @@ declare const Input: FunctionComponent<InputProps>;
 /** @format */
 
 interface BoxProps {
+    display?: "flex" | "inline-flex" | "inline" | "block" | "none";
     flexDirection?: "column" | "row";
     gap?: string;
     height?: string;
@@ -333,6 +336,37 @@ interface AccordionProps {
 declare const Accordion: FC<AccordionProps>;
 
 /** @format */
+
+interface TagSlideProps {
+    example?: string;
+    onClick?: MouseEventHandler<HTMLButtonElement>;
+}
+
+/** @format */
+
+declare const TagSlide: FC<TagSlideProps>;
+
+/** @format */
+
+interface MenuSidebarProps {
+    example?: string;
+    onClick?: MouseEventHandler<HTMLButtonElement>;
+}
+
+/** @format */
+
+declare const MenuSidebar: FC<MenuSidebarProps>;
+
+/** @format */
+
+interface MainSwipeListProps {
+    example?: string;
+    onClick?: MouseEventHandler<HTMLButtonElement>;
+}
+
+declare const MainSwipeList: FC<MainSwipeListProps>;
+
+/** @format */
 interface AuthProps {
     handleClose?: (x: boolean) => void;
     handleSubmitRegister?: any;
@@ -356,9 +390,32 @@ declare const Auth: FC<AuthProps>;
 
 /** @format */
 
+interface OrganizationPageProps {
+    organization?: Array<string>;
+    onClick?: MouseEventHandler<HTMLButtonElement>;
+}
+
+/** @format */
+
+declare const Example: FC<OrganizationPageProps>;
+
+/** @format */
+
+interface OrganizationsOverviewProps {
+    example?: string;
+    onClick?: MouseEventHandler<HTMLButtonElement>;
+}
+
+declare const OrganizationsOverview: FC<OrganizationsOverviewProps>;
+
+/** @format */
+
 declare const theme: Theme;
 
 /** @format */
 declare const GlobalStyle: styled_components.GlobalStyleComponent<{}, styled_components.DefaultTheme>;
 
-export { Accordion, Auth, Box, Button, Divider, Form, GlobalStyle, Icon, IdeaCard, Input, LayerBrownDefault, LayerBrownHover, LayerGreyButtonsDefault, LayerGreyButtonsHover, LayerGreyDefault, LayerGreyHover, LayerWhiteFirstActive, LayerWhiteFirstDefault, LayerWhiteFirstHover, LayerWhiteGradientBordersDefault, LayerWhiteSecondDefault, LayerWhiteSecondHover, LayerYellowDefault, LayerYellowHover, List, Loader, Modal, ObjectCard, OrganizationCard, ProjectroomCard, RangeSlider, RoundedButton, Shape, SubNavbar, Tag, TertiaryButton, Typography, theme };
+/** @format */
+declare const i18n: i18next.i18n;
+
+export { Accordion, Auth, Box, Button, Divider, Form, GlobalStyle, Icon, IdeaCard, Input, LayerBrownDefault, LayerBrownHover, LayerGreyButtonsDefault, LayerGreyButtonsHover, LayerGreyDefault, LayerGreyHover, LayerWhiteFirstActive, LayerWhiteFirstDefault, LayerWhiteFirstHover, LayerWhiteGradientBordersDefault, LayerWhiteSecondDefault, LayerWhiteSecondHover, LayerYellowDefault, LayerYellowHover, List, Loader, MainSwipeList, MenuSidebar, Modal, ObjectCard, OrganizationCard, Example as OrganizationPage, OrganizationsOverview, ProjectroomCard, RangeSlider, RoundedButton, Shape, SubNavbar, Tag, TagSlide, TertiaryButton, Typography, i18n, theme };

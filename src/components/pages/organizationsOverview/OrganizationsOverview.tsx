@@ -17,12 +17,15 @@ import SubNavbar from "../../molecules/navs/SubNavbar";
 import TagSlide from "../../molecules/tagSlide/TagSlide";
 import Toolbar from "../../molecules/toolbar/Toolbar";
 import { OrganizationsOverviewProps } from "./OrganizationsOverview.types";
+import Arrow from "../../../assets/icons/Arrow";
 
 const Wrapper = styled.div<OrganizationsOverviewProps>`
   background-color: ${({ theme }) => theme.colors.beige.beige20};
-  margin-left: 200px;
-  width: ${({ open }) => (open ? "calc(100vw - 605px)" : "400px")};
-  height: 100vh;
+  margin-left: 10px;
+  margin-top: 10px;
+  width: ${({ open }) => (open ? "calc(100vw - 475px)" : "470px")};
+  height: calc(100vh - 20px);
+  border-radius: 18px;
   overflow-y: scroll;
   z-index: 90;
   top: 0;
@@ -41,7 +44,7 @@ const InnerWrapper = styled.div<OrganizationsOverviewProps>`
   pointer-events: all;
   height: calc(100% - 120px);
   width: 100%;
-  margin-top: ${(props) => (props.isMobileCustom ? "-10px" : "0px")};
+  margin-top: ${(props) => (props.isMobile ? "-10px" : "0px")};
   overflow: scroll;
   z-index: 1;
   margin-left: 50%;
@@ -73,22 +76,23 @@ const HeaderWrapper = styled.div`
 `;
 
 const OrganizationsOverview: FC<OrganizationsOverviewProps> = ({
-  open = true,
+  openOrganizationsModal = true,
+  setOpenOrganizationsOverview,
   data,
   selectedOrganizationTypes,
+  handleSelectOrganizationTypes,
   user,
   openCreateOrganization,
   setOpenModalAuthenticate,
 }) => {
   const { t } = useTranslation();
+  const isMobile = isMobileCustom();
   const [searchOpen, setSearchOpen] = useState(false);
 
-  console.log(isMobileCustom());
-
-  return isMobileCustom() ? (
+  return isMobile ? (
     <SwipeModal
       backgroundColor={theme.colors.beige.beige20}
-      openModal={true}
+      openModal={openOrganizationsModal}
       headerComponentHeight="102px"
       headerComponentBackgroundColor={theme.colors.beige.beige20}
       HeaderComponent={
@@ -96,7 +100,7 @@ const OrganizationsOverview: FC<OrganizationsOverviewProps> = ({
           <Shape variant={1} position="absolute" marginTop="0px" />
 
           <SubNavbar
-            iconLeft="arrow"
+            iconLeft={<Arrow transform="rotate(90deg)" />}
             header={t("organizations")}
             handlebar={true}
             // iconRight="plus"
@@ -105,11 +109,12 @@ const OrganizationsOverview: FC<OrganizationsOverviewProps> = ({
           <TagSlide
             type="organizationTypes"
             selectedOrganizationTypes={selectedOrganizationTypes}
+            handleSelectOrganizationTypes={handleSelectOrganizationTypes}
           />
         </React.Fragment>
       }
     >
-      <InnerWrapper isMobileCustom={isMobileCustom}>
+      <InnerWrapper isMobile={isMobile}>
         <Box margin="16px 12px 16px 12px">
           <Toolbar />
         </Box>
@@ -127,14 +132,17 @@ const OrganizationsOverview: FC<OrganizationsOverviewProps> = ({
             // }
           />
         </Box>
-        <List CardType={OrganizationCard} data={data} />
+        <List CardType={OrganizationCard} data={data} listType="grid" />
       </InnerWrapper>
     </SwipeModal>
   ) : (
-    <Wrapper open={open}>
+    <Wrapper open={openOrganizationsModal}>
       <SVGWrapper searchOpen={searchOpen}>
         <Box position="fixed" margin="20px" zIndex={2}>
-          <RoundedButton icon="arrow" />
+          <RoundedButton
+            icon={<Arrow transform="rotate(180deg)" />}
+            onClick={() => setOpenOrganizationsOverview(false)}
+          />
         </Box>
         <HeaderWrapper>
           <Box margin="20px" justifyContent="center">
@@ -152,7 +160,7 @@ const OrganizationsOverview: FC<OrganizationsOverviewProps> = ({
               setSearchOpen={setSearchOpen}
               searchOpen={searchOpen}
               secondButtonClick={
-                user.authenticated
+                user?.authenticated
                   ? openCreateOrganization
                   : () => setOpenModalAuthenticate(true)
               }
@@ -188,8 +196,8 @@ const OrganizationsOverview: FC<OrganizationsOverviewProps> = ({
         </svg>
       </SVGWrapper>
 
-      <InnerWrapper isMobileCustom={isMobileCustom}>
-        <List CardType={OrganizationCard} data={data} />
+      <InnerWrapper isMobile={isMobile}>
+        <List CardType={OrganizationCard} data={data} listType="grid" />
       </InnerWrapper>
     </Wrapper>
   );

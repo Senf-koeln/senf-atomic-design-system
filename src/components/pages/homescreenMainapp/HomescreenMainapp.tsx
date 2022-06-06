@@ -7,7 +7,7 @@ import Box from "../../atoms/box/Box";
 import TagSlide from "../../molecules/tagSlide/TagSlide";
 import MainSwipeList from "../../organisms/mainSwipeList/MainSwipeList";
 import MenuSidebar from "../../organisms/menuSidebar/MenuSidebar";
-import OrganizationsOverview from "../../organisms/organizationsOverview/OrganizationsOverview";
+import OrganizationsOverview from "../organizationsOverview/OrganizationsOverview";
 import { HomescreenMainappProps } from "./HomescreenMainapp.types";
 
 const Wrapper = styled.div<HomescreenMainappProps>`
@@ -48,11 +48,24 @@ const MainColumnWrapper = styled.div`
 
 const HomescreenMainapp: FC<HomescreenMainappProps> = ({
   selectedTopics,
-  ideaData,
+  selectedOrganizationTypes,
+  ideasData,
+  projectroomsData,
   organizationsData,
 }) => {
   const [openOrganizationsOverview, setOpenOrganizationsOverview] =
     useState(false);
+
+  const handleButtonOpenCard = () => {
+    () => {};
+  };
+  const handleButtonLike = () => {
+    () => {};
+  };
+  const handleButtonComment = () => {
+    () => {};
+  };
+  const user = null;
   return (
     <Wrapper>
       {isMobileCustom() && (
@@ -65,8 +78,14 @@ const HomescreenMainapp: FC<HomescreenMainappProps> = ({
       <MainColumnWrapper>
         <MainSwipeList
           setOpenOrganizationsOverview={setOpenOrganizationsOverview}
-          data={ideaData}
+          ideasData={ideasData}
+          projectroomsData={projectroomsData}
           selectedTopics={["Versorgung"]}
+          selectedOrganiztaionTypes={["Vereine"]}
+          handleButtonOpenCard={handleButtonOpenCard}
+          handleButtonLike={handleButtonLike}
+          handleButtonComment={handleButtonComment}
+          user={user}
         />
       </MainColumnWrapper>
 

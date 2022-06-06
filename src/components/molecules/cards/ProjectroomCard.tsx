@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { FC } from "react";
+import React, { FC, useEffect, useState } from "react";
 import styled from "styled-components";
 import Icon from "../../atoms/icons/Icon";
 import { LayerWhiteFirstDefault } from "../../atoms/layerStyles/LayerStyles";
@@ -9,23 +9,20 @@ import Typography from "../../atoms/typography/Typography";
 import { ProjectroomCardProps } from "./ProjectroomCard.types";
 import { t } from "i18next";
 import ImagePlaceholder from "../../atoms/imagePlaceholder/ImagePlaceholder";
+import Bulb from "../../../assets/icons/Bulb";
+import setOrganizationTypeIcon from "../../../data/setOrganizationTypeIcon";
 
 const Wrapper = styled.div<ProjectroomCardProps>`
+  cursor: pointer;
   float: left;
-  margin: 10px 0px 0px 10px;
   overflow: hidden;
   position: relative;
   box-sizing: border-box;
-  width: 178px;
   height: auto;
   border-radius: 18px;
 
   width: 100%;
 
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 10px;
-  max-width: 400px;
   height: auto;
   overflow: hidden;
 
@@ -36,6 +33,12 @@ const Wrapper = styled.div<ProjectroomCardProps>`
       ? "brightness(0.6)"
       : "brightness(1)"};
   animation: opacityTranslateYFrom50Animation 0.8s;
+
+  transition: 0.3s;
+  &:hover {
+    transform: scale(103%);
+    background-color: #fefefd;
+  }
 `;
 
 const InnerWrapper = styled.div`
@@ -57,7 +60,6 @@ const LogoPlacer = styled.div`
 `;
 
 const IconWrapper = styled.div`
-  margin-top: -4px;
   margin-right: 8px;
 `;
 
@@ -72,23 +74,46 @@ const DeactivatedWrapper = styled.div`
 
 const ProjectroomCard: FC<ProjectroomCardProps> = ({
   data,
-  handleButtonClick,
+  handleButtonOpenCard,
+  organizations,
 }) => {
   const {
+    projectRoomId,
     title,
     brief,
-    organizationType,
-    organizationName,
-    imgUrl,
-    logo,
+    logoURL,
     ideaSize,
     status,
     active,
-    thisOrganizationId,
+    organizationId,
   } = data;
+
+  const cardOrganizationId = organizationId;
+  const [organizationCardData, setOrganizationCardData] = useState([]);
+
+  useEffect(() => {
+    if (organizations) {
+      organizations.map(
+        ({ organizationId, title, organizationType, logoURL }) => {
+          if (cardOrganizationId === organizationId) {
+            setOrganizationCardData([
+              ...organizationCardData,
+              title,
+              organizationType,
+              logoURL,
+            ]);
+          }
+        }
+      );
+    }
+  }, [organizations]);
+
   return (
     <Wrapper
       status={status}
+      onClick={(event) =>
+        handleButtonOpenCard(event, "projectroomCard", projectRoomId)
+      }
       // active={thisOrganizationId === organization?.organizationId}
     >
       <InnerWrapper>
@@ -111,7 +136,7 @@ const ProjectroomCard: FC<ProjectroomCardProps> = ({
             width="118px"
             height="118px"
             img={
-              imgUrl
+              logoURL
               // ? img : placeHodlerImage && NoImage
             }
           />
@@ -119,21 +144,24 @@ const ProjectroomCard: FC<ProjectroomCardProps> = ({
           <Typography variant="bodyBg"> {brief}</Typography>
         </Box>
         <Box alignItems="center" flexDirection="row" gap="14px">
-          <Icon icon={organizationType} transform="scale(0.8)" />
+          <Icon
+            icon={setOrganizationTypeIcon(organizationCardData[1])}
+            // transform="scale(0.8)"
+          />
 
           <LogoPlacer>
             <ImagePlaceholder
               img={
-                logo
+                organizationCardData[2]
                 // ? img : placeHodlerImage && NoImage
               }
             />
           </LogoPlacer>
-          <Typography variant="buttonSm">{organizationName}</Typography>
+          <Typography variant="buttonSm">{organizationCardData[0]}</Typography>
 
           <div style={{ marginLeft: "auto", display: "flex" }}>
             <IconWrapper>
-              <Icon icon="bulb" />
+              <Icon icon={<Bulb />} />
             </IconWrapper>
             <Typography variant="buttonSm">{ideaSize} </Typography>
           </div>

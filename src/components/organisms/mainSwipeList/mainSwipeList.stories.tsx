@@ -19,7 +19,7 @@ const Template: Story<MainSwipeListProps> = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
-  type: "ideas",
+  order: "ideas",
   selectedTopics: ["Versorgung"],
 
   ideasData: [
@@ -538,9 +538,10 @@ Default.args = {
 
 export const ProjectRoomSwipeList = Template.bind({});
 ProjectRoomSwipeList.args = {
-  type: "projectrooms",
+  order: "projectrooms",
 
   selectedTopics: ["Versorgung"],
+  selectedOrganizationTypes: ["Vereine"],
 
   projectRoomsData: [
     {

@@ -3,18 +3,20 @@
 import { t } from "i18next";
 import React, { FC } from "react";
 import styled from "styled-components";
+import setOrganizationTypeIcon from "../../../data/setOrganizationTypeIcon";
 import Icon from "../../atoms/icons/Icon";
 import { LayerWhiteFirstDefault } from "../../atoms/layerStyles/LayerStyles";
 import Typography from "../../atoms/typography/Typography";
 import { OrganizationCardProps } from "./OrganizationCard.types";
 
 const Wrapper = styled.div<OrganizationCardProps>`
+  cursor: pointer;
   float: left;
   margin: 10px 0px 0px 10px;
   overflow: hidden;
   position: relative;
   box-sizing: border-box;
-  width: 178px;
+  width: auto;
   height: auto;
   border-radius: 18px;
 
@@ -25,8 +27,19 @@ const Wrapper = styled.div<OrganizationCardProps>`
       ? "brightness(0.6)"
       : "brightness(1)"};
   animation: opacityTranslateYFrom50Animation 0.8s;
+
+  transition: 0.3s;
+  &:hover {
+    transform: scale(103%);
+    background-color: #fefefd;
+  }
+
   @media (max-width: 768px) {
     width: calc(50% - 15px);
+  }
+
+  @media (min-width: 768px) {
+    margin: 16px 8px 0px 8px;
   }
 `;
 
@@ -128,7 +141,7 @@ const DeactivatedWrapper = styled.div`
 
 const OrganizationCard: FC<OrganizationCardProps> = ({
   data,
-  handleButtonClick,
+  handleButtonOpenCard,
 }) => {
   const {
     title,
@@ -136,15 +149,17 @@ const OrganizationCard: FC<OrganizationCardProps> = ({
     organizationType,
     status,
     active,
-    thisOrganizationId,
+    organizationId,
     organization,
-    imgUrl,
+    logoURL,
   } = data;
   return (
     <Wrapper
       status={status}
-      active={thisOrganizationId === organization?.organizationId}
-      onClick={handleButtonClick}
+      active={organizationId === organization?.organizationId}
+      onClick={(event) =>
+        handleButtonOpenCard(event, "organizationCard", organizationId)
+      }
     >
       {/* {status !== "active" && (
         <DeactivatedWrapper>
@@ -156,7 +171,7 @@ const OrganizationCard: FC<OrganizationCardProps> = ({
       <LogoWrapper>
         <Thumbnail
           img={
-            imgUrl
+            logoURL
             // ? img : placeHodlerImage && NoImage
           }
         />
@@ -164,7 +179,7 @@ const OrganizationCard: FC<OrganizationCardProps> = ({
 
       <LogoPlacer>
         <IconWrapper>
-          <Icon icon={organizationType} transform="scale(0.8)" />
+          <Icon icon={setOrganizationTypeIcon(organizationType)} />
         </IconWrapper>
       </LogoPlacer>
       <Title>

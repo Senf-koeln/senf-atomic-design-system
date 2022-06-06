@@ -11,6 +11,7 @@ import IdeaCard from "../cards/IdeaCard";
 import ProjectCard from "../cards/ProjectroomCard";
 import OrganizationCard from "../cards/OrganizationCard";
 import { ListProps } from "./List.types";
+import Box from "../../atoms/box/Box";
 // import ObjectCard from "../cards/ObjectCard";
 
 // import {
@@ -34,13 +35,18 @@ const NoIdeasYet = styled.div`
 `;
 
 const List: FC<ListProps> = ({
+  listType,
   loading,
   dropdown,
   data,
   CardType,
-  handleButtonClick,
+  organizations,
+  handleButtonOpenCard,
+  handleButtonLike,
+  handleButtonComment,
+  user,
 }) => {
-  const dataLength = data.length;
+  const dataLength = data?.length;
   const { t } = useTranslation();
   const prevdataLength = usePrevious({ dataLength });
   const prevDropdown = usePrevious({ dropdown });
@@ -70,14 +76,23 @@ const List: FC<ListProps> = ({
 
   const showItems = (dataArray, CardType) => {
     var items = [];
-    if (dataArray.length !== 0) {
+    if (dataArray?.length !== 0) {
       for (var i = 0; i < listItems; i++) {
         items.push(
           dataArray[i]?.title && (
-            <CardType
-              data={dataArray[i]}
-              handleButtonClick={handleButtonClick}
-            />
+            <Box
+              margin="16px 16px 0px 16px"
+              display={listType === "grid" ? "contents" : "flex"}
+            >
+              <CardType
+                data={dataArray[i]}
+                organizations={organizations}
+                handleButtonOpenCard={handleButtonOpenCard}
+                handleButtonLike={handleButtonLike}
+                handleButtonComment={handleButtonComment}
+                user={user}
+              />
+            </Box>
           )
         );
       }

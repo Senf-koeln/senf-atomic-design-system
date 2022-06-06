@@ -30,7 +30,7 @@ import { TagsFilter } from "../../molecules/Filters/TagsFilter";
 import { MenuData } from "../../../data/MenuData";
 import { StyledH2 } from "../../../styles/GlobalStyle";
 import Tabs from "../../atoms/Tabs/Tabs";
-import { usePrevious } from "../../../../src/hooks/usePrevious";
+import { usePrevious } from "../../../hooks/usePrevious";
 import { useSpring, animated } from "@react-spring/web";
 import { useDrag } from "@use-gesture/react";
 import NewButton from "../../atoms/CustomButtons/NewButton";

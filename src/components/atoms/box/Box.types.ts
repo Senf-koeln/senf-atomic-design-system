@@ -2,6 +2,7 @@
 
 import { MouseEventHandler } from "react";
 export interface BoxProps {
+  display?: "flex" | "inline-flex" | "inline" | "block" | "none";
   flexDirection?: "column" | "row";
   gap?: string;
   height?: string;

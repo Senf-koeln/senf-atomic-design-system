@@ -8,7 +8,7 @@ import OrganizationPage from "./OrganizationPage";
 import { OrganizationPageProps } from "./OrganizationPage.types";
 
 export default {
-  title: "Organisms/OrganizationPage",
+  title: "Pages/OrganizationPage",
   component: OrganizationPage,
   argTypes: {},
 } as Meta<typeof OrganizationPage>;

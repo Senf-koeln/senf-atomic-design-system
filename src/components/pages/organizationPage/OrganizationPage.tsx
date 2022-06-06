@@ -23,6 +23,10 @@ import ProjectroomCard from "../../molecules/cards/ProjectroomCard";
 import Modal from "../../molecules/modals/Modal";
 import Accordion from "../../molecules/accordion/Accordion";
 import SubNavbar from "../../molecules/navs/SubNavbar";
+import setOrganizationTypeIcon from "../../../data/setOrganizationTypeIcon";
+import Arrow from "../../../assets/icons/Arrow";
+import Plus from "../../../assets/icons/Plus";
+import More from "../../../assets/icons/More";
 
 const SVGWrapper = styled.div`
   position: absolute;
@@ -124,12 +128,12 @@ const Example: FC<OrganizationPageProps> = ({ organization, data }) => {
           </svg>
         </SVGWrapper>
         <Box position="fixed" margin="20px" zIndex={2}>
-          <RoundedButton icon="arrow" />
+          <RoundedButton icon={<Plus transform="rotate(45deg)" />} />
         </Box>
 
         {/* {organization?.userIds.includes(user.userId) && ( ROUNDEDMENUBUTTON)} */}
         <Box position="absolute" margin="20px" right="0px" zIndex={2}>
-          <RoundedButton icon="Menu" />
+          <RoundedButton icon={<More />} />
         </Box>
 
         <Box justifyContent="center" margin="20px">
@@ -161,7 +165,10 @@ const Example: FC<OrganizationPageProps> = ({ organization, data }) => {
         )}
         <Box margin="24px" alignItems="center" gap="12px">
           <LogoPlacer>
-            <Icon icon={organization.organizationType} transform="scale(0.7)" />
+            <Icon
+              icon={setOrganizationTypeIcon(organization.organizationType)}
+              transform="scale(0.7)"
+            />
           </LogoPlacer>
           <Typography variant="h3"> {organization.title}</Typography>
         </Box>
@@ -190,11 +197,10 @@ const Example: FC<OrganizationPageProps> = ({ organization, data }) => {
         <Box margin="21px 0px 0px 18px">
           <TertiaryButton
             text={t("information")}
-            iconRight="arrow"
-            iconRightTransform={
-              infoOpen
-                ? "rotate(180deg) scale(0.7)"
-                : "rotate(270deg) scale(0.7)"
+            iconRight={
+              <Arrow
+                transform={infoOpen ? "rotate(-90deg) " : "rotate(0deg) "}
+              />
             }
             onClick={() => setInfoOpen(!infoOpen)}
           />

@@ -3,10 +3,12 @@
 import React, { FC, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
+import AllOrganizationTypes from "../../../assets/icons/AllOrganizationTypes";
 import Dot from "../../../assets/icons/Dot";
 import DotAllTopics from "../../../assets/icons/DotAllTopics";
 import organizationTypes from "../../../data/organizationTypes";
 import setColorByTopic from "../../../data/setColorByTopic";
+import setOrganizationTypeIcon from "../../../data/setOrganizationTypeIcon";
 import topics from "../../../data/topiccs";
 import Tag from "../../atoms/tag/Tag";
 import { TagSlideProps } from "./TagSlide.types";
@@ -51,6 +53,9 @@ const TagSlide: FC<TagSlideProps> = ({
   openScream,
   selectedTopics,
   selectedOrganizationTypes,
+
+  handleSelectTopics,
+  handleSelectOrganizationTypes,
 }) => {
   const { t } = useTranslation();
 
@@ -72,18 +77,20 @@ const TagSlide: FC<TagSlideProps> = ({
             //       openOrganization ||
             //       swipePosition === "top"))
             // }
-            // onClick={
-            //   type === "topics"
-            //     ? () => dispatch(handleTopicSelectorRedux("all"))
-            //     : () => dispatch(handleOrganizationTypesSelectorRedux("all"))
-            // }
+            onClick={
+              type === "topics"
+                ? () => handleSelectTopics("all")
+                : () => handleSelectOrganizationTypes("all")
+            }
             active={
               type === "topics"
-                ? selectedTopics.length === 7
+                ? selectedTopics?.length === 7
                 : selectedOrganizationTypes?.length === 7
             }
             color="#000000"
-            icon={<DotAllTopics />}
+            icon={
+              type === "topics" ? <DotAllTopics /> : <AllOrganizationTypes />
+            }
             text={
               type === "topics" ? t("topics_all") : t("organizationTypes_all")
             }
@@ -94,9 +101,9 @@ const TagSlide: FC<TagSlideProps> = ({
                 <Tag
                   key={topic.name}
                   placing={placing}
-                  // onClick={() => dispatch(handleTopicSelectorRedux(topic.name))}
+                  onClick={() => handleSelectTopics(topic.name)}
                   active={
-                    selectedTopics.includes(topic.name) &&
+                    selectedTopics?.includes(topic.name) &&
                     selectedTopics?.length !== 7
                   }
                   text={topic.label}
@@ -118,20 +125,16 @@ const TagSlide: FC<TagSlideProps> = ({
                 <Tag
                   key={organizationTypes.name}
                   placing={placing}
-                  // onClick={() =>
-                  //   dispatch(
-                  //     handleOrganizationTypesSelectorRedux(
-                  //       organizationTypes.name
-                  //     )
-                  //   )
-                  // }
+                  onClick={() =>
+                    handleSelectOrganizationTypes(organizationTypes.name)
+                  }
                   active={
-                    selectedOrganizationTypes.includes(
+                    selectedOrganizationTypes?.includes(
                       organizationTypes.name
-                    ) && selectedOrganizationTypes.length !== 7
+                    ) && selectedOrganizationTypes?.length !== 7
                   }
                   text={organizationTypes.label}
-                  icon={organizationTypes.name}
+                  icon={setOrganizationTypeIcon(organizationTypes.name)}
                   // hide={
                   //   (placing === "list" && swipePosition === "bottom") ||
                   //   (placing !== "list" &&
