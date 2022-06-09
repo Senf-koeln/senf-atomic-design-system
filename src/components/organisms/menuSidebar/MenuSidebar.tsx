@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import styled from "styled-components";
 import Info from "../../../assets/icons/Info";
 import Mail from "../../../assets/icons/Mail";
@@ -8,12 +8,8 @@ import More from "../../../assets/icons/More";
 import User from "../../../assets/icons/User";
 import Box from "../../atoms/box/Box";
 import Button from "../../atoms/buttons/Button";
+import ContentDropdown from "../../atoms/contentDropdown/ContentDropdown";
 import Divider from "../../atoms/divider/Divider";
-import Icon from "../../atoms/icons/Icon";
-import {
-  LayerWhiteFirstDefault,
-  LayerWhiteSecondDefault,
-} from "../../atoms/layerStyles/LayerStyles";
 import { MenuSidebarProps } from "./MenuSidebar.types";
 
 const Wrapper = styled.div<MenuSidebarProps>`
@@ -23,8 +19,7 @@ const Wrapper = styled.div<MenuSidebarProps>`
   padding: 20px 10px 20px 12px;
   left: 0;
   top: 0;
-  overflow: hidden;
-  z-index: 2;
+  z-index: 996;
   display: flex;
 `;
 
@@ -58,6 +53,10 @@ const MenuSidebar: FC<MenuSidebarProps> = ({
   handleOpenMyAccount,
   setInfoPageOpen,
 }) => {
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const handleToggle = () => {
+    setDropdownOpen(!dropdownOpen);
+  };
   return (
     <Wrapper>
       <Box
@@ -88,7 +87,25 @@ const MenuSidebar: FC<MenuSidebarProps> = ({
         </Box>
 
         <Box gap="14px" flexDirection="column" width="36px">
-          <Button variant="white" size="small" text={"DE"} />
+          <ContentDropdown
+            open={dropdownOpen}
+            setOpen={setDropdownOpen}
+            openButtonWidth="36px"
+            OpenButton={
+              <Button
+                variant="white"
+                size="small"
+                onClick={handleToggle}
+                text={"DE"}
+              />
+            }
+            Content={
+              <Box gap="5px" flexDirection="column">
+                <Button variant="primary" size="small" text="🇩🇪 Deutsch" />
+                <Button size="small" variant="secondary" text="🇬🇧 English" />
+              </Box>
+            }
+          />
           <Divider />
 
           <Button variant="white" size="small" icon={<Mail />} />

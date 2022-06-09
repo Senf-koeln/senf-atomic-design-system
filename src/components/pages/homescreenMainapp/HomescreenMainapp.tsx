@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { isMobileCustom } from "../../../hooks/customDeviceDetect";
 import Box from "../../atoms/box/Box";
 import TagSlide from "../../molecules/tagSlide/TagSlide";
-import MainSwipeList from "../../organisms/mainSwipeList/MainSwipeList";
+import MainSwipeList from "../mainSwipeList/MainSwipeList";
 import MenuSidebar from "../../organisms/menuSidebar/MenuSidebar";
 import OrganizationsOverview from "../organizationsOverview/OrganizationsOverview";
 import { HomescreenMainappProps } from "./HomescreenMainapp.types";

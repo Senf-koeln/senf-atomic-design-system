@@ -1,7 +1,7 @@
 /** @format */
 
 import { MouseEventHandler } from "react";
-export interface IdeaDetailCardProps {
+export interface IdeaDetailPageProps {
   title?: string;
   body?: string;
   projectRoomsSize?: number;

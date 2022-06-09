@@ -1,6 +1,6 @@
 {
   "name": "senf-atomic-design-system",
-  "version": "1.6.2",
+  "version": "1.6.8",
   "description": "An atomic-design-system-library for all Senf-apps ",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -41,10 +41,6 @@
     "babel-plugin-styled-components": "^2.0.3",
     "chromatic": "^6.5.4",
     "dayjs": "^1.11.3",
-    "i18next-browser-languagedetector": "^6.1.4",
-    "i18next-locize-backend": "^5.1.2",
-    "locize": "^2.3.0",
-    "locize-lastused": "^3.1.0",
     "react-device-detect": "^2.2.2",
     "rollup": "^2.67.3",
     "rollup-plugin-babel": "^4.4.0",
@@ -66,7 +62,11 @@
     "react-i18next": "^11.16.7",
     "styled-components": "^5.3.3",
     "styled-system": "^5.1.5",
-    "yup": "^0.32.11"
+    "yup": "^0.32.11",
+    "i18next-browser-languagedetector": "^6.1.4",
+    "i18next-locize-backend": "^5.1.2",
+    "locize": "^2.3.0",
+    "locize-lastused": "^3.1.0"
   },
   "dependencies": {
     "formik": "^2.2.9",

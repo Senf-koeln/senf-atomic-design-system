@@ -9,7 +9,7 @@ import {
 } from "../../atoms/layerStyles/LayerStyles";
 import Box from "../../atoms/box/Box";
 import Typography from "../../atoms/typography/Typography";
-import { IdeaDetailCardProps } from "./IdeaDetailCard.types";
+import { IdeaDetailPageProps } from "./IdeaDetailPage.types";
 import { t } from "i18next";
 import TertiaryButton from "../../atoms/buttons/TertiaryButton";
 import setColorByTopic from "../../../data/setColorByTopic";
@@ -23,20 +23,21 @@ import RoundedButton from "../../atoms/buttons/RoundedButton";
 import Arrow from "../../../assets/icons/Arrow";
 import { useTranslation } from "react-i18next";
 import Input from "../../atoms/inputs/Input";
-import List from "../list/List";
-import CommentCard from "./commentCard";
+import List from "../../molecules/list/List";
+import CommentCard from "../../molecules/cards/commentCard";
 import Wave from "../../atoms/shapes/Wave";
 import theme from "../../../styles/theme";
 import More from "../../../assets/icons/More";
-import Tabs from "../tabs/Tabs";
+import Tabs from "../../molecules/tabs/Tabs";
 import Stats from "../../../assets/icons/Stats";
 import Info from "../../../assets/icons/Info";
 import Bulb from "../../../assets/icons/Bulb";
 import User from "../../../assets/icons/User";
 import dayjs from "dayjs";
 import Mail from "../../../assets/icons/Mail";
+import Divider from "../../atoms/divider/Divider";
 
-const Wrapper = styled.div<IdeaDetailCardProps>`
+const Wrapper = styled.div<IdeaDetailPageProps>`
   display: flex;
   position: relative;
   flex-direction: column;
@@ -58,7 +59,7 @@ const InnerWrapper = styled.div`
   height: 100%;
   overflow-y: scroll;
 `;
-const CardWrapper = styled.div<IdeaDetailCardProps>`
+const CardWrapper = styled.div<IdeaDetailPageProps>`
   float: left;
   overflow: hidden;
   position: relative;
@@ -96,7 +97,7 @@ const ProjectroomOpenButton = styled.button`
   border: 0;
   bottom: 0;
 `;
-const IdeaDetailCard: FC<IdeaDetailCardProps> = ({
+const IdeaDetailPage: FC<IdeaDetailPageProps> = ({
   data,
   projectroomsData,
   handleButtonCloseCard,
@@ -167,6 +168,7 @@ const IdeaDetailCard: FC<IdeaDetailCardProps> = ({
           icon={<Arrow transform="rotate(180deg)" />}
           onClick={() => handleButtonCloseCard(false)}
         />
+        <Divider />
         <RoundedButton
           icon={<More />}
           onClick={() => handleButtonCloseCard(false)}
@@ -286,9 +288,9 @@ const IdeaDetailCard: FC<IdeaDetailCardProps> = ({
           gap="10px"
         >
           <Typography variant="h3">
-            {t("ideaDetailCard.commentHeadline")}
+            {t("IdeaDetailPage.commentHeadline")}
           </Typography>
-          <Input placeholder={t("ideaDetailCard.commentPlaceholder")} />
+          <Input placeholder={t("IdeaDetailPage.commentPlaceholder")} />
         </Box>
         <List data={comments} CardType={CommentCard} />
       </InnerWrapper>
@@ -296,4 +298,4 @@ const IdeaDetailCard: FC<IdeaDetailCardProps> = ({
   );
 };
 
-export default IdeaDetailCard;
+export default IdeaDetailPage;

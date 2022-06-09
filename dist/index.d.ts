@@ -410,6 +410,15 @@ declare const OrganizationsOverview: FC<OrganizationsOverviewProps>;
 
 /** @format */
 
+interface StatisticsOverviewProps {
+    example?: string;
+    onClick?: MouseEventHandler<HTMLButtonElement>;
+}
+
+declare const StatisticsOverview: FC<StatisticsOverviewProps>;
+
+/** @format */
+
 declare const theme: Theme;
 
 /** @format */
@@ -418,4 +427,4 @@ declare const GlobalStyle: styled_components.GlobalStyleComponent<{}, styled_com
 /** @format */
 declare const i18n: i18next.i18n;
 
-export { Accordion, Auth, Box, Button, Divider, Form, GlobalStyle, Icon, IdeaCard, Input, LayerBrownDefault, LayerBrownHover, LayerGreyButtonsDefault, LayerGreyButtonsHover, LayerGreyDefault, LayerGreyHover, LayerWhiteFirstActive, LayerWhiteFirstDefault, LayerWhiteFirstHover, LayerWhiteGradientBordersDefault, LayerWhiteSecondDefault, LayerWhiteSecondHover, LayerYellowDefault, LayerYellowHover, List, Loader, MainSwipeList, MenuSidebar, Modal, ObjectCard, OrganizationCard, Example as OrganizationPage, OrganizationsOverview, ProjectroomCard, RangeSlider, RoundedButton, Shape, SubNavbar, Tag, TagSlide, TertiaryButton, Typography, i18n, theme };
+export { Accordion, Auth, Box, Button, Divider, Form, GlobalStyle, Icon, IdeaCard, Input, LayerBrownDefault, LayerBrownHover, LayerGreyButtonsDefault, LayerGreyButtonsHover, LayerGreyDefault, LayerGreyHover, LayerWhiteFirstActive, LayerWhiteFirstDefault, LayerWhiteFirstHover, LayerWhiteGradientBordersDefault, LayerWhiteSecondDefault, LayerWhiteSecondHover, LayerYellowDefault, LayerYellowHover, List, Loader, MainSwipeList, MenuSidebar, Modal, ObjectCard, OrganizationCard, Example as OrganizationPage, OrganizationsOverview, ProjectroomCard, RangeSlider, RoundedButton, Shape, StatisticsOverview, SubNavbar, Tag, TagSlide, TertiaryButton, Typography, i18n, theme };

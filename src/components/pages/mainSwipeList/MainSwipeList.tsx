@@ -28,7 +28,7 @@ import Plus from "../../../assets/icons/Plus";
 import ProjectroomCard from "../../molecules/cards/ProjectroomCard";
 import Stats from "../../../assets/icons/Stats";
 import MainSwipeListTabs from "../../molecules/tabs/MainSwipeListTabs";
-import MenuSidebar from "../menuSidebar/MenuSidebar";
+import MenuSidebar from "../../organisms/menuSidebar/MenuSidebar";
 
 const DragWrapper = styled(animated.div)`
   z-index: ${({ zIndex }) => (zIndex ? zIndex : 995)};
@@ -64,6 +64,9 @@ const DragWrapper = styled(animated.div)`
 const InnerWrapper = styled.div<OrganizationsOverviewProps>`
   @media (min-width: 768px) {
     padding-left: 59px;
+    height: 100%;
+
+    position: absolute;
   }
 `;
 
@@ -75,10 +78,10 @@ const ContentWrapper = styled.div<OrganizationsOverviewProps>`
   z-index: 1;
   margin-left: 50%;
   transform: translateX(-50%);
-  width: 100%;
 
   @media (min-width: 768px) {
-    height: 100%;
+    height: calc(100% - 50px);
+    width: 410px;
   }
 `;
 
@@ -128,16 +131,7 @@ const HandleBar = styled.div`
   border-radius: 1px;
 `;
 
-const TagSlideWrapper = styled.div<MainSwipeListProps>``;
-
 const MainSwipeList: FC<MainSwipeListProps> = ({
-  openModal,
-  zIndex,
-  backgroundColor,
-  overflow,
-  size,
-  children,
-
   swipedUp,
   setSwipedUp,
   openScream,
@@ -189,39 +183,8 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
   }));
 
   const [listHeaderProps, setListHeaderProps] = useSpring(() => ({
-    height: isMobile ? "80px" : !isMobile && searchOpen ? "210px" : "160px",
-    overflow: "hidden",
+    height: isMobile ? "80px" : "160px",
   }));
-  // const setSwipeUp = () => {
-  //   // dispatch(setSwipePositionUp());
-  //   setSpring({
-  //     transform: `translateY(${30}px)`,
-  //     touchAction: "unset",
-  //   });
-  //   setSlideUpSectionProps({
-  //     height: "150px",
-  //     overflow: "visible",
-  //   });
-  //   setListHeaderProps({
-  //     height: "110px",
-  //   });
-  // };
-
-  // const setSwipeDown = () => {
-  //   // dispatch(setSwipePositionDown());
-  //   setSpring({
-  //     transform: `translateY(${window.innerHeight - 120}px)`,
-  //     touchAction: "none",
-  //   });
-  //   setSlideUpSectionProps({
-  //     height: "0px",
-  //     overflow: "hidden",
-  //   });
-  //   setListHeaderProps({
-  //     height: "60px",
-  //   });
-  //   setSearchOpen(false);
-  // };
 
   useEffect(() => {
     if (openScream) {
@@ -244,30 +207,20 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
     }
   }, [openScream]);
 
-  // useEffect(() => {
-  //   if (isMobile && swipePosition === "bottom") {
-  //     setSwipeDown();
-  //   }
-  //   if (isMobile && swipePosition === "top") {
-  //     setSwipeUp();
-  //   }
-  // }, [swipePosition]);
-
-  // useEffect(() => {
-  //   if (searchOpen) {
-  //     setSlideUpSectionProps({
-  //       height: "210px",
-  //     });
-  //   }
-  //   if (!searchOpen && (swipePosition !== "bottom" || !isMobileCustom)) {
-  //     setSlideUpSectionProps({
-  //       height: "150px",
-  //     });
-  //   }
-  // }, [searchOpen]);
+  useEffect(() => {
+    if (searchOpen) {
+      setListHeaderProps({
+        height: isMobile ? "140px" : "220px",
+      });
+    } else {
+      setListHeaderProps({
+        height: isMobile ? "80px" : "160px",
+      });
+    }
+  }, [searchOpen]);
 
   useEffect(() => {
-    if (openStatistics || openOrganizationsOverview) {
+    if ((openStatistics || openOrganizationsOverview) && isMobile) {
       setSpring({
         transition: "0.5s",
         transform: "scale(0.9) translateY(-20px)",
@@ -299,17 +252,8 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
           transform: `translateY(${window.innerHeight - 160}px)`,
           touchAction: "none",
         });
-        setListHeaderProps({
-          overflow: "hidden",
-        });
-
         setSwipedUp(false);
-        // dispatch(setSwipePositionDown());
-
-        // setListHeaderProps({
-        //   height: "70px",
-        // });
-        setSearchOpen(false);
+        // setSearchOpen(false);
       }
 
       if (last && my < -50) {
@@ -319,15 +263,6 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
         });
 
         setSwipedUp(true);
-        setListHeaderProps({
-          overflow: "visible",
-        });
-
-        // dispatch(setSwipePositionUp());
-
-        // setListHeaderProps({
-        //   height: "150px",
-        // });
       }
 
       setSwipePercentage(Math.abs(my) / (window.innerHeight - 190));
@@ -405,47 +340,48 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
         $openOrganizationsOverview={openOrganizationsOverview}
         $openStatistics={openStatistics}
       >
+        <Wave
+          color={theme.colors.beige.beige20}
+          top={swipedUp || !isMobile ? "0px" : "200px"}
+          // position="fixed"
+        />
         {!isMobile && (
           <MenuSidebar
             handleOpenMyAccount={handleOpenMyAccount}
             setInfoPageOpen={setInfoPageOpen}
           />
         )}
-        <Wave
-          color={theme.colors.beige.beige20}
-          top={swipedUp || !isMobile ? "0px" : "200px"}
-          // position="fixed"
-        />
+
         <InnerWrapper>
-          {isMobile && <HandleBar />}
-          <RoundedButtonWrapper swipedUp={swipedUp}>
-            <RoundedButton
-              size="big"
-              icon={
-                <Plus
-                  color={theme.colors.primary.primary120}
-                  transform="scale(2)"
-                />
-              }
-              onClick={() => setPostIdeaOpen(true)}
-            />
-          </RoundedButtonWrapper>
           <Header {...bind()} swipedUp={swipedUp} style={listHeaderProps}>
+            {isMobile && <HandleBar />}
+
             <MainSwipeListTabs
               swipedUp={swipedUp}
               order={order}
               setOrder={setOrder}
             />
+            <RoundedButtonWrapper swipedUp={swipedUp}>
+              <RoundedButton
+                size="big"
+                icon={
+                  <Plus
+                    color={theme.colors.primary.primary120}
+                    transform="scale(2)"
+                  />
+                }
+                onClick={() => setPostIdeaOpen(true)}
+              />
+            </RoundedButtonWrapper>
+
             {isMobile && (
-              <TagSlideWrapper>
-                <TagSlide
-                  type={order === "ideas" ? "topics" : "organizationTypes"}
-                  selectedTopics={selectedTopics}
-                  selectedOrganizationTypes={selectedOrganizationTypes}
-                  handleSelectTopics={handleSelectTopics}
-                  handleSelectOrganizationTypes={handleSelectOrganizationTypes}
-                />
-              </TagSlideWrapper>
+              <TagSlide
+                type={order === "ideas" ? "topics" : "organizationTypes"}
+                selectedTopics={selectedTopics}
+                selectedOrganizationTypes={selectedOrganizationTypes}
+                handleSelectTopics={handleSelectTopics}
+                handleSelectOrganizationTypes={handleSelectOrganizationTypes}
+              />
             )}
             {!isMobile && toolbarComponent}
           </Header>
