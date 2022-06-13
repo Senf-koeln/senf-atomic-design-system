@@ -32,7 +32,7 @@ Default.args = {
     ],
     logo: "https://firebasestorage.googleapis.com/v0/b/senf-dev.appspot.com/o/organizationsData%2F562az529HNj8CIKKE6JL%2Flogo%2Flogo?alt=media&token=a85fa435-5eeb-4a20-ae8a-b872d0571639",
   },
-  data: [
+  projectroomsData: [
     {
       projectRoomId: "lvbqMZp0bYbedrsQOSfv",
       title: "This is a projectroomcard",

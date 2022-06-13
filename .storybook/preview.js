@@ -36,6 +36,7 @@ export const parameters = {
   viewport: {
     viewports: INITIAL_VIEWPORTS,
   },
+  layout: "fullscreen",
   backgrounds: {
     default: "lightgrey",
     values: [

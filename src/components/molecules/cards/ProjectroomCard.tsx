@@ -34,10 +34,13 @@ const Wrapper = styled.div<ProjectroomCardProps>`
       : "brightness(1)"};
   animation: opacityTranslateYFrom50Animation 0.8s;
 
-  transition: 0.3s;
-  &:hover {
-    transform: scale(103%);
-    background-color: #fefefd;
+  @media (min-width: 768px) {
+    transition: 0.3s;
+
+    &:hover {
+      transform: scale(103%);
+      background-color: #fefefd;
+    }
   }
 `;
 

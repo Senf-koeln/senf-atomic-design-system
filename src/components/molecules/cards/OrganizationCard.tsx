@@ -2,10 +2,14 @@
 
 import { t } from "i18next";
 import React, { FC } from "react";
+import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import setOrganizationTypeIcon from "../../../data/setOrganizationTypeIcon";
 import Icon from "../../atoms/icons/Icon";
-import { LayerWhiteFirstDefault } from "../../atoms/layerStyles/LayerStyles";
+import {
+  LayerWhiteFirstDefault,
+  LayerWhiteFirstActive,
+} from "../../atoms/layerStyles/LayerStyles";
 import Typography from "../../atoms/typography/Typography";
 import { OrganizationCardProps } from "./OrganizationCard.types";
 
@@ -28,18 +32,24 @@ const Wrapper = styled.div<OrganizationCardProps>`
       : "brightness(1)"};
   animation: opacityTranslateYFrom50Animation 0.8s;
 
-  transition: 0.3s;
-  &:hover {
-    transform: scale(103%);
-    background-color: #fefefd;
+  ${({ active }) => (active ? LayerWhiteFirstActive : LayerWhiteFirstDefault)}
+
+  &:active {
+    ${(props) => LayerWhiteFirstActive}
+  }
+
+  @media (min-width: 768px) {
+    transition: 0.3s;
+    margin: 16px 8px 0px 8px;
+
+    &:hover {
+      transform: scale(103%);
+      background-color: #fefefd;
+    }
   }
 
   @media (max-width: 768px) {
     width: calc(50% - 15px);
-  }
-
-  @media (min-width: 768px) {
-    margin: 16px 8px 0px 8px;
   }
 `;
 
@@ -142,23 +152,33 @@ const DeactivatedWrapper = styled.div`
 const OrganizationCard: FC<OrganizationCardProps> = ({
   data,
   handleButtonOpenCard,
+  organization,
+  projectroomsData,
 }) => {
   const {
     title,
-    projectroomsSize,
     organizationType,
     status,
     active,
-    organizationId,
-    organization,
+    organizationId: cardOrganizationId,
     logoURL,
   } = data;
+  const { t } = useTranslation();
+
+  const projectroomsSize = projectroomsData?.filter(
+    ({ organizationId }) => organizationId === cardOrganizationId
+  ).length;
+
+  console.log(organization);
+  console.log(organization?.organizationId);
+  console.log(cardOrganizationId);
+
   return (
     <Wrapper
       status={status}
-      active={organizationId === organization?.organizationId}
+      active={cardOrganizationId === organization?.organizationId}
       onClick={(event) =>
-        handleButtonOpenCard(event, "organizationCard", organizationId)
+        handleButtonOpenCard(event, "organizationCard", cardOrganizationId)
       }
     >
       {/* {status !== "active" && (

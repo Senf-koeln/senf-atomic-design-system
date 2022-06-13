@@ -60,6 +60,30 @@ p {
     }
   }
 
+
+  @keyframes translateYFrom100toMinus200pxAnimation {
+  0% {
+    transform: translateY(100%);
+  }
+
+  100% {
+    transform: translateY(calc(100vh - 200px));
+  }
+}
+
+@keyframes translateYFrom100to70pxAnimation {
+  0% {
+    transform: translateY(100%);
+  }
+
+  100% {
+    transform: translateY(70px);
+  }
+}
+
+
+
+
   @keyframes opacityTranslateYFrom100Animation {
   0% {
     opacity: 0;

@@ -53,6 +53,7 @@ const SubNavbar: FC<SubNavbarProps> = ({
   iconLeft,
   iconLeftTransform,
   textLeft,
+  leftButtonClick,
   header,
   textRight,
   iconRight,
@@ -62,7 +63,7 @@ const SubNavbar: FC<SubNavbarProps> = ({
   return (
     <Wrapper>
       {handlebar && <HandleBar />}
-      <LeftWrapper>
+      <LeftWrapper onClick={leftButtonClick}>
         <TertiaryButton
           iconLeft={iconLeft}
           iconLeftTransform={iconLeftTransform}

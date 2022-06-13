@@ -1,11 +1,16 @@
 /** @format */
 
 import React, { FC, useState } from "react";
+import { useTranslation } from "react-i18next";
+
 import styled from "styled-components";
+import Bell from "../../../assets/icons/Bell";
 import Info from "../../../assets/icons/Info";
+import Insta from "../../../assets/icons/Insta";
 import Mail from "../../../assets/icons/Mail";
 import More from "../../../assets/icons/More";
 import User from "../../../assets/icons/User";
+import { openLink, openMail } from "../../../util/helpers";
 import Box from "../../atoms/box/Box";
 import Button from "../../atoms/buttons/Button";
 import ContentDropdown from "../../atoms/contentDropdown/ContentDropdown";
@@ -15,7 +20,7 @@ import { MenuSidebarProps } from "./MenuSidebar.types";
 const Wrapper = styled.div<MenuSidebarProps>`
   position: absolute;
   width: 85px;
-  height: 100%;
+  height: calc(100vh - 60px);
   padding: 20px 10px 20px 12px;
   left: 0;
   top: 0;
@@ -48,15 +53,27 @@ const Wrapper = styled.div<MenuSidebarProps>`
 
 //   margin: 0;
 // `;
+const lngs = {
+  de: { nativeName: "🇩🇪 Deutsch", shortName: "DE" },
+  en: { nativeName: "🇬🇧 English", shortName: "EN" },
+};
 
 const MenuSidebar: FC<MenuSidebarProps> = ({
   handleOpenMyAccount,
   setInfoPageOpen,
+  setOrder,
 }) => {
+  const { i18n } = useTranslation();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const handleToggle = () => {
     setDropdownOpen(!dropdownOpen);
   };
+
+  const handleChangeLanguage = (lng: string) => {
+    i18n.changeLanguage(lng);
+    setDropdownOpen(false);
+  };
+
   return (
     <Wrapper>
       <Box
@@ -67,8 +84,13 @@ const MenuSidebar: FC<MenuSidebarProps> = ({
         width="36px"
       >
         <Box gap="14px" flexDirection="column" width="36px">
-          <Button variant="primary" size="small" text={<More />} />
-          <Button variant="white" size="small" icon={<More />} />
+          <Button
+            variant="primary"
+            size="small"
+            text={<More />}
+            onClick={() => setOrder(1)}
+          />
+          <Button variant="white" size="small" icon={<Bell />} />
 
           <Button
             variant="white"
@@ -96,20 +118,41 @@ const MenuSidebar: FC<MenuSidebarProps> = ({
                 variant="white"
                 size="small"
                 onClick={handleToggle}
-                text={"DE"}
+                text={Object.keys(lngs).map(
+                  (lng) => i18n.resolvedLanguage === lng && lngs[lng].shortName
+                )}
               />
             }
             Content={
               <Box gap="5px" flexDirection="column">
-                <Button variant="primary" size="small" text="🇩🇪 Deutsch" />
-                <Button size="small" variant="secondary" text="🇬🇧 English" />
+                {Object.keys(lngs).map((lng) => (
+                  <Button
+                    variant={
+                      i18n.resolvedLanguage === lng ? "primary" : "secondary"
+                    }
+                    size="small"
+                    text={lngs[lng].nativeName}
+                    onClick={() => handleChangeLanguage(lng)}
+                    // disabled={i18n.resolvedLanguage === lng}
+                  />
+                ))}
               </Box>
             }
           />
           <Divider />
 
-          <Button variant="white" size="small" icon={<Mail />} />
-          <Button variant="white" size="small" icon={<More />} />
+          <Button
+            variant="white"
+            size="small"
+            icon={<Mail />}
+            onClick={() => openMail("dein@senf.koeln")}
+          />
+          <Button
+            variant="white"
+            size="small"
+            icon={<Insta />}
+            onClick={() => openLink("https://www.instagram.com/senf.koeln/")}
+          />
         </Box>
       </Box>
 

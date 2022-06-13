@@ -47,9 +47,6 @@ const DragWrapper = styled(animated.div)`
   position: absolute;
   pointer-events: all;
 
-  transform: ${(props) =>
-    (props.$openOrganizationsOverview || props.$openStatistics) &&
-    "scale(0.9) translateY(-20px)"};
   /* transform: scale(0.9) translateY(-20px); */
   @media (min-width: 768px) {
     width: 470px;
@@ -73,7 +70,7 @@ const InnerWrapper = styled.div<OrganizationsOverviewProps>`
 const ContentWrapper = styled.div<OrganizationsOverviewProps>`
   overflow-y: scroll;
   pointer-events: all;
-  height: calc(100% - 120px);
+  height: calc(100vh - 160px);
   width: 100%;
   z-index: 1;
   margin-left: 50%;
@@ -137,7 +134,7 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
   openScream,
 
   ideasData,
-  projectRoomsData,
+  projectroomsData,
   organizations,
 
   order,
@@ -153,8 +150,8 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
   handleSelectTopics,
   handleSelectOrganizationTypes,
 
-  setOpenStatistics,
-  openStatistics,
+  setOpenStatisticsOverview,
+  openStatisticsOverview,
   setOpenOrganizationsOverview,
   openOrganizationsOverview,
 
@@ -219,28 +216,32 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
     }
   }, [searchOpen]);
 
-  useEffect(() => {
-    if ((openStatistics || openOrganizationsOverview) && isMobile) {
-      setSpring({
-        transition: "0.5s",
-        transform: "scale(0.9) translateY(-20px)",
-      });
-    } else {
-      if (!swipedUp) {
-        setSpring({
-          transform: `translateY(${window.innerHeight - 160}px)`,
-          touchAction: "none",
-          transition: "0s",
-        });
-      } else {
-        setSpring({
-          transform: `translateY(${30}px)`,
-          touchAction: "unset",
-          transition: "0s",
-        });
-      }
-    }
-  }, [openStatistics, openOrganizationsOverview]);
+  // useEffect(() => {
+  //   if (isMobile) {
+  //     if (openStatistics || openOrganizationsOverview) {
+  //       setSpring({
+  //         transition: "0.5s",
+  //         transform: "scale(0.9) translateY(-20px)",
+  //       });
+  //     }
+
+  //     else {
+  //       if (!swipedUp) {
+  //         setSpring({
+  //           transform: `scale(1) translateY(${window.innerHeight - 160}px)`,
+  //           touchAction: "none",
+  //           transition: "0s",
+  //         });
+  //       } else {
+  //         setSpring({
+  //           transform: `scale(1) translateY(${30}px)`,
+  //           touchAction: "unset",
+  //           transition: "0s",
+  //         });
+  //       }
+  //     }
+  //   }
+  // }, [openStatistics, openOrganizationsOverview]);
 
   const bind = useDrag(
     ({ last, down, movement: [, my], offset: [, y] }) => {
@@ -272,7 +273,7 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
           height: down
             ? `${70 + 80 * swipePercentage}px`
             : last && my < -50
-            ? "120px"
+            ? "130px"
             : "80px",
         });
       }
@@ -282,7 +283,7 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
             ? `${120 - 80 * swipePercentage}px`
             : last && my > 50
             ? "80px"
-            : "120px",
+            : "130px",
         });
       }
 
@@ -311,17 +312,27 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
             icon={order === "ideas" ? <Stats /> : null}
             onClick={
               order === "ideas"
-                ? () => setOpenStatistics(true)
+                ? () => setOpenStatisticsOverview(true)
                 : () => setOpenOrganizationsOverview(true)
             }
           />
         }
         searchPlaceholder={t("searchBar")}
-        activeSortOptionLabel={t("newest_ideas")}
-        sortOptions={[
-          { name: "newest", label: t("newest_ideas") },
-          { name: "hottest", label: t("hottest_ideas") },
-        ]}
+        activeSortOptionLabel={
+          order === "ideas" ? t("newest_ideas") : t("newest_projectrooms")
+        }
+        sortOptions={
+          order === "ideas"
+            ? [
+                { name: "newest", label: t("newest_ideas") },
+                { name: "hottest", label: t("hottest_ideas") },
+              ]
+            : [
+                { name: "newest", label: t("newest_projectrooms") },
+                { name: "aToZ", label: t("aToZ_projectrooms") },
+                { name: "zToA", label: t("zToA_projectrooms") },
+              ]
+        }
         statusOptions={[
           { name: "Unprocessed", label: t("unprocessed") },
           { name: "Accepted", label: t("accepted") },
@@ -336,9 +347,19 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
   return (
     <React.Fragment>
       <DragWrapper
-        style={isMobile ? springProps : null}
-        $openOrganizationsOverview={openOrganizationsOverview}
-        $openStatistics={openStatistics}
+        style={
+          (openOrganizationsOverview || openStatisticsOverview) && isMobile
+            ? {
+                scale: 0.9,
+                transform: `translateY(${-20}px)`,
+                filter: "brightness(80%)",
+                transition: "0.5s",
+                overflow: "visible",
+              }
+            : isMobile
+            ? springProps
+            : null
+        }
       >
         <Wave
           color={theme.colors.beige.beige20}
@@ -349,6 +370,7 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
           <MenuSidebar
             handleOpenMyAccount={handleOpenMyAccount}
             setInfoPageOpen={setInfoPageOpen}
+            setOrder={setOrder}
           />
         )}
 
@@ -390,8 +412,9 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
             {isMobile && toolbarComponent}
             <List
               CardType={order === "ideas" ? IdeaCard : ProjectroomCard}
-              data={order === "ideas" ? ideasData : projectRoomsData}
+              data={order === "ideas" ? ideasData : projectroomsData}
               organizations={organizations}
+              projectroomsData={projectroomsData}
               handleButtonOpenCard={handleButtonOpenCard}
               handleButtonLike={handleButtonLike}
               handleButtonComment={handleButtonComment}

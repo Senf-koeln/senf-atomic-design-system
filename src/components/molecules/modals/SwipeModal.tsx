@@ -69,7 +69,6 @@ const SwipeModal: FC<SwipeModalProps> = ({
   backgroundColor,
   overflow,
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
@@ -81,13 +80,13 @@ const SwipeModal: FC<SwipeModalProps> = ({
   }, [openModal]);
 
   const handleOpen = () => {
-    setIsOpen(true);
+    setOpenModal(true);
     const root = document.getElementById("root");
     root?.setAttribute("inert", "");
   };
 
   const handleClose = () => {
-    setIsOpen(false);
+    setOpenModal(false);
     const root = document.getElementById("root");
     root?.removeAttribute("inert");
     // focus modal trigger again
@@ -123,7 +122,7 @@ const SwipeModal: FC<SwipeModalProps> = ({
 
         setTimeout(() => {
           window.history.pushState(null, null, "/projectRooms");
-          setIsOpen(false);
+          setOpenModal(false);
         }, 150);
         setTimeout(() => {
           set({
@@ -151,13 +150,13 @@ const SwipeModal: FC<SwipeModalProps> = ({
     });
     setTimeout(() => {
       // window.history.pushState(null, null, "/projectRooms");
-      setIsOpen(false);
+      setOpenModal(false);
     }, 150);
   };
 
   return (
     <React.Fragment>
-      {isOpen &&
+      {openModal &&
         ReactDOM.createPortal(
           <React.Fragment>
             <Background zIndex={zIndex - 1} onClick={setClose} />

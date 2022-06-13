@@ -37,10 +37,11 @@ const NoIdeasYet = styled.div`
 const List: FC<ListProps> = ({
   listType,
   loading,
+  CardType,
   dropdown,
   data,
-  CardType,
-  organizations,
+  organization,
+  projectroomsData,
   handleButtonOpenCard,
   handleButtonLike,
   handleButtonComment,
@@ -86,7 +87,8 @@ const List: FC<ListProps> = ({
             >
               <CardType
                 data={dataArray[i]}
-                organizations={organizations}
+                organization={organization}
+                projectroomsData={projectroomsData}
                 handleButtonOpenCard={handleButtonOpenCard}
                 handleButtonLike={handleButtonLike}
                 handleButtonComment={handleButtonComment}

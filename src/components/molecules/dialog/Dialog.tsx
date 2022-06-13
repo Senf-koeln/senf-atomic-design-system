@@ -15,8 +15,9 @@ const DialogWrapper = styled.div<DialogProps>`
   z-index: ${({ zIndex }) => (zIndex ? zIndex : 9999)};
   position: fixed;
   top: 0;
-  height: 100vh;
+  height: calc(100vh - 20px);
   width: 100%;
+  margin: 10px;
   max-width: ${({ size }) =>
     size === "xxl"
       ? "100vw"
@@ -33,7 +34,7 @@ const DialogWrapper = styled.div<DialogProps>`
     backgroundColor ? backgroundColor : "white"};
 
   box-shadow: ${({ boxShadow }) => (boxShadow ? boxShadow : undefined)};
-
+  border-radius: 18px;
   animation: opacityTranslateYFrom100Animation 0.2s;
 `;
 
@@ -63,53 +64,54 @@ const Dialog: FC<DialogProps> = ({
 
   const handleOpen = () => {
     setIsOpen(true);
-    const root = document.getElementById("root");
-    root?.setAttribute("inert", "");
+    // const root = document.getElementById("root");
+    // root?.setAttribute("inert", "");
   };
 
   const handleClose = () => {
     setIsOpen(false);
-    const root = document.getElementById("root");
-    root?.removeAttribute("inert");
-    // focus modal trigger again
-    buttonRef?.current?.focus();
+    // const root = document.getElementById("root");
+    // root?.removeAttribute("inert");
+    // // focus modal trigger again
+    // buttonRef?.current?.focus();
   };
 
-  const submitRef = useRef<HTMLButtonElement>(null);
-  const closeRef = useRef<HTMLButtonElement>(null);
+  // const submitRef = useRef<HTMLButtonElement>(null);
+  // const closeRef = useRef<HTMLButtonElement>(null);
 
-  useEffect(() => {
-    if (submitRef?.current) {
-      submitRef?.current.focus();
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (submitRef?.current) {
+  //     submitRef?.current.focus();
+  //   }
+  // }, []);
 
   return (
     <React.Fragment>
-      {isOpen &&
-        ReactDOM.createPortal(
-          <DialogWrapper
-            left={left}
-            right={right}
-            zIndex={zIndex}
-            boxShadow={boxShadow}
-            backgroundColor={backgroundColor}
-            overflow={overflow}
-            role="dialog"
-            size={size}
-            aria-labelledby="dialog-header"
-            onKeyDown={
-              (e) =>
-                submitRef?.current &&
-                closeRef?.current &&
-                trapFocus(e, submitRef.current, closeRef.current) // ideally we would use inert but it doesn't seem to be working
-            }
-          >
-            {children}
-          </DialogWrapper>,
-          document.body
-          //  document.getElementById(portalId) as HTMLElement
-        )}
+      {isOpen && (
+        // ReactDOM.createPortal(
+        <DialogWrapper
+          left={left}
+          right={right}
+          zIndex={zIndex}
+          boxShadow={boxShadow}
+          backgroundColor={backgroundColor}
+          overflow={overflow}
+          role="dialog"
+          size={size}
+          // aria-labelledby="dialog-header"
+          // onKeyDown={
+          //   (e) =>
+          //     submitRef?.current &&
+          //     closeRef?.current &&
+          //     trapFocus(e, submitRef.current, closeRef.current) // ideally we would use inert but it doesn't seem to be working
+          // }
+        >
+          {children}
+        </DialogWrapper>
+        // ,
+        // document.body
+        //  document.getElementById(portalId) as HTMLElement
+      )}
     </React.Fragment>
   );
 };
