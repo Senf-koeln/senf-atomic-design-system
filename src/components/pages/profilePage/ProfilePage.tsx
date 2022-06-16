@@ -33,6 +33,7 @@ import IdeaCard from "../../molecules/cards/IdeaCard";
 import ContentDropdown from "../../atoms/contentDropdown/ContentDropdown";
 import RoundedButton from "../../atoms/buttons/RoundedButton";
 import Button from "../../atoms/buttons/Button";
+import OrganizationCard from "../../molecules/cards/OrganizationCard";
 
 const DragWrapper = styled(animated.div)<ProfilePageProps>`
   display: flex;
@@ -104,26 +105,13 @@ const LogoPlacer = styled.div`
   align-items: center;
 `;
 
-const InfoWidget = styled.div`
-  max-width: 100%;
-  width: 352px;
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  word-break: break-word;
-  height: ${(props) => (props.infoOpen ? "auto" : "90px")};
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: ${(props) => (props.infoOpen ? "block" : "-webkit-box")};
-  -webkit-line-clamp: 4;
-  line-clamp: 4;
-  -webkit-box-orient: vertical;
-`;
-
 const ProfilePage: FC<ProfilePageProps> = ({
   user,
   organization,
   organizations,
+  myOrganizations,
   handleButtonOpenCard,
+  handleOpenProjectroom,
   handleButtonClose,
   setEditProfileOpen,
   handleLogout,
@@ -131,9 +119,11 @@ const ProfilePage: FC<ProfilePageProps> = ({
 }) => {
   const { t } = useTranslation();
   const isMobile = isMobileCustom();
-  const [infoOpen, setInfoOpen] = useState(false);
+  const [order, setOrder] = useState(1);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [swipePosition, setSwipePosition] = useState("top");
+
+  const { handle, description, photoUrl, screams, likes } = user;
 
   const handleToggle = () => {
     setDropdownOpen(!dropdownOpen);
@@ -200,7 +190,6 @@ const ProfilePage: FC<ProfilePageProps> = ({
           <ContentDropdown
             open={dropdownOpen}
             setOpen={setDropdownOpen}
-            openButtonWidth="36px"
             OpenButton={
               <RoundedButton
                 variant="white"
@@ -249,7 +238,7 @@ const ProfilePage: FC<ProfilePageProps> = ({
           <Box justifyContent="center" margin="20px">
             <ImageWrapper>
               <ImagePlaceholder
-                img={user?.img ? user?.img : null}
+                img={photoUrl ? photoUrl : null}
                 borderRadius="18px"
                 height="calc(100% - 40px)"
                 width="calc(100% - 40px)"
@@ -257,54 +246,54 @@ const ProfilePage: FC<ProfilePageProps> = ({
             </ImageWrapper>
           </Box>
           <Box justifyContent="center" margin="20px">
-            <Typography variant="h3">{user?.userHandle}</Typography>
+            <Typography variant="h3">{handle}</Typography>
           </Box>
 
-          <Box margin="21px 0px 0px 18px">
-            <TertiaryButton
-              text={t("information")}
-              iconRight={
-                <Arrow
-                  transform={infoOpen ? "rotate(-90deg) " : "rotate(0deg) "}
-                />
-              }
-              onClick={() => setInfoOpen(!infoOpen)}
-            />
-          </Box>
-          <Box margin="0px 0px 0px 24px">
-            <InfoWidget
-              onClick={() => setInfoOpen(!infoOpen)}
-              infoOpen={infoOpen}
-            >
-              <Typography variant="bodyBg">{user?.description}</Typography>
-            </InfoWidget>
+          <Box margin="0px 24px" flexDirection="column">
+            <Typography variant="buttonBg">
+              {t("profilePage.aboutHeadline")}
+            </Typography>
+            <Box margin="2px 0px">
+              <Typography variant="bodyBg">{description}</Typography>
+            </Box>
           </Box>
 
           <Divider margin="14px 24px 16px 24px" width="calc(100% - 48px)" />
           <Box margin="0px 24px 0px 24px" gap="10px">
             <Tabs
               fontSize="buttonSm"
-              order={0}
-              tabs={[
-                { icon: <Bulb />, text: "Ideen" },
-                { icon: <Info />, text: "Organisationen" },
-                { icon: <Info />, text: "Interaktionen" },
-              ]}
+              order={order}
+              setOrder={setOrder}
+              tabs={
+                myOrganizations
+                  ? [
+                      { icon: <Bulb />, text: "Ideen" },
+                      { icon: <Info />, text: "Organisationen" },
+                      { icon: <Info />, text: "Interaktionen" },
+                    ]
+                  : [
+                      { icon: <Bulb />, text: "Ideen" },
+                      { icon: <Info />, text: "Interaktionen" },
+                    ]
+              }
             />
-
-            {/* <Typography variant="buttonBg">Unsere Projekträume</Typography>
-          <Typography variant="buttonBg">Kalender</Typography> */}
           </Box>
 
           <Box margin="0px 12px">
-            {user?.ideas && (
-              <List
-                CardType={IdeaCard}
-                data={user?.ideas}
-                handleButtonOpenCard={handleButtonOpenCard}
-                organizations={organizations}
-              />
-            )}
+            <List
+              CardType={order === 1 ? IdeaCard : OrganizationCard}
+              data={order === 1 ? screams : myOrganizations}
+              handleButtonOpenCard={handleButtonOpenCard}
+              handleOpenProjectroom={handleOpenProjectroom}
+              organizations={organizations}
+              listEndText={
+                order === 1 && screams > 0
+                  ? t("noMoreIdeas")
+                  : order === 1 && screams < 1 && t("noSharedIdeas")
+
+                // :t("noIdeasWithFilter")
+              }
+            />
           </Box>
         </InnerWrapper>
       </DragWrapper>

@@ -30,6 +30,9 @@ import More from "../../../assets/icons/More";
 import Tabs from "../../molecules/tabs/Tabs";
 import Bulb from "../../../assets/icons/Bulb";
 import Info from "../../../assets/icons/Info";
+import Calendar from "../../organisms/calendar/Calendar";
+import CalendarIcon from "../../../assets/icons/CalendarIcon";
+import Room from "../../../assets/icons/Room";
 
 const SVGWrapper = styled.div`
   position: absolute;
@@ -85,12 +88,13 @@ const Example: FC<OrganizationPageProps> = ({
   handleCloseOrganizationPage,
   handleButtonOpenCard,
   handleEdit,
-  setContactOpen,
-  setFaqOpen,
+  setModalData,
+  googleCalendarApiKey,
 }) => {
   const { t } = useTranslation();
 
   const [infoOpen, setInfoOpen] = useState(false);
+  const [order, setOrder] = useState(1);
 
   return (
     <Dialog
@@ -125,7 +129,7 @@ const Example: FC<OrganizationPageProps> = ({
         />
       </Box>
 
-      {organization?.userIds.includes(user.userId) && (
+      {user?.userId && organization?.userIds.includes(user?.userId) && (
         <Box position="absolute" margin="20px" right="0px" zIndex={2}>
           <RoundedButton icon={<More />} onClick={handleEdit} />
         </Box>
@@ -176,7 +180,37 @@ const Example: FC<OrganizationPageProps> = ({
             text={t("contact")}
             fillWidth="max"
             size="small"
-            onClick={() => setContactOpen(true)}
+            onClick={() =>
+              setModalData(
+                <Box>
+                  <SubNavbar
+                    iconLeft={<Arrow transform="rotate(90deg)" />}
+                    leftButtonClick={() => setModalData(null)}
+                    header={t("contact")}
+                    handlebar={true}
+                  />
+                  <Box margin="18px">
+                    {organization?.contact && (
+                      <Typography variant="bodyBg">
+                        {organization.contact}
+                      </Typography>
+                    )}
+                    {organization?.contact && <Divider />}
+                    {organization?.weblink && (
+                      <Typography variant="bodyBg">
+                        {organization.contact}{" "}
+                      </Typography>
+                    )}
+                    {organization?.weblink && <Divider />}
+                    {organization?.address && (
+                      <Typography variant="bodyBg">
+                        {organization.contact}{" "}
+                      </Typography>
+                    )}
+                  </Box>
+                </Box>
+              )
+            }
           />
         )}
         {organization.faqs && (
@@ -185,7 +219,21 @@ const Example: FC<OrganizationPageProps> = ({
             text={t("faq")}
             fillWidth="max"
             size="small"
-            onClick={() => setFaqOpen(true)}
+            onClick={() =>
+              setModalData(
+                <Box>
+                  <SubNavbar
+                    iconLeft={<Arrow transform="rotate(90deg)" />}
+                    leftButtonClick={setModalData(null)}
+                    header={t("FAQ")}
+                    handlebar={true}
+                  />
+                  <Box margin="18px">
+                    <Accordion data={organization.faqs} />
+                  </Box>
+                </Box>
+              )
+            }
           />
         )}
       </Box>
@@ -198,34 +246,54 @@ const Example: FC<OrganizationPageProps> = ({
           onClick={() => setInfoOpen(!infoOpen)}
         />
       </Box>
-      <Box margin="0px 0px 0px 24px">
+      <Box margin="2px 0px 0px 24px">
         <InfoWidget onClick={() => setInfoOpen(!infoOpen)} infoOpen={infoOpen}>
           <Typography variant="bodyBg">{organization?.description}</Typography>
         </InfoWidget>
       </Box>
 
       <Divider margin="14px 24px 16px 24px" width="calc(100% - 48px)" />
-      <Box margin="0px 0px 0px 24px" gap="10px">
-        <Tabs
-          fontSize="buttonSm"
-          order={0}
-          tabs={[
-            { icon: <Bulb />, text: "Projekträume" },
-            { icon: <Info />, text: "Kalender" },
-          ]}
-        />
 
-        {/* <Typography variant="buttonBg">Unsere Projekträume</Typography>
-          <Typography variant="buttonBg">Kalender</Typography> */}
-      </Box>
+      {organization?.googleCalendarId && (
+        <Box margin="0px 24px 0px 24px" gap="10px">
+          <Tabs
+            fontSize="buttonSm"
+            order={order}
+            setOrder={setOrder}
+            tabs={[
+              { icon: <Room />, text: "Projekträume" },
+              { icon: <CalendarIcon />, text: "Kalender" },
+              // { icon: <Info />, text: "Interaktionen" },
+            ]}
+          />
+        </Box>
+      )}
 
       <Box margin="0px 12px">
-        <List
-          CardType={ProjectroomCard}
-          data={organization?.projectRooms}
-          handleButtonOpenCard={handleButtonOpenCard}
-          organizations={organizations}
-        />
+        {order === 1 ? (
+          <List
+            CardType={ProjectroomCard}
+            data={organization?.projectRooms}
+            handleButtonOpenCard={handleButtonOpenCard}
+            organizations={organizations}
+            listEndText={
+              !organization?.projectRooms || organization?.projectRooms < 1
+                ? t("noOrganizationProjectRooms")
+                : t("noMoreProjectrooms")
+            }
+          />
+        ) : (
+          order === 2 &&
+          organization?.googleCalendarId && (
+            <Box margin="10px 10px 0px 0px" width="100%">
+              <Calendar
+                googleCalendarApiKey={googleCalendarApiKey}
+                googleCalendarId={organization?.googleCalendarId}
+                calendarType="google"
+              />
+            </Box>
+          )
+        )}
       </Box>
     </Dialog>
   );

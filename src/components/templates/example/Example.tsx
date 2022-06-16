@@ -7,7 +7,7 @@ import { ExampleProps } from "./Example.types";
 const Wrapper = styled.div<ExampleProps>``;
 
 const Example: FC<ExampleProps> = ({ text }) => {
-  return <Wrapper>{text}</Wrapper>;
+  return <Wrapper>Testtttt</Wrapper>;
 };
 
 export default Example;

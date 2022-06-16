@@ -88,7 +88,7 @@ export const InputField = styled.div<{ focus: boolean }>`
 `;
 
 export const TextField = styled.input`
-  /* font-size: ${({ theme }) => theme.fontSizes[2]}rem; */
+  font-size: ${({ theme }) => theme.fontSizes[2]}rem;
   border: 0;
   flex: 1;
   background-color: transparent !important;

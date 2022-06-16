@@ -23,8 +23,8 @@ const DetailSidebar: FC<DetailSidebarProps> = ({
     <Wrapper>
       <Box
         position="fixed"
-        margin={isMobile ? "10px" : "20px"}
-        width="36px"
+        margin={isMobile ? "10px" : "30px 20px"}
+        width={isMobile ? "calc(100% - 20px)" : "36px"}
         zIndex={9999}
         flexDirection={isMobile ? "row" : "column"}
         justifyContent={isMobile ? "space-between" : "flex-start"}
@@ -34,15 +34,18 @@ const DetailSidebar: FC<DetailSidebarProps> = ({
           icon={<Arrow transform="rotate(180deg)" />}
           onClick={handleButtonClose}
         />
-        <Divider />
-        {SecondButton}
-        {ThirdButton}
+
+        {!isMobile && <Divider margin="0px 8px" />}
+        <Box gap="8px" flexDirection={isMobile ? "row" : "column"}>
+          {SecondButton}
+          {ThirdButton}
+        </Box>
       </Box>
       {sideDivider && !isMobile && (
         <Divider
-          height="calc(100% - 40px)"
+          height="calc(100% - 60px)"
           width="2px"
-          margin="20px 16px 20px 80px"
+          margin="30px 16px 30px 80px"
           position="fixed"
           zIndex={99}
         />

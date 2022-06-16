@@ -36,12 +36,12 @@ const Wrapper = styled.div<OrganizationsOverviewProps>`
   transition: 0.5s;
 
   @media (min-width: 768px) {
-    display: ${({ open }) => (open ? "block" : "none")};
+    /* display: ${({ open }) => (open ? "block" : "none")}; */
     width: ${({ open }) => (open ? "calc(100vw - 430px)" : "0px")};
   }
 
   @media (max-width: 1350px) {
-    width: ${({ open }) => (open ? "calc(100vw - 10px)" : "0px")};
+    width: ${({ open }) => (open ? "calc(100vw - 20px)" : "0px")};
   }
 `;
 
@@ -73,7 +73,7 @@ export const SVGWrapper = styled.div`
 
 const HeaderWrapper = styled.div`
   position: absolute;
-  width: 600px;
+  width: 750px;
   height: 120px;
   margin-left: 50%;
   top: 0;
@@ -96,6 +96,7 @@ const OrganizationsOverview: FC<OrganizationsOverviewProps> = ({
   setSearchTerm,
   handleButtonOpenCard,
   handleOpenCreateOrganization,
+  checkedSortOption,
 }) => {
   const { t } = useTranslation();
   const isMobile = isMobileCustom();
@@ -116,12 +117,13 @@ const OrganizationsOverview: FC<OrganizationsOverviewProps> = ({
           onClick={handleOpenCreateOrganization}
         />
       }
+      checkedSortOption={checkedSortOption}
       searchPlaceholder={t("searchBarOrganizations")}
       activeSortOptionLabel={t("newest_organizations")}
       sortOptions={[
-        { name: "newest", label: t("newest_organizations") },
-        { name: "aToZ", label: t("aToZ_organizations") },
-        { name: "zToA", label: t("zToA_organizations") },
+        { value: "newest", label: t("newest_organizations") },
+        { value: "aToZ", label: t("aToZ_organizations") },
+        { value: "zToA", label: t("zToA_organizations") },
       ]}
     />
   );
@@ -187,7 +189,7 @@ const OrganizationsOverview: FC<OrganizationsOverviewProps> = ({
           />
         </Box>
         <HeaderWrapper>
-          <Box margin="20px" justifyContent="center">
+          <Box margin="20px 0px 0px 0px" justifyContent="center">
             <Typography
               variant="h2"
               // fontSize={document.body.clientWidth > 368 ? "22px" : "19px"}
@@ -196,6 +198,11 @@ const OrganizationsOverview: FC<OrganizationsOverviewProps> = ({
               {t("organizations")}
             </Typography>
           </Box>
+          <TagSlide
+            type="organizationTypes"
+            selectedOrganizationTypes={selectedOrganizationTypes}
+            handleSelectOrganizationTypes={handleSelectOrganizationTypes}
+          />
 
           <Box margin="16px 12px 16px 12px">{toolbarComponent}</Box>
         </HeaderWrapper>

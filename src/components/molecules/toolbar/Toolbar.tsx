@@ -73,11 +73,11 @@ const Toolbar: FC<ToolbarProps> = ({
   activeSortOptionLabel,
 
   secondButton,
+
+  checkedSortOption,
+  setCheckedSortOption,
 }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const handleToggle = () => {
-    setDropdownOpen(!dropdownOpen);
-  };
 
   const setSearch = () => {
     setSearchOpen(!searchOpen);
@@ -94,7 +94,7 @@ const Toolbar: FC<ToolbarProps> = ({
         setOpen={setDropdownOpen}
         OpenButton={
           <TertiaryButton
-            onClick={handleToggle}
+            onClick={() => setDropdownOpen(!dropdownOpen)}
             text={activeSortOptionLabel}
             iconRight={<Arrow transform="rotate(90deg)" />}
             variant="semibold"
@@ -102,10 +102,21 @@ const Toolbar: FC<ToolbarProps> = ({
         }
         Content={
           <Box gap="5px" flexDirection="column">
-            {Object.values(sortOptions).map((item) => (
+            {Object.values(sortOptions).map(({ value, label }) => (
               <Box gap="5px">
-                <ToggleInput type="radio" selected={true} />
-                <option value={item.value}>{item.label}</option>
+                <TertiaryButton
+                  text={label}
+                  variant={checkedSortOption === value ? "bold" : "medium"}
+                  onClick={() => setCheckedSortOption(value)}
+                  iconLeft={
+                    <ToggleInput
+                      type="radio"
+                      checked={checkedSortOption === value}
+                      pointerEvents="none"
+                    />
+                  }
+                />
+                {/* <option value={item.value}>{item.label}</option> */}
               </Box>
             ))}
           </Box>

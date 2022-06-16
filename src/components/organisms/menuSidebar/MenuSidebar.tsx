@@ -19,9 +19,9 @@ import { MenuSidebarProps } from "./MenuSidebar.types";
 
 const Wrapper = styled.div<MenuSidebarProps>`
   position: absolute;
-  width: 85px;
+  width: 50px;
   height: calc(100vh - 60px);
-  padding: 20px 10px 20px 12px;
+  padding: 20px 0px 20px 12px;
   left: 0;
   top: 0;
   z-index: 996;
@@ -65,9 +65,6 @@ const MenuSidebar: FC<MenuSidebarProps> = ({
 }) => {
   const { i18n } = useTranslation();
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const handleToggle = () => {
-    setDropdownOpen(!dropdownOpen);
-  };
 
   const handleChangeLanguage = (lng: string) => {
     i18n.changeLanguage(lng);
@@ -117,7 +114,7 @@ const MenuSidebar: FC<MenuSidebarProps> = ({
               <Button
                 variant="white"
                 size="small"
-                onClick={handleToggle}
+                onClick={() => setDropdownOpen(!dropdownOpen)}
                 text={Object.keys(lngs).map(
                   (lng) => i18n.resolvedLanguage === lng && lngs[lng].shortName
                 )}
@@ -156,7 +153,7 @@ const MenuSidebar: FC<MenuSidebarProps> = ({
         </Box>
       </Box>
 
-      <Divider height="100%" width="2px" margin="0px 16px 0px 10px" />
+      <Divider height="100%" width="2px" margin="0px 0px 0px 10px" />
     </Wrapper>
   );
 };

@@ -168,15 +168,6 @@ const AuthEmail: FC<AuthEmailProps> = ({
             variantState === "register" ? formikRegisterStore : formikLoginStore
           }
         />
-        {variantState === "register" && (
-          <Dropdown
-            multi={true}
-            listItems={[
-              ["age", "Female", "Male"],
-              ["gender", "Female", "Male"],
-            ]}
-          />
-        )}
 
         {errorMessage && (
           <Typography variant="bodySm" color={theme.colors.signal.redDark}>

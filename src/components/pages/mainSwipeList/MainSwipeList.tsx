@@ -1,22 +1,15 @@
 /** @format */
+import React, { FC, useEffect, useRef, useState, memo } from "react";
+
 import { MainSwipeListProps } from "./MainSwipeList.types";
 
 import { useSpring } from "@react-spring/web";
 import { useDrag } from "@use-gesture/react";
-import React, { FC, useEffect, useRef, useState } from "react";
-import ReactDOM from "react-dom";
 import styled from "styled-components";
-import { trapFocus } from "../../../hooks/trapFocus";
-import { LayerWhiteFirstDefault } from "../../atoms/layerStyles/LayerStyles";
-import SubNavbar from "../navs/SubNavbar";
-import { SwipeModalProps } from "./SwipeModal.types";
 import { animated } from "@react-spring/web";
 import { isMobileCustom } from "../../../hooks/customDeviceDetect";
-import Typography from "../../atoms/typography/Typography";
-import Box from "../../atoms/box/Box";
 import RoundedButton from "../../atoms/buttons/RoundedButton";
 import theme from "../../../styles/theme";
-import Shape from "../../atoms/shapes/Shape";
 import Wave from "../../atoms/shapes/Wave";
 import TagSlide from "../../molecules/tagSlide/TagSlide";
 import Toolbar from "../../molecules/toolbar/Toolbar";
@@ -156,6 +149,7 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
   openOrganizationsOverview,
 
   handleButtonOpenCard,
+  handleOpenProjectroom,
   handleButtonLike,
   handleButtonComment,
   user,
@@ -164,6 +158,9 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
 
   handleOpenMyAccount,
   setInfoPageOpen,
+
+  checkedSortOption,
+  setCheckedSortOption,
 }) => {
   const { t } = useTranslation();
   const isMobile = isMobileCustom();
@@ -318,27 +315,29 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
           />
         }
         searchPlaceholder={t("searchBar")}
+        checkedSortOption={checkedSortOption}
+        setCheckedSortOption={setCheckedSortOption}
         activeSortOptionLabel={
           order === "ideas" ? t("newest_ideas") : t("newest_projectrooms")
         }
         sortOptions={
           order === "ideas"
             ? [
-                { name: "newest", label: t("newest_ideas") },
-                { name: "hottest", label: t("hottest_ideas") },
+                { value: "newest", label: t("newest_ideas") },
+                { value: "hottest", label: t("hottest_ideas") },
               ]
             : [
-                { name: "newest", label: t("newest_projectrooms") },
-                { name: "aToZ", label: t("aToZ_projectrooms") },
-                { name: "zToA", label: t("zToA_projectrooms") },
+                { value: "newest", label: t("newest_projectrooms") },
+                { value: "aToZ", label: t("aToZ_projectrooms") },
+                { value: "zToA", label: t("zToA_projectrooms") },
               ]
         }
         statusOptions={[
-          { name: "Unprocessed", label: t("unprocessed") },
-          { name: "Accepted", label: t("accepted") },
-          { name: "Planning", label: t("planning") },
-          { name: "Implemented", label: t("implemented") },
-          { name: "Rejected", label: t("rejected") },
+          { value: "Unprocessed", label: t("unprocessed") },
+          { value: "Accepted", label: t("accepted") },
+          { value: "Planning", label: t("planning") },
+          { value: "Implemented", label: t("implemented") },
+          { value: "Rejected", label: t("rejected") },
         ]}
       />
     </ToolbarWrapper>
@@ -414,11 +413,20 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
               CardType={order === "ideas" ? IdeaCard : ProjectroomCard}
               data={order === "ideas" ? ideasData : projectroomsData}
               organizations={organizations}
+              ideasData={ideasData}
               projectroomsData={projectroomsData}
               handleButtonOpenCard={handleButtonOpenCard}
+              handleOpenProjectroom={handleOpenProjectroom}
               handleButtonLike={handleButtonLike}
               handleButtonComment={handleButtonComment}
               user={user}
+              listEndText={
+                order === "ideas" && ideasData.length > 0
+                  ? t("noMoreIdeas")
+                  : order === "ideas" && ideasData.length < 1
+                  ? t("noContentIdeas")
+                  : t("noMoreProjectrooms")
+              }
             />
           </ContentWrapper>
         </InnerWrapper>
@@ -427,4 +435,4 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
   );
 };
 
-export default MainSwipeList;
+export default memo(MainSwipeList);

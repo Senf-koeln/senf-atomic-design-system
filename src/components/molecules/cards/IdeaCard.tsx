@@ -27,7 +27,7 @@ const Wrapper = styled.div<IdeaCardProps>`
   border-radius: 18px;
 
   width: 100%;
-
+  min-width: 100%;
   height: auto;
   padding-bottom: ${({ projectroomCardData }) =>
     projectroomCardData ? "40px" : "0"};
@@ -67,6 +67,7 @@ const IdeaCard: FC<IdeaCardProps> = ({
   data,
   projectroomsData,
   handleButtonOpenCard,
+  handleOpenProjectroom,
   handleButtonLike,
   handleButtonComment,
   user,
@@ -170,7 +171,9 @@ const IdeaCard: FC<IdeaCardProps> = ({
       </InnerWrapper>
 
       {projectroomCardData.length > 0 && (
-        <ProjectroomOpenButton>
+        <ProjectroomOpenButton
+          onClick={() => handleOpenProjectroom(cardProjectRoomId)}
+        >
           <Box
             alignItems="center"
             flexDirection="row"

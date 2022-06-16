@@ -40,6 +40,15 @@ import { isMobileCustom } from "../../../hooks/customDeviceDetect";
 import { animated, useSpring } from "@react-spring/web";
 import { useDrag } from "@use-gesture/react";
 import DetailSidebar from "../../organisms/detailSidebar/DetailSidebar";
+import Share from "../../../assets/icons/Share";
+import Button from "../../atoms/buttons/Button";
+import Link from "../../../assets/icons/Link";
+import { openMail, openLink } from "../../../util/helpers";
+import Calendar from "../../organisms/calendar/Calendar";
+import CalendarIcon from "../../../assets/icons/CalendarIcon";
+import Location from "../../../assets/icons/Location";
+import ContentDropdown from "../../atoms/contentDropdown/ContentDropdown";
+import SocialmediaShare from "../../organisms/socialmediaShare/SocialmediaShare";
 
 const DragWrapper = styled(animated.div)<IdeaDetailPageProps>`
   display: flex;
@@ -144,21 +153,28 @@ const IdeaDetailPage: FC<IdeaDetailPageProps> = ({
     locationHeader,
     status,
     Thema,
+    weblink,
+    weblinkTitle,
+    contact,
+    contactTitle,
     likeCount,
     commentCount,
-    projectRoomId: cardProjectroomId,
+    projectroomId: cardProjectroomId,
     selectedUnix,
     userHandle,
     createdAt,
     comments,
+    path,
   } = data;
   const { t } = useTranslation();
   const isMobile = isMobileCustom();
+
+  const [socialmediaShareDropdownOpen, setSocialmediaShareDropdownOpen] =
+    useState(false);
+
   const [projectroomCardData, setProjectroomCardData] = useState([]);
   const [swipePosition, setSwipePosition] = useState("bottom");
 
-  console.log(projectroomsData);
-  console.log(cardProjectroomId);
   const liked = () => {
     if (user?.likes && user?.likes.find((like) => like.screamId === screamId))
       return true;
@@ -175,8 +191,8 @@ const IdeaDetailPage: FC<IdeaDetailPageProps> = ({
   };
 
   useEffect(() => {
-    if (projectroomsData && data) {
-      console.log(projectroomsData);
+    if (projectroomsData && cardProjectroomId) {
+      console.log(projectroomsData, cardProjectroomId);
       projectroomsData.map(({ projectRoomId, title, organizationType }) => {
         if (cardProjectroomId === projectRoomId) {
           console.log(cardProjectroomId, projectRoomId);
@@ -189,7 +205,7 @@ const IdeaDetailPage: FC<IdeaDetailPageProps> = ({
         }
       });
     }
-  }, [projectroomsData, data]);
+  }, [projectroomsData, cardProjectroomId, loadingIdea]);
 
   let selectedDates = [];
   const selectedUnixArray = selectedUnix;
@@ -276,7 +292,30 @@ const IdeaDetailPage: FC<IdeaDetailPageProps> = ({
 
   return (
     <React.Fragment>
-      <DetailSidebar handleButtonClose={() => handleButtonCloseCard(false)} />
+      <DetailSidebar
+        handleButtonClose={() => handleButtonCloseCard(false)}
+        SecondButton={
+          <ContentDropdown
+            open={socialmediaShareDropdownOpen}
+            setOpen={setSocialmediaShareDropdownOpen}
+            OpenButton={
+              <RoundedButton
+                variant="white"
+                size="small"
+                onClick={() =>
+                  setSocialmediaShareDropdownOpen(!socialmediaShareDropdownOpen)
+                }
+                icon={<Share />}
+              />
+            }
+            Content={
+              <Box gap="5px" flexDirection="column">
+                <SocialmediaShare path={path} />
+              </Box>
+            }
+          />
+        }
+      />
       <DragWrapper
         id="dragWrapper"
         style={props}
@@ -343,22 +382,40 @@ const IdeaDetailPage: FC<IdeaDetailPageProps> = ({
                 />
               </Box>
 
-              <Box
-                alignItems="flex-start"
-                flexDirection="row"
-                margin="8px 0px 8px 0px"
-              >
+              <Box alignItems="flex-start" flexDirection="row" margin="8px 0px">
                 <Typography variant="bodyBg"> {body}</Typography>
               </Box>
+
+              {weblink || contact ? (
+                <Box gap="8px" flexWrap="wrap" margin="10px 0px 16px 0px">
+                  <Button
+                    variant="secondary"
+                    icon={<Mail />}
+                    text={contactTitle ? contactTitle : t("contact")}
+                    size="small"
+                    onClick={() => openMail(contact)}
+                  />
+                  <Button
+                    variant="secondary"
+                    icon={<Link />}
+                    text={weblinkTitle ? weblinkTitle : t("website")}
+                    size="small"
+                    onClick={() => openLink(weblink)}
+                  />
+                </Box>
+              ) : (
+                <Divider margin="10px 0px 16px 0px" />
+              )}
+
               <Box flexDirection="column" gap="5px">
                 {selectedUnixArray !== undefined && selectedUnixArray !== null && (
                   <Box gap="5px">
-                    <Icon icon={<Dot />} />
+                    <Icon icon={<CalendarIcon />} />
                     <Typography variant="buttonSm">{selectedDates}</Typography>
                   </Box>
                 )}
                 <Box gap="5px">
-                  <Icon icon={<Mail />} />{" "}
+                  <Icon icon={<Location />} />{" "}
                   <Typography variant="buttonSm">{locationHeader}</Typography>
                 </Box>
 

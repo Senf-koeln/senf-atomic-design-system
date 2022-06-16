@@ -38,6 +38,9 @@ import Plus from "../../../assets/icons/Plus";
 import setOrganizationTypeIcon from "../../../data/setOrganizationTypeIcon";
 import Toolbar from "../../molecules/toolbar/Toolbar";
 import { useIntersection } from "../../../hooks/useIntersection";
+import CalendarIcon from "../../../assets/icons/CalendarIcon";
+import Share from "../../../assets/icons/Share";
+import SocialmediaShare from "../../organisms/socialmediaShare/SocialmediaShare";
 
 const DragWrapper = styled(animated.div)<ProjectroomPageProps>`
   display: flex;
@@ -208,6 +211,7 @@ const ProjectroomPage: FC<ProjectroomPageProps> = ({
   searchOpen,
   searchTerm,
   setSearchTerm,
+  path,
 }) => {
   const { t } = useTranslation();
   const isMobile = isMobileCustom();
@@ -220,9 +224,15 @@ const ProjectroomPage: FC<ProjectroomPageProps> = ({
     description_learnmore,
     screams,
     organizationId: cardOrganizationId,
+    calendar,
   } = data;
+
+  const [order, setOrder] = useState(1);
   const [infoOpen, setInfoOpen] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [editDropdownOpen, setEditDropdownOpen] = useState(false);
+  const [socialmediaShareDropdownOpen, setSocialmediaShareDropdownOpen] =
+    useState(false);
+
   const [swipedUp, setSwipedUp] = useState(true);
 
   const [swipePosition, setSwipePosition] = useState("top");
@@ -244,10 +254,6 @@ const ProjectroomPage: FC<ProjectroomPageProps> = ({
     } else {
       setTagSlideVisible(false);
     }
-  };
-
-  const handleToggle = () => {
-    setDropdownOpen(!dropdownOpen);
   };
 
   const [props, set] = useSpring(() => ({
@@ -326,23 +332,35 @@ const ProjectroomPage: FC<ProjectroomPageProps> = ({
         handleButtonClose={() => handleButtonClose(false)}
         sideDivider={true}
         SecondButton={
-          <RoundedButton
-            variant="white"
-            size="small"
-            onClick={handleToggle}
-            icon={<Bulb />}
-          />
-        }
-        ThirdButton={
           <ContentDropdown
-            open={dropdownOpen}
-            setOpen={setDropdownOpen}
-            openButtonWidth="36px"
+            open={socialmediaShareDropdownOpen}
+            setOpen={setSocialmediaShareDropdownOpen}
             OpenButton={
               <RoundedButton
                 variant="white"
                 size="small"
-                onClick={handleToggle}
+                onClick={() =>
+                  setSocialmediaShareDropdownOpen(!socialmediaShareDropdownOpen)
+                }
+                icon={<Share />}
+              />
+            }
+            Content={
+              <Box gap="5px" flexDirection="column">
+                <SocialmediaShare path={path} />
+              </Box>
+            }
+          />
+        }
+        ThirdButton={
+          <ContentDropdown
+            open={editDropdownOpen}
+            setOpen={setEditDropdownOpen}
+            OpenButton={
+              <RoundedButton
+                variant="white"
+                size="small"
+                onClick={() => setEditDropdownOpen(!editDropdownOpen)}
                 icon={<More />}
               />
             }
@@ -433,7 +451,7 @@ const ProjectroomPage: FC<ProjectroomPageProps> = ({
                 onClick={() => setInfoOpen(!infoOpen)}
               />
             </Box>
-            <Box margin="0px 24px 0px 24px">
+            <Box margin="2px 24px 0px 24px">
               <InfoWidget
                 onClick={() => setInfoOpen(!infoOpen)}
                 infoOpen={infoOpen}
@@ -454,16 +472,20 @@ const ProjectroomPage: FC<ProjectroomPageProps> = ({
             </Box>
 
             <Divider margin="14px 24px 16px 24px" width="auto" />
-            <Box margin="0px 24px 0px 24px" gap="10px">
-              <Tabs
-                fontSize="buttonSm"
-                order={0}
-                tabs={[
-                  { icon: <Bulb />, text: "Ideen" },
-                  // { icon: <Info />, text: "Kalender" },
-                ]}
-              />
-            </Box>
+
+            {calendar && (
+              <Box margin="0px 24px 0px 24px" gap="10px">
+                <Tabs
+                  fontSize="buttonSm"
+                  order={order}
+                  setOrder={setOrder}
+                  tabs={[
+                    { icon: <Bulb />, text: "Ideen" },
+                    { icon: <CalendarIcon />, text: "Kalender" },
+                  ]}
+                />
+              </Box>
+            )}
             {isMobile && (
               <TagSlideWrapper id="tagSlideRef" ref={ref}></TagSlideWrapper>
             )}
@@ -491,13 +513,29 @@ const ProjectroomPage: FC<ProjectroomPageProps> = ({
             </Box>
 
             <Box margin="0px 12px">
-              {screams && (
+              {order === 1 ? (
                 <List
                   CardType={IdeaCard}
                   data={screams}
                   handleButtonOpenCard={handleButtonOpenCard}
                   organizations={organizations}
+                  listEndText={
+                    screams > 0
+                      ? t("noMoreIdeas")
+                      : screams < 1 && t("noProjectIdeas")
+
+                    // :t("noContentIdeas") //filter...
+                  }
                 />
+              ) : (
+                order === 2 && (
+                  <Box margin="10px 10px 0px 0px" width="100%">
+                    <Calendar
+                      inlineCalendarEntries={screams}
+                      calendarType="inline"
+                    />
+                  </Box>
+                )
               )}
             </Box>
           </ContentWrapper>

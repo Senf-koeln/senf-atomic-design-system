@@ -42,7 +42,13 @@ VerifyPage.args = {
   emailRegistrationSubmitted: true,
 };
 
+export const AddDetailsPage = Template.bind({});
+AddDetailsPage.args = {
+  verifiedUser: true,
+};
+
 export const SuccessPage = Template.bind({});
 SuccessPage.args = {
-  socialLoginVerified: true,
+  verifiedUser: true,
+  addedDetails: true,
 };

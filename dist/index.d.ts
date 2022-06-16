@@ -412,7 +412,7 @@ interface OrganizationPageProps {
 
 /** @format */
 
-declare const Example: FC<OrganizationPageProps>;
+declare const Example$1: FC<OrganizationPageProps>;
 
 /** @format */
 
@@ -460,6 +460,17 @@ declare const ProjectroomPage: FC<ProjectroomPageProps>;
 
 /** @format */
 
+interface ExampleProps {
+    example?: string;
+    onClick?: MouseEventHandler<HTMLButtonElement>;
+}
+
+/** @format */
+
+declare const Example: FC<ExampleProps>;
+
+/** @format */
+
 declare const theme: Theme;
 
 /** @format */
@@ -468,4 +479,4 @@ declare const GlobalStyle: styled_components.GlobalStyleComponent<{}, styled_com
 /** @format */
 declare const i18n: i18next.i18n;
 
-export { Accordion, Auth, Box, Button, Divider, Form, GlobalStyle, Icon, IdeaCard, IdeaDetailPage, Input, LayerBrownDefault, LayerBrownHover, LayerGreyButtonsDefault, LayerGreyButtonsHover, LayerGreyDefault, LayerGreyHover, LayerWhiteFirstActive, LayerWhiteFirstDefault, LayerWhiteFirstHover, LayerWhiteGradientBordersDefault, LayerWhiteSecondDefault, LayerWhiteSecondHover, LayerYellowDefault, LayerYellowHover, List, Loader, MainSwipeList, MenuSidebar, Modal, ObjectCard, OrganizationCard, Example as OrganizationPage, OrganizationsOverview, ProfilePage, ProjectroomCard, ProjectroomPage, RangeSlider, RoundedButton, Shape, StatisticsOverview, SubNavbar, Tag, TagSlide, TertiaryButton, Typography, i18n, theme };
+export { Accordion, Auth, Box, Button, Divider, Example, Form, GlobalStyle, Icon, IdeaCard, IdeaDetailPage, Input, LayerBrownDefault, LayerBrownHover, LayerGreyButtonsDefault, LayerGreyButtonsHover, LayerGreyDefault, LayerGreyHover, LayerWhiteFirstActive, LayerWhiteFirstDefault, LayerWhiteFirstHover, LayerWhiteGradientBordersDefault, LayerWhiteSecondDefault, LayerWhiteSecondHover, LayerYellowDefault, LayerYellowHover, List, Loader, MainSwipeList, MenuSidebar, Modal, ObjectCard, OrganizationCard, Example$1 as OrganizationPage, OrganizationsOverview, ProfilePage, ProjectroomCard, ProjectroomPage, RangeSlider, RoundedButton, Shape, StatisticsOverview, SubNavbar, Tag, TagSlide, TertiaryButton, Typography, i18n, theme };
