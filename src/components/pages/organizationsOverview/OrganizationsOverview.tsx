@@ -18,12 +18,13 @@ import TagSlide from "../../molecules/tagSlide/TagSlide";
 import Toolbar from "../../molecules/toolbar/Toolbar";
 import { OrganizationsOverviewProps } from "./OrganizationsOverview.types";
 import Arrow from "../../../assets/icons/Arrow";
+import Plus from "../../../assets/icons/Plus";
 
 const Wrapper = styled.div<OrganizationsOverviewProps>`
   background-color: ${({ theme }) => theme.colors.beige.beige20};
   margin-left: 10px;
   margin-top: 10px;
-  width: ${({ open }) => (open ? "calc(100vw - 475px)" : "470px")};
+  width: 100%;
   height: calc(100vh - 20px);
   border-radius: 18px;
   overflow-y: scroll;
@@ -34,8 +35,13 @@ const Wrapper = styled.div<OrganizationsOverviewProps>`
   box-shadow: 40px 8px 30px -12px rgba(0, 0, 0, 0.2);
   transition: 0.5s;
 
+  @media (min-width: 768px) {
+    /* display: ${({ open }) => (open ? "block" : "none")}; */
+    width: ${({ open }) => (open ? "calc(100vw - 430px)" : "0px")};
+  }
+
   @media (max-width: 1350px) {
-    width: ${({ open }) => (open ? "calc(100vw - 200px)" : "400px")};
+    width: ${({ open }) => (open ? "calc(100vw - 20px)" : "0px")};
   }
 `;
 
@@ -67,7 +73,7 @@ export const SVGWrapper = styled.div`
 
 const HeaderWrapper = styled.div`
   position: absolute;
-  width: 600px;
+  width: 750px;
   height: 120px;
   margin-left: 50%;
   top: 0;
@@ -76,23 +82,56 @@ const HeaderWrapper = styled.div`
 `;
 
 const OrganizationsOverview: FC<OrganizationsOverviewProps> = ({
-  openOrganizationsModal = true,
+  openOrganizationsOverview,
   setOpenOrganizationsOverview,
   data,
   selectedOrganizationTypes,
   handleSelectOrganizationTypes,
+  organization,
+  projectroomsData,
   user,
   openCreateOrganization,
   setOpenModalAuthenticate,
+  searchTerm,
+  setSearchTerm,
+  handleButtonOpenCard,
+  handleOpenCreateOrganization,
+  checkedSortOption,
 }) => {
   const { t } = useTranslation();
   const isMobile = isMobileCustom();
   const [searchOpen, setSearchOpen] = useState(false);
 
+  const toolbarComponent = (
+    <Toolbar
+      setSearchOpen={setSearchOpen}
+      searchOpen={searchOpen}
+      searchTerm={searchTerm}
+      setSearchTerm={setSearchTerm}
+      secondButton={
+        <Button
+          variant="secondary"
+          size="small"
+          text={t("createOrganization")}
+          icon={<Plus />}
+          onClick={handleOpenCreateOrganization}
+        />
+      }
+      checkedSortOption={checkedSortOption}
+      searchPlaceholder={t("searchBarOrganizations")}
+      activeSortOptionLabel={t("newest_organizations")}
+      sortOptions={[
+        { value: "newest", label: t("newest_organizations") },
+        { value: "aToZ", label: t("aToZ_organizations") },
+        { value: "zToA", label: t("zToA_organizations") },
+      ]}
+    />
+  );
   return isMobile ? (
     <SwipeModal
       backgroundColor={theme.colors.beige.beige20}
-      openModal={openOrganizationsModal}
+      openModal={openOrganizationsOverview}
+      setOpenModal={setOpenOrganizationsOverview}
       headerComponentHeight="102px"
       headerComponentBackgroundColor={theme.colors.beige.beige20}
       HeaderComponent={
@@ -115,9 +154,7 @@ const OrganizationsOverview: FC<OrganizationsOverviewProps> = ({
       }
     >
       <InnerWrapper isMobile={isMobile}>
-        <Box margin="16px 12px 16px 12px">
-          <Toolbar />
-        </Box>
+        <Box margin="16px 12px 16px 12px">{toolbarComponent}</Box>
         <Box margin="0px 12px 6px 12px">
           <Button
             variant="secondary"
@@ -132,11 +169,18 @@ const OrganizationsOverview: FC<OrganizationsOverviewProps> = ({
             // }
           />
         </Box>
-        <List CardType={OrganizationCard} data={data} listType="grid" />
+        <List
+          CardType={OrganizationCard}
+          data={data}
+          listType="grid"
+          organization={organization}
+          projectroomsData={projectroomsData}
+          handleButtonOpenCard={handleButtonOpenCard}
+        />
       </InnerWrapper>
     </SwipeModal>
   ) : (
-    <Wrapper open={openOrganizationsModal}>
+    <Wrapper open={openOrganizationsOverview}>
       <SVGWrapper searchOpen={searchOpen}>
         <Box position="fixed" margin="20px" zIndex={2}>
           <RoundedButton
@@ -145,7 +189,7 @@ const OrganizationsOverview: FC<OrganizationsOverviewProps> = ({
           />
         </Box>
         <HeaderWrapper>
-          <Box margin="20px" justifyContent="center">
+          <Box margin="20px 0px 0px 0px" justifyContent="center">
             <Typography
               variant="h2"
               // fontSize={document.body.clientWidth > 368 ? "22px" : "19px"}
@@ -154,32 +198,13 @@ const OrganizationsOverview: FC<OrganizationsOverviewProps> = ({
               {t("organizations")}
             </Typography>
           </Box>
+          <TagSlide
+            type="organizationTypes"
+            selectedOrganizationTypes={selectedOrganizationTypes}
+            handleSelectOrganizationTypes={handleSelectOrganizationTypes}
+          />
 
-          <Box margin="16px 12px 16px 12px">
-            <Toolbar
-              setSearchOpen={setSearchOpen}
-              searchOpen={searchOpen}
-              secondButtonClick={
-                user?.authenticated
-                  ? openCreateOrganization
-                  : () => setOpenModalAuthenticate(true)
-              }
-              secondButtonLabel={t("createOrganization")}
-              searchPlaceholder={t("searchBar")}
-              activeSortOptionLabel={t("newest_ideas")}
-              sortOptions={[
-                { name: "newest", label: t("newest_ideas") },
-                { name: "hottest", label: t("hottest_ideas") },
-              ]}
-              statusOptions={[
-                { name: "Unprocessed", label: t("unprocessed") },
-                { name: "Accepted", label: t("accepted") },
-                { name: "Planning", label: t("planning") },
-                { name: "Implemented", label: t("implemented") },
-                { name: "Rejected", label: t("rejected") },
-              ]}
-            />
-          </Box>
+          <Box margin="16px 12px 16px 12px">{toolbarComponent}</Box>
         </HeaderWrapper>
         <svg
           width="100%"
@@ -197,7 +222,14 @@ const OrganizationsOverview: FC<OrganizationsOverviewProps> = ({
       </SVGWrapper>
 
       <InnerWrapper isMobile={isMobile}>
-        <List CardType={OrganizationCard} data={data} listType="grid" />
+        <List
+          CardType={OrganizationCard}
+          data={data}
+          listType="grid"
+          organization={organization}
+          projectroomsData={projectroomsData}
+          handleButtonOpenCard={handleButtonOpenCard}
+        />
       </InnerWrapper>
     </Wrapper>
   );

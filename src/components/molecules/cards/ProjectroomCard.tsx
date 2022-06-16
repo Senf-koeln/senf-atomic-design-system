@@ -22,6 +22,7 @@ const Wrapper = styled.div<ProjectroomCardProps>`
   border-radius: 18px;
 
   width: 100%;
+  min-width: 100%;
 
   height: auto;
   overflow: hidden;
@@ -34,10 +35,13 @@ const Wrapper = styled.div<ProjectroomCardProps>`
       : "brightness(1)"};
   animation: opacityTranslateYFrom50Animation 0.8s;
 
-  transition: 0.3s;
-  &:hover {
-    transform: scale(103%);
-    background-color: #fefefd;
+  @media (min-width: 768px) {
+    transition: 0.3s;
+
+    &:hover {
+      transform: scale(103%);
+      background-color: #fefefd;
+    }
   }
 `;
 
@@ -74,21 +78,20 @@ const DeactivatedWrapper = styled.div`
 
 const ProjectroomCard: FC<ProjectroomCardProps> = ({
   data,
+  ideasData,
   handleButtonOpenCard,
   organizations,
 }) => {
   const {
-    projectRoomId,
+    projectRoomId: cardProjectRoomId,
     title,
     brief,
     logoURL,
-    ideaSize,
     status,
     active,
-    organizationId,
+    organizationId: cardOrganizationId,
   } = data;
 
-  const cardOrganizationId = organizationId;
   const [organizationCardData, setOrganizationCardData] = useState([]);
 
   useEffect(() => {
@@ -108,11 +111,15 @@ const ProjectroomCard: FC<ProjectroomCardProps> = ({
     }
   }, [organizations]);
 
+  const ideasSize = ideasData?.filter(
+    ({ projectRoomId }) => projectRoomId === cardProjectRoomId
+  ).length;
+
   return (
     <Wrapper
       status={status}
       onClick={(event) =>
-        handleButtonOpenCard(event, "projectroomCard", projectRoomId)
+        handleButtonOpenCard(event, "projectroomCard", cardProjectRoomId)
       }
       // active={thisOrganizationId === organization?.organizationId}
     >
@@ -163,7 +170,7 @@ const ProjectroomCard: FC<ProjectroomCardProps> = ({
             <IconWrapper>
               <Icon icon={<Bulb />} />
             </IconWrapper>
-            <Typography variant="buttonSm">{ideaSize} </Typography>
+            <Typography variant="buttonSm">{ideasSize} </Typography>
           </div>
         </Box>
       </InnerWrapper>

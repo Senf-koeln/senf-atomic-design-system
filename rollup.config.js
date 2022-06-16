@@ -10,6 +10,7 @@ import { terser } from "rollup-plugin-terser";
 import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import json from "@rollup/plugin-json";
 import image from "@rollup/plugin-image";
+import css from "rollup-plugin-import-css";
 
 const packageJson = require("./package.json");
 
@@ -36,6 +37,7 @@ export default [
         extensions: /\.(png|jpg|jpeg|gif|svg)$/,
         limit: 10000,
       }),
+      css(),
       commonjs({
         include: "node_modules/**",
         namedExports: {

@@ -1,6 +1,6 @@
 /** @format */
 
-import React from "react";
+import React, { memo } from "react";
 
 const WaveCanvas = ({ canvasRef, props }) => {
   return (
@@ -20,4 +20,4 @@ const WaveCanvas = ({ canvasRef, props }) => {
   );
 };
 
-export default WaveCanvas;
+export default memo(WaveCanvas);

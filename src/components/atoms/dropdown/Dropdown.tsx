@@ -1,11 +1,11 @@
 /** @format */
 
 import React, { FunctionComponent } from "react";
-import { Wrapper, Indication } from "../inputs/input.styles";
+import Box from "../box/Box";
+import { Wrapper, Label, Note } from "../inputs/input.styles";
 import { DropdownProps, MultiListItems } from "./Dropdown.types";
 import MultiDropdown from "./multi/MultiDropdown";
 import SingleDropdown from "./single/SingleDropdonw";
-
 
 const Dropdown: FunctionComponent<DropdownProps> = ({
   id,
@@ -14,7 +14,7 @@ const Dropdown: FunctionComponent<DropdownProps> = ({
   note,
   multi,
   listItems,
-  recieveValue
+  recieveValue,
 }) => {
   return (
     <Wrapper>

@@ -26,10 +26,14 @@ const Wrapper = styled.div<ObjectCardProps>`
       : "brightness(1)"};
   animation: opacityTranslateYFrom50Animation 0.8s;
 
-  transition: 0.3s;
-  &:hover {
-    transform: scale(103%);
-    background-color: #fefefd;
+  @media (min-width: 768px) {
+    transition: 0.3s;
+    margin: 16px 8px 0px 8px;
+
+    &:hover {
+      transform: scale(103%);
+      background-color: #fefefd;
+    }
   }
 
   @media (max-width: 768px) {
@@ -134,10 +138,12 @@ const Title = styled.div`
 //   margin-left: 25%;
 // `;
 
-const ObjectCard: FC<ObjectCardProps> = ({ data, handleButtonClick }) => {
+const ObjectCard: FC<ObjectCardProps> = ({ data, handleButtonOpenCard }) => {
   const { title, imgUrl, objectId } = data;
   return (
-    <Wrapper onClick={() => handleButtonClick(objectId)}>
+    <Wrapper
+      onClick={(event) => handleButtonOpenCard(event, "objectCard", objectId)}
+    >
       <LogoWrapper>
         <Thumbnail
           img={

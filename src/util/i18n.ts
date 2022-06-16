@@ -13,7 +13,7 @@ const locizeOptions = {
 
   projectId: "1cad4709-c868-4365-96b4-d8864b120ddd",
   apiKey: "69182f75-3763-40d5-bb03-f0229aa0f7a1",
-  referenceLng: "Senf",
+  referenceLng: "de",
 };
 
 const i18n = i18next.createInstance();
@@ -35,12 +35,12 @@ i18n
   // learn more: https://github.com/i18next/i18next-browser-languageDetector
   // .use(LanguageDetector)
   // pass the i18n instance to react-i18next.
-  // .use(initReactI18next)
+  .use(initReactI18next)
   // init i18next
   // for all options read: https://www.i18next.com/overview/configuration-options
   .init({
     debug: true,
-    fallbackLng: "en",
+    fallbackLng: "de",
     ns: ["common"],
     defaultNS: "common",
     interpolation: {

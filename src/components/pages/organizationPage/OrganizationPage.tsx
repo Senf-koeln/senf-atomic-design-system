@@ -27,6 +27,12 @@ import setOrganizationTypeIcon from "../../../data/setOrganizationTypeIcon";
 import Arrow from "../../../assets/icons/Arrow";
 import Plus from "../../../assets/icons/Plus";
 import More from "../../../assets/icons/More";
+import Tabs from "../../molecules/tabs/Tabs";
+import Bulb from "../../../assets/icons/Bulb";
+import Info from "../../../assets/icons/Info";
+import Calendar from "../../organisms/calendar/Calendar";
+import CalendarIcon from "../../../assets/icons/CalendarIcon";
+import Room from "../../../assets/icons/Room";
 
 const SVGWrapper = styled.div`
   position: absolute;
@@ -75,156 +81,221 @@ const InfoWidget = styled.div`
   -webkit-box-orient: vertical;
 `;
 
-const Example: FC<OrganizationPageProps> = ({ organization, data }) => {
+const Example: FC<OrganizationPageProps> = ({
+  user,
+  organization,
+  organizations,
+  handleCloseOrganizationPage,
+  handleButtonOpenCard,
+  handleEdit,
+  setModalData,
+  googleCalendarApiKey,
+}) => {
   const { t } = useTranslation();
-  const { logo } = organization;
 
   const [infoOpen, setInfoOpen] = useState(false);
-  const [contactOpen, setContactOpen] = useState(false);
-  const [calendarOpen, setCalendarOpen] = useState(false);
-  const [faqOpen, setFaqOpen] = useState(false);
+  const [order, setOrder] = useState(1);
 
   return (
-    <React.Fragment>
-      <Modal
-        setOpenModal={setFaqOpen}
-        zIndex="999999999"
-        openModal={faqOpen}
-        size="m"
-      >
-        <SubNavbar
-          iconLeft="arrow"
-          header="FAQ"
-          // iconRight="plus"
-          // iconRightTransform="rotate(45deg)"
+    <Dialog
+      openDialog={true}
+      right="0px"
+      backgroundColor={theme.colors.beige.beige20}
+      overflow="hidden scroll"
+      zIndex="99"
+    >
+      <SVGWrapper>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="100%"
+          height="466"
+          style={{
+            position: "absolute",
+            zIndex: -1,
+            marginTop: "40px",
+            transform: "scale(1.2)",
+          }}
+        >
+          <path
+            d="M0.5 106.5V0.5L375.5 0V38.5C361 35.5 333 41 316 61C290.075 91.5 237.5 111.5 143 91.5C67.4 75.5 16 94.6667 0.5 106.5Z"
+            fill="#FED957"
+          />
+        </svg>
+      </SVGWrapper>
+      <Box position="fixed" margin="20px" zIndex={2}>
+        <RoundedButton
+          icon={<Plus transform="rotate(45deg)" />}
+          onClick={handleCloseOrganizationPage}
         />
+      </Box>
 
-        <Accordion data={organization?.faqs} />
-      </Modal>
-
-      <Dialog
-        openDialog={true}
-        right="0px"
-        backgroundColor={theme.colors.beige.beige20}
-        overflow="hidden scroll"
-        zIndex="99"
-      >
-        <SVGWrapper>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="100%"
-            height="466"
-            style={{
-              position: "absolute",
-              zIndex: -1,
-              marginTop: "40px",
-              transform: "scale(1.2)",
-            }}
-          >
-            <path
-              d="M0.5 106.5V0.5L375.5 0V38.5C361 35.5 333 41 316 61C290.075 91.5 237.5 111.5 143 91.5C67.4 75.5 16 94.6667 0.5 106.5Z"
-              fill="#FED957"
-            />
-          </svg>
-        </SVGWrapper>
-        <Box position="fixed" margin="20px" zIndex={2}>
-          <RoundedButton icon={<Plus transform="rotate(45deg)" />} />
-        </Box>
-
-        {/* {organization?.userIds.includes(user.userId) && ( ROUNDEDMENUBUTTON)} */}
+      {user?.userId && organization?.userIds.includes(user?.userId) && (
         <Box position="absolute" margin="20px" right="0px" zIndex={2}>
-          <RoundedButton icon={<More />} />
+          <RoundedButton icon={<More />} onClick={handleEdit} />
         </Box>
+      )}
 
-        <Box justifyContent="center" margin="20px">
-          <ImageWrapper>
-            <ImagePlaceholder
-              img={logo ? logo : null}
-              borderRadius="18px"
-              height="calc(100% - 40px)"
-              width="calc(100% - 40px)"
-            />
-          </ImageWrapper>
+      <Box justifyContent="center" margin="20px">
+        <ImageWrapper>
+          <ImagePlaceholder
+            img={organization?.logoURL ? organization.logoURL : null}
+            borderRadius="18px"
+            height="calc(100% - 40px)"
+            width="calc(100% - 40px)"
+          />
+        </ImageWrapper>
+      </Box>
+
+      {organization?.status === "deactivated" ? (
+        <Box margin="24px">
+          {/* //ADD COLOR TO TYPOGRAPHY COMPONENT and THEME COLOR*/}
+          <Typography variant="h3" color="#ca3336">
+            {t("organization_is_deactivated")}
+          </Typography>
         </Box>
-
-        {organization?.status === "deactivated" ? (
+      ) : (
+        organization?.status === "uncompleted" && (
           <Box margin="24px">
-            {/* //ADD COLOR TO TYPOGRAPHY COMPONENT and THEME COLOR*/}
             <Typography variant="h3" color="#ca3336">
-              {t("organization_is_deactivated")}
+              {t("organization_is_uncompleted")}
             </Typography>
           </Box>
+        )
+      )}
+      <Box margin="24px" alignItems="center" gap="12px">
+        <LogoPlacer>
+          <Icon
+            icon={setOrganizationTypeIcon(organization?.organizationType)}
+          />
+        </LogoPlacer>
+        <Typography variant="h3"> {organization?.title}</Typography>
+      </Box>
+
+      <Box margin="24px" alignItems="center" gap="10px">
+        {(organization.contact ||
+          organization.weblink ||
+          organization.address) && (
+          <Button
+            variant="secondary"
+            text={t("contact")}
+            fillWidth="max"
+            size="small"
+            onClick={() =>
+              setModalData(
+                <Box>
+                  <SubNavbar
+                    iconLeft={<Arrow transform="rotate(90deg)" />}
+                    leftButtonClick={() => setModalData(null)}
+                    header={t("contact")}
+                    handlebar={true}
+                  />
+                  <Box margin="18px">
+                    {organization?.contact && (
+                      <Typography variant="bodyBg">
+                        {organization.contact}
+                      </Typography>
+                    )}
+                    {organization?.contact && <Divider />}
+                    {organization?.weblink && (
+                      <Typography variant="bodyBg">
+                        {organization.contact}{" "}
+                      </Typography>
+                    )}
+                    {organization?.weblink && <Divider />}
+                    {organization?.address && (
+                      <Typography variant="bodyBg">
+                        {organization.contact}{" "}
+                      </Typography>
+                    )}
+                  </Box>
+                </Box>
+              )
+            }
+          />
+        )}
+        {organization.faqs && (
+          <Button
+            variant="secondary"
+            text={t("faq")}
+            fillWidth="max"
+            size="small"
+            onClick={() =>
+              setModalData(
+                <Box>
+                  <SubNavbar
+                    iconLeft={<Arrow transform="rotate(90deg)" />}
+                    leftButtonClick={setModalData(null)}
+                    header={t("FAQ")}
+                    handlebar={true}
+                  />
+                  <Box margin="18px">
+                    <Accordion data={organization.faqs} />
+                  </Box>
+                </Box>
+              )
+            }
+          />
+        )}
+      </Box>
+      <Box margin="21px 0px 0px 18px">
+        <TertiaryButton
+          text={t("information")}
+          iconRight={
+            <Arrow transform={infoOpen ? "rotate(-90deg) " : "rotate(0deg) "} />
+          }
+          onClick={() => setInfoOpen(!infoOpen)}
+        />
+      </Box>
+      <Box margin="2px 0px 0px 24px">
+        <InfoWidget onClick={() => setInfoOpen(!infoOpen)} infoOpen={infoOpen}>
+          <Typography variant="bodyBg">{organization?.description}</Typography>
+        </InfoWidget>
+      </Box>
+
+      <Divider margin="14px 24px 16px 24px" width="calc(100% - 48px)" />
+
+      {organization?.googleCalendarId && (
+        <Box margin="0px 24px 0px 24px" gap="10px">
+          <Tabs
+            fontSize="buttonSm"
+            order={order}
+            setOrder={setOrder}
+            tabs={[
+              { icon: <Room />, text: "Projekträume" },
+              { icon: <CalendarIcon />, text: "Kalender" },
+              // { icon: <Info />, text: "Interaktionen" },
+            ]}
+          />
+        </Box>
+      )}
+
+      <Box margin="0px 12px">
+        {order === 1 ? (
+          <List
+            CardType={ProjectroomCard}
+            data={organization?.projectRooms}
+            handleButtonOpenCard={handleButtonOpenCard}
+            organizations={organizations}
+            listEndText={
+              !organization?.projectRooms || organization?.projectRooms < 1
+                ? t("noOrganizationProjectRooms")
+                : t("noMoreProjectrooms")
+            }
+          />
         ) : (
-          organization?.status === "uncompleted" && (
-            <Box margin="24px">
-              <Typography variant="h3" color="#ca3336">
-                {t("organization_is_uncompleted")}
-              </Typography>
+          order === 2 &&
+          organization?.googleCalendarId && (
+            <Box margin="10px 10px 0px 0px" width="100%">
+              <Calendar
+                googleCalendarApiKey={googleCalendarApiKey}
+                googleCalendarId={organization?.googleCalendarId}
+                calendarType="google"
+              />
             </Box>
           )
         )}
-        <Box margin="24px" alignItems="center" gap="12px">
-          <LogoPlacer>
-            <Icon
-              icon={setOrganizationTypeIcon(organization.organizationType)}
-              transform="scale(0.7)"
-            />
-          </LogoPlacer>
-          <Typography variant="h3"> {organization.title}</Typography>
-        </Box>
-
-        <Box margin="24px" alignItems="center" gap="10px">
-          {(organization.contact ||
-            organization.weblink ||
-            organization.address) && (
-            <Button
-              variant="secondary"
-              text={t("contact")}
-              fillWidth="max"
-              size="small"
-            />
-          )}
-          {organization.faqs && (
-            <Button
-              variant="secondary"
-              text={t("faq")}
-              fillWidth="max"
-              size="small"
-              onClick={() => setFaqOpen(true)}
-            />
-          )}
-        </Box>
-        <Box margin="21px 0px 0px 18px">
-          <TertiaryButton
-            text={t("information")}
-            iconRight={
-              <Arrow
-                transform={infoOpen ? "rotate(-90deg) " : "rotate(0deg) "}
-              />
-            }
-            onClick={() => setInfoOpen(!infoOpen)}
-          />
-        </Box>
-        <Box margin="0px 0px 0px 24px">
-          <InfoWidget
-            onClick={() => setInfoOpen(!infoOpen)}
-            infoOpen={infoOpen}
-          >
-            <Typography variant="bodyBg">{organization.description}</Typography>
-          </InfoWidget>
-        </Box>
-
-        <Divider margin="14px 24px 16px 24px" width="calc(100% - 48px)" />
-        <Box margin="0px 0px 0px 24px" gap="10px">
-          <Typography variant="buttonBg">Unsere Projekträume</Typography>
-          <Typography variant="buttonBg">Kalender</Typography>
-        </Box>
-
-        <Box margin="0px 12px">
-          <List CardType={ProjectroomCard} data={data} />
-        </Box>
-      </Dialog>
-    </React.Fragment>
+      </Box>
+    </Dialog>
   );
 };
 

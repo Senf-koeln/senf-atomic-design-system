@@ -12,6 +12,8 @@ import ProjectCard from "../cards/ProjectroomCard";
 import OrganizationCard from "../cards/OrganizationCard";
 import { ListProps } from "./List.types";
 import Box from "../../atoms/box/Box";
+import Typography from "../../atoms/typography/Typography";
+import theme from "../../../styles/theme";
 // import ObjectCard from "../cards/ObjectCard";
 
 // import {
@@ -25,26 +27,28 @@ import Box from "../../atoms/box/Box";
 // import { isMobileCustom } from "../../../util/customDeviceDetect";
 // import { NoMore } from "./styles/sharedStyles";
 
-const NoIdeasYet = styled.div`
-  position: relative;
-  font-size: 15pt;
-  color: #414345;
-  width: 80%;
-  margin-left: 10%;
-  text-align: center;
+const ListEnd = styled.div`
+  width: auto;
+  margin: 24px;
+  animation: 4s opacityAfter50PercentAnimation;
 `;
 
 const List: FC<ListProps> = ({
   listType,
   loading,
+  CardType,
   dropdown,
   data,
-  CardType,
+  organization,
   organizations,
+  ideasData,
+  projectroomsData,
   handleButtonOpenCard,
+  handleOpenProjectroom,
   handleButtonLike,
   handleButtonComment,
   user,
+  listEndText,
 }) => {
   const dataLength = data?.length;
   const { t } = useTranslation();
@@ -86,8 +90,12 @@ const List: FC<ListProps> = ({
             >
               <CardType
                 data={dataArray[i]}
+                organization={organization}
                 organizations={organizations}
+                ideasData={ideasData}
+                projectroomsData={projectroomsData}
                 handleButtonOpenCard={handleButtonOpenCard}
+                handleOpenProjectroom={handleOpenProjectroom}
                 handleButtonLike={handleButtonLike}
                 handleButtonComment={handleButtonComment}
                 user={user}
@@ -111,14 +119,30 @@ const List: FC<ListProps> = ({
   };
 
   return (
-    <InfiniteScroll
-      id="List"
-      loadMore={() => loadMore()}
-      hasMore={hasMoreItems}
-      useWindow={false}
-    >
-      {showItems(data, CardType)}
-    </InfiniteScroll>
+    <React.Fragment>
+      {data && (
+        <InfiniteScroll
+          id="List"
+          loadMore={() => loadMore()}
+          hasMore={hasMoreItems}
+          useWindow={false}
+        >
+          {showItems(data, CardType)}
+        </InfiniteScroll>
+      )}
+
+      {listEndText && (
+        <ListEnd>
+          <Typography
+            variant="h3"
+            textAlign="center"
+            color={theme.colors.black.black60tra}
+          >
+            {listEndText}
+          </Typography>
+        </ListEnd>
+      )}
+    </React.Fragment>
   );
 };
 

@@ -1,6 +1,7 @@
 /** @format */
 
 import React, { FC } from "react";
+import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import { isMobileCustom } from "../../../hooks/customDeviceDetect";
 import Box from "../../atoms/box/Box";
@@ -26,6 +27,7 @@ const MainSwipeListTabs: FC<MainSwipeListTabsProps> = ({
   order,
   setOrder,
 }) => {
+  const { t } = useTranslation();
   const isMobile = isMobileCustom();
   return (
     <Wrapper isMobile={isMobile}>
@@ -45,7 +47,7 @@ const MainSwipeListTabs: FC<MainSwipeListTabsProps> = ({
             fontWeight={900}
             fontSize={isMobile ? "5.6vw" : "22px"}
           >
-            Alle Ideen
+            {t("menuData_allIdeas")}
           </Typography>
         </Tab>
         <Tab
@@ -60,7 +62,7 @@ const MainSwipeListTabs: FC<MainSwipeListTabsProps> = ({
             fontWeight={900}
             fontSize={isMobile ? "5.6vw" : "22px"}
           >
-            Projekträume
+            {t("menuData_projectrooms")}
           </Typography>
         </Tab>
       </Box>

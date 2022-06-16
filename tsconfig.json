@@ -45,8 +45,8 @@
     "jsx": "react",
     "declaration": true,
     "declarationDir": "types",
-    "sourceMap": true,
     "outDir": "dist",
+    "sourceMap": true,
     "strict": true,
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
@@ -68,10 +68,6 @@
   },
   "include": ["src", "src/index.d.ts"],
 
-  "exclude": [
-    "dist",
-    "node_modules",
-    "src/**/*.test.tsx",
-  ],
+  "exclude": ["dist", "node_modules", "src/**/*.test.tsx"],
   "emitDeclarationOnly": true
 }

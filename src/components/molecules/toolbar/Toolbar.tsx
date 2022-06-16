@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import Button from "../../atoms/buttons/Button";
@@ -10,6 +10,9 @@ import Box from "../../atoms/box/Box";
 import { ToolbarProps } from "./Toolbar.types";
 import Arrow from "../../../assets/icons/Arrow";
 import Search from "../../../assets/icons/Search";
+import ContentDropdown from "../../atoms/contentDropdown/ContentDropdown";
+import { Checkbox } from "../../atoms/toggleInput/toggleInput.stories";
+import ToggleInput from "../../atoms/toggleInput/ToggleInput";
 
 const Wrapper = styled.div<ToolbarProps>`
   display: flex;
@@ -70,8 +73,11 @@ const Toolbar: FC<ToolbarProps> = ({
   activeSortOptionLabel,
 
   secondButton,
+
+  checkedSortOption,
+  setCheckedSortOption,
 }) => {
-  const { t } = useTranslation();
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const setSearch = () => {
     setSearchOpen(!searchOpen);
@@ -83,11 +89,38 @@ const Toolbar: FC<ToolbarProps> = ({
 
   return (
     <Wrapper searchOpen={searchOpen}>
-      <TertiaryButton
-        onClick={handleDropdown}
-        text={activeSortOptionLabel}
-        iconRight={<Arrow transform="rotate(90deg)" />}
-        variant="semibold"
+      <ContentDropdown
+        open={dropdownOpen}
+        setOpen={setDropdownOpen}
+        OpenButton={
+          <TertiaryButton
+            onClick={() => setDropdownOpen(!dropdownOpen)}
+            text={activeSortOptionLabel}
+            iconRight={<Arrow transform="rotate(90deg)" />}
+            variant="semibold"
+          />
+        }
+        Content={
+          <Box gap="5px" flexDirection="column">
+            {Object.values(sortOptions).map(({ value, label }) => (
+              <Box gap="5px">
+                <TertiaryButton
+                  text={label}
+                  variant={checkedSortOption === value ? "bold" : "medium"}
+                  onClick={() => setCheckedSortOption(value)}
+                  iconLeft={
+                    <ToggleInput
+                      type="radio"
+                      checked={checkedSortOption === value}
+                      pointerEvents="none"
+                    />
+                  }
+                />
+                {/* <option value={item.value}>{item.label}</option> */}
+              </Box>
+            ))}
+          </Box>
+        }
       />
 
       <Box gap="8px">

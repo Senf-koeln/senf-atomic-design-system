@@ -19,6 +19,8 @@ const Template: Story<OrganizationsOverviewProps> = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
+  checkedSortOption: "aToZ",
+  openOrganizationsOverview: true,
   selectedOrganizationTypes: ["Vereine"],
   data: [
     {

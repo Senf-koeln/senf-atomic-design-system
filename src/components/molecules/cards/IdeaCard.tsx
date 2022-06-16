@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { FC } from "react";
+import React, { FC, useEffect, useState } from "react";
 import styled from "styled-components";
 import Icon from "../../atoms/icons/Icon";
 import { LayerWhiteFirstDefault } from "../../atoms/layerStyles/LayerStyles";
@@ -27,9 +27,10 @@ const Wrapper = styled.div<IdeaCardProps>`
   border-radius: 18px;
 
   width: 100%;
-
+  min-width: 100%;
   height: auto;
-  padding-bottom: ${(props) => (props.projectroomName ? "40px" : "0")};
+  padding-bottom: ${({ projectroomCardData }) =>
+    projectroomCardData ? "40px" : "0"};
   overflow: hidden;
 
   ${(props) => LayerWhiteFirstDefault}
@@ -40,10 +41,13 @@ const Wrapper = styled.div<IdeaCardProps>`
       : "brightness(1)"};
   animation: opacityTranslateYFrom50Animation 0.8s;
 
-  transition: 0.3s;
-  &:hover {
-    transform: scale(103%);
-    background-color: #fefefd;
+  @media (min-width: 768px) {
+    transition: 0.3s;
+
+    &:hover {
+      transform: scale(103%);
+      background-color: #fefefd;
+    }
   }
 `;
 
@@ -61,7 +65,9 @@ const ProjectroomOpenButton = styled.button`
 `;
 const IdeaCard: FC<IdeaCardProps> = ({
   data,
+  projectroomsData,
   handleButtonOpenCard,
+  handleOpenProjectroom,
   handleButtonLike,
   handleButtonComment,
   user,
@@ -75,7 +81,7 @@ const IdeaCard: FC<IdeaCardProps> = ({
     likeCount,
     commentCount,
     organizationType,
-    projectroomName,
+    projectRoomId: cardProjectRoomId,
     thisOrganizationId,
     screamId,
   } = data;
@@ -95,10 +101,26 @@ const IdeaCard: FC<IdeaCardProps> = ({
     else return false;
   };
 
+  const [projectroomCardData, setProjectroomCardData] = useState([]);
+
+  useEffect(() => {
+    if (projectroomsData) {
+      projectroomsData.map(({ projectRoomId, title, organizationType }) => {
+        if (cardProjectRoomId === projectRoomId) {
+          setProjectroomCardData([
+            ...projectroomCardData,
+            title,
+            organizationType,
+          ]);
+        }
+      });
+    }
+  }, [projectroomsData]);
+
   return (
     <Wrapper
       status={status}
-      projectroomName={projectroomName}
+      projectroomCardData={projectroomCardData.length > 0}
       onClick={(event) => handleButtonOpenCard(event, "ideaCard", screamId)}
     >
       <InnerWrapper>
@@ -148,19 +170,18 @@ const IdeaCard: FC<IdeaCardProps> = ({
         </Box>
       </InnerWrapper>
 
-      {projectroomName && (
-        <ProjectroomOpenButton>
+      {projectroomCardData.length > 0 && (
+        <ProjectroomOpenButton
+          onClick={() => handleOpenProjectroom(cardProjectRoomId)}
+        >
           <Box
             alignItems="center"
             flexDirection="row"
             gap="14px"
             margin="0px 10px"
           >
-            <Icon
-              icon={setOrganizationTypeIcon(organizationType)}
-              // transform="scale(0.8)"
-            />
-            <Typography variant="bodySm">{projectroomName}</Typography>
+            <Icon icon={setOrganizationTypeIcon(projectroomCardData[1])} />
+            <Typography variant="bodySm">{projectroomCardData[0]}</Typography>
           </Box>
         </ProjectroomOpenButton>
       )}

@@ -41,9 +41,8 @@ const TabUnderline = styled.div<TabsProps>`
   transition: 0.3s;
 `;
 
-const Tabs: FC<TabsProps> = ({ tabs, fontSize }) => {
+const Tabs: FC<TabsProps> = ({ tabs, fontSize, order, setOrder }) => {
   // order, setOrder
-  const [order, setOrder] = useState(0);
   const isMobile = isMobileCustom();
   return (
     <Wrapper isMobile={isMobile}>

@@ -23,7 +23,7 @@ const Wrapper = styled.div<StatisticsOverviewProps>`
   background-color: ${({ theme }) => theme.colors.beige.beige20};
   margin-left: 10px;
   margin-top: 10px;
-  width: ${({ open }) => (open ? "calc(100vw - 475px)" : "470px")};
+  width: 100%;
   height: calc(100vh - 20px);
   border-radius: 18px;
   overflow-y: scroll;
@@ -34,8 +34,13 @@ const Wrapper = styled.div<StatisticsOverviewProps>`
   box-shadow: 40px 8px 30px -12px rgba(0, 0, 0, 0.2);
   transition: 0.5s;
 
+  @media (min-width: 768px) {
+    display: ${({ open }) => (open ? "block" : "none")};
+    width: ${({ open }) => (open ? "calc(100vw - 420px)" : "0px")};
+  }
+
   @media (max-width: 1350px) {
-    width: ${({ open }) => (open ? "calc(100vw - 200px)" : "400px")};
+    width: ${({ open }) => (open ? "calc(100vw - 10px)" : "0px")};
   }
 `;
 
@@ -76,7 +81,7 @@ const HeaderWrapper = styled.div`
 `;
 
 const StatisticsOverview: FC<StatisticsOverviewProps> = ({
-  openStatisticsModal = true,
+  openStatisticsOverview,
   setOpenStatisticsOverview,
   children,
 }) => {
@@ -87,7 +92,8 @@ const StatisticsOverview: FC<StatisticsOverviewProps> = ({
   return isMobile ? (
     <SwipeModal
       backgroundColor={theme.colors.beige.beige20}
-      openModal={openStatisticsModal}
+      openModal={openStatisticsOverview}
+      setOpenModal={setOpenStatisticsOverview}
       headerComponentHeight="102px"
       headerComponentBackgroundColor={theme.colors.beige.beige20}
       HeaderComponent={
@@ -96,6 +102,7 @@ const StatisticsOverview: FC<StatisticsOverviewProps> = ({
 
           <SubNavbar
             iconLeft={<Arrow transform="rotate(90deg)" />}
+            leftButtonClick={() => setOpenStatisticsOverview(false)}
             header={t("statistics")}
             handlebar={true}
             // iconRight="plus"
@@ -107,7 +114,7 @@ const StatisticsOverview: FC<StatisticsOverviewProps> = ({
       <InnerWrapper isMobile={isMobile}>{children}</InnerWrapper>
     </SwipeModal>
   ) : (
-    <Wrapper open={openStatisticsModal}>
+    <Wrapper open={openStatisticsOverview}>
       <SVGWrapper searchOpen={searchOpen}>
         <Box position="fixed" margin="20px" zIndex={2}>
           <RoundedButton

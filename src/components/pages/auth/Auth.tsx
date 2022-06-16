@@ -24,6 +24,8 @@ import SenfManSquating from "../../../assets/illustrations/senfManSquatting.png"
 import AuthEmail from "../../templates/auth/AuthEmail";
 import AuthResetEmail from "../../templates/auth/AuthResetEmail";
 import AuthVerifyEmail from "../../templates/auth/AuthVerifyEmail";
+import AuthAddDetails from "../../templates/auth/AuthAddDetails";
+import { SuccessPage } from "./auth.stories";
 
 const Wrapper = styled.div<AuthProps>`
   position: relative;
@@ -63,9 +65,9 @@ const Auth: FC<AuthProps> = ({
   facebookLoading,
   resetLoading,
   handleSubmitResetEmail,
-  socialLoginVerified,
   emailRegistrationSubmitted,
-  emailVerified,
+  verifiedUser,
+  addedDetails,
   errorMessage,
   dataSuccess,
 }) => {
@@ -100,43 +102,40 @@ const Auth: FC<AuthProps> = ({
 
       <Wave color="#fed957" top="170px" />
 
-      <Img src={SenfManSquating} alt="Illustration" />
+      {!verifiedUser && (
+        <React.Fragment>
+          <Img src={SenfManSquating} alt="Illustration" />
+          <StyledSvg xmlns="http://www.w3.org/2000/svg" width="175" height="69">
+            <g>
+              <defs>
+                <linearGradient
+                  id="idX0hbBYeIVg-1861781537"
+                  gradientTransform="rotate(154, 0.5, 0.5)"
+                >
+                  <stop
+                    offset="0"
+                    stop-color="rgba(186, 163, 79, 0)"
+                    stop-opacity="0"
+                  ></stop>
+                  <stop
+                    offset="1"
+                    stop-color="rgba(119, 108, 70, 0.46)"
+                    stop-opacity="0.46"
+                  ></stop>
+                </linearGradient>
+              </defs>
+              <path
+                d="M 0.5 68.5 L 174.5 0.5 L 174.5 33.5 L 56.5 67 L 62 55.5 L 26 67 Z"
+                fill="url(#idX0hbBYeIVg-1861781537)"
+                stroke="hsla(0, 0%, 100%, 0)"
+              ></path>
+            </g>
+          </StyledSvg>
+        </React.Fragment>
+      )}
 
-      <StyledSvg xmlns="http://www.w3.org/2000/svg" width="175" height="69">
-        <g>
-          <defs>
-            <linearGradient
-              id="idX0hbBYeIVg-1861781537"
-              gradientTransform="rotate(154, 0.5, 0.5)"
-            >
-              <stop
-                offset="0"
-                stop-color="rgba(186, 163, 79, 0)"
-                stop-opacity="0"
-              ></stop>
-              <stop
-                offset="1"
-                stop-color="rgba(119, 108, 70, 0.46)"
-                stop-opacity="0.46"
-              ></stop>
-            </linearGradient>
-          </defs>
-          <path
-            d="M 0.5 68.5 L 174.5 0.5 L 174.5 33.5 L 56.5 67 L 62 55.5 L 26 67 Z"
-            fill="url(#idX0hbBYeIVg-1861781537)"
-            stroke="hsla(0, 0%, 100%, 0)"
-          ></path>
-        </g>
-      </StyledSvg>
-
-      {page === "authOptions" && !emailRegistrationSubmitted ? (
-        <AuthOptions
-          handleGoogleSignIn={handleGoogleSignIn}
-          googleLoading={googleLoading}
-          handleFacebookSignIn={handleFacebookSignIn}
-          facebookLoading={facebookLoading}
-          setPage={setPage}
-        />
+      {emailRegistrationSubmitted ? (
+        <AuthVerifyEmail />
       ) : page === "authEmail" && !emailRegistrationSubmitted ? (
         <AuthEmail
           setPage={setPage}
@@ -146,6 +145,8 @@ const Auth: FC<AuthProps> = ({
           loginLoading={loginLoading}
           errorMessage={errorMessage}
         />
+      ) : verifiedUser && !addedDetails ? (
+        <AuthAddDetails />
       ) : page === "authResetEmail" ? (
         <AuthResetEmail
           resetLoading={resetLoading}
@@ -153,7 +154,13 @@ const Auth: FC<AuthProps> = ({
           dataSuccess={dataSuccess}
         />
       ) : (
-        <AuthVerifyEmail />
+        <AuthOptions
+          handleGoogleSignIn={handleGoogleSignIn}
+          googleLoading={googleLoading}
+          handleFacebookSignIn={handleFacebookSignIn}
+          facebookLoading={facebookLoading}
+          setPage={setPage}
+        />
       )}
     </Wrapper>
   );
