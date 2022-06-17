@@ -42,6 +42,8 @@ import CalendarIcon from "../../../assets/icons/CalendarIcon";
 import Share from "../../../assets/icons/Share";
 import SocialmediaShare from "../../organisms/socialmediaShare/SocialmediaShare";
 
+const Calendar = React.lazy(() => import("../../organisms/calendar/Calendar"));
+
 const DragWrapper = styled(animated.div)<ProjectroomPageProps>`
   display: flex;
   position: relative;

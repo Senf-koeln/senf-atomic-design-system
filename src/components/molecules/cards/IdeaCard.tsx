@@ -81,9 +81,7 @@ const IdeaCard: FC<IdeaCardProps> = ({
     Thema,
     likeCount,
     commentCount,
-    organizationType,
     projectRoomId: cardProjectRoomId,
-    thisOrganizationId,
     screamId,
   } = data;
 

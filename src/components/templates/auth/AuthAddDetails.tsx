@@ -47,6 +47,19 @@ const AuthAddDetails: FC<AuthAddDetailsProps> = ({
     gender: user?.sex ? user?.sex : null,
   });
 
+  function generateArrayOfYears() {
+    var max = new Date().getFullYear() - 14;
+    var min = max - 100;
+    var years = [];
+
+    for (var i = max; i >= min; i--) {
+      years.push({ value: i, label: i });
+    }
+    return years;
+  }
+
+  var years = generateArrayOfYears();
+
   return (
     <Box
       flexDirection="column"
@@ -128,20 +141,7 @@ const AuthAddDetails: FC<AuthAddDetailsProps> = ({
                 value: "Male",
               },
             ],
-            birthyear: [
-              {
-                label: "Non-binary",
-                value: "Non-binary",
-              },
-              {
-                label: "Female",
-                value: "Female",
-              },
-              {
-                label: "Male",
-                value: "Female",
-              },
-            ],
+            birthyear: years,
           }}
           multi
           recieveValue={(selectedItems) =>
