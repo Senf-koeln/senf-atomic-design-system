@@ -1,6 +1,6 @@
 {
   "name": "senf-atomic-design-system",
-  "version": "2.0.2",
+  "version": "2.1.0",
   "description": "An atomic-design-system-library for all Senf-apps ",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -48,7 +48,6 @@
     "i": "^0.3.7",
     "npm": "^8.12.1",
     "react-device-detect": "^2.2.2",
-    "react-share": "^4.4.0",
     "rollup": "^2.67.3",
     "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-dts": "^4.1.0",

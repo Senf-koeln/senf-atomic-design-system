@@ -4,7 +4,7 @@ import React, { FC } from "react";
 import styled from "styled-components";
 import { ImagePlaceholderProps } from "./ImagePlaceholder.types";
 
-const Wrapper = styled.div<ImagePlaceholderProps>`
+const Wrapper = styled.label<ImagePlaceholderProps>`
   position: relative;
   box-sizing: border-box;
   height: ${(props) => (props.height ? props.height : "100%")};

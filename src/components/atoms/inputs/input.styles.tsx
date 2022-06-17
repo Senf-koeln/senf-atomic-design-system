@@ -47,6 +47,7 @@ export const InputField = styled.div<{ focus: boolean }>`
   gap: 0.5rem;
   padding: 0 0.6rem 0 0.9rem;
   min-height: 50px;
+  color: rgb(51, 51, 51) !important;
   background-color: ${({ theme }) => theme.colors.white.white50tra};
   border-radius: ${({ theme }) => theme.radii[1]}px;
   -webkit-border-radius: ${({ theme }) => theme.radii[1]}px;
@@ -92,7 +93,6 @@ export const TextField = styled.input`
   border: 0;
   flex: 1;
   background-color: transparent !important;
-  color: rgb(51, 51, 51);
 
   /* Styles for search input */
   /* &[type="search"] {

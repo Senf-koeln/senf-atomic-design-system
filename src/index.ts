@@ -36,6 +36,7 @@ export { default as ObjectCard } from "./components/molecules/cards/ObjectCard";
 export { default as Form } from "./components/molecules/form/Form";
 export { default as List } from "./components/molecules/list/List";
 export { default as Modal } from "./components/molecules/modals/Modal";
+export { default as SwipeModal } from "./components/molecules/modals/SwipeModal";
 export { default as SubNavbar } from "./components/molecules/navs/SubNavbar";
 export { default as Accordion } from "./components/molecules/accordion/Accordion";
 export { default as TagSlide } from "./components/molecules/tagSlide/TagSlide";

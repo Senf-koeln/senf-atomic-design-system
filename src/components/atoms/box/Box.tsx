@@ -8,6 +8,8 @@ const Wrapper = styled.div<BoxProps>`
   display: ${({ display }) => (display ? display : "flex")};
 
   position: ${({ position }) => (position ? position : "relative")};
+  top: ${({ top }) => (top ? top : undefined)};
+
   left: ${({ left }) => (left ? left : undefined)};
   right: ${({ right }) => (right ? right : undefined)};
   height: ${({ height }) => (height ? height : "auto")};
@@ -34,6 +36,7 @@ const Box: FC<BoxProps> = ({
   margin,
   width,
   maxWidth,
+  top,
   left,
   right,
   zIndex,
@@ -52,6 +55,7 @@ const Box: FC<BoxProps> = ({
       height={height}
       width={width}
       maxWidth={maxWidth}
+      top={top}
       left={left}
       right={right}
       zIndex={zIndex}

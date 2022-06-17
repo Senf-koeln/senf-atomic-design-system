@@ -26,7 +26,6 @@ const Dropdown: FunctionComponent<DropdownProps> = ({
         {multi ? (
           <MultiDropdown
             id={id}
-            placeholder={placeholder}
             listItems={listItems as MultiListItems}
             recieveValue={recieveValue}
           />

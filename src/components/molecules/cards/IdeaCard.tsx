@@ -56,6 +56,7 @@ const InnerWrapper = styled.div`
 `;
 
 const ProjectroomOpenButton = styled.button`
+  cursor: pointer;
   position: absolute;
   width: 100%;
   height: 40px;
@@ -172,7 +173,7 @@ const IdeaCard: FC<IdeaCardProps> = ({
 
       {projectroomCardData.length > 0 && (
         <ProjectroomOpenButton
-          onClick={() => handleOpenProjectroom(cardProjectRoomId)}
+          onClick={(event) => handleOpenProjectroom(event, cardProjectRoomId)}
         >
           <Box
             alignItems="center"

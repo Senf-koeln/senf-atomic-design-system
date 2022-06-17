@@ -27,7 +27,7 @@ Profile.args = {
     organizationId: ["7neEcENX16eIw4baKwXC", "dlLtQlMS2xmyA5R2oQkb"],
     sex: "",
     handle: "Senf.koeln",
-    description: "new descripotion for the users",
+    description: null,
     isSuperAdmin: true,
     photoUrl:
       "https://lh3.googleusercontent.com/a-/AOh14Gg6A5t4OFiEGKReXCl3mcJ5-DN2gm0nMpscWRdA2g=s96-c",

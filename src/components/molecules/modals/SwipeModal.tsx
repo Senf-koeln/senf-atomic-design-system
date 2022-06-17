@@ -10,6 +10,7 @@ import { LayerWhiteFirstDefault } from "../../atoms/layerStyles/LayerStyles";
 import SubNavbar from "../navs/SubNavbar";
 import { SwipeModalProps } from "./SwipeModal.types";
 import { animated } from "@react-spring/web";
+import { isMobileCustom } from "../../../hooks/customDeviceDetect";
 
 const DragWrapper = styled(animated.div)`
   z-index: ${({ zIndex }) => (zIndex ? zIndex : 9999)};
@@ -29,6 +30,15 @@ const DragWrapper = styled(animated.div)`
 
   position: absolute;
   animation: organizationOverviewEnterAnimation 0.5s;
+
+  @media (min-width: 768px) {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    max-width: 400px;
+    max-height: calc(100vh - 40px);
+    border-radius: ${({ theme }) => theme.radii[4]}px;
+  }
 `;
 
 const Background = styled.div<SwipeModalProps>`
@@ -69,6 +79,7 @@ const SwipeModal: FC<SwipeModalProps> = ({
   backgroundColor,
   overflow,
 }) => {
+  const isMobile = isMobileCustom();
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
@@ -106,8 +117,8 @@ const SwipeModal: FC<SwipeModalProps> = ({
     x: 0,
     y: 0,
     scale: 1,
-    transform: `translateY(${30}px)`,
-    overflow: "hidden",
+    transform: isMobile ? `translateY(${30}px)` : "translate(-50%, -50%)",
+    overflow: "scroll",
     touchAction: "none",
     userSelect: "none",
   }));
@@ -175,14 +186,27 @@ const SwipeModal: FC<SwipeModalProps> = ({
                   trapFocus(e, submitRef.current, closeRef.current) // ideally we would use inert but it doesn't seem to be working
               }
             >
-              <Header
-                headerComponentHeight={headerComponentHeight}
-                headerComponentBackgroundColor={headerComponentBackgroundColor}
-                {...bind()}
-              >
-                {HeaderComponent}
-              </Header>
-              {children}
+              {HeaderComponent ? (
+                <React.Fragment>
+                  <Header
+                    headerComponentHeight={headerComponentHeight}
+                    headerComponentBackgroundColor={
+                      headerComponentBackgroundColor
+                    }
+                    {...bind()}
+                  >
+                    {HeaderComponent}
+                  </Header>
+                  {children}
+                </React.Fragment>
+              ) : (
+                <div
+                  style={{ height: "100%", width: "100%", overflow: "scroll" }}
+                  {...bind()}
+                >
+                  {children}
+                </div>
+              )}
             </DragWrapper>
           </React.Fragment>,
           document.body

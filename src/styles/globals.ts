@@ -47,6 +47,7 @@ p {
 }
 
 
+
 //ANIMATIONS
 
 @keyframes opacityTranslateYFrom50Animation {

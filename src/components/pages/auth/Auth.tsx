@@ -68,6 +68,10 @@ const Auth: FC<AuthProps> = ({
   emailRegistrationSubmitted,
   verifiedUser,
   addedDetails,
+  user,
+  handleSubmitEditDetails,
+  handleImageUpload,
+  uploadingImage,
   errorMessage,
   dataSuccess,
 }) => {
@@ -146,7 +150,12 @@ const Auth: FC<AuthProps> = ({
           errorMessage={errorMessage}
         />
       ) : verifiedUser && !addedDetails ? (
-        <AuthAddDetails />
+        <AuthAddDetails
+          user={user}
+          handleSubmitEditDetails={handleSubmitEditDetails}
+          handleImageUpload={handleImageUpload}
+          uploadingImage={uploadingImage}
+        />
       ) : page === "authResetEmail" ? (
         <AuthResetEmail
           resetLoading={resetLoading}

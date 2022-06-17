@@ -113,7 +113,7 @@ const ProfilePage: FC<ProfilePageProps> = ({
   handleButtonOpenCard,
   handleOpenProjectroom,
   handleButtonClose,
-  setEditProfileOpen,
+  setAuthEditOpen,
   handleLogout,
   handleDeleteAccount,
 }) => {
@@ -204,7 +204,7 @@ const ProfilePage: FC<ProfilePageProps> = ({
                   variant={"secondary"}
                   size="small"
                   text={t("Profil bearbeiten")}
-                  onClick={() => setEditProfileOpen(true)}
+                  onClick={() => setAuthEditOpen(true)}
                   // disabled={i18n.resolvedLanguage === lng}
                 />
                 <Button
@@ -253,8 +253,18 @@ const ProfilePage: FC<ProfilePageProps> = ({
             <Typography variant="buttonBg">
               {t("profilePage.aboutHeadline")}
             </Typography>
-            <Box margin="2px 0px">
-              <Typography variant="bodyBg">{description}</Typography>
+
+            <Box margin="5px 0px">
+              {description ? (
+                <Typography variant="bodyBg">{description}</Typography>
+              ) : (
+                <Button
+                  variant="secondary"
+                  size="small"
+                  text={t("profilePage.addDescription")}
+                  onClick={() => setAuthEditOpen(true)}
+                />
+              )}
             </Box>
           </Box>
 

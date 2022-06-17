@@ -17,6 +17,9 @@ import ImagePlaceholder from "../../atoms/imagePlaceholder/ImagePlaceholder";
 import { LayerWhiteFirstDefault } from "../../atoms/layerStyles/LayerStyles";
 import Input from "../../atoms/inputs/Input";
 import MultiDropdown from "../../atoms/dropdown/multi/MultiDropdown";
+import Bulb from "../../../assets/icons/Bulb";
+import Icon from "../../atoms/icons/Icon";
+import Loader from "../../atoms/animations/Loader";
 
 const ImageWrapper = styled.div`
   ${(props) => LayerWhiteFirstDefault}
@@ -28,8 +31,21 @@ const ImageWrapper = styled.div`
   justify-content: center;
 `;
 
-const AuthAddDetails: FC<AuthAddDetailsProps> = ({ variant, loading }) => {
+const AuthAddDetails: FC<AuthAddDetailsProps> = ({
+  user,
+  handleSubmitEditDetails,
+  handleImageUpload,
+  uploadingImage,
+}) => {
   const { t } = useTranslation();
+
+  const [data, setData] = useState({
+    handle: user?.handle,
+    description: user?.description ? user?.description : null,
+    zipcode: user?.zipcode ? user?.zipcode : null,
+    birthyear: user?.age ? user?.age : null,
+    gender: user?.sex ? user?.sex : null,
+  });
 
   return (
     <Box
@@ -49,33 +65,56 @@ const AuthAddDetails: FC<AuthAddDetailsProps> = ({ variant, loading }) => {
 
       <Box margin="25px 0px 24px 0px" flexDirection="column" gap="10px">
         <Box justifyContent="center" margin="20px">
-          <ImageWrapper>
-            <ImagePlaceholder
-              img={null}
-              borderRadius="18px"
-              height="calc(100% - 40px)"
-              width="calc(100% - 40px)"
-            />
+          <ImageWrapper
+            // onMouseEnter={() => setUploadImageHover(true)}
+            // onMouseLeave={() => setUploadImageHover(false)}
+            htmlFor="imageUploader"
+          >
+            {user?.photoUrl ? (
+              <ImagePlaceholder
+                img={user?.photoUrl}
+                borderRadius="18px"
+                height="calc(100% - 40px)"
+                width="calc(100% - 40px)"
+              />
+            ) : uploadingImage ? (
+              <Loader />
+            ) : (
+              <Icon icon={<Bulb />} />
+            )}
           </ImageWrapper>
+          <input
+            type="file"
+            onChange={(event) => handleImageUpload(event)}
+            style={{ display: "none" }}
+            id="imageUploader"
+          />
         </Box>
+        <Input
+          type="text"
+          placeholder={t("username")}
+          onChange={(e) => setData({ ...data, handle: e.target.value })}
+          value={data.handle}
+        />
+
         <Input
           type="textarea"
           rows={3}
-          placeholder={"auth_add_details_description"}
-          onChange={() => console.log()}
-          value={""}
+          placeholder={t("auth_add_details_description")}
+          onChange={(e) => setData({ ...data, description: e.target.value })}
+          value={data.description}
         />
         <Input
           type="text"
           placeholder={t("zipcode")}
-          onChange={() => console.log()}
-          value={""}
+          onChange={(e) => setData({ ...data, zipcode: e.target.value })}
+          value={data.zipcode}
         />
 
         <Dropdown
           id="MultiDropdowns"
           listItems={{
-            Gender1: [
+            gender: [
               {
                 label: "Non-binary",
                 value: "Non-binary",
@@ -89,7 +128,7 @@ const AuthAddDetails: FC<AuthAddDetailsProps> = ({ variant, loading }) => {
                 value: "Male",
               },
             ],
-            Gender2: [
+            birthyear: [
               {
                 label: "Non-binary",
                 value: "Non-binary",
@@ -105,11 +144,18 @@ const AuthAddDetails: FC<AuthAddDetailsProps> = ({ variant, loading }) => {
             ],
           }}
           multi
-          placeholder="Geburtsjahr"
-          recieveValue={() => {}}
+          recieveValue={(selectedItems) =>
+            setData({
+              ...data,
+              gender: selectedItems.gender,
+              birthyear: selectedItems.birthyear,
+            })
+          }
         />
         <br />
-        <Button variant="white">{t("submit")}</Button>
+        <Button variant="white" onClick={() => handleSubmitEditDetails(data)}>
+          {t("save")}
+        </Button>
       </Box>
     </Box>
   );

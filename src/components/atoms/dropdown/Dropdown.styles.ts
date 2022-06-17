@@ -1,5 +1,8 @@
 /** @format */
 
+import { Disabled } from "./../inputs/input.stories";
+/** @format */
+
 import styled from "styled-components";
 import arrow from "../../../assets/rawSvgs/arrow.svg";
 
@@ -20,5 +23,14 @@ export const Selector = styled.select`
   }
   &:focus-visible {
     outline: 0;
+    display: none;
+  }
+  option {
+    color: #9e9e9e;
+    display: none;
+  }
+  &:disabled {
+    color: gray;
+    display: none;
   }
 `;
