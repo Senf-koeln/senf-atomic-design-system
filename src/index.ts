@@ -1,5 +1,11 @@
 /** @format */
 
+import { MobileTopBarProps } from "./components/organisms/mobileTopBar/MobileTopBar.types";
+/** @format */
+
+export { default as Plus } from "./assets/icons/Plus";
+export { default as Arrow } from "./assets/icons/Arrow";
+
 export {
   LayerWhiteGradientBordersDefault,
   LayerWhiteFirstDefault,
@@ -42,6 +48,8 @@ export { default as Accordion } from "./components/molecules/accordion/Accordion
 export { default as TagSlide } from "./components/molecules/tagSlide/TagSlide";
 
 export { default as MenuSidebar } from "./components/organisms/menuSidebar/MenuSidebar";
+export { default as MobileTopBar } from "./components/organisms/mobileTopBar/MobileTopBar";
+
 export { default as MainSwipeList } from "./components/pages/mainSwipeList/MainSwipeList";
 
 export { default as Auth } from "./components/pages/auth/Auth";

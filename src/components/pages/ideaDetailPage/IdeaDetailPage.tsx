@@ -49,6 +49,9 @@ import CalendarIcon from "../../../assets/icons/CalendarIcon";
 import Location from "../../../assets/icons/Location";
 import ContentDropdown from "../../atoms/contentDropdown/ContentDropdown";
 import SocialmediaShare from "../../organisms/socialmediaShare/SocialmediaShare";
+import Edit from "../../../assets/icons/Edit";
+import Delete from "../../../assets/icons/Delete";
+import Report from "../../../assets/icons/Report";
 
 const DragWrapper = styled(animated.div)<IdeaDetailPageProps>`
   display: flex;
@@ -143,6 +146,9 @@ const IdeaDetailPage: FC<IdeaDetailPageProps> = ({
   handleButtonLike,
   handleButtonComment,
   handleOpenProjectroom,
+  handleEditIdea,
+  handleDeleteIdea,
+  handleReportIdea,
   user,
 }) => {
   const {
@@ -162,8 +168,10 @@ const IdeaDetailPage: FC<IdeaDetailPageProps> = ({
     projectroomId: cardProjectroomId,
     selectedUnix,
     userHandle,
+    userId,
     createdAt,
     comments,
+    handleShareIdeaVia,
     path,
   } = data;
   const { t } = useTranslation();
@@ -171,6 +179,8 @@ const IdeaDetailPage: FC<IdeaDetailPageProps> = ({
 
   const [socialmediaShareDropdownOpen, setSocialmediaShareDropdownOpen] =
     useState(false);
+
+  const [editIdeaDropdownOpen, setEditIdeaDropdownOpen] = useState(false);
 
   const [projectroomCardData, setProjectroomCardData] = useState([]);
   const [swipePosition, setSwipePosition] = useState("bottom");
@@ -290,6 +300,22 @@ const IdeaDetailPage: FC<IdeaDetailPageProps> = ({
     }
   );
 
+  const handleShareIdea = () => {
+    if (navigator.share) {
+      navigator
+        .share({
+          title: `Senf.koeln – ${title}`,
+          url: path,
+        })
+        .then(() => {
+          console.log("Thanks for sharing!");
+        })
+        .catch(console.error);
+    } else {
+      setSocialmediaShareDropdownOpen(!socialmediaShareDropdownOpen);
+    }
+  };
+
   return (
     <React.Fragment>
       <DetailSidebar
@@ -298,19 +324,69 @@ const IdeaDetailPage: FC<IdeaDetailPageProps> = ({
           <ContentDropdown
             open={socialmediaShareDropdownOpen}
             setOpen={setSocialmediaShareDropdownOpen}
+            direction={isMobile ? "downLeft" : "downRight"}
             OpenButton={
               <RoundedButton
                 variant="white"
                 size="small"
-                onClick={() =>
-                  setSocialmediaShareDropdownOpen(!socialmediaShareDropdownOpen)
-                }
+                onClick={handleShareIdea}
                 icon={<Share />}
               />
             }
             Content={
               <Box gap="5px" flexDirection="column">
-                <SocialmediaShare path={path} />
+                <SocialmediaShare
+                  path={path}
+                  handleShareIdeaVia={handleShareIdeaVia}
+                />
+              </Box>
+            }
+          />
+        }
+        ThirdButton={
+          <ContentDropdown
+            open={editIdeaDropdownOpen}
+            setOpen={setEditIdeaDropdownOpen}
+            direction={isMobile ? "downLeft" : "downRight"}
+            OpenButton={
+              <RoundedButton
+                variant="white"
+                size="small"
+                onClick={() => setEditIdeaDropdownOpen(!editIdeaDropdownOpen)}
+                icon={<More />}
+              />
+            }
+            Content={
+              <Box gap="5px" flexDirection="column">
+                {user?.userId === userId || user?.isSuperAdmin === true ? (
+                  <React.Fragment>
+                    <Button
+                      variant={"secondary"}
+                      size="small"
+                      text={t("idea.edit")}
+                      justifyContent="flex-start"
+                      onClick={() => handleEditIdea(screamId)}
+                      icon={<Edit />}
+                    />
+                    <Button
+                      variant={"secondary"}
+                      size="small"
+                      text={t("idea.delete")}
+                      justifyContent="flex-start"
+                      onClick={() => handleDeleteIdea(screamId)}
+                      icon={<Delete />}
+                    />
+                  </React.Fragment>
+                ) : (
+                  <Button
+                    variant={"secondary"}
+                    size="small"
+                    text={t("idea.report")}
+                    justifyContent="flex-start"
+                    onClick={() => handleReportIdea(screamId)}
+                    icon={<Report />}
+                  />
+                )}
               </Box>
             }
           />

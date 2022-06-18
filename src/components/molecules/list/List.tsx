@@ -30,6 +30,7 @@ import theme from "../../../styles/theme";
 const ListEnd = styled.div`
   width: auto;
   margin: 24px;
+  padding-bottom: 200px;
   animation: 4s opacityAfter50PercentAnimation;
 `;
 

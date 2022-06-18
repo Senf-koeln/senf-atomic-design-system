@@ -171,7 +171,9 @@ const IdeaCard: FC<IdeaCardProps> = ({
 
       {projectroomCardData.length > 0 && (
         <ProjectroomOpenButton
-          onClick={(event) => handleOpenProjectroom(event, cardProjectRoomId)}
+          onClick={(event) =>
+            handleOpenProjectroom(event, cardProjectRoomId, data?.projectRoomId)
+          }
         >
           <Box
             alignItems="center"

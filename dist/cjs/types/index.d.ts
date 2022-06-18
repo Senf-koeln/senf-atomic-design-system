@@ -1,4 +1,6 @@
 /** @format */
+export { default as Plus } from "./assets/icons/Plus";
+export { default as Arrow } from "./assets/icons/Arrow";
 export { LayerWhiteGradientBordersDefault, LayerWhiteFirstDefault, LayerWhiteFirstHover, LayerWhiteFirstActive, LayerWhiteSecondDefault, LayerWhiteSecondHover, LayerYellowDefault, LayerYellowHover, LayerBrownDefault, LayerBrownHover, LayerGreyDefault, LayerGreyHover, LayerGreyButtonsDefault, LayerGreyButtonsHover, } from "./components/atoms/layerStyles/LayerStyles";
 export { default as Loader } from "./components/atoms/animations/Loader";
 export { default as RangeSlider } from "./components/atoms/rangeSlider/RangeSlider";

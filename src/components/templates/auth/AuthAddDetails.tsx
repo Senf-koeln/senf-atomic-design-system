@@ -21,7 +21,7 @@ import Bulb from "../../../assets/icons/Bulb";
 import Icon from "../../atoms/icons/Icon";
 import Loader from "../../atoms/animations/Loader";
 
-const ImageWrapper = styled.div`
+const ImageWrapper = styled.label`
   ${(props) => LayerWhiteFirstDefault}
   width:158px;
   height: 158px;

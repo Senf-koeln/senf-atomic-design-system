@@ -15,7 +15,7 @@ const Wrapper = styled.div<SocialmediaShareProps>``;
 
 const SocialmediaShare: FC<SocialmediaShareProps> = ({
   path,
-  setShareOpen,
+  handleShareIdeaVia,
 }) => {
   const { t } = useTranslation();
   return (
@@ -32,13 +32,20 @@ const SocialmediaShare: FC<SocialmediaShareProps> = ({
           text="WhatsApp"
           variant="medium"
           iconLeft={<WhatsApp />}
+          onClick={() => handleShareIdeaVia("WhatsApp")}
         />
         <TertiaryButton
           text="Facebook"
           variant="medium"
           iconLeft={<Facebook />}
+          onClick={() => handleShareIdeaVia("Facebook")}
         />
-        <TertiaryButton text="Email" variant="medium" iconLeft={<Mail />} />
+        <TertiaryButton
+          text="Email"
+          variant="medium"
+          iconLeft={<Mail />}
+          onClick={() => handleShareIdeaVia("Email")}
+        />
 
         {/* <WhatsappShareButton url={path}>
           <TertiaryButton

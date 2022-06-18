@@ -21,7 +21,8 @@ const StyledButton = styled.button<ButtonProps>`
   width: auto; /* 150px */
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: ${({ justifyContent }) =>
+    justifyContent ? justifyContent : "center"};
   align-items: center;
 
   //ADD THEME-OPACITY
@@ -109,6 +110,7 @@ const Button: FC<ButtonProps> = ({
   size,
   variant,
   borderStyle,
+  justifyContent,
   fillWidth,
   loading,
   onClick,
@@ -121,6 +123,7 @@ const Button: FC<ButtonProps> = ({
       variant={variant}
       icon={icon}
       borderStyle={borderStyle}
+      justifyContent={justifyContent}
       fillWidth={fillWidth}
       loading={loading}
       onClick={onClick}

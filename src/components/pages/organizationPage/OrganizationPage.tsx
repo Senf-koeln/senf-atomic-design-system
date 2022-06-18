@@ -33,7 +33,9 @@ import Info from "../../../assets/icons/Info";
 import CalendarIcon from "../../../assets/icons/CalendarIcon";
 import Room from "../../../assets/icons/Room";
 
-const Calendar = React.lazy(() => import("../../organisms/calendar/Calendar"));
+import Calendar from "../../organisms/calendar/Calendar";
+
+// const Calendar = React.lazy(() => import("../../organisms/calendar/Calendar"));
 
 const SVGWrapper = styled.div`
   position: absolute;

@@ -107,6 +107,7 @@ const ToolbarWrapper = styled.div`
   transition: 0.5s;
   margin-left: 12px;
   width: calc(100% - 24px);
+  overflow-y: hidden;
 `;
 
 const HandleBar = styled.div`
@@ -161,6 +162,8 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
 
   checkedSortOption,
   setCheckedSortOption,
+
+  handleCreateProjectroom,
 }) => {
   const { t } = useTranslation();
   const isMobile = isMobileCustom();
@@ -177,7 +180,7 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
   }));
 
   const [listHeaderProps, setListHeaderProps] = useSpring(() => ({
-    height: isMobile ? "80px" : "160px",
+    height: isMobile ? "60px" : "160px",
   }));
 
   useEffect(() => {
@@ -204,11 +207,11 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
   useEffect(() => {
     if (searchOpen) {
       setListHeaderProps({
-        height: isMobile ? "140px" : "220px",
+        height: isMobile ? "130px" : "220px",
       });
     } else {
       setListHeaderProps({
-        height: isMobile ? "80px" : "160px",
+        height: isMobile ? "130px" : "160px",
       });
     }
   }, [searchOpen]);
@@ -271,7 +274,7 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
             ? `${70 + 80 * swipePercentage}px`
             : last && my < -50
             ? "130px"
-            : "80px",
+            : "60px",
         });
       }
       if (swipedUp && my > 2) {
@@ -279,7 +282,7 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
           height: down
             ? `${120 - 80 * swipePercentage}px`
             : last && my > 50
-            ? "80px"
+            ? "60px"
             : "130px",
         });
       }
@@ -409,6 +412,15 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
 
           <ContentWrapper isMobileCustom={isMobileCustom}>
             {isMobile && toolbarComponent}
+
+            {order !== "ideas" && (
+              <Button
+                variant="secondary"
+                borderStyle="dashed"
+                onClick={handleCreateProjectroom}
+                text={t("createProjectRoom")}
+              />
+            )}
             <List
               CardType={order === "ideas" ? IdeaCard : ProjectroomCard}
               data={order === "ideas" ? ideasData : projectroomsData}

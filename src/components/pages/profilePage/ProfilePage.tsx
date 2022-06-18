@@ -34,6 +34,9 @@ import ContentDropdown from "../../atoms/contentDropdown/ContentDropdown";
 import RoundedButton from "../../atoms/buttons/RoundedButton";
 import Button from "../../atoms/buttons/Button";
 import OrganizationCard from "../../molecules/cards/OrganizationCard";
+import Logout from "../../../assets/icons/Logout";
+import Edit from "../../../assets/icons/Edit";
+import Plus from "../../../assets/icons/Plus";
 
 const DragWrapper = styled(animated.div)<ProfilePageProps>`
   display: flex;
@@ -71,15 +74,14 @@ const DragWrapper = styled(animated.div)<ProfilePageProps>`
     animation: none;
   }
 `;
-const InnerWrapper = styled.div`
+const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
   height: 100%;
   overflow-y: scroll;
-
   @media (min-width: 768px) {
-    padding: 10px 10px 0px 70px;
+    padding: 10px 0px 0px 70px;
   }
 `;
 
@@ -190,6 +192,7 @@ const ProfilePage: FC<ProfilePageProps> = ({
           <ContentDropdown
             open={dropdownOpen}
             setOpen={setDropdownOpen}
+            direction={isMobile ? "downLeft" : "downRight"}
             OpenButton={
               <RoundedButton
                 variant="white"
@@ -203,22 +206,27 @@ const ProfilePage: FC<ProfilePageProps> = ({
                 <Button
                   variant={"secondary"}
                   size="small"
-                  text={t("Profil bearbeiten")}
+                  text={t("profile.edit")}
+                  justifyContent="flex-start"
                   onClick={() => setAuthEditOpen(true)}
-                  // disabled={i18n.resolvedLanguage === lng}
+                  icon={<Edit />}
                 />
                 <Button
                   variant={"secondary"}
                   size="small"
                   text={t("logout")}
+                  justifyContent="flex-start"
                   onClick={handleLogout}
+                  icon={<Logout />}
                   // disabled={i18n.resolvedLanguage === lng}
                 />
                 <Button
                   variant={"secondary"}
                   size="small"
-                  text={t("delete_account")}
+                  text={t("profile.delete")}
+                  justifyContent="flex-start"
                   onClick={handleDeleteAccount}
+                  icon={<Plus transform="rotate(45deg)" />}
                   // disabled={i18n.resolvedLanguage === lng}
                 />
               </Box>
@@ -234,7 +242,7 @@ const ProfilePage: FC<ProfilePageProps> = ({
       >
         <Wave top="0px" color={theme.colors.beige.beige20} />
 
-        <InnerWrapper>
+        <ContentWrapper>
           <Box justifyContent="center" margin="20px">
             <ImageWrapper>
               <ImagePlaceholder
@@ -289,23 +297,21 @@ const ProfilePage: FC<ProfilePageProps> = ({
             />
           </Box>
 
-          <Box margin="0px 12px">
-            <List
-              CardType={order === 1 ? IdeaCard : OrganizationCard}
-              data={order === 1 ? screams : myOrganizations}
-              handleButtonOpenCard={handleButtonOpenCard}
-              handleOpenProjectroom={handleOpenProjectroom}
-              organizations={organizations}
-              listEndText={
-                order === 1 && screams > 0
-                  ? t("noMoreIdeas")
-                  : order === 1 && screams < 1 && t("noSharedIdeas")
+          <List
+            CardType={order === 1 ? IdeaCard : OrganizationCard}
+            data={order === 1 ? screams : myOrganizations}
+            handleButtonOpenCard={handleButtonOpenCard}
+            handleOpenProjectroom={handleOpenProjectroom}
+            organizations={organizations}
+            listEndText={
+              order === 1 && screams > 0
+                ? t("noMoreIdeas")
+                : order === 1 && screams < 1 && t("noSharedIdeas")
 
-                // :t("noIdeasWithFilter")
-              }
-            />
-          </Box>
-        </InnerWrapper>
+              // :t("noIdeasWithFilter")
+            }
+          />
+        </ContentWrapper>
       </DragWrapper>
     </React.Fragment>
   );

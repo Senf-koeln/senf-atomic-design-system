@@ -28,7 +28,9 @@ const DropDownListContainer = styled.div`
   border-radius: 10px;
 
   transform: ${(props) =>
-    props.direction === "down" ? "translateY(45px)" : "translateY(-100%)"};
+    props.direction === "downLeft"
+      ? "translateY(45px) translateX(calc(-100% + 50px))"
+      : "translateY(45px)"};
 
   ${(props) => LayerWhiteFirstDefault}
   box-shadow: ${({ theme }) => theme.shadows[0]}${({ theme }) =>
@@ -38,7 +40,7 @@ const DropDownListContainer = styled.div`
 `;
 
 const ContentDropdown: FC<ContentDropdownProps> = ({
-  direction = "down",
+  direction = "downRight",
   OpenButton,
   Content,
   openButtonWidth,
