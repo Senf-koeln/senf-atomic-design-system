@@ -25,7 +25,6 @@ import AuthEmail from "../../templates/auth/AuthEmail";
 import AuthResetEmail from "../../templates/auth/AuthResetEmail";
 import AuthVerifyEmail from "../../templates/auth/AuthVerifyEmail";
 import AuthAddDetails from "../../templates/auth/AuthAddDetails";
-import { SuccessPage } from "./auth.stories";
 
 const Wrapper = styled.div<AuthProps>`
   position: relative;

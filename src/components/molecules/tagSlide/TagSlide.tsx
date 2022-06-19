@@ -17,7 +17,7 @@ const Wrapper = styled.div<TagSlideProps>`
   z-index: 1;
   width: 100%;
   overflow-x: scroll;
-  overflow-y: visible;
+  overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
   transition: 1s;
 `;

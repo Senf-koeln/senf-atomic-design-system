@@ -22,6 +22,7 @@ import ProjectroomCard from "../../molecules/cards/ProjectroomCard";
 import Stats from "../../../assets/icons/Stats";
 import MainSwipeListTabs from "../../molecules/tabs/MainSwipeListTabs";
 import MenuSidebar from "../../organisms/menuSidebar/MenuSidebar";
+import Box from "../../atoms/box/Box";
 
 const DragWrapper = styled(animated.div)`
   z-index: ${({ zIndex }) => (zIndex ? zIndex : 995)};
@@ -209,9 +210,13 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
       setListHeaderProps({
         height: isMobile ? "130px" : "220px",
       });
+    } else if (swipedUp && isMobile) {
+      setListHeaderProps({
+        height: "130px",
+      });
     } else {
       setListHeaderProps({
-        height: isMobile ? "130px" : "160px",
+        height: isMobile ? "60px" : "160px",
       });
     }
   }, [searchOpen]);
@@ -413,14 +418,19 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
           <ContentWrapper isMobileCustom={isMobileCustom}>
             {isMobile && toolbarComponent}
 
-            {order !== "ideas" && (
-              <Button
-                variant="secondary"
-                borderStyle="dashed"
-                onClick={handleCreateProjectroom}
-                text={t("createProjectRoom")}
-              />
+            {order !== "ideas" && (!isMobile || swipedUp) && (
+              <Box margin="0px 16px">
+                <Button
+                  variant="secondary"
+                  borderStyle="dashed"
+                  size="small"
+                  fillWidth="max"
+                  onClick={handleCreateProjectroom}
+                  text={t("createProjectRoom")}
+                />
+              </Box>
             )}
+
             <List
               CardType={order === "ideas" ? IdeaCard : ProjectroomCard}
               data={order === "ideas" ? ideasData : projectroomsData}

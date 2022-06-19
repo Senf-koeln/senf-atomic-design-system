@@ -94,10 +94,10 @@ const InnerWrapper = styled.div`
   flex-direction: column;
   position: relative;
   height: 100%;
-  overflow-y: scroll;
 
   @media (min-width: 768px) {
     padding: 10px 10px 0px 70px;
+    overflow-y: scroll;
   }
 `;
 const CardWrapper = styled.div<IdeaDetailPageProps>`
@@ -115,7 +115,6 @@ const CardWrapper = styled.div<IdeaDetailPageProps>`
   flex: none;
   padding-bottom: ${({ projectroomCardData }) =>
     projectroomCardData ? "40px" : "0"};
-  overflow: hidden;
 
   ${(props) => LayerWhiteFirstDefault}
 
@@ -150,6 +149,8 @@ const IdeaDetailPage: FC<IdeaDetailPageProps> = ({
   handleDeleteIdea,
   handleReportIdea,
   user,
+
+  projectroomCardData,
 }) => {
   const {
     screamId,
@@ -182,7 +183,6 @@ const IdeaDetailPage: FC<IdeaDetailPageProps> = ({
 
   const [editIdeaDropdownOpen, setEditIdeaDropdownOpen] = useState(false);
 
-  const [projectroomCardData, setProjectroomCardData] = useState([]);
   const [swipePosition, setSwipePosition] = useState("bottom");
 
   const liked = () => {
@@ -200,22 +200,24 @@ const IdeaDetailPage: FC<IdeaDetailPageProps> = ({
     else return false;
   };
 
-  useEffect(() => {
-    if (projectroomsData && cardProjectroomId) {
-      console.log(projectroomsData, cardProjectroomId);
-      projectroomsData.map(({ projectRoomId, title, organizationType }) => {
-        if (cardProjectroomId === projectRoomId) {
-          console.log(cardProjectroomId, projectRoomId);
+  // const [projectroomCardData, setProjectroomCardData] = useState([]);
 
-          setProjectroomCardData([
-            ...projectroomCardData,
-            title,
-            organizationType,
-          ]);
-        }
-      });
-    }
-  }, [projectroomsData, cardProjectroomId, loadingIdea]);
+  // useEffect(() => {
+  //   if (projectroomsData && cardProjectroomId) {
+  //     console.log(projectroomsData, cardProjectroomId);
+  //     projectroomsData.map(({ projectRoomId, title, organizationType }) => {
+  //       if (cardProjectroomId === projectRoomId) {
+  //         console.log(cardProjectroomId, projectRoomId);
+
+  //         setProjectroomCardData([
+  //           ...projectroomCardData,
+  //           title,
+  //           organizationType,
+  //         ]);
+  //       }
+  //     });
+  //   }
+  // }, [projectroomsData, cardProjectroomId, loadingIdea]);
 
   let selectedDates = [];
   const selectedUnixArray = selectedUnix;
@@ -261,7 +263,7 @@ const IdeaDetailPage: FC<IdeaDetailPageProps> = ({
       if (isMobile) {
         const el = document.getElementById("dragWrapper");
 
-        if (last && my < -50 && swipePosition === "bottom") {
+        if (last && my < -50) {
           set({
             transform: !down ? `translateY(${70}px)` : `translateY(${0}px)`,
             touchAction: "unset",
@@ -545,7 +547,9 @@ const IdeaDetailPage: FC<IdeaDetailPageProps> = ({
             </Typography>
             <Input placeholder={t("IdeaDetailPage.commentPlaceholder")} />
           </Box>
-          {comments && <List data={comments} CardType={CommentCard} />}
+          {comments && (
+            <List data={comments} CardType={CommentCard} listEndText={" "} />
+          )}
         </InnerWrapper>
       </DragWrapper>
     </React.Fragment>

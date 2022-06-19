@@ -37,7 +37,9 @@ const DragWrapper = styled(animated.div)`
     left: 50%;
     max-width: 400px;
     max-height: calc(100vh - 40px);
+    height: auto;
     border-radius: ${({ theme }) => theme.radii[4]}px;
+    animation: none;
   }
 `;
 

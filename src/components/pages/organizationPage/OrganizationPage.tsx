@@ -106,6 +106,10 @@ const Example: FC<OrganizationPageProps> = ({
       backgroundColor={theme.colors.beige.beige20}
       overflow="hidden scroll"
       zIndex="99"
+      boxShadow={
+        document.body.clientWidth > 1350 &&
+        "-40px 8px 30px -12px rgba(0, 0, 0, 0.2)"
+      }
     >
       <SVGWrapper>
         <svg
@@ -278,6 +282,7 @@ const Example: FC<OrganizationPageProps> = ({
             CardType={ProjectroomCard}
             data={organization?.projectRooms}
             handleButtonOpenCard={handleButtonOpenCard}
+            setCommentMenuOpen={setCommentMenuOpen}
             organizations={organizations}
             listEndText={
               !organization?.projectRooms || organization?.projectRooms < 1

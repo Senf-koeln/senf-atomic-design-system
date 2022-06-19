@@ -217,6 +217,7 @@ const ProjectroomPage: FC<ProjectroomPageProps> = ({
   setSearchTerm,
   handleEditProjectroom,
   path,
+  handleShare,
 }) => {
   const { t } = useTranslation();
   const isMobile = isMobileCustom();
@@ -354,10 +355,7 @@ const ProjectroomPage: FC<ProjectroomPageProps> = ({
             }
             Content={
               <Box gap="5px" flexDirection="column">
-                <SocialmediaShare
-                  path={path}
-                  handleShareIdea={handleShareIdea}
-                />
+                <SocialmediaShare path={path} handleShareIdea={handleShare} />
               </Box>
             }
           />

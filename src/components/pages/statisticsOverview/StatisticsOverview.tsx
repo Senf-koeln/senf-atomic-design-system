@@ -40,7 +40,7 @@ const Wrapper = styled.div<StatisticsOverviewProps>`
   }
 
   @media (max-width: 1350px) {
-    width: ${({ open }) => (open ? "calc(100vw - 10px)" : "0px")};
+    width: ${({ open }) => (open ? "calc(100vw - 20px)" : "0px")};
   }
 `;
 

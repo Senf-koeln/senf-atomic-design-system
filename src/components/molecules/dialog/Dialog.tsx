@@ -33,9 +33,9 @@ const DialogWrapper = styled.div<DialogProps>`
   background-color: ${({ backgroundColor }) =>
     backgroundColor ? backgroundColor : "white"};
 
-  /* box-shadow: ${({ boxShadow }) => (boxShadow ? boxShadow : undefined)}; */
-  box-shadow: ${({ theme }) => theme.shadows[0]}
-    ${({ theme }) => theme.colors.brown.brown20tra};
+  box-shadow: ${({ boxShadow, theme }) =>
+    boxShadow ? boxShadow : theme.shadows[0] + theme.colors.brown.brown20tra};
+
   border-radius: 18px;
   animation: opacityTranslateYFrom100Animation 0.2s;
 `;

@@ -48,6 +48,7 @@ const List: FC<ListProps> = ({
   handleOpenProjectroom,
   handleButtonLike,
   handleButtonComment,
+  setCommentMenuOpen,
   user,
   listEndText,
 }) => {
@@ -99,6 +100,7 @@ const List: FC<ListProps> = ({
                 handleOpenProjectroom={handleOpenProjectroom}
                 handleButtonLike={handleButtonLike}
                 handleButtonComment={handleButtonComment}
+                setCommentMenuOpen={setCommentMenuOpen}
                 user={user}
               />
             </Box>
