@@ -63,7 +63,7 @@ const DragWrapper = styled(animated.div)<IdeaDetailPageProps>`
   width: 100%;
   max-width: 470px;
 
-  background-color: ${({ theme }) => theme.colors.primary.primary100};
+  background-color: ${({ theme }) => theme.colors.beige.beige20};
   overflow: hidden;
 
   overscroll-behavior: contain;
@@ -149,8 +149,7 @@ const IdeaDetailPage: FC<IdeaDetailPageProps> = ({
   handleDeleteIdea,
   handleReportIdea,
   user,
-
-  projectroomCardData,
+  handleOpenMenuComment,
 }) => {
   const {
     screamId,
@@ -166,7 +165,7 @@ const IdeaDetailPage: FC<IdeaDetailPageProps> = ({
     contactTitle,
     likeCount,
     commentCount,
-    projectroomId: cardProjectroomId,
+    projectRoomId: cardProjectroomId,
     selectedUnix,
     userHandle,
     userId,
@@ -200,24 +199,24 @@ const IdeaDetailPage: FC<IdeaDetailPageProps> = ({
     else return false;
   };
 
-  // const [projectroomCardData, setProjectroomCardData] = useState([]);
+  const [projectroomCardData, setProjectroomCardData] = useState([]);
 
-  // useEffect(() => {
-  //   if (projectroomsData && cardProjectroomId) {
-  //     console.log(projectroomsData, cardProjectroomId);
-  //     projectroomsData.map(({ projectRoomId, title, organizationType }) => {
-  //       if (cardProjectroomId === projectRoomId) {
-  //         console.log(cardProjectroomId, projectRoomId);
+  useEffect(() => {
+    if (projectroomsData && cardProjectroomId && !loadingIdea) {
+      console.log(projectroomsData, cardProjectroomId);
+      projectroomsData.map(({ projectRoomId, title, organizationType }) => {
+        if (cardProjectroomId === projectRoomId) {
+          console.log(cardProjectroomId, projectRoomId);
 
-  //         setProjectroomCardData([
-  //           ...projectroomCardData,
-  //           title,
-  //           organizationType,
-  //         ]);
-  //       }
-  //     });
-  //   }
-  // }, [projectroomsData, cardProjectroomId, loadingIdea]);
+          setProjectroomCardData([
+            ...projectroomCardData,
+            title,
+            organizationType,
+          ]);
+        }
+      });
+    }
+  }, [projectroomsData, cardProjectroomId, loadingIdea]);
 
   let selectedDates = [];
   const selectedUnixArray = selectedUnix;
@@ -401,6 +400,14 @@ const IdeaDetailPage: FC<IdeaDetailPageProps> = ({
         loadingIdea={loadingIdea}
         isMobile={isMobile}
       >
+        <div
+          style={{
+            position: "absolute",
+            height: "200px",
+            width: "100%",
+            backgroundColor: isMobile ? "white" : "#fed957",
+          }}
+        />
         <Wave top="0px" color={theme.colors.beige.beige20} />
 
         <InnerWrapper>
@@ -548,7 +555,12 @@ const IdeaDetailPage: FC<IdeaDetailPageProps> = ({
             <Input placeholder={t("IdeaDetailPage.commentPlaceholder")} />
           </Box>
           {comments && (
-            <List data={comments} CardType={CommentCard} listEndText={" "} />
+            <List
+              data={comments}
+              CardType={CommentCard}
+              listEndText={" "}
+              handleOpenMenuComment={handleOpenMenuComment}
+            />
           )}
         </InnerWrapper>
       </DragWrapper>

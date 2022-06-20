@@ -37,9 +37,9 @@ const InnerWrapper = styled.div`
   margin: 12px 0px 12px 0px;
 `;
 
-const CommentCard: FC<CommentCardProps> = ({ data, setCommentMenuOpen }) => {
+const CommentCard: FC<CommentCardProps> = ({ data, handleOpenMenuComment }) => {
   const { t } = useTranslation();
-  const { title, createdAt, userHandle } = data;
+  const { title, createdAt, userHandle, userId, commentId } = data;
 
   return (
     <Wrapper>
@@ -63,7 +63,7 @@ const CommentCard: FC<CommentCardProps> = ({ data, setCommentMenuOpen }) => {
           </Box>
           <TertiaryButton
             iconLeft={<More />}
-            onClick={() => setCommentMenuOpen(true)}
+            onClick={() => handleOpenMenuComment(commentId, userId)}
           />
         </Box>
         <Box

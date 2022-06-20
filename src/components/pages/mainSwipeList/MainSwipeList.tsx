@@ -406,6 +406,7 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
             {isMobile && (
               <TagSlide
                 type={order === "ideas" ? "topics" : "organizationTypes"}
+                hide={!swipedUp}
                 selectedTopics={selectedTopics}
                 selectedOrganizationTypes={selectedOrganizationTypes}
                 handleSelectTopics={handleSelectTopics}
@@ -419,7 +420,7 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
             {isMobile && toolbarComponent}
 
             {order !== "ideas" && (!isMobile || swipedUp) && (
-              <Box margin="0px 16px">
+              <Box margin="10px 16px 0px 16px">
                 <Button
                   variant="secondary"
                   borderStyle="dashed"

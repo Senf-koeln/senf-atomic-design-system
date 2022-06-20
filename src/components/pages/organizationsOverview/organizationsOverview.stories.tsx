@@ -21,6 +21,7 @@ export const Default = Template.bind({});
 Default.args = {
   checkedSortOption: "aToZ",
   openOrganizationsOverview: true,
+  setOpenOrganizationsOverview: () => {},
   selectedOrganizationTypes: ["Vereine"],
   data: [
     {

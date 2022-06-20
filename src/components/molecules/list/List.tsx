@@ -48,7 +48,7 @@ const List: FC<ListProps> = ({
   handleOpenProjectroom,
   handleButtonLike,
   handleButtonComment,
-  setCommentMenuOpen,
+  handleOpenMenuComment,
   user,
   listEndText,
 }) => {
@@ -89,6 +89,7 @@ const List: FC<ListProps> = ({
             <Box
               margin="16px 16px 0px 16px"
               display={listType === "grid" ? "contents" : "flex"}
+              flexDirection={listType === "grid" ? "row" : "column"}
             >
               <CardType
                 data={dataArray[i]}
@@ -100,7 +101,7 @@ const List: FC<ListProps> = ({
                 handleOpenProjectroom={handleOpenProjectroom}
                 handleButtonLike={handleButtonLike}
                 handleButtonComment={handleButtonComment}
-                setCommentMenuOpen={setCommentMenuOpen}
+                handleOpenMenuComment={handleOpenMenuComment}
                 user={user}
               />
             </Box>

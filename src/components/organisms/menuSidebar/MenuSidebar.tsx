@@ -87,7 +87,8 @@ const MenuSidebar: FC<MenuSidebarProps> = ({
             text={<More />}
             onClick={() => setOrder(1)}
           />
-          <Button variant="white" size="small" icon={<Bell />} />
+
+          {/* <Button variant="white" size="small" icon={<Bell />} /> */}
 
           <Button
             variant="white"

@@ -50,6 +50,7 @@ const TagSlide: FC<TagSlideProps> = ({
   placing = "list",
   column,
   type,
+  hide,
   openScream,
   selectedTopics,
   selectedOrganizationTypes,
@@ -82,6 +83,7 @@ const TagSlide: FC<TagSlideProps> = ({
                 ? () => handleSelectTopics("all")
                 : () => handleSelectOrganizationTypes("all")
             }
+            hide={hide}
             active={
               type === "topics"
                 ? selectedTopics?.length === 7
@@ -102,6 +104,7 @@ const TagSlide: FC<TagSlideProps> = ({
                   key={topic.name}
                   placing={placing}
                   onClick={() => handleSelectTopics(topic.name)}
+                  hide={hide}
                   active={
                     selectedTopics?.includes(topic.name) &&
                     selectedTopics?.length !== 7
@@ -128,6 +131,7 @@ const TagSlide: FC<TagSlideProps> = ({
                   onClick={() =>
                     handleSelectOrganizationTypes(organizationTypes.name)
                   }
+                  hide={hide}
                   active={
                     selectedOrganizationTypes?.includes(
                       organizationTypes.name

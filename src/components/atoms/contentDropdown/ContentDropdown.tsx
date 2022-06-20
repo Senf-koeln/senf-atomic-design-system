@@ -19,7 +19,7 @@ const DropDownListContainer = styled.div`
   display: block;
   box-sizing: border-box;
   z-index: 99;
-  position: absolute;
+  position: fixed;
   margin-top: -40px;
   width: auto;
   min-width: max-content;

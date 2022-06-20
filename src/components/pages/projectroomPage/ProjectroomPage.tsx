@@ -330,6 +330,8 @@ const ProjectroomPage: FC<ProjectroomPageProps> = ({
           }
         }
       );
+
+      console.log(organizationCardData, user);
     }
   }, [organizations]);
 

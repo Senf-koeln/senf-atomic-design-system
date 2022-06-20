@@ -18,6 +18,7 @@ import TagSlide from "../../molecules/tagSlide/TagSlide";
 import Toolbar from "../../molecules/toolbar/Toolbar";
 import { StatisticsOverviewProps } from "./StatisticsOverview.types";
 import Arrow from "../../../assets/icons/Arrow";
+import Wave from "../../atoms/shapes/Wave";
 
 const Wrapper = styled.div<StatisticsOverviewProps>`
   background-color: ${({ theme }) => theme.colors.beige.beige20};
@@ -91,15 +92,12 @@ const StatisticsOverview: FC<StatisticsOverviewProps> = ({
 
   return isMobile ? (
     <SwipeModal
-      backgroundColor={theme.colors.beige.beige20}
+      backgroundColor={theme.colors.primary.primary100}
       openModal={openStatisticsOverview}
       setOpenModal={setOpenStatisticsOverview}
       headerComponentHeight="102px"
-      headerComponentBackgroundColor={theme.colors.beige.beige20}
       HeaderComponent={
         <React.Fragment>
-          <Shape variant={1} position="absolute" marginTop="0px" />
-
           <SubNavbar
             iconLeft={<Arrow transform="rotate(90deg)" />}
             leftButtonClick={() => setOpenStatisticsOverview(false)}
@@ -111,6 +109,8 @@ const StatisticsOverview: FC<StatisticsOverviewProps> = ({
         </React.Fragment>
       }
     >
+      <Wave color={theme.colors.beige.beige20} top="0px" />
+
       <InnerWrapper isMobile={isMobile}>{children}</InnerWrapper>
     </SwipeModal>
   ) : (

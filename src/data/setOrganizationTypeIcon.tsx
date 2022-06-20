@@ -21,7 +21,7 @@ const setOrganizationTypeIcon = (name) => {
     case "Politik":
       icon = <Politik />;
       break;
-    case "Verwaltung":
+    case "Stadtverwaltung":
       icon = <Stadtverwaltung />;
       break;
     case "Presse":

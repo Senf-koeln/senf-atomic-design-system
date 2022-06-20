@@ -53,6 +53,7 @@ const Wrapper = styled.div<IdeaCardProps>`
 
 const InnerWrapper = styled.div`
   margin: 12px 12px 12px 18px;
+  width: 100%;
 `;
 
 const ProjectroomOpenButton = styled.button`

@@ -7,20 +7,12 @@ import { ShapeProps } from "./Shape.types";
 const StyledWrapper = styled.div<ShapeProps>`
   position: ${({ position }) => (position ? position : "relative")};
   width: 100%;
+  height: 70px;
   margin-top: ${({ marginTop }) => (marginTop ? marginTop : "0px")};
   z-index: -1;
   display: flex;
   flex-direction: column;
   pointer-events: none;
-`;
-
-//NOT WORKING
-const RemainingSpaceFill = styled.div`
-  flex-grow: 1;
-  background-color: green;
-  width: 100%;
-  position: relative;
-  z-index: 99999;
 `;
 
 const Shapes = [
@@ -57,7 +49,7 @@ const Shapes = [
 const Shape: FC<ShapeProps> = ({ variant, position, marginTop }) => {
   return (
     <StyledWrapper position={position} marginTop={marginTop}>
-      {Shapes[variant]} <RemainingSpaceFill />
+      {Shapes[variant]}
     </StyledWrapper>
   );
 };

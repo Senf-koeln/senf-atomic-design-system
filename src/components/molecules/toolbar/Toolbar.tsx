@@ -21,7 +21,7 @@ const Wrapper = styled.div<ToolbarProps>`
   width: 100%;
   transition: 0.5s;
   animation: ToolbarAnimation 0.7s;
-
+  z-index: 1;
   flex-flow: wrap;
 
   @keyframes ToolbarAnimation {
@@ -116,7 +116,6 @@ const Toolbar: FC<ToolbarProps> = ({
                     />
                   }
                 />
-                {/* <option value={item.value}>{item.label}</option> */}
               </Box>
             ))}
           </Box>

@@ -105,7 +105,7 @@ const Example: FC<OrganizationPageProps> = ({
       right="0px"
       backgroundColor={theme.colors.beige.beige20}
       overflow="hidden scroll"
-      zIndex="99"
+      zIndex="999"
       boxShadow={
         document.body.clientWidth > 1350 &&
         "-40px 8px 30px -12px rgba(0, 0, 0, 0.2)"
@@ -282,7 +282,6 @@ const Example: FC<OrganizationPageProps> = ({
             CardType={ProjectroomCard}
             data={organization?.projectRooms}
             handleButtonOpenCard={handleButtonOpenCard}
-            setCommentMenuOpen={setCommentMenuOpen}
             organizations={organizations}
             listEndText={
               !organization?.projectRooms || organization?.projectRooms < 1
