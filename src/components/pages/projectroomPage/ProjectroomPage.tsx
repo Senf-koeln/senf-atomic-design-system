@@ -527,32 +527,30 @@ const ProjectroomPage: FC<ProjectroomPageProps> = ({
               />
             </Box>
 
-            <Box>
-              {order === 1 ? (
-                <List
-                  CardType={IdeaCard}
-                  data={screams}
-                  handleButtonOpenCard={handleButtonOpenCard}
-                  organizations={organizations}
-                  listEndText={
-                    screams > 0
-                      ? t("noMoreIdeas")
-                      : screams < 1 && t("noProjectIdeas")
+            {order === 1 ? (
+              <List
+                CardType={IdeaCard}
+                data={screams}
+                handleButtonOpenCard={handleButtonOpenCard}
+                organizations={organizations}
+                listEndText={
+                  screams > 0
+                    ? t("noMoreIdeas")
+                    : screams < 1 && t("noProjectIdeas")
 
-                    // :t("noContentIdeas") //filter...
-                  }
-                />
-              ) : (
-                order === 2 && (
-                  <Box margin="10px 10px 0px 0px" width="100%">
-                    <Calendar
-                      inlineCalendarEntries={screams}
-                      calendarType="inline"
-                    />
-                  </Box>
-                )
-              )}
-            </Box>
+                  // :t("noContentIdeas") //filter...
+                }
+              />
+            ) : (
+              order === 2 && (
+                <Box margin="10px 10px 0px 0px" width="100%">
+                  <Calendar
+                    inlineCalendarEntries={screams}
+                    calendarType="inline"
+                  />
+                </Box>
+              )
+            )}
           </ContentWrapper>
         </InnerWrapper>
       </DragWrapper>

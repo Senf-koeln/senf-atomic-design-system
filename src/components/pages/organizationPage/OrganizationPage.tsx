@@ -276,32 +276,30 @@ const Example: FC<OrganizationPageProps> = ({
         </Box>
       )}
 
-      <Box margin="0px 12px">
-        {order === 1 ? (
-          <List
-            CardType={ProjectroomCard}
-            data={organization?.projectRooms}
-            handleButtonOpenCard={handleButtonOpenCard}
-            organizations={organizations}
-            listEndText={
-              !organization?.projectRooms || organization?.projectRooms < 1
-                ? t("noOrganizationProjectRooms")
-                : t("noMoreProjectrooms")
-            }
-          />
-        ) : (
-          order === 2 &&
-          organization?.googleCalendarId && (
-            <Box margin="10px 10px 0px 0px" width="100%">
-              <Calendar
-                googleCalendarApiKey={googleCalendarApiKey}
-                googleCalendarId={organization?.googleCalendarId}
-                calendarType="google"
-              />
-            </Box>
-          )
-        )}
-      </Box>
+      {order === 1 ? (
+        <List
+          CardType={ProjectroomCard}
+          data={organization?.projectRooms}
+          handleButtonOpenCard={handleButtonOpenCard}
+          organizations={organizations}
+          listEndText={
+            !organization?.projectRooms || organization?.projectRooms < 1
+              ? t("noOrganizationProjectRooms")
+              : t("noMoreProjectrooms")
+          }
+        />
+      ) : (
+        order === 2 &&
+        organization?.googleCalendarId && (
+          <Box margin="10px 10px 0px 0px" width="100%">
+            <Calendar
+              googleCalendarApiKey={googleCalendarApiKey}
+              googleCalendarId={organization?.googleCalendarId}
+              calendarType="google"
+            />
+          </Box>
+        )
+      )}
     </Dialog>
   );
 };

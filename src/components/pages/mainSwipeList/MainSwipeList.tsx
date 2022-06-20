@@ -109,6 +109,7 @@ const ToolbarWrapper = styled.div`
   margin-left: 12px;
   width: calc(100% - 24px);
   overflow-y: hidden;
+  z-index: 9;
 `;
 
 const HandleBar = styled.div`
@@ -371,7 +372,6 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
         <Wave
           color={theme.colors.beige.beige20}
           top={swipedUp || !isMobile ? "0px" : "200px"}
-          // position="fixed"
         />
         {!isMobile && (
           <MenuSidebar

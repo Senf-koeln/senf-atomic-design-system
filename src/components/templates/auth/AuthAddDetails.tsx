@@ -47,6 +47,17 @@ const AuthAddDetails: FC<AuthAddDetailsProps> = ({
     sex: user?.sex ? user?.sex : null,
   });
 
+  useEffect(() => {
+    // Set up canvas
+    setData({
+      handle: user?.handle,
+      description: user?.description ? user?.description : null,
+      zipcode: user?.zipcode ? user?.zipcode : null,
+      age: user?.age ? user?.age : null,
+      sex: user?.sex ? user?.sex : null,
+    });
+  }, [user]);
+
   function generateArrayOfYears() {
     var max = new Date().getFullYear() - 14;
     var min = max - 100;
@@ -61,105 +72,103 @@ const AuthAddDetails: FC<AuthAddDetailsProps> = ({
   var years = generateArrayOfYears();
 
   return (
-    user && (
-      <Box
-        flexDirection="column"
-        margin="80px 10% 0px 10%"
-        position="relative"
-        zIndex={9999}
-      >
-        <Typography variant="h1" style={{ position: "relative" }}>
-          {/* {t("auth_add_details_header1")} */}
-          Vervollständige
-        </Typography>
-        <Typography variant="h1" style={{ position: "relative" }}>
-          dein Profil
-          {/* {t("auth_add_details_header2")} */}
-        </Typography>
+    <Box
+      flexDirection="column"
+      margin="80px 10% 0px 10%"
+      position="relative"
+      zIndex={9999}
+    >
+      <Typography variant="h1" style={{ position: "relative" }}>
+        {/* {t("auth_add_details_header1")} */}
+        Vervollständige
+      </Typography>
+      <Typography variant="h1" style={{ position: "relative" }}>
+        dein Profil
+        {/* {t("auth_add_details_header2")} */}
+      </Typography>
 
-        <Box margin="25px 0px 24px 0px" flexDirection="column" gap="10px">
-          <Box justifyContent="center" margin="20px">
-            <ImageWrapper
-              // onMouseEnter={() => setUploadImageHover(true)}
-              // onMouseLeave={() => setUploadImageHover(false)}
-              htmlFor="imageUploader"
-            >
-              {user?.photoUrl ? (
-                <ImagePlaceholder
-                  img={user?.photoUrl}
-                  borderRadius="18px"
-                  height="calc(100% - 40px)"
-                  width="calc(100% - 40px)"
-                />
-              ) : uploadingImage ? (
-                <Loader />
-              ) : (
-                <Icon icon={<Bulb />} />
-              )}
-            </ImageWrapper>
-            <input
-              type="file"
-              onChange={(event) => handleImageUpload(event)}
-              style={{ display: "none" }}
-              id="imageUploader"
-            />
-          </Box>
-          <Input
-            type="text"
-            placeholder={t("username")}
-            onChange={(e) => setData({ ...data, handle: e.target.value })}
-            value={data.handle}
+      <Box margin="25px 0px 24px 0px" flexDirection="column" gap="10px">
+        <Box justifyContent="center" margin="20px">
+          <ImageWrapper
+            // onMouseEnter={() => setUploadImageHover(true)}
+            // onMouseLeave={() => setUploadImageHover(false)}
+            htmlFor="imageUploader"
+          >
+            {user?.photoUrl ? (
+              <ImagePlaceholder
+                img={user?.photoUrl}
+                borderRadius="18px"
+                height="calc(100% - 40px)"
+                width="calc(100% - 40px)"
+              />
+            ) : uploadingImage ? (
+              <Loader />
+            ) : (
+              <Icon icon={<Bulb />} />
+            )}
+          </ImageWrapper>
+          <input
+            type="file"
+            onChange={(event) => handleImageUpload(event)}
+            style={{ display: "none" }}
+            id="imageUploader"
           />
-
-          <Input
-            type="textarea"
-            rows={3}
-            placeholder={t("auth_add_details_description")}
-            onChange={(e) => setData({ ...data, description: e.target.value })}
-            value={data.description}
-          />
-          <Input
-            type="text"
-            placeholder={t("zipcode")}
-            onChange={(e) => setData({ ...data, zipcode: e.target.value })}
-            value={data.zipcode}
-          />
-
-          <Dropdown
-            id="MultiDropdowns"
-            listItems={{
-              sex: [
-                {
-                  label: t("diverse"),
-                  value: "diverse",
-                },
-                {
-                  label: t("female"),
-                  value: "female",
-                },
-                {
-                  label: t("male"),
-                  value: "male",
-                },
-              ],
-              age: years,
-            }}
-            multi
-            recieveValue={(selectedItems) =>
-              setData({
-                ...data,
-                sex: selectedItems.sex,
-                age: selectedItems.age,
-              })
-            }
-          />
-          <br />
-          <Button variant="white" onClick={() => handleSubmitEditDetails(data)}>
-            {t("save")}
-          </Button>
         </Box>
+        <Input
+          type="text"
+          placeholder={t("username")}
+          onChange={(e) => setData({ ...data, handle: e.target.value })}
+          value={data.handle}
+        />
+
+        <Input
+          type="textarea"
+          rows={3}
+          placeholder={t("auth_add_details_description")}
+          onChange={(e) => setData({ ...data, description: e.target.value })}
+          value={data.description}
+        />
+        <Input
+          type="text"
+          placeholder={t("zipcode")}
+          onChange={(e) => setData({ ...data, zipcode: e.target.value })}
+          value={data.zipcode}
+        />
+
+        <Dropdown
+          id="MultiDropdowns"
+          listItems={{
+            sex: [
+              {
+                label: t("diverse"),
+                value: "diverse",
+              },
+              {
+                label: t("female"),
+                value: "female",
+              },
+              {
+                label: t("male"),
+                value: "male",
+              },
+            ],
+            age: years,
+          }}
+          multi
+          recieveValue={(selectedItems) =>
+            setData({
+              ...data,
+              sex: selectedItems.sex,
+              age: selectedItems.age,
+            })
+          }
+        />
+        <br />
+        <Button variant="white" onClick={() => handleSubmitEditDetails(data)}>
+          {t("save")}
+        </Button>
       </Box>
-    )
+    </Box>
   );
 };
 

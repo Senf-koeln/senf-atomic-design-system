@@ -150,6 +150,7 @@ const IdeaDetailPage: FC<IdeaDetailPageProps> = ({
   handleReportIdea,
   user,
   handleOpenMenuComment,
+  path,
 }) => {
   const {
     screamId,
@@ -172,7 +173,6 @@ const IdeaDetailPage: FC<IdeaDetailPageProps> = ({
     createdAt,
     comments,
     handleShareIdeaVia,
-    path,
   } = data;
   const { t } = useTranslation();
   const isMobile = isMobileCustom();

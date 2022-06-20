@@ -163,6 +163,8 @@ const OrganizationsOverview: FC<OrganizationsOverviewProps> = ({
             size="small"
             text={t("createOrganization")}
             fillWidth="max"
+            onClick={handleOpenCreateOrganization}
+
             // onClick={
             //   user.authenticated
             //     ? openCreateOrganization

@@ -26,8 +26,6 @@ const Wrapper = styled.div<IdeaCardProps>`
 
   border-radius: 18px;
 
-  width: 100%;
-  min-width: 100%;
   height: auto;
   padding-bottom: ${({ projectroomCardData }) =>
     projectroomCardData ? "40px" : "0"};
@@ -53,7 +51,6 @@ const Wrapper = styled.div<IdeaCardProps>`
 
 const InnerWrapper = styled.div`
   margin: 12px 12px 12px 18px;
-  width: 100%;
 `;
 
 const ProjectroomOpenButton = styled.button`

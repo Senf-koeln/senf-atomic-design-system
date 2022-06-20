@@ -21,9 +21,6 @@ const Wrapper = styled.div<ProjectroomCardProps>`
   height: auto;
   border-radius: 18px;
 
-  width: 100%;
-  min-width: 100%;
-
   height: auto;
   overflow: hidden;
 

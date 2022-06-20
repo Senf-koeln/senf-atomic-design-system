@@ -184,136 +184,138 @@ const ProfilePage: FC<ProfilePageProps> = ({
   );
 
   return (
-    <React.Fragment>
-      <DetailSidebar
-        handleButtonClose={() => handleButtonClose(false)}
-        sideDivider={true}
-        SecondButton={
-          <ContentDropdown
-            open={dropdownOpen}
-            setOpen={setDropdownOpen}
-            direction={isMobile ? "downLeft" : "downRight"}
-            OpenButton={
-              <RoundedButton
-                variant="white"
-                size="small"
-                onClick={handleToggle}
-                icon={<More />}
-              />
-            }
-            Content={
-              <Box gap="5px" flexDirection="column">
-                <Button
-                  variant={"secondary"}
+    user && (
+      <React.Fragment>
+        <DetailSidebar
+          handleButtonClose={() => handleButtonClose(false)}
+          sideDivider={true}
+          SecondButton={
+            <ContentDropdown
+              open={dropdownOpen}
+              setOpen={setDropdownOpen}
+              direction={isMobile ? "downLeft" : "downRight"}
+              OpenButton={
+                <RoundedButton
+                  variant="white"
                   size="small"
-                  text={t("profile.edit")}
-                  justifyContent="flex-start"
-                  onClick={() => setAuthEditOpen(true)}
-                  icon={<Edit />}
+                  onClick={handleToggle}
+                  icon={<More />}
                 />
-                <Button
-                  variant={"secondary"}
-                  size="small"
-                  text={t("logout")}
-                  justifyContent="flex-start"
-                  onClick={handleLogout}
-                  icon={<Logout />}
-                  // disabled={i18n.resolvedLanguage === lng}
-                />
-                <Button
-                  variant={"secondary"}
-                  size="small"
-                  text={t("profile.delete")}
-                  justifyContent="flex-start"
-                  onClick={handleDeleteAccount}
-                  icon={<Plus transform="rotate(45deg)" />}
-                  // disabled={i18n.resolvedLanguage === lng}
-                />
-              </Box>
-            }
-          />
-        }
-      />
-      <DragWrapper
-        id="dragWrapper"
-        style={props}
-        {...bind()}
-        isMobile={isMobile}
-      >
-        <Wave top="0px" color={theme.colors.beige.beige20} />
-
-        <ContentWrapper>
-          <Box justifyContent="center" margin="20px">
-            <ImageWrapper>
-              <ImagePlaceholder
-                img={photoUrl ? photoUrl : null}
-                borderRadius="18px"
-                height="calc(100% - 40px)"
-                width="calc(100% - 40px)"
-              />
-            </ImageWrapper>
-          </Box>
-          <Box justifyContent="center" margin="20px">
-            <Typography variant="h3">{handle}</Typography>
-          </Box>
-
-          <Box margin="0px 24px" flexDirection="column">
-            <Typography variant="buttonBg">
-              {t("profilePage.aboutHeadline")}
-            </Typography>
-
-            <Box margin="5px 0px">
-              {description ? (
-                <Typography variant="bodyBg">{description}</Typography>
-              ) : (
-                <Button
-                  variant="secondary"
-                  size="small"
-                  text={t("profilePage.addDescription")}
-                  onClick={() => setAuthEditOpen(true)}
-                />
-              )}
-            </Box>
-          </Box>
-
-          <Divider margin="14px 24px 16px 24px" width="calc(100% - 48px)" />
-          <Box margin="0px 24px 0px 24px" gap="10px">
-            <Tabs
-              fontSize="buttonSm"
-              order={order}
-              setOrder={setOrder}
-              tabs={
-                myOrganizations
-                  ? [
-                      { icon: <Bulb />, text: "Ideen" },
-                      { icon: <Info />, text: "Organisationen" },
-                      { icon: <Info />, text: "Interaktionen" },
-                    ]
-                  : [
-                      { icon: <Bulb />, text: "Ideen" },
-                      { icon: <Info />, text: "Interaktionen" },
-                    ]
+              }
+              Content={
+                <Box gap="5px" flexDirection="column">
+                  <Button
+                    variant={"secondary"}
+                    size="small"
+                    text={t("profile.edit")}
+                    justifyContent="flex-start"
+                    onClick={() => setAuthEditOpen(true)}
+                    icon={<Edit />}
+                  />
+                  <Button
+                    variant={"secondary"}
+                    size="small"
+                    text={t("logout")}
+                    justifyContent="flex-start"
+                    onClick={handleLogout}
+                    icon={<Logout />}
+                    // disabled={i18n.resolvedLanguage === lng}
+                  />
+                  <Button
+                    variant={"secondary"}
+                    size="small"
+                    text={t("profile.delete")}
+                    justifyContent="flex-start"
+                    onClick={handleDeleteAccount}
+                    icon={<Plus transform="rotate(45deg)" />}
+                    // disabled={i18n.resolvedLanguage === lng}
+                  />
+                </Box>
               }
             />
-          </Box>
+          }
+        />
+        <DragWrapper
+          id="dragWrapper"
+          style={props}
+          {...bind()}
+          isMobile={isMobile}
+        >
+          <Wave top="0px" color={theme.colors.beige.beige20} />
 
-          <List
-            CardType={order === 1 ? IdeaCard : OrganizationCard}
-            data={order === 1 ? screams : myOrganizations}
-            handleButtonOpenCard={handleButtonOpenCard}
-            handleOpenProjectroom={handleOpenProjectroom}
-            organizations={organizations}
-            listEndText={
-              order === 1 && screams > 0
-                ? t("noMoreIdeas")
-                : order === 1 && screams < 1 && t("noSharedIdeas")
+          <ContentWrapper>
+            <Box justifyContent="center" margin="20px">
+              <ImageWrapper>
+                <ImagePlaceholder
+                  img={photoUrl ? photoUrl : null}
+                  borderRadius="18px"
+                  height="calc(100% - 40px)"
+                  width="calc(100% - 40px)"
+                />
+              </ImageWrapper>
+            </Box>
+            <Box justifyContent="center" margin="20px">
+              <Typography variant="h3">{handle}</Typography>
+            </Box>
 
-              // :t("noIdeasWithFilter")
-            }
-          />
-        </ContentWrapper>
-      </DragWrapper>
-    </React.Fragment>
+            <Box margin="0px 24px" flexDirection="column">
+              <Typography variant="buttonBg">
+                {t("profilePage.aboutHeadline")}
+              </Typography>
+
+              <Box margin="5px 0px">
+                {description ? (
+                  <Typography variant="bodyBg">{description}</Typography>
+                ) : (
+                  <Button
+                    variant="secondary"
+                    size="small"
+                    text={t("profilePage.addDescription")}
+                    onClick={() => setAuthEditOpen(true)}
+                  />
+                )}
+              </Box>
+            </Box>
+
+            <Divider margin="14px 24px 16px 24px" width="calc(100% - 48px)" />
+            <Box margin="0px 24px 0px 24px" gap="10px">
+              <Tabs
+                fontSize="buttonSm"
+                order={order}
+                setOrder={setOrder}
+                tabs={
+                  myOrganizations
+                    ? [
+                        { icon: <Bulb />, text: "Ideen" },
+                        { icon: <Info />, text: "Organisationen" },
+                        { icon: <Info />, text: "Interaktionen" },
+                      ]
+                    : [
+                        { icon: <Bulb />, text: "Ideen" },
+                        { icon: <Info />, text: "Interaktionen" },
+                      ]
+                }
+              />
+            </Box>
+
+            <List
+              CardType={order === 1 ? IdeaCard : OrganizationCard}
+              data={order === 1 ? screams : myOrganizations}
+              handleButtonOpenCard={handleButtonOpenCard}
+              handleOpenProjectroom={handleOpenProjectroom}
+              organizations={organizations}
+              listEndText={
+                order === 1 && screams > 0
+                  ? t("noMoreIdeas")
+                  : order === 1 && screams < 1 && t("noSharedIdeas")
+
+                // :t("noIdeasWithFilter")
+              }
+            />
+          </ContentWrapper>
+        </DragWrapper>
+      </React.Fragment>
+    )
   );
 };
 
