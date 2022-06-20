@@ -61,7 +61,9 @@ const Input: FunctionComponent<InputProps> = ({
         focus={isFocused}
         onFocusCapture={() => setIsFocused((prevState) => !prevState)}
         onBlurCapture={() => setIsFocused((prevState) => !prevState)}
-        onBlur={(event) => onBlur(event)}
+        onBlur={(event) => {
+          onBlur ? onBlur(event) : null;
+        }}
       >
         {isSearch && <Icon icon={<Search />} />}
         <TextField

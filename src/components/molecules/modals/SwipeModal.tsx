@@ -10,6 +10,7 @@ import { LayerWhiteFirstDefault } from "../../atoms/layerStyles/LayerStyles";
 import SubNavbar from "../navs/SubNavbar";
 import { SwipeModalProps } from "./SwipeModal.types";
 import { animated } from "@react-spring/web";
+import { isMobileCustom } from "../../../hooks/customDeviceDetect";
 
 const DragWrapper = styled(animated.div)`
   z-index: ${({ zIndex }) => (zIndex ? zIndex : 9999)};
@@ -27,8 +28,18 @@ const DragWrapper = styled(animated.div)`
   box-shadow: ${({ theme }) => theme.shadows[0]}
     ${({ theme }) => theme.colors.brown.brown20tra};
 
-  position: absolute;
+  position: fixed;
   animation: organizationOverviewEnterAnimation 0.5s;
+
+  @media (min-width: 768px) {
+    top: 50%;
+    left: 50%;
+    max-width: 400px;
+    max-height: calc(100vh - 40px);
+    height: auto;
+    border-radius: ${({ theme }) => theme.radii[4]}px;
+    animation: none;
+  }
 `;
 
 const Background = styled.div<SwipeModalProps>`
@@ -69,6 +80,7 @@ const SwipeModal: FC<SwipeModalProps> = ({
   backgroundColor,
   overflow,
 }) => {
+  const isMobile = isMobileCustom();
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
@@ -81,12 +93,24 @@ const SwipeModal: FC<SwipeModalProps> = ({
 
   const handleOpen = () => {
     setOpenModal(true);
+    set({
+      transform: isMobile ? `translateY(${30}px)` : "translate(-50%, -50%)",
+      overflow: "scroll",
+      touchAction: "unset",
+      userSelect: "none",
+    });
     const root = document.getElementById("root");
     root?.setAttribute("inert", "");
   };
 
   const handleClose = () => {
-    setOpenModal(false);
+    set({
+      transform: `translateY(${window.innerHeight}px)`,
+      touchAction: "none",
+    });
+    setTimeout(() => {
+      setOpenModal(false);
+    }, 150);
     const root = document.getElementById("root");
     root?.removeAttribute("inert");
     // focus modal trigger again
@@ -103,35 +127,32 @@ const SwipeModal: FC<SwipeModalProps> = ({
   }, []);
 
   const [props, set] = useSpring(() => ({
-    x: 0,
     y: 0,
-    scale: 1,
-    transform: `translateY(${30}px)`,
-    overflow: "hidden",
-    touchAction: "none",
+    transform: isMobile ? `translateY(${30}px)` : "translate(-50%, -50%)",
+    overflow: "scroll",
+    touchAction: "unset",
     userSelect: "none",
   }));
 
   const bind = useDrag(
     ({ last, down, movement: [, my], offset: [, y] }) => {
-      if (last && my > 50) {
+      const el = document.getElementById("swipeModal");
+
+      if (last && el.scrollTop < 30 && my > 150) {
         set({
           transform: `translateY(${window.innerHeight}px)`,
           touchAction: "none",
         });
 
         setTimeout(() => {
-          window.history.pushState(null, null, "/projectRooms");
-          setOpenModal(false);
+          handleClose();
         }, 150);
-        setTimeout(() => {
-          set({
-            transform: `translateY(${30}px)`,
-            touchAction: "none",
-          });
-        }, 300);
+      } else {
+        set({
+          transform: `translateY(${30}px)`,
+          touchAction: "unset",
+        });
       }
-      console.log(my);
 
       set({ y: down ? my : 0 });
     },
@@ -143,23 +164,12 @@ const SwipeModal: FC<SwipeModalProps> = ({
     }
   );
 
-  const setClose = () => {
-    set({
-      transform: `translateY(${window.innerHeight}px)`,
-      touchAction: "none",
-    });
-    setTimeout(() => {
-      // window.history.pushState(null, null, "/projectRooms");
-      setOpenModal(false);
-    }, 150);
-  };
-
   return (
     <React.Fragment>
       {openModal &&
         ReactDOM.createPortal(
           <React.Fragment>
-            <Background zIndex={zIndex - 1} onClick={setClose} />
+            <Background zIndex={zIndex - 1} onClick={handleClose} />
             <DragWrapper
               style={props}
               zIndex={zIndex}
@@ -168,6 +178,7 @@ const SwipeModal: FC<SwipeModalProps> = ({
               role="dialog"
               size={size}
               aria-labelledby="modal-header"
+              id="swipeModal"
               onKeyDown={
                 (e) =>
                   submitRef?.current &&
@@ -175,14 +186,27 @@ const SwipeModal: FC<SwipeModalProps> = ({
                   trapFocus(e, submitRef.current, closeRef.current) // ideally we would use inert but it doesn't seem to be working
               }
             >
-              <Header
-                headerComponentHeight={headerComponentHeight}
-                headerComponentBackgroundColor={headerComponentBackgroundColor}
-                {...bind()}
-              >
-                {HeaderComponent}
-              </Header>
-              {children}
+              {HeaderComponent ? (
+                <React.Fragment>
+                  <Header
+                    headerComponentHeight={headerComponentHeight}
+                    headerComponentBackgroundColor={
+                      headerComponentBackgroundColor
+                    }
+                    {...bind()}
+                  >
+                    {HeaderComponent}
+                  </Header>
+                  {children}
+                </React.Fragment>
+              ) : (
+                <div
+                  style={{ height: "100%", width: "100%", overflow: "scroll" }}
+                  {...bind()}
+                >
+                  {children}
+                </div>
+              )}
             </DragWrapper>
           </React.Fragment>,
           document.body

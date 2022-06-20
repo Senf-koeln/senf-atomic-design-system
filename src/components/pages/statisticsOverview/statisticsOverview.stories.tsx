@@ -18,4 +18,7 @@ const Template: Story<StatisticsOverviewProps> = (args) => (
 );
 
 export const Default = Template.bind({});
-Default.args = {};
+Default.args = {
+  openStatisticsOverview: true,
+  setOpenStatisticsOverview: () => {},
+};

@@ -19,6 +19,7 @@ import Toolbar from "../../molecules/toolbar/Toolbar";
 import { OrganizationsOverviewProps } from "./OrganizationsOverview.types";
 import Arrow from "../../../assets/icons/Arrow";
 import Plus from "../../../assets/icons/Plus";
+import Wave from "../../atoms/shapes/Wave";
 
 const Wrapper = styled.div<OrganizationsOverviewProps>`
   background-color: ${({ theme }) => theme.colors.beige.beige20};
@@ -90,8 +91,6 @@ const OrganizationsOverview: FC<OrganizationsOverviewProps> = ({
   organization,
   projectroomsData,
   user,
-  openCreateOrganization,
-  setOpenModalAuthenticate,
   searchTerm,
   setSearchTerm,
   handleButtonOpenCard,
@@ -109,13 +108,15 @@ const OrganizationsOverview: FC<OrganizationsOverviewProps> = ({
       searchTerm={searchTerm}
       setSearchTerm={setSearchTerm}
       secondButton={
-        <Button
-          variant="secondary"
-          size="small"
-          text={t("createOrganization")}
-          icon={<Plus />}
-          onClick={handleOpenCreateOrganization}
-        />
+        !isMobile && (
+          <Button
+            variant="secondary"
+            size="small"
+            text={t("createOrganization")}
+            icon={<Plus />}
+            onClick={handleOpenCreateOrganization}
+          />
+        )
       }
       checkedSortOption={checkedSortOption}
       searchPlaceholder={t("searchBarOrganizations")}
@@ -129,15 +130,13 @@ const OrganizationsOverview: FC<OrganizationsOverviewProps> = ({
   );
   return isMobile ? (
     <SwipeModal
-      backgroundColor={theme.colors.beige.beige20}
+      backgroundColor={theme.colors.primary.primary100}
       openModal={openOrganizationsOverview}
       setOpenModal={setOpenOrganizationsOverview}
       headerComponentHeight="102px"
-      headerComponentBackgroundColor={theme.colors.beige.beige20}
+      zIndex="998"
       HeaderComponent={
         <React.Fragment>
-          <Shape variant={1} position="absolute" marginTop="0px" />
-
           <SubNavbar
             iconLeft={<Arrow transform="rotate(90deg)" />}
             header={t("organizations")}
@@ -153,6 +152,8 @@ const OrganizationsOverview: FC<OrganizationsOverviewProps> = ({
         </React.Fragment>
       }
     >
+      <Wave color={theme.colors.beige.beige20} top="0px" />
+
       <InnerWrapper isMobile={isMobile}>
         <Box margin="16px 12px 16px 12px">{toolbarComponent}</Box>
         <Box margin="0px 12px 6px 12px">
@@ -162,6 +163,8 @@ const OrganizationsOverview: FC<OrganizationsOverviewProps> = ({
             size="small"
             text={t("createOrganization")}
             fillWidth="max"
+            onClick={handleOpenCreateOrganization}
+
             // onClick={
             //   user.authenticated
             //     ? openCreateOrganization

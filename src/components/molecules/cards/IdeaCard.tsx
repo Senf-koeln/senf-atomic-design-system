@@ -26,8 +26,6 @@ const Wrapper = styled.div<IdeaCardProps>`
 
   border-radius: 18px;
 
-  width: 100%;
-  min-width: 100%;
   height: auto;
   padding-bottom: ${({ projectroomCardData }) =>
     projectroomCardData ? "40px" : "0"};
@@ -56,6 +54,7 @@ const InnerWrapper = styled.div`
 `;
 
 const ProjectroomOpenButton = styled.button`
+  cursor: pointer;
   position: absolute;
   width: 100%;
   height: 40px;
@@ -80,9 +79,7 @@ const IdeaCard: FC<IdeaCardProps> = ({
     Thema,
     likeCount,
     commentCount,
-    organizationType,
     projectRoomId: cardProjectRoomId,
-    thisOrganizationId,
     screamId,
   } = data;
 
@@ -111,6 +108,7 @@ const IdeaCard: FC<IdeaCardProps> = ({
             ...projectroomCardData,
             title,
             organizationType,
+            projectRoomId,
           ]);
         }
       });
@@ -118,74 +116,83 @@ const IdeaCard: FC<IdeaCardProps> = ({
   }, [projectroomsData]);
 
   return (
-    <Wrapper
-      status={status}
-      projectroomCardData={projectroomCardData.length > 0}
-      onClick={(event) => handleButtonOpenCard(event, "ideaCard", screamId)}
-    >
-      <InnerWrapper>
-        <Box
-          alignItems="center"
-          flexDirection="row"
-          gap="5px"
-          margin="8px 0px 4px 0px"
-        >
-          <Icon icon={<Dot color={setColorByTopic(Thema)} />} />
-          <Typography
-            variant="bodySm"
-            fontWeight={600}
-            color={setColorByTopic(Thema)}
-          >
-            {Stadtteil}
-          </Typography>
-          <Box
-            alignItems="center"
-            justifyContent="flex-end"
-            flexDirection="row"
-            margin="0px 0px 0px auto"
-          >
-            <TertiaryButton
-              variant="semibold"
-              iconLeft={liked() ? <FlameActive /> : <FlameInactive />}
-              text={likeCount}
-              onClick={(event) => handleButtonLike(event, screamId)}
-            />
-            <TertiaryButton
-              variant="semibold"
-              iconLeft={commented() ? <CommentActive /> : <CommentInactive />}
-              text={commentCount}
-              onClick={(event) => handleButtonComment(event, screamId)}
-            />
-          </Box>
-        </Box>
-
-        <Typography variant="h3"> {title}</Typography>
-
-        <Box
-          alignItems="flex-start"
-          flexDirection="row"
-          margin="8px 0px 8px 0px"
-        >
-          <Typography variant="bodyBg"> {body}</Typography>
-        </Box>
-      </InnerWrapper>
-
-      {projectroomCardData.length > 0 && (
-        <ProjectroomOpenButton
-          onClick={() => handleOpenProjectroom(cardProjectRoomId)}
-        >
+    data && (
+      <Wrapper
+        status={status}
+        projectroomCardData={projectroomCardData.length > 0}
+        onClick={(event) => handleButtonOpenCard(event, "ideaCard", screamId)}
+      >
+        <InnerWrapper>
           <Box
             alignItems="center"
             flexDirection="row"
-            gap="14px"
-            margin="0px 10px"
+            gap="5px"
+            margin="8px 0px 4px 0px"
           >
-            <Icon icon={setOrganizationTypeIcon(projectroomCardData[1])} />
-            <Typography variant="bodySm">{projectroomCardData[0]}</Typography>
+            <Icon icon={<Dot color={setColorByTopic(Thema)} />} />
+            <Typography
+              variant="bodySm"
+              fontWeight={600}
+              color={setColorByTopic(Thema)}
+            >
+              {Stadtteil}
+            </Typography>
+            <Box
+              alignItems="center"
+              justifyContent="flex-end"
+              flexDirection="row"
+              margin="0px 0px 0px auto"
+            >
+              <TertiaryButton
+                variant="semibold"
+                iconLeft={liked() ? <FlameActive /> : <FlameInactive />}
+                text={likeCount}
+                onClick={(event) => handleButtonLike(event, screamId)}
+              />
+              <TertiaryButton
+                variant="semibold"
+                iconLeft={commented() ? <CommentActive /> : <CommentInactive />}
+                text={commentCount}
+                onClick={(event) => handleButtonComment(event, screamId)}
+              />
+            </Box>
           </Box>
-        </ProjectroomOpenButton>
-      )}
-    </Wrapper>
+
+          <Typography variant="h3"> {title}</Typography>
+
+          <Box
+            alignItems="flex-start"
+            flexDirection="row"
+            margin="8px 0px 8px 0px"
+          >
+            <Typography variant="bodyBg"> {body}</Typography>
+          </Box>
+        </InnerWrapper>
+
+        {projectroomCardData.length > 0 && (
+          <ProjectroomOpenButton
+            onClick={(event) =>
+              handleOpenProjectroom(
+                event,
+                cardProjectRoomId,
+                data?.projectRoomId,
+                projectroomCardData[2]
+              )
+            }
+          >
+            <Box
+              alignItems="center"
+              flexDirection="row"
+              gap="14px"
+              margin="0px 10px"
+            >
+              <Icon icon={setOrganizationTypeIcon(projectroomCardData[1])} />
+              <Typography variant="bodySm">{projectroomCardData[0]}</Typography>
+            </Box>
+          </ProjectroomOpenButton>
+        )}
+      </Wrapper>
+    )
   );
 };
 

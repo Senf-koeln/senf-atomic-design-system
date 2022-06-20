@@ -38,6 +38,10 @@ const StyledButton = styled.button<TagProps>`
   //ADD THEME-SPACE?
   padding: 14px 10px 14px 10px;
 
+  transform: ${({ hide }) => (hide ? "scale(0.8)" : "scale(1)")};
+  opacity: ${({ hide }) => (hide ? "0" : "1")};
+  transition: 0.4s;
+
   animation: tagsAnimation 0.4s;
   @keyframes tagsAnimation {
     0% {
@@ -71,6 +75,7 @@ const Tag: FC<TagProps> = ({
   iconColor,
   variant,
   fillWidth,
+  hide,
   active,
   onClick,
   ...rest
@@ -84,6 +89,7 @@ const Tag: FC<TagProps> = ({
       fillWidth={fillWidth}
       active={active}
       onClick={onClick}
+      hide={hide}
       {...rest}
     >
       {icon === "all-topics" ? (

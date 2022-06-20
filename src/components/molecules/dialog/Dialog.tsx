@@ -17,7 +17,7 @@ const DialogWrapper = styled.div<DialogProps>`
   top: 0;
   height: calc(100vh - 20px);
   width: 100%;
-  margin: 10px;
+
   max-width: ${({ size }) =>
     size === "xxl"
       ? "100vw"
@@ -33,11 +33,15 @@ const DialogWrapper = styled.div<DialogProps>`
   background-color: ${({ backgroundColor }) =>
     backgroundColor ? backgroundColor : "white"};
 
-  /* box-shadow: ${({ boxShadow }) => (boxShadow ? boxShadow : undefined)}; */
-  box-shadow: ${({ theme }) => theme.shadows[0]}
-    ${({ theme }) => theme.colors.brown.brown20tra};
-  border-radius: 18px;
+  box-shadow: ${({ boxShadow, theme }) =>
+    boxShadow ? boxShadow : theme.shadows[0] + theme.colors.brown.brown20tra};
+
   animation: opacityTranslateYFrom100Animation 0.2s;
+
+  @media (min-width: 768px) {
+    margin: 10px;
+    border-radius: 18px;
+  }
 `;
 
 const Dialog: FC<DialogProps> = ({

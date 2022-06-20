@@ -22,6 +22,7 @@ import ProjectroomCard from "../../molecules/cards/ProjectroomCard";
 import Stats from "../../../assets/icons/Stats";
 import MainSwipeListTabs from "../../molecules/tabs/MainSwipeListTabs";
 import MenuSidebar from "../../organisms/menuSidebar/MenuSidebar";
+import Box from "../../atoms/box/Box";
 
 const DragWrapper = styled(animated.div)`
   z-index: ${({ zIndex }) => (zIndex ? zIndex : 995)};
@@ -107,6 +108,8 @@ const ToolbarWrapper = styled.div`
   transition: 0.5s;
   margin-left: 12px;
   width: calc(100% - 24px);
+  overflow-y: hidden;
+  z-index: 9;
 `;
 
 const HandleBar = styled.div`
@@ -161,6 +164,8 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
 
   checkedSortOption,
   setCheckedSortOption,
+
+  handleCreateProjectroom,
 }) => {
   const { t } = useTranslation();
   const isMobile = isMobileCustom();
@@ -177,7 +182,7 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
   }));
 
   const [listHeaderProps, setListHeaderProps] = useSpring(() => ({
-    height: isMobile ? "80px" : "160px",
+    height: isMobile ? "60px" : "160px",
   }));
 
   useEffect(() => {
@@ -204,11 +209,15 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
   useEffect(() => {
     if (searchOpen) {
       setListHeaderProps({
-        height: isMobile ? "140px" : "220px",
+        height: isMobile ? "130px" : "220px",
+      });
+    } else if (swipedUp && isMobile) {
+      setListHeaderProps({
+        height: "130px",
       });
     } else {
       setListHeaderProps({
-        height: isMobile ? "80px" : "160px",
+        height: isMobile ? "60px" : "160px",
       });
     }
   }, [searchOpen]);
@@ -271,7 +280,7 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
             ? `${70 + 80 * swipePercentage}px`
             : last && my < -50
             ? "130px"
-            : "80px",
+            : "60px",
         });
       }
       if (swipedUp && my > 2) {
@@ -279,7 +288,7 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
           height: down
             ? `${120 - 80 * swipePercentage}px`
             : last && my > 50
-            ? "80px"
+            ? "60px"
             : "130px",
         });
       }
@@ -363,7 +372,6 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
         <Wave
           color={theme.colors.beige.beige20}
           top={swipedUp || !isMobile ? "0px" : "200px"}
-          // position="fixed"
         />
         {!isMobile && (
           <MenuSidebar
@@ -398,6 +406,7 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
             {isMobile && (
               <TagSlide
                 type={order === "ideas" ? "topics" : "organizationTypes"}
+                hide={!swipedUp}
                 selectedTopics={selectedTopics}
                 selectedOrganizationTypes={selectedOrganizationTypes}
                 handleSelectTopics={handleSelectTopics}
@@ -409,6 +418,20 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
 
           <ContentWrapper isMobileCustom={isMobileCustom}>
             {isMobile && toolbarComponent}
+
+            {order !== "ideas" && (!isMobile || swipedUp) && (
+              <Box margin="10px 16px 0px 16px">
+                <Button
+                  variant="secondary"
+                  borderStyle="dashed"
+                  size="small"
+                  fillWidth="max"
+                  onClick={handleCreateProjectroom}
+                  text={t("createProjectRoom")}
+                />
+              </Box>
+            )}
+
             <List
               CardType={order === "ideas" ? IdeaCard : ProjectroomCard}
               data={order === "ideas" ? ideasData : projectroomsData}

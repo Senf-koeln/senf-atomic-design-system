@@ -1,8 +1,24 @@
 /// <reference types="react" />
+import React$1, { FC, MouseEventHandler, ChangeEventHandler, FunctionComponent } from 'react';
 import * as styled_components from 'styled-components';
-import { FC, MouseEventHandler, ChangeEventHandler, FunctionComponent } from 'react';
 import { Theme } from 'styled-system';
 import * as i18next from 'i18next';
+
+/** @format */
+
+interface SVGRProps$1 {
+    color?: string;
+    transform?: string;
+}
+declare const Plus: FC<SVGRProps$1>;
+
+/** @format */
+
+interface SVGRProps {
+    color?: string;
+    transform?: string;
+}
+declare const Arrow: FC<SVGRProps>;
 
 declare const LayerWhiteGradientBordersDefault: styled_components.FlattenInterpolation<styled_components.ThemeProps<any>>;
 declare const LayerWhiteFirstDefault: styled_components.FlattenInterpolation<styled_components.ThemeProps<any>>;
@@ -308,6 +324,23 @@ declare const Modal: FC<ModalProps>;
 
 /** @format */
 
+interface SwipeModalProps {
+    x?: string;
+    size?: "xl" | "l" | "m";
+    backgroundColor?: string;
+    onClick?: MouseEventHandler<HTMLButtonElement>;
+    setOpenModal: (x: boolean) => void;
+    openModal: boolean;
+    children: React.ReactNode;
+    zIndex?: number | string;
+    portalId?: string;
+    overflow?: string;
+}
+
+declare const SwipeModal: FC<SwipeModalProps>;
+
+/** @format */
+
 interface SubNavbarProps {
     iconLeft?: string;
     iconLeftTransform?: string;
@@ -359,12 +392,23 @@ declare const MenuSidebar: FC<MenuSidebarProps>;
 
 /** @format */
 
+interface MobileTopBarProps {
+    example?: string;
+    onClick?: MouseEventHandler<HTMLButtonElement>;
+}
+
+/** @format */
+
+declare const MobileTopBar: FC<MobileTopBarProps>;
+
+/** @format */
+
 interface MainSwipeListProps {
     example?: string;
     onClick?: MouseEventHandler<HTMLButtonElement>;
 }
 
-declare const MainSwipeList: FC<MainSwipeListProps>;
+declare const _default: React$1.NamedExoticComponent<MainSwipeListProps>;
 
 /** @format */
 interface AuthProps {
@@ -479,4 +523,4 @@ declare const GlobalStyle: styled_components.GlobalStyleComponent<{}, styled_com
 /** @format */
 declare const i18n: i18next.i18n;
 
-export { Accordion, Auth, Box, Button, Divider, Example, Form, GlobalStyle, Icon, IdeaCard, IdeaDetailPage, Input, LayerBrownDefault, LayerBrownHover, LayerGreyButtonsDefault, LayerGreyButtonsHover, LayerGreyDefault, LayerGreyHover, LayerWhiteFirstActive, LayerWhiteFirstDefault, LayerWhiteFirstHover, LayerWhiteGradientBordersDefault, LayerWhiteSecondDefault, LayerWhiteSecondHover, LayerYellowDefault, LayerYellowHover, List, Loader, MainSwipeList, MenuSidebar, Modal, ObjectCard, OrganizationCard, Example$1 as OrganizationPage, OrganizationsOverview, ProfilePage, ProjectroomCard, ProjectroomPage, RangeSlider, RoundedButton, Shape, StatisticsOverview, SubNavbar, Tag, TagSlide, TertiaryButton, Typography, i18n, theme };
+export { Accordion, Arrow, Auth, Box, Button, Divider, Example, Form, GlobalStyle, Icon, IdeaCard, IdeaDetailPage, Input, LayerBrownDefault, LayerBrownHover, LayerGreyButtonsDefault, LayerGreyButtonsHover, LayerGreyDefault, LayerGreyHover, LayerWhiteFirstActive, LayerWhiteFirstDefault, LayerWhiteFirstHover, LayerWhiteGradientBordersDefault, LayerWhiteSecondDefault, LayerWhiteSecondHover, LayerYellowDefault, LayerYellowHover, List, Loader, _default as MainSwipeList, MenuSidebar, MobileTopBar, Modal, ObjectCard, OrganizationCard, Example$1 as OrganizationPage, OrganizationsOverview, Plus, ProfilePage, ProjectroomCard, ProjectroomPage, RangeSlider, RoundedButton, Shape, StatisticsOverview, SubNavbar, SwipeModal, Tag, TagSlide, TertiaryButton, Typography, i18n, theme };

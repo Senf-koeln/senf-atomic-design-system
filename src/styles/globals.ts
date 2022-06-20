@@ -47,6 +47,7 @@ p {
 }
 
 
+
 //ANIMATIONS
 
 @keyframes opacityTranslateYFrom50Animation {
@@ -67,7 +68,7 @@ p {
   }
 
   100% {
-    transform: translateY(calc(100vh - 200px));
+    transform: translateY(calc(100% - 200px));
   }
 }
 

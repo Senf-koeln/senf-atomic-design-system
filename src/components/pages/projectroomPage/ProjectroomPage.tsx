@@ -42,6 +42,11 @@ import CalendarIcon from "../../../assets/icons/CalendarIcon";
 import Share from "../../../assets/icons/Share";
 import SocialmediaShare from "../../organisms/socialmediaShare/SocialmediaShare";
 
+import Calendar from "../../organisms/calendar/Calendar";
+import Edit from "../../../assets/icons/Edit";
+
+// const Calendar = React.lazy(() => import("../../organisms/calendar/Calendar"));
+
 const DragWrapper = styled(animated.div)<ProjectroomPageProps>`
   display: flex;
   position: relative;
@@ -80,9 +85,9 @@ const DragWrapper = styled(animated.div)<ProjectroomPageProps>`
 
 const InnerWrapper = styled.div<OrganizationsOverviewProps>`
   @media (min-width: 768px) {
-    padding-left: 59px;
+    padding: 0px 0px 0px 70px;
     height: 100%;
-
+    width: 100%;
     position: absolute;
   }
 `;
@@ -98,7 +103,6 @@ const ContentWrapper = styled.div<OrganizationsOverviewProps>`
 
   @media (min-width: 768px) {
     height: calc(100% - 50px);
-    width: 410px;
   }
 `;
 
@@ -211,7 +215,9 @@ const ProjectroomPage: FC<ProjectroomPageProps> = ({
   searchOpen,
   searchTerm,
   setSearchTerm,
+  handleEditProjectroom,
   path,
+  handleShare,
 }) => {
   const { t } = useTranslation();
   const isMobile = isMobileCustom();
@@ -312,17 +318,20 @@ const ProjectroomPage: FC<ProjectroomPageProps> = ({
   useEffect(() => {
     if (organizations) {
       organizations.map(
-        ({ organizationId, title, organizationType, logoURL }) => {
+        ({ organizationId, title, organizationType, logoURL, userIds }) => {
           if (cardOrganizationId === organizationId) {
             setOrganizationCardData([
               ...organizationCardData,
               title,
               organizationType,
               logoURL,
+              userIds,
             ]);
           }
         }
       );
+
+      console.log(organizationCardData, user);
     }
   }, [organizations]);
 
@@ -335,6 +344,7 @@ const ProjectroomPage: FC<ProjectroomPageProps> = ({
           <ContentDropdown
             open={socialmediaShareDropdownOpen}
             setOpen={setSocialmediaShareDropdownOpen}
+            direction={isMobile ? "downLeft" : "downRight"}
             OpenButton={
               <RoundedButton
                 variant="white"
@@ -347,34 +357,39 @@ const ProjectroomPage: FC<ProjectroomPageProps> = ({
             }
             Content={
               <Box gap="5px" flexDirection="column">
-                <SocialmediaShare path={path} />
+                <SocialmediaShare path={path} handleShareIdea={handleShare} />
               </Box>
             }
           />
         }
         ThirdButton={
-          <ContentDropdown
-            open={editDropdownOpen}
-            setOpen={setEditDropdownOpen}
-            OpenButton={
-              <RoundedButton
-                variant="white"
-                size="small"
-                onClick={() => setEditDropdownOpen(!editDropdownOpen)}
-                icon={<More />}
-              />
-            }
-            Content={
-              <Box gap="5px" flexDirection="column">
-                <Button
-                  variant={"secondary"}
+          organizationCardData[3]?.includes(user?.userId) && (
+            <ContentDropdown
+              open={editDropdownOpen}
+              setOpen={setEditDropdownOpen}
+              direction={isMobile ? "downLeft" : "downRight"}
+              OpenButton={
+                <RoundedButton
+                  variant="white"
                   size="small"
-                  text={t("Projektraum bearbeiten")}
-                  onClick={() => console.log("projektraum bearbeiten")}
+                  onClick={() => setEditDropdownOpen(!editDropdownOpen)}
+                  icon={<More />}
                 />
-              </Box>
-            }
-          />
+              }
+              Content={
+                <Box gap="5px" flexDirection="column">
+                  <Button
+                    variant={"secondary"}
+                    size="small"
+                    justifyContent="flex-start"
+                    text={t("Projektraum bearbeiten")}
+                    onClick={handleEditProjectroom}
+                    icon={<Edit />}
+                  />
+                </Box>
+              }
+            />
+          )
         }
       />
       <DragWrapper id="dragWrapper" style={props} isMobile={isMobile}>
@@ -389,7 +404,7 @@ const ProjectroomPage: FC<ProjectroomPageProps> = ({
           >
             {isMobile && <HandleBar />}
 
-            <Box margin="21px 90px 0px 24px">
+            <Box margin="21px 110px 0px 24px">
               <Typography
                 variant="h3"
                 fontWeight={900}
@@ -406,7 +421,7 @@ const ProjectroomPage: FC<ProjectroomPageProps> = ({
                 handleSelectTopics={handleSelectTopics}
               />
             ) : (
-              <Box margin="24px" alignItems="center" gap="12px">
+              <Box margin="24px 24px 12px 24px" alignItems="center" gap="12px">
                 <LogoPlacer>
                   <Icon
                     icon={setOrganizationTypeIcon(organizationCardData[1])}
@@ -440,7 +455,7 @@ const ProjectroomPage: FC<ProjectroomPageProps> = ({
             id="contentWrapper"
             onScroll={scrollHandler}
           >
-            <Box margin="21px 0px 0px 18px">
+            <Box margin="0px 0px 0px 18px">
               <TertiaryButton
                 text={t("information")}
                 iconRight={
@@ -512,32 +527,30 @@ const ProjectroomPage: FC<ProjectroomPageProps> = ({
               />
             </Box>
 
-            <Box margin="0px 12px">
-              {order === 1 ? (
-                <List
-                  CardType={IdeaCard}
-                  data={screams}
-                  handleButtonOpenCard={handleButtonOpenCard}
-                  organizations={organizations}
-                  listEndText={
-                    screams > 0
-                      ? t("noMoreIdeas")
-                      : screams < 1 && t("noProjectIdeas")
+            {order === 1 ? (
+              <List
+                CardType={IdeaCard}
+                data={screams}
+                handleButtonOpenCard={handleButtonOpenCard}
+                organizations={organizations}
+                listEndText={
+                  screams > 0
+                    ? t("noMoreIdeas")
+                    : screams < 1 && t("noProjectIdeas")
 
-                    // :t("noContentIdeas") //filter...
-                  }
-                />
-              ) : (
-                order === 2 && (
-                  <Box margin="10px 10px 0px 0px" width="100%">
-                    <Calendar
-                      inlineCalendarEntries={screams}
-                      calendarType="inline"
-                    />
-                  </Box>
-                )
-              )}
-            </Box>
+                  // :t("noContentIdeas") //filter...
+                }
+              />
+            ) : (
+              order === 2 && (
+                <Box margin="10px 10px 0px 0px" width="100%">
+                  <Calendar
+                    inlineCalendarEntries={screams}
+                    calendarType="inline"
+                  />
+                </Box>
+              )
+            )}
           </ContentWrapper>
         </InnerWrapper>
       </DragWrapper>

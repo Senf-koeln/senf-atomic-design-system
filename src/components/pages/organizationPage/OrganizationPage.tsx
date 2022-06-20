@@ -30,9 +30,12 @@ import More from "../../../assets/icons/More";
 import Tabs from "../../molecules/tabs/Tabs";
 import Bulb from "../../../assets/icons/Bulb";
 import Info from "../../../assets/icons/Info";
-import Calendar from "../../organisms/calendar/Calendar";
 import CalendarIcon from "../../../assets/icons/CalendarIcon";
 import Room from "../../../assets/icons/Room";
+
+import Calendar from "../../organisms/calendar/Calendar";
+
+// const Calendar = React.lazy(() => import("../../organisms/calendar/Calendar"));
 
 const SVGWrapper = styled.div`
   position: absolute;
@@ -102,7 +105,11 @@ const Example: FC<OrganizationPageProps> = ({
       right="0px"
       backgroundColor={theme.colors.beige.beige20}
       overflow="hidden scroll"
-      zIndex="99"
+      zIndex="999"
+      boxShadow={
+        document.body.clientWidth > 1350 &&
+        "-40px 8px 30px -12px rgba(0, 0, 0, 0.2)"
+      }
     >
       <SVGWrapper>
         <svg
@@ -269,32 +276,30 @@ const Example: FC<OrganizationPageProps> = ({
         </Box>
       )}
 
-      <Box margin="0px 12px">
-        {order === 1 ? (
-          <List
-            CardType={ProjectroomCard}
-            data={organization?.projectRooms}
-            handleButtonOpenCard={handleButtonOpenCard}
-            organizations={organizations}
-            listEndText={
-              !organization?.projectRooms || organization?.projectRooms < 1
-                ? t("noOrganizationProjectRooms")
-                : t("noMoreProjectrooms")
-            }
-          />
-        ) : (
-          order === 2 &&
-          organization?.googleCalendarId && (
-            <Box margin="10px 10px 0px 0px" width="100%">
-              <Calendar
-                googleCalendarApiKey={googleCalendarApiKey}
-                googleCalendarId={organization?.googleCalendarId}
-                calendarType="google"
-              />
-            </Box>
-          )
-        )}
-      </Box>
+      {order === 1 ? (
+        <List
+          CardType={ProjectroomCard}
+          data={organization?.projectRooms}
+          handleButtonOpenCard={handleButtonOpenCard}
+          organizations={organizations}
+          listEndText={
+            !organization?.projectRooms || organization?.projectRooms < 1
+              ? t("noOrganizationProjectRooms")
+              : t("noMoreProjectrooms")
+          }
+        />
+      ) : (
+        order === 2 &&
+        organization?.googleCalendarId && (
+          <Box margin="10px 10px 0px 0px" width="100%">
+            <Calendar
+              googleCalendarApiKey={googleCalendarApiKey}
+              googleCalendarId={organization?.googleCalendarId}
+              calendarType="google"
+            />
+          </Box>
+        )
+      )}
     </Dialog>
   );
 };

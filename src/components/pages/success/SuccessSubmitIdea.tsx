@@ -16,6 +16,8 @@ import RoundedButton from "../../atoms/buttons/RoundedButton";
 import Plus from "../../../assets/icons/Plus";
 import { InlineWidget } from "react-calendly";
 import Button from "../../atoms/buttons/Button";
+import SwipeModal from "../../molecules/modals/SwipeModal";
+import theme from "../../../styles/theme";
 
 const Wrapper = styled.div<SuccessSubmitIdeaProps>`
   height: 500px;
@@ -36,14 +38,13 @@ const SuccessSubmitIdea: FC<SuccessSubmitIdeaProps> = ({}) => {
   const [order, setOrder] = useState(1);
   const setOpenModal = () => {};
   return (
-    <Modal
+    <SwipeModal
       openModal={true}
       setOpenModal={setOpenModal}
       zIndex="999999999"
-      backgroundColor="beige"
-      size={order === 1 ? "s" : "xl"}
+      backgroundColor={theme.colors.beige.beige20}
     >
-      <Box margin="24px" position="absolute" zIndex={999}>
+      <Box margin="24px" position="fixed" zIndex={999} top="0">
         <RoundedButton
           icon={<Plus transform="rotate(45deg)" />}
           onClick={() => setOrder(1)}
@@ -94,7 +95,7 @@ const SuccessSubmitIdea: FC<SuccessSubmitIdeaProps> = ({}) => {
           <InlineWidget url="https://calendly.com/senf-appointments/60min?month=2022-06" />
         </React.Fragment>
       )}
-    </Modal>
+    </SwipeModal>
   );
 };
 

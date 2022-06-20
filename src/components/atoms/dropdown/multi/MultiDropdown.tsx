@@ -1,4 +1,8 @@
+/** @format */
+
 import React, { FunctionComponent, useState } from "react";
+import { useTranslation } from "react-i18next";
+import styled from "styled-components";
 import { InputField } from "../../inputs/input.styles";
 import { Selector } from "../Dropdown.styles";
 import { DropdownProps } from "../Dropdown.types";
@@ -9,6 +13,7 @@ const MultiDropdown: FunctionComponent<DropdownProps> = ({
   listItems,
   recieveValue,
 }) => {
+  const { t } = useTranslation();
   const listItemsArr = Object.entries(listItems);
   const [selectedItems, setSelectedItems] = useState<{
     [k: string]: undefined | string;
@@ -31,13 +36,15 @@ const MultiDropdown: FunctionComponent<DropdownProps> = ({
             recieveValue(selectedItems);
           }}
         >
-          {placeholder && (
+          {key && (
             <option disabled selected hidden>
-              {placeholder}
+              {t(key)}
             </option>
           )}
           {value.map((ele, index) => (
-            <option key={index} value={ele.value}>{ele.label}</option>
+            <option key={index} value={ele.value}>
+              {ele.label}
+            </option>
           ))}
         </InputField>
       ))}

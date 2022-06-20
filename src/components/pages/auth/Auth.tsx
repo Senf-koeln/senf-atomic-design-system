@@ -25,7 +25,6 @@ import AuthEmail from "../../templates/auth/AuthEmail";
 import AuthResetEmail from "../../templates/auth/AuthResetEmail";
 import AuthVerifyEmail from "../../templates/auth/AuthVerifyEmail";
 import AuthAddDetails from "../../templates/auth/AuthAddDetails";
-import { SuccessPage } from "./auth.stories";
 
 const Wrapper = styled.div<AuthProps>`
   position: relative;
@@ -68,6 +67,10 @@ const Auth: FC<AuthProps> = ({
   emailRegistrationSubmitted,
   verifiedUser,
   addedDetails,
+  user,
+  handleSubmitEditDetails,
+  handleImageUpload,
+  uploadingImage,
   errorMessage,
   dataSuccess,
 }) => {
@@ -146,7 +149,12 @@ const Auth: FC<AuthProps> = ({
           errorMessage={errorMessage}
         />
       ) : verifiedUser && !addedDetails ? (
-        <AuthAddDetails />
+        <AuthAddDetails
+          user={user}
+          handleSubmitEditDetails={handleSubmitEditDetails}
+          handleImageUpload={handleImageUpload}
+          uploadingImage={uploadingImage}
+        />
       ) : page === "authResetEmail" ? (
         <AuthResetEmail
           resetLoading={resetLoading}

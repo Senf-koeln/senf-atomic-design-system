@@ -30,6 +30,7 @@ import theme from "../../../styles/theme";
 const ListEnd = styled.div`
   width: auto;
   margin: 24px;
+  padding-bottom: 200px;
   animation: 4s opacityAfter50PercentAnimation;
 `;
 
@@ -47,6 +48,7 @@ const List: FC<ListProps> = ({
   handleOpenProjectroom,
   handleButtonLike,
   handleButtonComment,
+  handleOpenMenuComment,
   user,
   listEndText,
 }) => {
@@ -87,6 +89,7 @@ const List: FC<ListProps> = ({
             <Box
               margin="16px 16px 0px 16px"
               display={listType === "grid" ? "contents" : "flex"}
+              flexDirection={listType === "grid" ? "row" : "column"}
             >
               <CardType
                 data={dataArray[i]}
@@ -98,6 +101,7 @@ const List: FC<ListProps> = ({
                 handleOpenProjectroom={handleOpenProjectroom}
                 handleButtonLike={handleButtonLike}
                 handleButtonComment={handleButtonComment}
+                handleOpenMenuComment={handleOpenMenuComment}
                 user={user}
               />
             </Box>
