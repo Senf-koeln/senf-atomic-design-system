@@ -13,6 +13,7 @@ const Wrapper = styled.div<MainSwipeListTabsProps>`
 `;
 
 const Tab = styled.div<MainSwipeListTabsProps>`
+  cursor: pointer;
   margin: ${({ isMobile }) => (isMobile ? "10px" : "0px 10px 5px 10px")};
   color: ${({ active, theme }) =>
     active ? "black" : theme.colors.primary.primary160};

@@ -456,7 +456,7 @@ interface OrganizationPageProps {
 
 /** @format */
 
-declare const Example$1: FC<OrganizationPageProps>;
+declare const OrganizationPage: FC<OrganizationPageProps>;
 
 /** @format */
 
@@ -523,4 +523,4 @@ declare const GlobalStyle: styled_components.GlobalStyleComponent<{}, styled_com
 /** @format */
 declare const i18n: i18next.i18n;
 
-export { Accordion, Arrow, Auth, Box, Button, Divider, Example, Form, GlobalStyle, Icon, IdeaCard, IdeaDetailPage, Input, LayerBrownDefault, LayerBrownHover, LayerGreyButtonsDefault, LayerGreyButtonsHover, LayerGreyDefault, LayerGreyHover, LayerWhiteFirstActive, LayerWhiteFirstDefault, LayerWhiteFirstHover, LayerWhiteGradientBordersDefault, LayerWhiteSecondDefault, LayerWhiteSecondHover, LayerYellowDefault, LayerYellowHover, List, Loader, _default as MainSwipeList, MenuSidebar, MobileTopBar, Modal, ObjectCard, OrganizationCard, Example$1 as OrganizationPage, OrganizationsOverview, Plus, ProfilePage, ProjectroomCard, ProjectroomPage, RangeSlider, RoundedButton, Shape, StatisticsOverview, SubNavbar, SwipeModal, Tag, TagSlide, TertiaryButton, Typography, i18n, theme };
+export { Accordion, Arrow, Auth, Box, Button, Divider, Example, Form, GlobalStyle, Icon, IdeaCard, IdeaDetailPage, Input, LayerBrownDefault, LayerBrownHover, LayerGreyButtonsDefault, LayerGreyButtonsHover, LayerGreyDefault, LayerGreyHover, LayerWhiteFirstActive, LayerWhiteFirstDefault, LayerWhiteFirstHover, LayerWhiteGradientBordersDefault, LayerWhiteSecondDefault, LayerWhiteSecondHover, LayerYellowDefault, LayerYellowHover, List, Loader, _default as MainSwipeList, MenuSidebar, MobileTopBar, Modal, ObjectCard, OrganizationCard, OrganizationPage, OrganizationsOverview, Plus, ProfilePage, ProjectroomCard, ProjectroomPage, RangeSlider, RoundedButton, Shape, StatisticsOverview, SubNavbar, SwipeModal, Tag, TagSlide, TertiaryButton, Typography, i18n, theme };

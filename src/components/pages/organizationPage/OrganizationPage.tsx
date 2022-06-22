@@ -84,7 +84,7 @@ const InfoWidget = styled.div`
   -webkit-box-orient: vertical;
 `;
 
-const Example: FC<OrganizationPageProps> = ({
+const OrganizationPage: FC<OrganizationPageProps> = ({
   user,
   organization,
   organizations,
@@ -136,7 +136,7 @@ const Example: FC<OrganizationPageProps> = ({
         />
       </Box>
 
-      {user?.userId && organization?.userIds.includes(user?.userId) && (
+      {user && organization?.userIds.includes(user.userId) && (
         <Box position="absolute" margin="20px" right="0px" zIndex={2}>
           <RoundedButton icon={<More />} onClick={handleEdit} />
         </Box>
@@ -304,4 +304,4 @@ const Example: FC<OrganizationPageProps> = ({
   );
 };
 
-export default Example;
+export default OrganizationPage;

@@ -125,7 +125,7 @@ const ProfilePage: FC<ProfilePageProps> = ({
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [swipePosition, setSwipePosition] = useState("top");
 
-  const { handle, description, photoUrl, screams, likes } = user;
+  const { handle, description, photoURL, screams, likes } = user;
 
   const handleToggle = () => {
     setDropdownOpen(!dropdownOpen);
@@ -247,7 +247,7 @@ const ProfilePage: FC<ProfilePageProps> = ({
             <Box justifyContent="center" margin="20px">
               <ImageWrapper>
                 <ImagePlaceholder
-                  img={photoUrl ? photoUrl : null}
+                  img={photoURL ? photoURL : null}
                   borderRadius="18px"
                   height="calc(100% - 40px)"
                   width="calc(100% - 40px)"
@@ -288,11 +288,11 @@ const ProfilePage: FC<ProfilePageProps> = ({
                     ? [
                         { icon: <Bulb />, text: "Ideen" },
                         { icon: <Info />, text: "Organisationen" },
-                        { icon: <Info />, text: "Interaktionen" },
+                        // { icon: <Info />, text: "Interaktionen" },
                       ]
                     : [
                         { icon: <Bulb />, text: "Ideen" },
-                        { icon: <Info />, text: "Interaktionen" },
+                        // { icon: <Info />, text: "Interaktionen" },
                       ]
                 }
               />
@@ -301,6 +301,7 @@ const ProfilePage: FC<ProfilePageProps> = ({
             <List
               CardType={order === 1 ? IdeaCard : OrganizationCard}
               data={order === 1 ? screams : myOrganizations}
+              listType={order === 2 && "grid"}
               handleButtonOpenCard={handleButtonOpenCard}
               handleOpenProjectroom={handleOpenProjectroom}
               organizations={organizations}

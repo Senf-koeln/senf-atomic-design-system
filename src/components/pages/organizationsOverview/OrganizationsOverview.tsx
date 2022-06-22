@@ -96,6 +96,7 @@ const OrganizationsOverview: FC<OrganizationsOverviewProps> = ({
   handleButtonOpenCard,
   handleOpenCreateOrganization,
   checkedSortOption,
+  setCheckedSortOption,
 }) => {
   const { t } = useTranslation();
   const isMobile = isMobileCustom();
@@ -119,6 +120,7 @@ const OrganizationsOverview: FC<OrganizationsOverviewProps> = ({
         )
       }
       checkedSortOption={checkedSortOption}
+      setCheckedSortOption={setCheckedSortOption}
       searchPlaceholder={t("searchBarOrganizations")}
       activeSortOptionLabel={t("newest_organizations")}
       sortOptions={[
@@ -139,6 +141,7 @@ const OrganizationsOverview: FC<OrganizationsOverviewProps> = ({
         <React.Fragment>
           <SubNavbar
             iconLeft={<Arrow transform="rotate(90deg)" />}
+            leftButtonClick={() => setOpenOrganizationsOverview(false)}
             header={t("organizations")}
             handlebar={true}
             // iconRight="plus"

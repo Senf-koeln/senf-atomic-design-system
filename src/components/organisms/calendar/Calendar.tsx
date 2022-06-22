@@ -53,7 +53,7 @@ const Wrapper = styled.div<CalendarProps>`
   .fc .fc-toolbar-title {
     font-size: 22px;
     margin: 0;
-    margin-left: 15px;
+    margin-left: 0px;
     color: #414345;
   }
 

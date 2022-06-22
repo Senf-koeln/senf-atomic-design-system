@@ -103,14 +103,14 @@ export const Header = styled(animated.div)`
   overflow: visible;
 `;
 
-const ToolbarWrapper = styled.div`
-  margin-top: ${({ swipedUp }) => (swipedUp ? "16px" : "-46px")};
-  transition: 0.5s;
-  margin-left: 12px;
-  width: calc(100% - 24px);
-  overflow-y: hidden;
-  z-index: 9;
-`;
+// const ToolbarWrapper = styled.div`
+//   margin-top: ${({ swipedUp }) => (swipedUp ? "16px" : "-46px")};
+//   transition: 0.5s;
+//   margin-left: 12px;
+//   width: calc(100% - 24px);
+//   overflow-y: hidden;
+//   z-index: 9;
+// `;
 
 const HandleBar = styled.div`
   position: absolute;
@@ -304,52 +304,50 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
   );
 
   const toolbarComponent = (
-    <ToolbarWrapper swipedUp={swipedUp || !isMobile}>
-      <Toolbar
-        setSearchOpen={setSearchOpen}
-        searchOpen={searchOpen}
-        searchTerm={searchTerm}
-        setSearchTerm={setSearchTerm}
-        secondButton={
-          <Button
-            variant="secondary"
-            size="small"
-            text={order === "ideas" ? t("statistics") : t("organizations")}
-            icon={order === "ideas" ? <Stats /> : null}
-            onClick={
-              order === "ideas"
-                ? () => setOpenStatisticsOverview(true)
-                : () => setOpenOrganizationsOverview(true)
-            }
-          />
-        }
-        searchPlaceholder={t("searchBar")}
-        checkedSortOption={checkedSortOption}
-        setCheckedSortOption={setCheckedSortOption}
-        activeSortOptionLabel={
-          order === "ideas" ? t("newest_ideas") : t("newest_projectrooms")
-        }
-        sortOptions={
-          order === "ideas"
-            ? [
-                { value: "newest", label: t("newest_ideas") },
-                { value: "hottest", label: t("hottest_ideas") },
-              ]
-            : [
-                { value: "newest", label: t("newest_projectrooms") },
-                { value: "aToZ", label: t("aToZ_projectrooms") },
-                { value: "zToA", label: t("zToA_projectrooms") },
-              ]
-        }
-        statusOptions={[
-          { value: "Unprocessed", label: t("unprocessed") },
-          { value: "Accepted", label: t("accepted") },
-          { value: "Planning", label: t("planning") },
-          { value: "Implemented", label: t("implemented") },
-          { value: "Rejected", label: t("rejected") },
-        ]}
-      />
-    </ToolbarWrapper>
+    <Toolbar
+      setSearchOpen={setSearchOpen}
+      searchOpen={searchOpen}
+      searchTerm={searchTerm}
+      setSearchTerm={setSearchTerm}
+      secondButton={
+        <Button
+          variant="secondary"
+          size="small"
+          text={order === "ideas" ? t("statistics") : t("organizations")}
+          icon={order === "ideas" ? <Stats /> : null}
+          onClick={
+            order === "ideas"
+              ? () => setOpenStatisticsOverview(true)
+              : () => setOpenOrganizationsOverview(true)
+          }
+        />
+      }
+      searchPlaceholder={t("searchBar")}
+      checkedSortOption={checkedSortOption}
+      setCheckedSortOption={setCheckedSortOption}
+      activeSortOptionLabel={
+        order === "ideas" ? t("newest_ideas") : t("newest_projectrooms")
+      }
+      sortOptions={
+        order === "ideas"
+          ? [
+              { value: "newest", label: t("newest_ideas") },
+              { value: "hottest", label: t("hottest_ideas") },
+            ]
+          : [
+              { value: "newest", label: t("newest_projectrooms") },
+              { value: "aToZ", label: t("aToZ_projectrooms") },
+              { value: "zToA", label: t("zToA_projectrooms") },
+            ]
+      }
+      statusOptions={[
+        { value: "Unprocessed", label: t("unprocessed") },
+        { value: "Accepted", label: t("accepted") },
+        { value: "Planning", label: t("planning") },
+        { value: "Implemented", label: t("implemented") },
+        { value: "Rejected", label: t("rejected") },
+      ]}
+    />
   );
 
   return (
@@ -413,11 +411,14 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
                 handleSelectOrganizationTypes={handleSelectOrganizationTypes}
               />
             )}
-            {!isMobile && toolbarComponent}
+
+            {!isMobile && <Box margin="16px">{toolbarComponent} </Box>}
           </Header>
 
           <ContentWrapper isMobileCustom={isMobileCustom}>
-            {isMobile && toolbarComponent}
+            {isMobile && swipedUp && (
+              <Box margin="16px">{toolbarComponent}</Box>
+            )}
 
             {order !== "ideas" && (!isMobile || swipedUp) && (
               <Box margin="10px 16px 0px 16px">

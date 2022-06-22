@@ -35,7 +35,8 @@ const InnerWrapper = styled.div<TagSlideProps>`
     width: 100%;
     height: auto;
     display: flex;
-    flex-direction: ${(props) => (props.column ? "column" : "row")};
+    flex-direction: ${({ flexDirection }) =>
+      flexDirection ? flexDirection : "row"};
     align-items: flex-start;
     text-align: left;
     flex-wrap: wrap;
@@ -48,7 +49,7 @@ const TagSlide: FC<TagSlideProps> = ({
   loading = false,
   inline = false,
   placing = "list",
-  column,
+  flexDirection,
   type,
   hide,
   openScream,
@@ -64,7 +65,7 @@ const TagSlide: FC<TagSlideProps> = ({
     !loading &&
     !inline && (
       <Wrapper openScream={openScream} id="Wrapper" placing={placing}>
-        <InnerWrapper column={column}>
+        <InnerWrapper flexDirection={flexDirection}>
           <Tag
             placing={placing}
             // hide={

@@ -94,9 +94,9 @@ const AuthAddDetails: FC<AuthAddDetailsProps> = ({
             // onMouseLeave={() => setUploadImageHover(false)}
             htmlFor="imageUploader"
           >
-            {user?.photoUrl ? (
+            {user?.photoURL ? (
               <ImagePlaceholder
-                img={user?.photoUrl}
+                img={user?.photoURL}
                 borderRadius="18px"
                 height="calc(100% - 40px)"
                 width="calc(100% - 40px)"

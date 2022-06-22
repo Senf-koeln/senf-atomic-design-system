@@ -21,7 +21,7 @@ const Wrapper = styled.div<ToolbarProps>`
   width: 100%;
   transition: 0.5s;
   animation: ToolbarAnimation 0.7s;
-  z-index: 1;
+  z-index: 9;
   flex-flow: wrap;
 
   @keyframes ToolbarAnimation {

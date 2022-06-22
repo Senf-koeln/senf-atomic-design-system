@@ -151,6 +151,10 @@ const IdeaDetailPage: FC<IdeaDetailPageProps> = ({
   user,
   handleOpenMenuComment,
   path,
+  commentFormInput,
+  setCommentFormInput,
+  handleSubmitComment,
+  commentFormLoading,
 }) => {
   const {
     screamId,
@@ -455,17 +459,17 @@ const IdeaDetailPage: FC<IdeaDetailPageProps> = ({
 
               <Typography variant="h3"> {title}</Typography>
 
-              <Box margin="10px 0px 20px 0px">
+              {/* <Box margin="10px 0px 20px 0px">
                 <Tabs
                   fontSize="buttonSm"
                   order={0}
                   tabs={[
                     { icon: <Bulb />, text: "Beschreibung" },
                     { icon: <Info />, text: "Status" },
-                    { icon: <Stats />, text: "Statistiken" },
+                    // { icon: <Stats />, text: "Statistiken" },
                   ]}
                 />
-              </Box>
+              </Box> */}
 
               <Box alignItems="flex-start" flexDirection="row" margin="8px 0px">
                 <Typography variant="bodyBg"> {body}</Typography>
@@ -552,7 +556,18 @@ const IdeaDetailPage: FC<IdeaDetailPageProps> = ({
             <Typography variant="h3">
               {t("IdeaDetailPage.commentHeadline")}
             </Typography>
-            <Input placeholder={t("IdeaDetailPage.commentPlaceholder")} />
+            <Box gap="8px" width="100%">
+              <Input
+                placeholder={t("IdeaDetailPage.commentPlaceholder")}
+                onChange={(event) => setCommentFormInput(event.target.value)}
+              />
+
+              <Button
+                text={t("send")}
+                disabled={commentFormInput === "" || commentFormLoading}
+                onClick={handleSubmitComment}
+              />
+            </Box>
           </Box>
           {comments && (
             <List

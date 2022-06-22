@@ -64,11 +64,13 @@ p {
 
   @keyframes translateYFrom100toMinus200pxAnimation {
   0% {
-    transform: translateY(100%);
+    /* transform: translateY(100%); */
+    margin-top:100%;
   }
 
   100% {
-    transform: translateY(calc(100% - 200px));
+    /* transform: translateY(calc((var(--vh, 1vh) * 100) - 200px)); */
+    margin-top:0%;
   }
 }
 
