@@ -84,6 +84,16 @@ p {
   }
 }
 
+@keyframes translateYFrom100to30pxAnimation {
+  0% {
+    transform: translateY(100%);
+  }
+
+  100% {
+    transform: translateY(30px);
+  }
+}
+
 
 
 
@@ -115,6 +125,19 @@ p {
   }
 }
 
+
+
+@keyframes opacityAndPointerEventsAnimation {
+  0% {
+    pointer-events:none;
+    opacity: 0;
+  }
+ 
+  100% {
+    opacity: 1;
+    pointer-events:all;
+  }
+}
 
 
 

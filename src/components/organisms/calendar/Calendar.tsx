@@ -13,6 +13,7 @@ import { formatDate } from "@fullcalendar/react";
 import listMonth from "@fullcalendar/list";
 import googleCalendarPlugin from "@fullcalendar/google-calendar";
 import i18n from "../../../util/i18n";
+import arrow from "../../../assets/rawSvgs/arrow.svg";
 
 let str = formatDate(new Date(), {
   month: "long",
@@ -21,6 +22,8 @@ let str = formatDate(new Date(), {
 });
 
 const Wrapper = styled.div<CalendarProps>`
+  display: block;
+  position: relative;
   width: 100%;
   height: 100%;
 
@@ -37,13 +40,37 @@ const Wrapper = styled.div<CalendarProps>`
     line-height: 22, 666666666666664px !important;
   }
 
-  .fc .fc-button {
-    border-radius: 15px;
+  .fc .fc-button-group {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
   }
 
-  button.fc-today-button.fc-button.fc-button-primary {
+  .fc .fc-button {
+    border-radius: 20px;
+    height: 50px;
+    width: 50px;
+    border-radius: 18px !important;
+    border-color: white !important;
+    background-color: white !important;
+    color: #353535 !important;
+
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("${arrow}");
+    background-repeat: no-repeat;
+    background-position: calc(100% - 1rem);
+    background-size: 1rem;
+    transform: rotate(270deg);
+  }
+
+  .fc .fc-button:first-child {
+    transform: rotate(90deg);
+  }
+
+  .fc .fc-today-button {
     display: none;
-    opacity: 0;
   }
 
   .fc .fc-toolbar.fc-header-toolbar {
@@ -52,15 +79,15 @@ const Wrapper = styled.div<CalendarProps>`
   }
   .fc .fc-toolbar-title {
     font-size: 22px;
-    margin: 0;
-    margin-left: 0px;
+    margin: 15px;
+    position: absolute;
     color: #414345;
   }
 
   .fc-theme-standard .fc-list-day-cushion {
     background-color: transparent !important;
     padding: 18px 0px;
-    width: 70px;
+    width: 50px;
     display: flex;
     flex-direction: column-reverse;
     justify-content: center;
@@ -69,11 +96,6 @@ const Wrapper = styled.div<CalendarProps>`
 
   .fc tr th {
     background-color: transparent !important;
-  }
-
-  .fc .fc-button-primary {
-    background-color: #353535;
-    border-color: white;
   }
 
   .fc-direction-ltr .fc-list-day-side-text,
@@ -123,6 +145,14 @@ const Wrapper = styled.div<CalendarProps>`
     border: 0;
   }
 
+  .fc table {
+    width: 100%;
+  }
+
+  .fc table thead {
+    display: none;
+  }
+
   .fc .fc-list-table tbody {
     display: grid;
     grid-gap: 10px;
@@ -132,12 +162,10 @@ const Wrapper = styled.div<CalendarProps>`
 
   .fc-list-day {
     grid-column-start: 1;
-    width: 70px;
+    width: 50px;
   }
   .fc .fc-list-event {
-    background-color: rgb(255, 255, 255, 0.7);
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding: 20px;
     border-radius: 20px;
     overflow: hidden;
     flex-direction: row-reverse;
@@ -148,6 +176,8 @@ const Wrapper = styled.div<CalendarProps>`
     flex-direction: column;
     align-items: flex-start;
     grid-column-start: 2;
+    background-color: ${({ theme }) => theme.colors.brown.brown4};
+    border: 2px solid ${({ theme }) => theme.colors.white.white100};
   }
   .fc .fc-list-event:hover {
     background-color: rgb(255, 255, 255, 0.9);
@@ -159,7 +189,7 @@ const Wrapper = styled.div<CalendarProps>`
 
   .fc .fc-list-event-time {
     border-radius: 20px 0 0 20px;
-    padding: 8px 14px !important;
+    padding: 0px 0px !important;
     padding-bottom: 0 !important;
     color: grey;
   }
@@ -174,11 +204,12 @@ const Calendar: FC<CalendarProps> = ({
   googleCalendarApiKey,
   inlineCalendarEntries,
   calendarType,
-  handleOpenIdeaDetailsPage,
+  handleButtonOpenCard,
 }) => {
   const [initState, setInitState] = useState({
     calendarWeekends: true,
-
+    prev: "chevron-right",
+    next: "chevron-right",
     calendarEvents: [
       // initial event data
       /*  {
@@ -205,7 +236,6 @@ const Calendar: FC<CalendarProps> = ({
     const data = [];
     let i;
     let u;
-    console.log(inlineCalendarEntries, "inlineCalendarEntries");
     if (inlineCalendarEntries && calendarType === "inline") {
       for (i = 0; i < inlineCalendarEntries.length; i++) {
         if (
@@ -230,10 +260,9 @@ const Calendar: FC<CalendarProps> = ({
 
   const handleEventClick = ({ event, el }) => {
     if (inlineCalendarEntries) {
-      handleOpenIdeaDetailsPage(event.id);
+      handleButtonOpenCard(event, "ideaCard", event.id);
       // props.handleClick(1);
     } else {
-      console.log(event);
     }
   };
 

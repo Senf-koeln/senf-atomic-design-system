@@ -109,7 +109,6 @@ const Accordion: FC<AccordionProps> = ({ data }) => {
   return (
     <AccordionWrapper>
       {data.map(({ header, body }) => {
-        console.log(data);
         return <AccordionItem key={header} header={header} body={body} />;
       })}
     </AccordionWrapper>

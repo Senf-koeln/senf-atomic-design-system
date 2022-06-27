@@ -64,15 +64,19 @@ const InnerWrapper = styled.div<OrganizationsOverviewProps>`
 const ContentWrapper = styled.div<OrganizationsOverviewProps>`
   overflow-y: scroll;
   pointer-events: all;
-  height: calc(100vh - 160px);
+  height: calc(100vh - 110px);
   width: 100%;
   z-index: 1;
   margin-left: 50%;
   transform: translateX(-50%);
+  position: fixed;
+  top: ${({ swipedUp }) => swipedUp && "110px"};
 
   @media (min-width: 768px) {
     height: calc(100% - 50px);
     width: 410px;
+    position: relative;
+    top: 0;
   }
 `;
 
@@ -401,23 +405,25 @@ const MainSwipeList: FC<MainSwipeListProps> = ({
               />
             </RoundedButtonWrapper>
 
-            {isMobile && (
-              <TagSlide
-                type={order === "ideas" ? "topics" : "organizationTypes"}
-                hide={!swipedUp}
-                selectedTopics={selectedTopics}
-                selectedOrganizationTypes={selectedOrganizationTypes}
-                handleSelectTopics={handleSelectTopics}
-                handleSelectOrganizationTypes={handleSelectOrganizationTypes}
-              />
+            {isMobile && swipedUp && (
+              <Box margin="-10px 0px">
+                <TagSlide
+                  type={order === "ideas" ? "topics" : "organizationTypes"}
+                  hide={!swipedUp}
+                  selectedTopics={selectedTopics}
+                  selectedOrganizationTypes={selectedOrganizationTypes}
+                  handleSelectTopics={handleSelectTopics}
+                  handleSelectOrganizationTypes={handleSelectOrganizationTypes}
+                />
+              </Box>
             )}
 
             {!isMobile && <Box margin="16px">{toolbarComponent} </Box>}
           </Header>
 
-          <ContentWrapper isMobileCustom={isMobileCustom}>
+          <ContentWrapper swipedUp={swipedUp}>
             {isMobile && swipedUp && (
-              <Box margin="16px">{toolbarComponent}</Box>
+              <Box margin="32px 16px 16px 16px">{toolbarComponent}</Box>
             )}
 
             {order !== "ideas" && (!isMobile || swipedUp) && (

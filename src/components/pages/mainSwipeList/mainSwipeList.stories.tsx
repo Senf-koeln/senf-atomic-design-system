@@ -27,7 +27,7 @@ Default.args = {
       lat: 50.96734458192481,
       long: 7.00181320821256,
       title: "Straßenfest an der Wallstraße",
-      body: "Vom Abschnitt Ecke Wallstr. bis Springbrunnen wird geplant ein Straßenfest zu veranstalten. Wohnst du in der Straße und willst deine Nachbar:innen ken",
+      body: "Vom Abschnitt Ecke Wallstr. bis Springbrunnen wird geplant ein Straßenfest zu veranstalten. Wohnst du in der Straße und willst deine Springbrunnen wird geplant ein Straßenfest zu veranstalten. Wohnst du in der Straße und willst deine Nachbar:innen",
       createdAt: "2021-07-12T11:10:22.413Z",
       commentCount: 0,
       likeCount: 1,

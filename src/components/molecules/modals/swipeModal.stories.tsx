@@ -20,6 +20,7 @@ const Template: Story<SwipeModalProps> = (args) => <SwipeModal {...args} />;
 export const Default = Template.bind({});
 Default.args = {
   openModal: true,
+  setOpenModal: () => {},
 
   children: (
     <React.Fragment>

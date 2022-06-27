@@ -15,6 +15,7 @@ const Dropdown: FunctionComponent<DropdownProps> = ({
   multi,
   listItems,
   recieveValue,
+  value,
 }) => {
   return (
     <Wrapper>
@@ -32,9 +33,9 @@ const Dropdown: FunctionComponent<DropdownProps> = ({
         ) : (
           <SingleDropdown
             id={id}
-            placeholder={placeholder}
             listItems={listItems}
             recieveValue={recieveValue}
+            value={value}
           />
         )}
       </Box>

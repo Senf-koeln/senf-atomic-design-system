@@ -334,7 +334,6 @@ const ProjectroomPage: FC<ProjectroomPageProps> = ({
         }
       );
 
-      console.log(organizationCardData, user);
     }
   }, [organizations]);
 
@@ -540,9 +539,9 @@ const ProjectroomPage: FC<ProjectroomPageProps> = ({
                   handleButtonOpenCard={handleButtonOpenCard}
                   organizations={organizations}
                   listEndText={
-                    ideasData.length > 0
+                    ideasData?.length > 0
                       ? t("noMoreIdeas")
-                      : ideasData.length < 1 && t("noProjectIdeas")
+                      : ideasData?.length < 1 && t("noProjectIdeas")
 
                     // :t("noContentIdeas") //filter...
                   }
@@ -554,6 +553,7 @@ const ProjectroomPage: FC<ProjectroomPageProps> = ({
                   <Calendar
                     inlineCalendarEntries={screams}
                     calendarType="inline"
+                    handleButtonOpenCard={handleButtonOpenCard}
                   />
                 </div>
               )

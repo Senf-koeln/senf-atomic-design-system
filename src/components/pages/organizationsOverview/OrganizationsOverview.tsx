@@ -51,7 +51,6 @@ const InnerWrapper = styled.div<OrganizationsOverviewProps>`
   pointer-events: all;
   height: calc(100% - 120px);
   width: 100%;
-  margin-top: ${(props) => (props.isMobile ? "-10px" : "0px")};
   overflow: scroll;
   z-index: 1;
   margin-left: 50%;
@@ -61,6 +60,10 @@ const InnerWrapper = styled.div<OrganizationsOverviewProps>`
   max-width: 800px;
   display: flex;
   flex-direction: column;
+
+  @media (min-width: 768px) {
+    height: calc(100% - 210px);
+  }
 `;
 
 export const SVGWrapper = styled.div`
@@ -69,7 +72,7 @@ export const SVGWrapper = styled.div`
   position: sticky;
   top: 0;
   z-index: 2;
-  height: ${(props) => (props.searchOpen ? "210px" : "150px")};
+  height: ${(props) => (props.searchOpen ? "260px" : "210px")};
 `;
 
 const HeaderWrapper = styled.div`

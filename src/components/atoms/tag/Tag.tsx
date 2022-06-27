@@ -15,6 +15,7 @@ import Typography from "../typography/Typography";
 import { TagProps } from "./Tag.types";
 
 const StyledButton = styled.button<TagProps>`
+pointer-events:all;
   position: relative;
   cursor: pointer;
   box-sizing: border-box;

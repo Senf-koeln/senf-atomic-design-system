@@ -23,9 +23,10 @@ const Wrapper = styled.div<TagSlideProps>`
 `;
 
 const InnerWrapper = styled.div<TagSlideProps>`
+  pointer-events: none;
   padding-left: 0px;
   padding-right: 20px;
-  margin: 8px;
+  margin: 15px 16px;
   display: flex;
   flex-direction: row;
   width: max-content;
@@ -41,6 +42,7 @@ const InnerWrapper = styled.div<TagSlideProps>`
     text-align: left;
     flex-wrap: wrap;
     padding: 0px;
+    margin: 8px;
     margin-left: 0;
   }
 `;
