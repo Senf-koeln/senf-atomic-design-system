@@ -218,7 +218,7 @@ const ProjectroomPage: FC<ProjectroomPageProps> = ({
   setSearchTerm,
   handleEditProjectroom,
   path,
-  handleShare,
+  handleShareIdeaVia,
   checkedSortOption,
   setCheckedSortOption,
 }) => {
@@ -333,7 +333,6 @@ const ProjectroomPage: FC<ProjectroomPageProps> = ({
           }
         }
       );
-
     }
   }, [organizations]);
 
@@ -359,7 +358,10 @@ const ProjectroomPage: FC<ProjectroomPageProps> = ({
             }
             Content={
               <Box gap="5px" flexDirection="column">
-                <SocialmediaShare path={path} handleShareIdea={handleShare} />
+                <SocialmediaShare
+                  path={path}
+                  handleShareIdeaVia={handleShareIdeaVia}
+                />
               </Box>
             }
           />

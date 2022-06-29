@@ -15,6 +15,12 @@ export default {
 
 const Template: Story<ToggleInputProps> = (args) => <ToggleInput {...args} />;
 
+export const CheckboxChecked = Template.bind({});
+CheckboxChecked.args = {
+  type: "checkbox",
+  checked: true,
+};
+
 export const Checkbox = Template.bind({});
 Checkbox.args = {
   type: "checkbox",

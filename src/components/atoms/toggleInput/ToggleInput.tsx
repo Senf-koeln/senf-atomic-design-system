@@ -2,6 +2,10 @@
 
 import React, { FC, useState } from "react";
 import styled from "styled-components";
+import Check from "../../../assets/icons/Check";
+import CheckDropShadow from "../../../assets/icons/CheckDropShadow";
+import Box from "../box/Box";
+import Icon from "../icons/Icon";
 import { ToggleInputProps } from "./ToggleInput.types";
 
 const Wrapper = styled.div<ToggleInputProps>``;
@@ -11,23 +15,20 @@ const ToggleInputContainer = styled.div<ToggleInputProps>`
   align-items: center;
   z-index: 99;
   cursor: pointer;
-  height: 16px;
-  width: 16px;
+  height: 20px;
+  width: 20px;
   pointer-events: ${({ pointerEvents }) =>
     pointerEvents ? pointerEvents : "all"};
 `;
-const CheckIcon = styled.svg<ToggleInputProps>`
-  fill: none;
-  stroke: white;
-  stroke-width: 1px;
-`;
+
 const RadioIcon = styled.div<ToggleInputProps>`
-  width: 4px;
+  width: 9px;
   position: relative;
-  height: 4px;
-  border-radius: 4px;
+  height: 9px;
+  border-radius: 9px;
   flex-grow: 0;
   background-color: white;
+  box-shadow: 0px 2px 4px 0px rgba(134, 124, 99, 0.18);
 `;
 
 const StyledToggleInput = styled.div<ToggleInputProps>`
@@ -35,19 +36,22 @@ const StyledToggleInput = styled.div<ToggleInputProps>`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  width: 12px;
-  height: 12px;
+  width: 20px;
+  height: 20px;
   background: ${({ checked, theme }) =>
-    checked ? theme.colors.primary.primary100 : "white"};
-  border-radius: 4px;
+    checked ? theme.colors.primary.primary100 : theme.colors.white.white50tra};
+  border-radius: ${({ borderRadius }) => (borderRadius ? borderRadius : "7px")};
   transition: all 150ms;
-  border: 2px solid #f2c71c;
-  ${CheckIcon} {
-    visibility: ${({ checked }) => (checked ? "visible" : "hidden")};
-  }
+  border: 2px solid
+    ${({ checked, theme }) =>
+      checked
+        ? theme.colors.primary.primary120
+        : theme.colors.greyscale.greyscale50};
+
   ${RadioIcon} {
     visibility: ${({ checked }) => (checked ? "visible" : "hidden")};
   }
+  flex: none;
 `;
 
 const ToggleInput: FC<ToggleInputProps> = ({
@@ -64,15 +68,23 @@ const ToggleInput: FC<ToggleInputProps> = ({
       }}
       pointerEvents={pointerEvents}
     >
+      {type === "check" && checked && (
+        <Box
+          width="20px"
+          height="20px"
+          justifyContent="center"
+          alignItems="center"
+        >
+          <Icon icon={<Check />} />
+        </Box>
+      )}
       {type === "checkbox" && (
-        <StyledToggleInput checked={checked}>
-          <CheckIcon viewBox="0 0 24 24">
-            <polyline points="20 6 9 17 4 12" />
-          </CheckIcon>
+        <StyledToggleInput checked={checked} borderRadius="7px">
+          {checked && <Icon icon={<CheckDropShadow color="white" />} />}
         </StyledToggleInput>
       )}
       {type === "radio" && (
-        <StyledToggleInput checked={checked}>
+        <StyledToggleInput checked={checked} borderRadius={"50%"}>
           <RadioIcon />
         </StyledToggleInput>
       )}

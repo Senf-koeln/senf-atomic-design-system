@@ -24,8 +24,8 @@ const DropDownListContainer = styled.div`
   width: auto;
   min-width: max-content;
   height: auto;
-  padding: 10px;
-  border-radius: 10px;
+  padding: 6px;
+  border-radius: 12px;
 
   transform: ${(props) =>
     props.direction === "downLeft"

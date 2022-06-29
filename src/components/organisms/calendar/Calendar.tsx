@@ -54,10 +54,6 @@ const Wrapper = styled.div<CalendarProps>`
     border-color: white !important;
     background-color: white !important;
     color: #353535 !important;
-
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
     background-image: url("${arrow}");
     background-repeat: no-repeat;
     background-position: calc(100% - 1rem);
@@ -65,12 +61,8 @@ const Wrapper = styled.div<CalendarProps>`
     transform: rotate(270deg);
   }
 
-  .fc .fc-button:first-child {
-    transform: rotate(90deg);
-  }
-
   .fc .fc-today-button {
-    display: none;
+    display: none !important;
   }
 
   .fc .fc-toolbar.fc-header-toolbar {
