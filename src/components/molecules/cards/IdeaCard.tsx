@@ -29,15 +29,24 @@ const Wrapper = styled.div<IdeaCardProps>`
   height: auto;
   padding-bottom: ${({ projectroomCardData }) =>
     projectroomCardData ? "40px" : "0"};
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  word-break: break-word;
   overflow: hidden;
 
   ${(props) => LayerWhiteFirstDefault}
 
-  filter: ${(props) =>
-    props.status === "deactivated" || props.status === "uncompleted"
-      ? "brightness(0.6)"
-      : "brightness(1)"};
   animation: opacityTranslateYFrom50Animation 0.8s;
+
+  p {
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: ${({ projectroomCardData }) =>
+      projectroomCardData ? 3 : 4};
+    line-clamp: ${({ projectroomCardData }) => (projectroomCardData ? 3 : 4)};
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
 
   @media (min-width: 768px) {
     transition: 0.3s;

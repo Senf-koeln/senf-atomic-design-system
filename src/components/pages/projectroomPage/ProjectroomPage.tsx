@@ -202,6 +202,7 @@ const TagSlideWrapper = styled.div`
 
 const ProjectroomPage: FC<ProjectroomPageProps> = ({
   data,
+  ideasData,
   organizations,
 
   user,
@@ -217,7 +218,9 @@ const ProjectroomPage: FC<ProjectroomPageProps> = ({
   setSearchTerm,
   handleEditProjectroom,
   path,
-  handleShare,
+  handleShareIdeaVia,
+  checkedSortOption,
+  setCheckedSortOption,
 }) => {
   const { t } = useTranslation();
   const isMobile = isMobileCustom();
@@ -330,8 +333,6 @@ const ProjectroomPage: FC<ProjectroomPageProps> = ({
           }
         }
       );
-
-      console.log(organizationCardData, user);
     }
   }, [organizations]);
 
@@ -357,7 +358,10 @@ const ProjectroomPage: FC<ProjectroomPageProps> = ({
             }
             Content={
               <Box gap="5px" flexDirection="column">
-                <SocialmediaShare path={path} handleShareIdea={handleShare} />
+                <SocialmediaShare
+                  path={path}
+                  handleShareIdeaVia={handleShareIdeaVia}
+                />
               </Box>
             }
           />
@@ -505,50 +509,55 @@ const ProjectroomPage: FC<ProjectroomPageProps> = ({
               <TagSlideWrapper id="tagSlideRef" ref={ref}></TagSlideWrapper>
             )}
 
-            <Box margin="14px 24px 16px 24px">
-              <Toolbar
-                setSearchOpen={setSearchOpen}
-                searchOpen={searchOpen}
-                searchTerm={searchTerm}
-                setSearchTerm={setSearchTerm}
-                searchPlaceholder={t("searchBar")}
-                activeSortOptionLabel={t("newest_ideas")}
-                sortOptions={[
-                  { name: "newest", label: t("newest_ideas") },
-                  { name: "hottest", label: t("hottest_ideas") },
-                ]}
-                statusOptions={[
-                  { name: "Unprocessed", label: t("unprocessed") },
-                  { name: "Accepted", label: t("accepted") },
-                  { name: "Planning", label: t("planning") },
-                  { name: "Implemented", label: t("implemented") },
-                  { name: "Rejected", label: t("rejected") },
-                ]}
-              />
-            </Box>
-
             {order === 1 ? (
-              <List
-                CardType={IdeaCard}
-                data={screams}
-                handleButtonOpenCard={handleButtonOpenCard}
-                organizations={organizations}
-                listEndText={
-                  screams > 0
-                    ? t("noMoreIdeas")
-                    : screams < 1 && t("noProjectIdeas")
+              <React.Fragment>
+                <Box margin="14px 24px 16px 24px">
+                  <Toolbar
+                    setSearchOpen={setSearchOpen}
+                    searchOpen={searchOpen}
+                    searchTerm={searchTerm}
+                    setSearchTerm={setSearchTerm}
+                    searchPlaceholder={t("searchBar")}
+                    activeSortOptionLabel={t("newest_ideas")}
+                    checkedSortOption={checkedSortOption}
+                    setCheckedSortOption={setCheckedSortOption}
+                    sortOptions={[
+                      { name: "newest", label: t("newest_ideas") },
+                      { name: "hottest", label: t("hottest_ideas") },
+                    ]}
+                    statusOptions={[
+                      { name: "Unprocessed", label: t("unprocessed") },
+                      { name: "Accepted", label: t("accepted") },
+                      { name: "Planning", label: t("planning") },
+                      { name: "Implemented", label: t("implemented") },
+                      { name: "Rejected", label: t("rejected") },
+                    ]}
+                  />
+                </Box>
 
-                  // :t("noContentIdeas") //filter...
-                }
-              />
+                <List
+                  CardType={IdeaCard}
+                  data={ideasData}
+                  handleButtonOpenCard={handleButtonOpenCard}
+                  organizations={organizations}
+                  listEndText={
+                    ideasData?.length > 0
+                      ? t("noMoreIdeas")
+                      : ideasData?.length < 1 && t("noProjectIdeas")
+
+                    // :t("noContentIdeas") //filter...
+                  }
+                />
+              </React.Fragment>
             ) : (
               order === 2 && (
-                <Box margin="10px 10px 0px 0px" width="100%">
+                <div style={{ margin: "10px 24px 20px 24px" }}>
                   <Calendar
                     inlineCalendarEntries={screams}
                     calendarType="inline"
+                    handleButtonOpenCard={handleButtonOpenCard}
                   />
-                </Box>
+                </div>
               )
             )}
           </ContentWrapper>

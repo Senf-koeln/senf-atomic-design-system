@@ -22,8 +22,7 @@ const RangeSlider: FC<RangeSliderProps> = ({
 
   const changeRange = (event: any) => {
     setRangeValue(event.target.value);
-    console.log(rangeValue);
-  };
+s  };
   return (
     <Wrapper>
       <Input

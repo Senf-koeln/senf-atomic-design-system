@@ -6,8 +6,6 @@ import React, { FC, useEffect, useRef, useState } from "react";
 import ReactDOM from "react-dom";
 import styled from "styled-components";
 import { trapFocus } from "../../../hooks/trapFocus";
-import { LayerWhiteFirstDefault } from "../../atoms/layerStyles/LayerStyles";
-import SubNavbar from "../navs/SubNavbar";
 import { SwipeModalProps } from "./SwipeModal.types";
 import { animated } from "@react-spring/web";
 import { isMobileCustom } from "../../../hooks/customDeviceDetect";
@@ -29,7 +27,8 @@ const DragWrapper = styled(animated.div)`
     ${({ theme }) => theme.colors.brown.brown20tra};
 
   position: fixed;
-  animation: organizationOverviewEnterAnimation 0.5s;
+
+  animation: translateYFrom100to30pxAnimation 0.5s;
 
   @media (min-width: 768px) {
     top: 50%;
@@ -51,6 +50,7 @@ const Background = styled.div<SwipeModalProps>`
   background-color: rgba(0, 0, 0, 0.5);
   width: 100vw;
   height: 100vh;
+  animation: opacityAndPointerEventsAnimation 0.5s;
 `;
 
 export const Header = styled(animated.div)`
@@ -86,21 +86,30 @@ const SwipeModal: FC<SwipeModalProps> = ({
   useEffect(() => {
     if (openModal) {
       handleOpen();
-    } else {
-      handleClose();
     }
-  }, [openModal]);
+  }, []);
+
+  const [props, set] = useSpring(() => ({
+    y: 0,
+    transform: isMobile ? `translateY(${30}px)` : "translate(-50%, -50%)",
+    overflow: "scroll",
+    touchAction: "unset",
+    userSelect: "none",
+  }));
 
   const handleOpen = () => {
     setOpenModal(true);
-    set({
-      transform: isMobile ? `translateY(${30}px)` : "translate(-50%, -50%)",
-      overflow: "scroll",
-      touchAction: "unset",
-      userSelect: "none",
-    });
-    const root = document.getElementById("root");
-    root?.setAttribute("inert", "");
+
+    setTimeout(() => {
+      set({
+        transform: isMobile ? `translateY(${30}px)` : "translate(-50%, -50%)",
+        overflow: "scroll",
+        touchAction: "unset",
+        userSelect: "none",
+      });
+      const root = document.getElementById("root");
+      root?.setAttribute("inert", "");
+    }, 50);
   };
 
   const handleClose = () => {
@@ -110,7 +119,7 @@ const SwipeModal: FC<SwipeModalProps> = ({
     });
     setTimeout(() => {
       setOpenModal(false);
-    }, 150);
+    }, 100);
     const root = document.getElementById("root");
     root?.removeAttribute("inert");
     // focus modal trigger again
@@ -126,27 +135,12 @@ const SwipeModal: FC<SwipeModalProps> = ({
     }
   }, []);
 
-  const [props, set] = useSpring(() => ({
-    y: 0,
-    transform: isMobile ? `translateY(${30}px)` : "translate(-50%, -50%)",
-    overflow: "scroll",
-    touchAction: "unset",
-    userSelect: "none",
-  }));
-
   const bind = useDrag(
     ({ last, down, movement: [, my], offset: [, y] }) => {
       const el = document.getElementById("swipeModal");
 
       if (last && el.scrollTop < 30 && my > 150) {
-        set({
-          transform: `translateY(${window.innerHeight}px)`,
-          touchAction: "none",
-        });
-
-        setTimeout(() => {
-          handleClose();
-        }, 150);
+        handleClose();
       } else {
         set({
           transform: `translateY(${30}px)`,
@@ -165,54 +159,50 @@ const SwipeModal: FC<SwipeModalProps> = ({
   );
 
   return (
-    <React.Fragment>
-      {openModal &&
-        ReactDOM.createPortal(
-          <React.Fragment>
-            <Background zIndex={zIndex - 1} onClick={handleClose} />
-            <DragWrapper
-              style={props}
-              zIndex={zIndex}
-              backgroundColor={backgroundColor}
-              overflow={overflow}
-              role="dialog"
-              size={size}
-              aria-labelledby="modal-header"
-              id="swipeModal"
-              onKeyDown={
-                (e) =>
-                  submitRef?.current &&
-                  closeRef?.current &&
-                  trapFocus(e, submitRef.current, closeRef.current) // ideally we would use inert but it doesn't seem to be working
-              }
+    openModal &&
+    ReactDOM.createPortal(
+      <React.Fragment>
+        <Background zIndex={zIndex - 1} onClick={handleClose} />
+        <DragWrapper
+          style={props}
+          zIndex={zIndex}
+          backgroundColor={backgroundColor}
+          overflow={overflow}
+          role="dialog"
+          size={size}
+          aria-labelledby="modal-header"
+          id="swipeModal"
+          onKeyDown={
+            (e) =>
+              submitRef?.current &&
+              closeRef?.current &&
+              trapFocus(e, submitRef.current, closeRef.current) // ideally we would use inert but it doesn't seem to be working
+          }
+        >
+          {HeaderComponent ? (
+            <React.Fragment>
+              <Header
+                headerComponentHeight={headerComponentHeight}
+                headerComponentBackgroundColor={headerComponentBackgroundColor}
+                {...bind()}
+              >
+                {HeaderComponent}
+              </Header>
+              {children}
+            </React.Fragment>
+          ) : (
+            <div
+              style={{ height: "100%", width: "100%", overflow: "scroll" }}
+              {...bind()}
             >
-              {HeaderComponent ? (
-                <React.Fragment>
-                  <Header
-                    headerComponentHeight={headerComponentHeight}
-                    headerComponentBackgroundColor={
-                      headerComponentBackgroundColor
-                    }
-                    {...bind()}
-                  >
-                    {HeaderComponent}
-                  </Header>
-                  {children}
-                </React.Fragment>
-              ) : (
-                <div
-                  style={{ height: "100%", width: "100%", overflow: "scroll" }}
-                  {...bind()}
-                >
-                  {children}
-                </div>
-              )}
-            </DragWrapper>
-          </React.Fragment>,
-          document.body
-          // document.getElementById(portalId) as HTMLElement
-        )}
-    </React.Fragment>
+              {children}
+            </div>
+          )}
+        </DragWrapper>
+      </React.Fragment>,
+      document.body
+      // document.getElementById(portalId) as HTMLElement
+    )
   );
 };
 

@@ -1,6 +1,6 @@
 /** @format */
 
-import * as React from "react";
+import React, { FC } from "react";
 import { SVGProps } from "react";
 import styled from "styled-components";
 
@@ -13,10 +13,7 @@ const Svg = styled.svg`
   transform: ${({ transform }) => (transform ? transform : undefined)};
 `;
 
-const Mail = ({
-  color = "black",
-  transform,
-}: SVGProps<SVGSVGElement> & SVGRProps) => (
+const Mail: FC<SVGRProps> = ({ color = "black", transform }) => (
   <Svg
     width="16px"
     height="16px"

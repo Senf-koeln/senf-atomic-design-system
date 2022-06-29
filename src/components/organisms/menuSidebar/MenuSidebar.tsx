@@ -9,6 +9,7 @@ import Info from "../../../assets/icons/Info";
 import Insta from "../../../assets/icons/Insta";
 import Mail from "../../../assets/icons/Mail";
 import More from "../../../assets/icons/More";
+import SenfLogoSmall from "../../../assets/icons/SenfLogoSmall";
 import User from "../../../assets/icons/User";
 import { openLink, openMail } from "../../../util/helpers";
 import Box from "../../atoms/box/Box";
@@ -82,9 +83,9 @@ const MenuSidebar: FC<MenuSidebarProps> = ({
       >
         <Box gap="14px" flexDirection="column" width="36px">
           <Button
-            variant="primary"
+            variant="white"
             size="small"
-            text={<More />}
+            text={<SenfLogoSmall />}
             onClick={() => setOrder(1)}
           />
 

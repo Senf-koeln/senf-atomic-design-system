@@ -16,6 +16,7 @@ export const Wrapper = styled.div<{ disabled?: boolean }>`
   flex-direction: column;
   gap: 0.2rem;
   color: ${({ theme }) => theme.colors.black.black40tra};
+  width: 100%;
 
   opacity: ${({ disabled }) => disabled && "0.5"};
 `;

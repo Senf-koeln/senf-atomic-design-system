@@ -42,7 +42,7 @@ import { useDrag } from "@use-gesture/react";
 import DetailSidebar from "../../organisms/detailSidebar/DetailSidebar";
 import Share from "../../../assets/icons/Share";
 import Button from "../../atoms/buttons/Button";
-import Link from "../../../assets/icons/Link";
+import Hyperlink from "../../../assets/icons/Hyperlink";
 import { openMail, openLink } from "../../../util/helpers";
 import Calendar from "../../organisms/calendar/Calendar";
 import CalendarIcon from "../../../assets/icons/CalendarIcon";
@@ -151,6 +151,11 @@ const IdeaDetailPage: FC<IdeaDetailPageProps> = ({
   user,
   handleOpenMenuComment,
   path,
+  commentFormInput,
+  setCommentFormInput,
+  handleSubmitComment,
+  commentFormLoading,
+  handleShareIdeaVia,
 }) => {
   const {
     screamId,
@@ -172,7 +177,6 @@ const IdeaDetailPage: FC<IdeaDetailPageProps> = ({
     userId,
     createdAt,
     comments,
-    handleShareIdeaVia,
   } = data;
   const { t } = useTranslation();
   const isMobile = isMobileCustom();
@@ -203,10 +207,8 @@ const IdeaDetailPage: FC<IdeaDetailPageProps> = ({
 
   useEffect(() => {
     if (projectroomsData && cardProjectroomId && !loadingIdea) {
-      console.log(projectroomsData, cardProjectroomId);
       projectroomsData.map(({ projectRoomId, title, organizationType }) => {
         if (cardProjectroomId === projectRoomId) {
-          console.log(cardProjectroomId, projectRoomId);
 
           setProjectroomCardData([
             ...projectroomCardData,
@@ -455,17 +457,17 @@ const IdeaDetailPage: FC<IdeaDetailPageProps> = ({
 
               <Typography variant="h3"> {title}</Typography>
 
-              <Box margin="10px 0px 20px 0px">
+              {/* <Box margin="10px 0px 20px 0px">
                 <Tabs
                   fontSize="buttonSm"
                   order={0}
                   tabs={[
                     { icon: <Bulb />, text: "Beschreibung" },
                     { icon: <Info />, text: "Status" },
-                    { icon: <Stats />, text: "Statistiken" },
+                    // { icon: <Stats />, text: "Statistiken" },
                   ]}
                 />
-              </Box>
+              </Box> */}
 
               <Box alignItems="flex-start" flexDirection="row" margin="8px 0px">
                 <Typography variant="bodyBg"> {body}</Typography>
@@ -482,7 +484,7 @@ const IdeaDetailPage: FC<IdeaDetailPageProps> = ({
                   />
                   <Button
                     variant="secondary"
-                    icon={<Link />}
+                    icon={<Hyperlink />}
                     text={weblinkTitle ? weblinkTitle : t("website")}
                     size="small"
                     onClick={() => openLink(weblink)}
@@ -552,7 +554,20 @@ const IdeaDetailPage: FC<IdeaDetailPageProps> = ({
             <Typography variant="h3">
               {t("IdeaDetailPage.commentHeadline")}
             </Typography>
-            <Input placeholder={t("IdeaDetailPage.commentPlaceholder")} />
+            <Box gap="8px" width="100%">
+              <Input
+                placeholder={t("IdeaDetailPage.commentPlaceholder")}
+                value={commentFormInput}
+                onChange={(event) => setCommentFormInput(event.target.value)}
+              />
+
+              <Button
+                text={t("send")}
+                disabled={commentFormInput === "" || commentFormLoading}
+                loading={commentFormLoading}
+                onClick={handleSubmitComment}
+              />
+            </Box>
           </Box>
           {comments && (
             <List

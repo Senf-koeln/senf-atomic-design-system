@@ -10,7 +10,11 @@ import Facebook from "../../../assets/icons/Facebook";
 import Mail from "../../../assets/icons/Mail";
 import Box from "../../atoms/box/Box";
 import WhatsApp from "../../../assets/icons/WhatsApp";
-
+import {
+  WhatsappShareButton,
+  FacebookShareButton,
+  EmailShareButton,
+} from "react-share";
 const Wrapper = styled.div<SocialmediaShareProps>``;
 
 const SocialmediaShare: FC<SocialmediaShareProps> = ({
@@ -28,24 +32,30 @@ const SocialmediaShare: FC<SocialmediaShareProps> = ({
         justifyContent="flex-start"
         alignItems="flex-start"
       >
-        <TertiaryButton
-          text="WhatsApp"
-          variant="medium"
-          iconLeft={<WhatsApp />}
-          onClick={() => handleShareIdeaVia("WhatsApp")}
-        />
-        <TertiaryButton
-          text="Facebook"
-          variant="medium"
-          iconLeft={<Facebook />}
-          onClick={() => handleShareIdeaVia("Facebook")}
-        />
-        <TertiaryButton
-          text="Email"
-          variant="medium"
-          iconLeft={<Mail />}
-          onClick={() => handleShareIdeaVia("Email")}
-        />
+        <WhatsappShareButton url={path}>
+          <TertiaryButton
+            text="WhatsApp"
+            variant="medium"
+            iconLeft={<WhatsApp />}
+            // onClick={() => handleShareIdeaVia("WhatsApp", path)}
+          />
+        </WhatsappShareButton>
+        <FacebookShareButton url={path}>
+          <TertiaryButton
+            text="Facebook"
+            variant="medium"
+            iconLeft={<Facebook />}
+            // onClick={() => handleShareIdeaVia("Facebook", path)}
+          />
+        </FacebookShareButton>
+        <EmailShareButton url={path}>
+          <TertiaryButton
+            text="Email"
+            variant="medium"
+            iconLeft={<Mail />}
+            // onClick={() => handleShareIdeaVia("Email", path)}
+          />
+        </EmailShareButton>
 
         {/* <WhatsappShareButton url={path}>
           <TertiaryButton

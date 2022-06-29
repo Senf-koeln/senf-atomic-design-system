@@ -14,26 +14,15 @@ import { ListProps } from "./List.types";
 import Box from "../../atoms/box/Box";
 import Typography from "../../atoms/typography/Typography";
 import theme from "../../../styles/theme";
-// import ObjectCard from "../cards/ObjectCard";
-
-// import {
-//   NoMoreMainContent,
-//   NoMoreMyContent,
-//   NoMoreProjectsContent,
-//   NoMoreProjectRooms,
-
-// } from "./NoMoreContent";
-
-// import { isMobileCustom } from "../../../util/customDeviceDetect";
-// import { NoMore } from "./styles/sharedStyles";
 
 const ListEnd = styled.div`
   width: auto;
   margin: 24px;
-  padding-bottom: 200px;
-  animation: 4s opacityAfter50PercentAnimation;
+  height: 200px;
 `;
-
+const ListEndText = styled.div`
+  animation: 2s opacityAfter50PercentAnimation;
+`;
 const List: FC<ListProps> = ({
   listType,
   loading,
@@ -134,18 +123,19 @@ const List: FC<ListProps> = ({
           {showItems(data, CardType)}
         </InfiniteScroll>
       )}
-
-      {listEndText && (
-        <ListEnd>
-          <Typography
-            variant="h3"
-            textAlign="center"
-            color={theme.colors.black.black60tra}
-          >
-            {listEndText}
-          </Typography>
-        </ListEnd>
-      )}
+      <ListEnd>
+        {listEndText && !hasMoreItems && (
+          <ListEndText>
+            <Typography
+              variant="h3"
+              textAlign="center"
+              color={theme.colors.black.black60tra}
+            >
+              {listEndText}
+            </Typography>
+          </ListEndText>
+        )}
+      </ListEnd>
     </React.Fragment>
   );
 };

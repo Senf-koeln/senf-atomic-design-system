@@ -83,6 +83,9 @@ const Thumbnail = styled.div<OrganizationCardProps>`
 `;
 
 const LogoPlacer = styled.div<OrganizationCardProps>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   box-sizing: border-box;
   width: 28px;
   height: 28px;
@@ -100,11 +103,6 @@ const LogoPlacer = styled.div<OrganizationCardProps>`
   @media (max-width: 368px) {
     top: -32px;
   }
-`;
-
-const IconWrapper = styled.div`
-  margin: 2px;
-  margin-top: 0;
 `;
 
 const Title = styled.div`
@@ -169,9 +167,7 @@ const OrganizationCard: FC<OrganizationCardProps> = ({
     ({ organizationId }) => organizationId === cardOrganizationId
   ).length;
 
-  console.log(organization);
-  console.log(organization?.organizationId);
-  console.log(cardOrganizationId);
+
 
   return (
     <Wrapper
@@ -198,9 +194,7 @@ const OrganizationCard: FC<OrganizationCardProps> = ({
       </LogoWrapper>
 
       <LogoPlacer>
-        <IconWrapper>
-          <Icon icon={setOrganizationTypeIcon(organizationType)} />
-        </IconWrapper>
+        <Icon icon={setOrganizationTypeIcon(organizationType)} />
       </LogoPlacer>
       <Title>
         <Typography variant="bodyBg">{title}</Typography>

@@ -13,6 +13,7 @@ import Search from "../../../assets/icons/Search";
 import ContentDropdown from "../../atoms/contentDropdown/ContentDropdown";
 import { Checkbox } from "../../atoms/toggleInput/toggleInput.stories";
 import ToggleInput from "../../atoms/toggleInput/ToggleInput";
+import ContentDropdownItem from "../../atoms/contentDropdownItem/ContentDropdownItem";
 
 const Wrapper = styled.div<ToolbarProps>`
   display: flex;
@@ -21,7 +22,7 @@ const Wrapper = styled.div<ToolbarProps>`
   width: 100%;
   transition: 0.5s;
   animation: ToolbarAnimation 0.7s;
-  z-index: 1;
+  z-index: 9;
   flex-flow: wrap;
 
   @keyframes ToolbarAnimation {
@@ -104,17 +105,11 @@ const Toolbar: FC<ToolbarProps> = ({
           <Box gap="5px" flexDirection="column">
             {Object.values(sortOptions).map(({ value, label }) => (
               <Box gap="5px">
-                <TertiaryButton
+                <ContentDropdownItem
+                  type="check"
                   text={label}
-                  variant={checkedSortOption === value ? "bold" : "medium"}
-                  onClick={() => setCheckedSortOption(value)}
-                  iconLeft={
-                    <ToggleInput
-                      type="radio"
-                      checked={checkedSortOption === value}
-                      pointerEvents="none"
-                    />
-                  }
+                  checked={checkedSortOption === value}
+                  setChecked={() => setCheckedSortOption(value)}
                 />
               </Box>
             ))}

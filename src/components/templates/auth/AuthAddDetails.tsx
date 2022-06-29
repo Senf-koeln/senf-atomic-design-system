@@ -94,9 +94,9 @@ const AuthAddDetails: FC<AuthAddDetailsProps> = ({
             // onMouseLeave={() => setUploadImageHover(false)}
             htmlFor="imageUploader"
           >
-            {user?.photoUrl ? (
+            {user?.photoURL ? (
               <ImagePlaceholder
-                img={user?.photoUrl}
+                img={user?.photoURL}
                 borderRadius="18px"
                 height="calc(100% - 40px)"
                 width="calc(100% - 40px)"
@@ -134,35 +134,47 @@ const AuthAddDetails: FC<AuthAddDetailsProps> = ({
           onChange={(e) => setData({ ...data, zipcode: e.target.value })}
           value={data.zipcode}
         />
-
-        <Dropdown
-          id="MultiDropdowns"
-          listItems={{
-            sex: [
-              {
-                label: t("diverse"),
-                value: "diverse",
-              },
-              {
-                label: t("female"),
-                value: "female",
-              },
-              {
-                label: t("male"),
-                value: "male",
-              },
-            ],
-            age: years,
-          }}
-          multi
-          recieveValue={(selectedItems) =>
-            setData({
-              ...data,
-              sex: selectedItems.sex,
-              age: selectedItems.age,
-            })
-          }
-        />
+        <Box gap="8px">
+          <Dropdown
+            id="sex"
+            listItems={{
+              sex: [
+                {
+                  label: t("diverse"),
+                  value: "diverse",
+                },
+                {
+                  label: t("female"),
+                  value: "female",
+                },
+                {
+                  label: t("male"),
+                  value: "male",
+                },
+              ],
+            }}
+            recieveValue={(selectedItems) =>
+              setData({
+                ...data,
+                sex: selectedItems.sex,
+              })
+            }
+            value={data.sex}
+          />
+          <Dropdown
+            id="age"
+            listItems={{
+              age: years,
+            }}
+            recieveValue={(selectedItems) =>
+              setData({
+                ...data,
+                age: selectedItems.age,
+              })
+            }
+            value={data.age}
+          />
+        </Box>
         <br />
         <Button variant="white" onClick={() => handleSubmitEditDetails(data)}>
           {t("save")}

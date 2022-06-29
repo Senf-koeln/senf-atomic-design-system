@@ -84,13 +84,13 @@ const InfoWidget = styled.div`
   -webkit-box-orient: vertical;
 `;
 
-const Example: FC<OrganizationPageProps> = ({
+const OrganizationPage: FC<OrganizationPageProps> = ({
   user,
   organization,
   organizations,
   handleCloseOrganizationPage,
   handleButtonOpenCard,
-  handleEdit,
+  handleEditOrganization,
   setModalData,
   googleCalendarApiKey,
 }) => {
@@ -98,6 +98,7 @@ const Example: FC<OrganizationPageProps> = ({
 
   const [infoOpen, setInfoOpen] = useState(false);
   const [order, setOrder] = useState(1);
+
 
   return (
     <Dialog
@@ -107,7 +108,8 @@ const Example: FC<OrganizationPageProps> = ({
       overflow="hidden scroll"
       zIndex="999"
       boxShadow={
-        document.body.clientWidth > 1350 &&
+        document.body.clientWidth < 1350 &&
+        document.body.clientWidth > 768 &&
         "-40px 8px 30px -12px rgba(0, 0, 0, 0.2)"
       }
     >
@@ -136,9 +138,9 @@ const Example: FC<OrganizationPageProps> = ({
         />
       </Box>
 
-      {user?.userId && organization?.userIds.includes(user?.userId) && (
+      {user && organization?.userIds.includes(user.userId) && (
         <Box position="absolute" margin="20px" right="0px" zIndex={2}>
-          <RoundedButton icon={<More />} onClick={handleEdit} />
+          <RoundedButton icon={<More />} onClick={handleEditOrganization} />
         </Box>
       )}
 
@@ -304,4 +306,4 @@ const Example: FC<OrganizationPageProps> = ({
   );
 };
 
-export default Example;
+export default OrganizationPage;

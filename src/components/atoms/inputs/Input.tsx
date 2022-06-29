@@ -44,7 +44,6 @@ const Input: FunctionComponent<InputProps> = ({
   // const [value, setValue] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
 
-  console.log(value);
   return (
     <Wrapper disabled={disabled}>
       {(label || note) && (

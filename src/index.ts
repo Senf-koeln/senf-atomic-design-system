@@ -5,6 +5,9 @@ import { MobileTopBarProps } from "./components/organisms/mobileTopBar/MobileTop
 
 export { default as Plus } from "./assets/icons/Plus";
 export { default as Arrow } from "./assets/icons/Arrow";
+export { default as Hyperlink } from "./assets/icons/Hyperlink";
+export { default as Mail } from "./assets/icons/Mail";
+export { default as CalendarIcon } from "./assets/icons/CalendarIcon";
 
 export {
   LayerWhiteGradientBordersDefault,
