@@ -13,7 +13,7 @@ import { formatDate } from "@fullcalendar/react";
 import listMonth from "@fullcalendar/list";
 import googleCalendarPlugin from "@fullcalendar/google-calendar";
 import i18n from "../../../util/i18n";
-import arrow from "../../../assets/rawSvgs/arrow.svg";
+// import arrow from "../../../assets/rawSvgs/arrow.svg";
 
 let str = formatDate(new Date(), {
   month: "long",
@@ -54,11 +54,11 @@ const Wrapper = styled.div<CalendarProps>`
     border-color: white !important;
     background-color: white !important;
     color: #353535 !important;
-    background-image: url("${arrow}");
+    /* background-image: url("${arrow}");
     background-repeat: no-repeat;
     background-position: calc(100% - 1rem);
     background-size: 1rem;
-    transform: rotate(270deg);
+    transform: rotate(270deg); */
   }
 
   .fc .fc-today-button {
